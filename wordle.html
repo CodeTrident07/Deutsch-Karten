@@ -287,7 +287,7 @@ function initGame(wordObj, isDaily) {
   startTime = Date.now();
 
   document.getElementById('wordHint').textContent =
-    isDaily ? `Daily word — ${wordLen} letters (${wordObj.en})` : `${wordLen} letters — ${wordObj.en}`;
+  isDaily ? `Daily word — ${wordLen} letters` : `${wordLen} letters`;
   document.getElementById('dailyBadge').textContent = isDaily ? `Daily #${getDayIndex()}` : 'Practice';
   document.getElementById('resultCard').classList.remove('show');
   document.getElementById('msgBar').textContent = '';
