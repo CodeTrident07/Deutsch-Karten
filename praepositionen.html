@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verben mit Präpositionen – Übung</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c0f;
+  --surface: #141418;
+  --surface2: #1c1c22;
+  --border: #26262e;
+  --border2: #32323d;
+  --text: #eeeef0;
+  --text2: #8888a0;
+  --text3: #55556a;
+  --a1: #ff6b6b; --a1d: #3d1515;
+  --a2: #ffa94d; --a2d: #3d2610;
+  --b1: #69db7c; --b1d: #0f3018;
+  --b2: #4dabf7; --b2d: #0d2840;
+  --c1: #da77f2; --c1d: #280d3d;
+  --accent: #69db7c;
+  --accentd: #0f3018;
+  --radius: 18px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATED BG ─── */
+.bg-orb {
+  position: fixed; border-radius: 50%; filter: blur(120px);
+  opacity: 0.07; pointer-events: none; z-index: 0;
+}
+.bg-orb-1 { width: 600px; height: 600px; top: -200px; left: -200px; background: var(--accent); }
+.bg-orb-2 { width: 400px; height: 400px; bottom: -100px; right: -100px; background: var(--b2); animation: drift 8s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translate(0,0); } to { transform: translate(-40px,-30px); } }
+
+/* ─── TOPBAR ─── */
+.topbar {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 1.8rem;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  background: rgba(20,20,24,0.55);
+}
+.logo {
+  font-size: 1.25rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text);
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+}
+.logo span { color: var(--accent); }
+.logo-sub { font-size: 0.65rem; color: var(--text3); font-weight: 400; font-family: 'JetBrains Mono', monospace; }
+.back-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+  color: var(--text3); text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.85rem; border: 1px solid var(--border2); border-radius: 8px;
+  background: var(--surface); transition: all 0.18s;
+}
+.back-link:hover { color: var(--text2); border-color: var(--border2); background: var(--surface2); }
+
+/* ─── MAIN ─── */
+main {
+  position: relative; z-index: 10;
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; padding: 2rem 1.5rem 3rem;
+  gap: 1.5rem;
+}
+
+/* ─── SESSION START SCREEN ─── */
+.start-screen {
+  width: 100%; max-width: 560px;
+  display: flex; flex-direction: column; align-items: center; gap: 1.8rem;
+  text-align: center; padding: 2.5rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.start-screen h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text); }
+.start-screen h1 span { color: var(--accent); }
+.start-screen p { font-family: 'Crimson Pro', serif; font-size: 1.05rem; color: var(--text2); line-height: 1.65; }
+.level-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.lvl-btn {
+  padding: 0.45rem 1.1rem; border-radius: 8px; border: 1px solid var(--border2);
+  background: var(--surface2); font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--text3); cursor: pointer; transition: all 0.18s;
+}
+.lvl-btn[data-l="A2"] { --tc: #ffa94d; }
+.lvl-btn[data-l="B1"] { --tc: #69db7c; }
+.lvl-btn[data-l="B2"] { --tc: #4dabf7; }
+.lvl-btn[data-l="C1"] { --tc: #da77f2; }
+.lvl-btn:hover { color: var(--tc); border-color: var(--tc); }
+.lvl-btn.active { color: var(--tc); border-color: var(--tc); background: color-mix(in srgb, var(--tc) 10%, transparent); }
+.start-btn {
+  padding: 0.9rem 2.5rem; border-radius: 12px;
+  background: var(--accent); color: var(--bg); border: none;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: 1rem; cursor: pointer; transition: all 0.2s; letter-spacing: -0.01em;
+}
+.start-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(105,219,124,0.2); }
+.start-btn:active { transform: scale(0.97); }
+.stats-mini {
+  display: flex; gap: 2rem; padding: 1rem 2rem;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+}
+.sm-stat { text-align: center; }
+.sm-val { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+.sm-lbl { font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-top: 2px; letter-spacing: 0.06em; }
+
+/* ─── PROGRESS BAR ─── */
+.progress-area {
+  width: 100%; max-width: 620px;
+  display: flex; flex-direction: column; gap: 0.55rem;
+}
+.progress-meta { display: flex; justify-content: space-between; align-items: center; }
+.progress-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text3); }
+.progress-label strong { color: var(--text2); }
+.progress-score { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; }
+.score-correct { color: var(--b1); }
+.score-wrong   { color: var(--a1); }
+.progress-bar { width: 100%; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.45s cubic-bezier(0.4,0,0.2,1); }
+
+/* ─── QUIZ CARD ─── */
+.quiz-card {
+  width: 100%; max-width: 620px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2.5rem 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  transition: border-color 0.3s;
+}
+.quiz-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: var(--radius);
+  background: radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.quiz-card.correct  { border-color: var(--b1); box-shadow: 0 0 0 1px var(--b1), 0 24px 60px rgba(0,0,0,0.4); }
+.quiz-card.wrong    { border-color: var(--a1); box-shadow: 0 0 0 1px var(--a1), 0 24px 60px rgba(0,0,0,0.4); }
+
+.card-tag {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase;
+  margin-bottom: 1.8rem;
+}
+.card-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.card-tag-verb { color: var(--accent); font-weight: 500; }
+
+/* Loading state */
+.loading-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 1rem; padding: 3rem 0; text-align: center;
+}
+.spinner {
+  width: 36px; height: 36px;
+  border: 2px solid var(--border2); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text3); }
+
+/* Sentence display */
+.sentence-area { margin-bottom: 2rem; }
+.sentence {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  line-height: 1.7; color: var(--text); text-align: center;
+}
+.blank {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 90px; height: 34px; padding: 0 12px;
+  border-bottom: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-radius: 6px 6px 0 0;
+  font-style: normal; font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: 1rem; color: var(--accent);
+  margin: 0 4px; vertical-align: middle; transition: all 0.25s;
+  letter-spacing: 0.01em;
+}
+.blank.filled { color: var(--text); background: var(--surface2); border-color: var(--border2); }
+.blank.reveal-correct { color: var(--b1); background: var(--b1d); border-color: var(--b1); }
+.blank.reveal-wrong   { color: var(--a1); background: var(--a1d); border-color: var(--a1); }
+
+/* Options grid */
+.options-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.55rem; margin-bottom: 1.4rem;
+}
+.option-btn {
+  padding: 0.65rem 1rem; border-radius: 10px;
+  border: 1px solid var(--border2); background: var(--surface2);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+  font-weight: 500; color: var(--text2); cursor: pointer;
+  transition: all 0.15s; text-align: center; position: relative;
+  overflow: hidden;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); background: color-mix(in srgb, var(--accent) 6%, var(--surface2)); }
+.option-btn:active:not(:disabled) { transform: scale(0.97); }
+.option-btn.selected { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface2)); }
+.option-btn.opt-correct { border-color: var(--b1); color: var(--b1); background: var(--b1d); }
+.option-btn.opt-wrong   { border-color: var(--a1); color: var(--a1); background: var(--a1d); }
+.option-btn:disabled { cursor: default; }
+
+/* Feedback + explanation */
+.feedback-row {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  padding: 0.9rem 1.1rem; border-radius: 10px;
+  font-size: 0.85rem; margin-bottom: 1rem;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.feedback-row.visible { opacity: 1; transform: translateY(0); }
+.feedback-row.fb-correct { background: var(--b1d); border: 1px solid color-mix(in srgb, var(--b1) 40%, transparent); }
+.feedback-row.fb-wrong   { background: var(--a1d); border: 1px solid color-mix(in srgb, var(--a1) 40%, transparent); }
+.fb-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.fb-text { flex: 1; line-height: 1.55; }
+.fb-text strong { color: var(--text); }
+.fb-text em { font-family: 'Crimson Pro', serif; font-size: 0.95rem; color: var(--text2); }
+
+/* Next button */
+.next-btn {
+  width: 100%; padding: 0.75rem; border-radius: 12px;
+  background: var(--accent); color: var(--bg); border: none;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: 0.9rem; cursor: pointer; transition: all 0.18s;
+  display: none; letter-spacing: -0.01em;
+}
+.next-btn.visible { display: block; }
+.next-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.next-btn:active { transform: scale(0.97); }
+
+/* ─── SESSION COMPLETE ─── */
+.complete-screen {
+  width: 100%; max-width: 620px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 3rem 2.5rem;
+  text-align: center; display: none; flex-direction: column;
+  align-items: center; gap: 1.5rem;
+}
+.complete-screen.visible { display: flex; }
+.complete-emoji { font-size: 3.5rem; }
+.complete-title { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; color: var(--accent); }
+.complete-sub { font-family: 'Crimson Pro', serif; font-size: 1.05rem; color: var(--text2); line-height: 1.6; }
+.complete-stats { display: flex; gap: 2rem; }
+.c-stat-val { font-size: 2rem; font-weight: 800; }
+.c-stat-lbl { font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-top: 0.2rem; letter-spacing: 0.06em; }
+
+/* Weak verbs review list */
+.weak-list {
+  width: 100%; text-align: left; border-top: 1px solid var(--border); padding-top: 1.2rem;
+}
+.weak-list h3 { font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+.weak-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0.8rem; border-radius: 8px; background: var(--surface2);
+  border: 1px solid var(--border); margin-bottom: 0.4rem;
+}
+.weak-verb { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); }
+.weak-rate { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; }
+.weak-rate.bad  { color: var(--a1); }
+.weak-rate.mid  { color: var(--a2); }
+.weak-rate.good { color: var(--b1); }
+
+.complete-btns { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+.btn-next-session {
+  padding: 0.75rem 2rem; border-radius: 12px; background: var(--accent);
+  color: var(--bg); border: none; font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.18s;
+}
+.btn-next-session:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-restart {
+  padding: 0.75rem 1.5rem; border-radius: 12px; background: none;
+  color: var(--text2); border: 1px solid var(--border2);
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
+  font-size: 0.9rem; cursor: pointer; transition: all 0.18s;
+}
+.btn-restart:hover { background: var(--surface2); color: var(--text); }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 0.6rem 1.2rem; font-size: 0.82rem;
+  color: var(--text2); font-family: 'JetBrains Mono', monospace;
+  opacity: 0; transition: all 0.3s; pointer-events: none;
+  z-index: 100; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 500px) {
+  .topbar { padding: 1rem; }
+  main { padding: 1rem; gap: 1rem; }
+  .quiz-card { padding: 1.5rem 1.2rem 1.2rem; }
+  .options-grid { grid-template-columns: 1fr 1fr; }
+  .complete-stats { gap: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<header class="topbar">
+  <a href="index.html" class="logo">
+    Deutsch<span>Karten</span>
+    <span class="logo-sub">/ Präpositionen</span>
+  </a>
+  <a href="index.html" class="back-link">← Flashcards</a>
+  <a href="app.html" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text3);text-decoration:none;padding:4px 12px;border:1px solid var(--border2,#32323d);border-radius:8px;background:var(--surface2,#1c1c22);transition:all 0.18s;white-space:nowrap;" onmouseover="this.style.color='#eeeef0';this.style.borderColor='#555'" onmouseout="this.style.color='';this.style.borderColor=''">← Flashcards</a>
+</header>
+
+<main id="mainArea">
+
+  <!-- START SCREEN -->
+  <div class="start-screen" id="startScreen">
+    <div>
+      <div style="font-size:2.5rem;margin-bottom:0.6rem">🔗</div>
+      <h1>Verben mit <span>Präpositionen</span></h1>
+    </div>
+    <p>Fill in the correct preposition + article combination. Each session has 20 questions. The app remembers which verbs you struggle with and focuses on them in future sessions.</p>
+
+    <div>
+      <div style="font-size:0.72rem;font-family:'JetBrains Mono',monospace;color:var(--text3);margin-bottom:0.6rem;letter-spacing:0.08em;text-transform:uppercase">Choose level</div>
+      <div class="level-grid" id="levelGrid">
+        <button class="lvl-btn active" data-l="A2">A2</button>
+        <button class="lvl-btn" data-l="B1">B1</button>
+        <button class="lvl-btn" data-l="B2">B2</button>
+        <button class="lvl-btn" data-l="C1">C1</button>
+        <button class="lvl-btn active" data-l="all" style="--tc:#ffa94d">All levels</button>
+      </div>
+    </div>
+
+    <div class="stats-mini" id="statsMini">
+      <div class="sm-stat"><div class="sm-val" id="smSessions">0</div><div class="sm-lbl">SESSIONS</div></div>
+      <div class="sm-stat"><div class="sm-val" id="smTotal">0</div><div class="sm-lbl">ANSWERED</div></div>
+      <div class="sm-stat"><div class="sm-val" id="smAccuracy" style="color:var(--accent)">—</div><div class="sm-lbl">ACCURACY</div></div>
+    </div>
+
+    <button class="start-btn" id="startBtn" onclick="startSession()">Start Session →</button>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-area" id="progressArea" style="display:none">
+    <div class="progress-meta">
+      <div class="progress-label"><strong id="qIdx">1</strong> / <strong id="qTotal">20</strong></div>
+      <div class="progress-score">
+        <span class="score-correct">✓ <span id="scoreCorrect">0</span></span>
+        &nbsp;
+        <span class="score-wrong">✗ <span id="scoreWrong">0</span></span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- QUIZ CARD -->
+  <div class="quiz-card" id="quizCard" style="display:none">
+    <div class="card-tag">
+      <span class="card-tag-dot"></span>
+      <span id="tagVerb" class="card-tag-verb">warten auf</span>
+      <span style="color:var(--border2)">·</span>
+      <span id="tagCase">+Akk</span>
+    </div>
+
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <div class="loading-text">Generating sentence…</div>
+    </div>
+
+    <div id="questionArea" style="display:none">
+      <div class="sentence-area">
+        <div class="sentence" id="sentenceDisplay"></div>
+      </div>
+
+      <div class="options-grid" id="optionsGrid"></div>
+
+      <div class="feedback-row" id="feedbackRow">
+        <span class="fb-icon" id="fbIcon"></span>
+        <span class="fb-text" id="fbText"></span>
+      </div>
+
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- COMPLETE SCREEN -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-title" id="completeTitle">Session complete!</div>
+    <div class="complete-sub" id="completeSub"></div>
+    <div class="complete-stats">
+      <div class="sm-stat"><div class="c-stat-val sm-val" id="cCorrect">0</div><div class="c-stat-lbl">CORRECT</div></div>
+      <div class="sm-stat"><div class="c-stat-val" id="cWrong" style="color:var(--a1)">0</div><div class="c-stat-lbl">WRONG</div></div>
+      <div class="sm-stat"><div class="c-stat-val" id="cPct" style="color:var(--accent)">0%</div><div class="c-stat-lbl">SCORE</div></div>
+    </div>
+    <div class="weak-list" id="weakList"></div>
+    <div class="complete-btns">
+      <button class="btn-next-session" onclick="startSession()">Next Session →</button>
+      <button class="btn-restart" onclick="showStart()">Back to Start</button>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+//  VERB BANK — all Verben mit Präpositionen, with metadata
+//  Format: { id, verb, prep, case, en, level }
+//  'case': 'Akk' | 'Dat'
+// ════════════════════════════════════════════════════════════
+
+const VERBS = [
+  // A2
+  { id:'warten_auf',    verb:'warten',      prep:'auf',   kase:'Akk', en:'to wait for',          level:'A2' },
+  { id:'denken_an',     verb:'denken',      prep:'an',    kase:'Akk', en:'to think of/about',     level:'A2' },
+  { id:'fragen_nach',   verb:'fragen',      prep:'nach',  kase:'Dat', en:'to ask about',          level:'A2' },
+  { id:'antworten_auf', verb:'antworten',   prep:'auf',   kase:'Akk', en:'to reply to',           level:'A2' },
+  { id:'sprechen_über', verb:'sprechen',    prep:'über',  kase:'Akk', en:'to talk about',         level:'A2' },
+  { id:'sprechen_mit',  verb:'sprechen',    prep:'mit',   kase:'Dat', en:'to talk with',          level:'A2' },
+  { id:'helfen_bei',    verb:'helfen',      prep:'bei',   kase:'Dat', en:'to help with',          level:'A2' },
+  { id:'einladen_zu',   verb:'einladen',    prep:'zu',    kase:'Dat', en:'to invite to',          level:'A2' },
+  { id:'fahren_mit',    verb:'fahren',      prep:'mit',   kase:'Dat', en:'to travel by',          level:'A2' },
+  { id:'arbeiten_als',  verb:'arbeiten',    prep:'als',   kase:'Nom', en:'to work as',            level:'A2' },
+  // B1
+  { id:'freuen_auf',    verb:'sich freuen', prep:'auf',   kase:'Akk', en:'to look forward to',   level:'B1' },
+  { id:'freuen_über',   verb:'sich freuen', prep:'über',  kase:'Akk', en:'to be pleased about',  level:'B1' },
+  { id:'interessieren', verb:'sich interessieren', prep:'für', kase:'Akk', en:'to be interested in', level:'B1' },
+  { id:'ärgern_über',   verb:'sich ärgern', prep:'über',  kase:'Akk', en:'to be annoyed about',  level:'B1' },
+  { id:'kümmern_um',    verb:'sich kümmern',prep:'um',    kase:'Akk', en:'to take care of',      level:'B1' },
+  { id:'bewerben_um',   verb:'sich bewerben',prep:'um',   kase:'Akk', en:'to apply for',         level:'B1' },
+  { id:'gehören_zu',    verb:'gehören',     prep:'zu',    kase:'Dat', en:'to belong to',         level:'B1' },
+  { id:'bestehen_aus',  verb:'bestehen',    prep:'aus',   kase:'Dat', en:'to consist of',        level:'B1' },
+  { id:'anfangen_mit',  verb:'anfangen',    prep:'mit',   kase:'Dat', en:'to start with',        level:'B1' },
+  { id:'aufhören_mit',  verb:'aufhören',    prep:'mit',   kase:'Dat', en:'to stop doing',        level:'B1' },
+  { id:'nachdenken_über',verb:'nachdenken', prep:'über',  kase:'Akk', en:'to reflect on',        level:'B1' },
+  { id:'träumen_von',   verb:'träumen',     prep:'von',   kase:'Dat', en:'to dream of',          level:'B1' },
+  // B2
+  { id:'gewöhnen_an',   verb:'sich gewöhnen',prep:'an',  kase:'Akk', en:'to get used to',        level:'B2' },
+  { id:'verlassen_auf', verb:'sich verlassen',prep:'auf', kase:'Akk', en:'to rely on',            level:'B2' },
+  { id:'zweifeln_an',   verb:'zweifeln',    prep:'an',    kase:'Dat', en:'to doubt',              level:'B2' },
+  { id:'leiden_unter',  verb:'leiden',      prep:'unter', kase:'Dat', en:'to suffer from',        level:'B2' },
+  { id:'verzichten_auf',verb:'verzichten',  prep:'auf',   kase:'Akk', en:'to give up / do without', level:'B2' },
+  { id:'hinweisen_auf', verb:'hinweisen',   prep:'auf',   kase:'Akk', en:'to point out',          level:'B2' },
+  { id:'einigen_auf',   verb:'sich einigen',prep:'auf',   kase:'Akk', en:'to agree on',           level:'B2' },
+  { id:'bestehen_auf',  verb:'bestehen',    prep:'auf',   kase:'Dat', en:'to insist on',          level:'B2' },
+  { id:'beitragen_zu',  verb:'beitragen',   prep:'zu',    kase:'Dat', en:'to contribute to',      level:'B2' },
+  { id:'beziehen_auf',  verb:'sich beziehen',prep:'auf',  kase:'Akk', en:'to refer to',           level:'B2' },
+  { id:'reagieren_auf', verb:'reagieren',   prep:'auf',   kase:'Akk', en:'to react to',           level:'B2' },
+  { id:'verfügen_über', verb:'verfügen',    prep:'über',  kase:'Akk', en:'to have at one\'s disposal', level:'B2' },
+  // C1
+  { id:'appellieren_an',verb:'appellieren', prep:'an',    kase:'Akk', en:'to appeal to',          level:'C1' },
+  { id:'plädieren_für', verb:'plädieren',   prep:'für',   kase:'Akk', en:'to argue for',          level:'C1' },
+  { id:'abfinden_mit',  verb:'sich abfinden',prep:'mit',  kase:'Dat', en:'to come to terms with', level:'C1' },
+  { id:'anknüpfen_an',  verb:'anknüpfen',   prep:'an',    kase:'Akk', en:'to build on',           level:'C1' },
+  { id:'ausgehen_von',  verb:'ausgehen',    prep:'von',   kase:'Dat', en:'to assume / proceed from', level:'C1' },
+  { id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',level:'C1'},
+  { id:'beruhen_auf',   verb:'beruhen',     prep:'auf',   kase:'Dat', en:'to be based on',        level:'C1' },
+  { id:'einwirken_auf', verb:'einwirken',   prep:'auf',   kase:'Akk', en:'to influence',          level:'C1' },
+  { id:'entscheiden_für',verb:'sich entscheiden',prep:'für',kase:'Akk',en:'to decide for',        level:'C1' },
+  { id:'richten_nach',  verb:'sich richten',prep:'nach',  kase:'Dat', en:'to follow / be guided by', level:'C1' },
+  { id:'zurückführen_auf',verb:'zurückführen',prep:'auf', kase:'Akk', en:'to attribute to',       level:'C1' },
+];
+
+// Articles by case (for distractors)
+const ARTICLES = {
+  Akk: { m:'den', f:'die', n:'das', pl:'die' },
+  Dat: { m:'dem', f:'der', n:'dem', pl:'den' },
+  Nom: { m:'der', f:'die', n:'das', pl:'die' },
+};
+
+// Prepositions that commonly appear as distractors per semantic group
+const PREP_DISTRACTORS = {
+  'auf': ['an', 'für', 'über', 'nach', 'um'],
+  'an':  ['auf', 'für', 'über', 'nach', 'bei'],
+  'für': ['an', 'auf', 'über', 'zu', 'mit'],
+  'über':['an', 'auf', 'für', 'nach', 'mit'],
+  'mit': ['bei', 'von', 'zu', 'nach', 'unter'],
+  'zu':  ['bei', 'mit', 'von', 'nach', 'für'],
+  'bei': ['mit', 'von', 'nach', 'zu', 'für'],
+  'nach':['bei', 'für', 'von', 'über', 'nach'],
+  'von': ['bei', 'mit', 'nach', 'zu', 'über'],
+  'um':  ['für', 'nach', 'auf', 'über', 'zu'],
+  'unter':['von','mit','bei','nach','in'],
+  'als': ['wie', 'für', 'mit', 'zu', 'bei'],
+};
+
+// ════════════════════════════════════════════════════════════
+//  PERSISTENCE — localStorage keys
+// ════════════════════════════════════════════════════════════
+
+const STORE_KEY = 'dk_praep_v1';
+
+function store() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
+}
+function storeSet(data) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch {}
+}
+
+// Per-verb record: { attempts, correct }
+function verbRecord(id) {
+  const s = store();
+  return s[id] || { attempts: 0, correct: 0 };
+}
+function verbUpdate(id, wasCorrect) {
+  const s = store();
+  if (!s[id]) s[id] = { attempts: 0, correct: 0 };
+  s[id].attempts++;
+  if (wasCorrect) s[id].correct++;
+  if (!s._meta) s._meta = { sessions: 0, totalAnswered: 0, totalCorrect: 0 };
+  s._meta.totalAnswered++;
+  if (wasCorrect) s._meta.totalCorrect++;
+  storeSet(s);
+}
+function metaIncrementSession() {
+  const s = store();
+  if (!s._meta) s._meta = { sessions: 0, totalAnswered: 0, totalCorrect: 0 };
+  s._meta.sessions++;
+  storeSet(s);
+}
+
+// ════════════════════════════════════════════════════════════
+//  WEIGHTED SELECTION — focus on weak verbs
+// ════════════════════════════════════════════════════════════
+
+function weightedVerbPool(verbList) {
+  // Assign a weight: higher weight = needs more practice
+  // New verb (0 attempts) → weight 3 (good chance to introduce)
+  // Wrong rate > 50% → weight 5
+  // Wrong rate > 25% → weight 3
+  // Otherwise → weight 1
+  return verbList.map(v => {
+    const r = verbRecord(v.id);
+    let w = 1;
+    if (r.attempts === 0) w = 3;
+    else {
+      const wrongRate = 1 - (r.correct / r.attempts);
+      if (wrongRate >= 0.5) w = 5;
+      else if (wrongRate >= 0.25) w = 3;
+    }
+    return { verb: v, weight: w };
+  });
+}
+
+function pickWeightedVerbs(verbList, count) {
+  const pool = weightedVerbPool(verbList);
+  const totalWeight = pool.reduce((s, x) => s + x.weight, 0);
+  const picked = [];
+  const usedIds = new Set();
+
+  // Build 20 picks (with repetition allowed for struggling verbs, but not back-to-back)
+  let lastId = null;
+  for (let i = 0; i < count; i++) {
+    let attempts = 0, chosen = null;
+    while (attempts < 50) {
+      let rng = Math.random() * totalWeight;
+      for (const item of pool) {
+        rng -= item.weight;
+        if (rng <= 0) { chosen = item.verb; break; }
+      }
+      if (!chosen) chosen = pool[Math.floor(Math.random() * pool.length)].verb;
+      if (chosen.id !== lastId) break;
+      attempts++;
+    }
+    picked.push(chosen);
+    lastId = chosen.id;
+  }
+  return picked;
+}
+
+// ════════════════════════════════════════════════════════════
+//  OPTION GENERATION — smart distractors
+// ════════════════════════════════════════════════════════════
+
+function generateOptions(verb) {
+  const { prep, kase } = verb;
+  const correctAnswer = prep + ' ' + (kase === 'Nom' ? ARTICLES[kase].m
+    : ['den','dem','des'].includes(prep) ? ARTICLES[kase].m
+    : '___'); // will be filled from AI response
+
+  // We'll generate options after AI gives us the correct answer
+  // This returns the correct prep + distractors (wrong prep + plausible articles)
+  const wrongPreps = (PREP_DISTRACTORS[prep] || ['an','auf','für','über','mit']).slice(0,4);
+  const wrongArticles = kase === 'Dat'
+    ? ['dem','der','den','des']
+    : ['den','die','das','dem'];
+
+  // Generate 4 distractors: mix of wrong prep + wrong article
+  const distractors = [];
+  const seen = new Set();
+  for (const wp of wrongPreps) {
+    for (const wa of wrongArticles) {
+      const opt = wp + ' ' + wa;
+      if (!seen.has(opt)) { seen.add(opt); distractors.push(opt); }
+      if (distractors.length >= 4) break;
+    }
+    if (distractors.length >= 4) break;
+  }
+  return distractors;
+}
+
+// ════════════════════════════════════════════════════════════
+//  AI SENTENCE GENERATION — calls Anthropic API
+// ════════════════════════════════════════════════════════════
+
+async function generateQuestion(verbObj, sessionId) {
+  // sessionId used to ensure we don't repeat same sentence
+  const prompt = `Generate a German fill-in-the-blank exercise for the verb+preposition: "${verbObj.verb} ${verbObj.prep}" (${verbObj.en}).
+
+Rules:
+- Write ONE natural German sentence using this verb+preposition combination
+- Replace ONLY the preposition+article with "___" (two blanks shown as one gap)
+- The missing piece must be exactly: ${verbObj.prep} + correct article (case: ${verbObj.kase})
+- Vary noun gender/number each time to create different correct articles
+- Make the sentence realistic and educational (B1-C1 appropriate content)
+- The sentence should clearly require THIS specific preposition (no ambiguity)
+- Use everyday situations: work, travel, study, relationships, news, etc.
+- Vary the subject (ich, er/sie, wir, man, der Student, die Frau, etc.)
+- Do NOT use the same sentence as before — session ${sessionId}
+
+Respond ONLY with this JSON (no markdown, no extra text):
+{
+  "sentence": "Full German sentence with ___ where prep+article goes",
+  "correct": "prep article",
+  "article_gender": "m|f|n|pl",
+  "hint": "One short English explanation of why this preposition is used here (max 10 words)"
+}`;
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 300,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  const data = await response.json();
+  const text = data.content.map(b => b.text || '').join('').trim();
+  const clean = text.replace(/```json|```/g, '').trim();
+  return JSON.parse(clean);
+}
+
+// ════════════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════════════
+
+let selectedLevel = 'all';
+let sessionQueue = [];     // array of verbObj
+let sessionIdx = 0;
+let sessionResults = [];   // { id, correct }
+let currentQuestion = null; // { verbObj, aiData, options }
+let answered = false;
+let sessionId = 0;
+const SESSION_SIZE = 20;
+
+// ════════════════════════════════════════════════════════════
+//  UI — START SCREEN
+// ════════════════════════════════════════════════════════════
+
+function updateStartStats() {
+  const s = store();
+  const m = s._meta || { sessions: 0, totalAnswered: 0, totalCorrect: 0 };
+  document.getElementById('smSessions').textContent = m.sessions;
+  document.getElementById('smTotal').textContent = m.totalAnswered;
+  const acc = m.totalAnswered > 0 ? Math.round(m.totalCorrect / m.totalAnswered * 100) + '%' : '—';
+  document.getElementById('smAccuracy').textContent = acc;
+}
+
+document.getElementById('levelGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.lvl-btn');
+  if (!btn) return;
+  const l = btn.dataset.l;
+  // Toggle individual levels, "all" is exclusive
+  if (l === 'all') {
+    selectedLevel = 'all';
+    document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    document.querySelector('.lvl-btn[data-l="all"]').classList.remove('active');
+    btn.classList.toggle('active');
+    // Collect active levels
+    const active = [...document.querySelectorAll('.lvl-btn.active')].map(b => b.dataset.l).filter(x => x !== 'all');
+    selectedLevel = active.length ? active : 'all';
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+//  SESSION MANAGEMENT
+// ════════════════════════════════════════════════════════════
+
+function getVerbPool() {
+  if (selectedLevel === 'all' || (Array.isArray(selectedLevel) && selectedLevel.includes('all'))) {
+    return VERBS;
+  }
+  const levels = Array.isArray(selectedLevel) ? selectedLevel : [selectedLevel];
+  return VERBS.filter(v => levels.includes(v.level));
+}
+
+function startSession() {
+  const pool = getVerbPool();
+  if (!pool.length) { showToast('No verbs for this level!'); return; }
+
+  metaIncrementSession();
+  sessionId = Date.now();
+  sessionQueue = pickWeightedVerbs(pool, SESSION_SIZE);
+  sessionIdx = 0;
+  sessionResults = [];
+  answered = false;
+
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display = 'flex';
+  document.getElementById('quizCard').style.display = 'block';
+
+  updateProgressBar();
+  loadQuestion(sessionQueue[0]);
+}
+
+function nextQuestion() {
+  sessionIdx++;
+  if (sessionIdx >= SESSION_SIZE) {
+    showComplete();
+    return;
+  }
+  document.getElementById('quizCard').className = 'quiz-card';
+  answered = false;
+  document.getElementById('nextBtn').classList.remove('visible');
+  document.getElementById('feedbackRow').classList.remove('visible', 'fb-correct', 'fb-wrong');
+  updateProgressBar();
+  loadQuestion(sessionQueue[sessionIdx]);
+}
+
+// ════════════════════════════════════════════════════════════
+//  QUESTION LOADING
+// ════════════════════════════════════════════════════════════
+
+async function loadQuestion(verbObj) {
+  currentQuestion = null;
+  document.getElementById('loadingState').style.display = 'flex';
+  document.getElementById('questionArea').style.display = 'none';
+  document.getElementById('tagVerb').textContent = verbObj.verb + ' ' + verbObj.prep;
+  document.getElementById('tagCase').textContent = '+' + verbObj.kase;
+
+  try {
+    const aiData = await generateQuestion(verbObj, sessionId + '_' + sessionIdx);
+    const options = buildOptions(verbObj, aiData.correct);
+    currentQuestion = { verbObj, aiData, options };
+
+    renderQuestion();
+  } catch (err) {
+    console.error(err);
+    // Fallback: show a simple question without AI
+    showToast('⚠ Could not load AI sentence – using fallback');
+    const fallback = {
+      sentence: `Ich ___ ${verbObj.prep === 'als' ? 'als Ingenieur.' : verbObj.prep + ' ___.'}`,
+      correct: verbObj.prep + ' dem',
+      hint: verbObj.en
+    };
+    // Just skip to next on persistent error
+    setTimeout(() => nextQuestion(), 1500);
+  }
+}
+
+function buildOptions(verbObj, correctAnswer) {
+  // Generate smart wrong options: same prep + wrong article, wrong prep + plausible article
+  const { prep, kase } = verbObj;
+  const allArticles = ['den','die','das','dem','der','des','ein','einer','einem'];
+  const wrongPreps = (PREP_DISTRACTORS[prep] || ['an','auf','für','über']).slice(0, 3);
+  const correctParts = correctAnswer.split(' ');
+  const correctPrep = correctParts[0];
+  const correctArt = correctParts.slice(1).join(' ');
+
+  const opts = new Set([correctAnswer]);
+
+  // Wrong article, same prep (case confusion)
+  const caseArticles = kase === 'Dat' ? ['den','die','das','der'] : ['dem','der','des','eine'];
+  for (const a of caseArticles) {
+    if (opts.size >= 3) break;
+    const o = correctPrep + ' ' + a;
+    if (o !== correctAnswer) opts.add(o);
+  }
+
+  // Wrong prep, plausible article
+  for (const wp of wrongPreps) {
+    if (opts.size >= 5) break;
+    const art = kase === 'Dat' ? correctArt : (correctArt === 'den' ? 'die' : 'den');
+    opts.add(wp + ' ' + art);
+    opts.add(wp + ' ' + (kase === 'Dat' ? 'dem' : 'den'));
+  }
+
+  // Shuffle and pick 5
+  const arr = [...opts].slice(0, 5);
+  // Ensure exactly 5
+  while (arr.length < 5) {
+    const extra = wrongPreps[arr.length % wrongPreps.length] + ' ' + allArticles[arr.length % allArticles.length];
+    if (!arr.includes(extra)) arr.push(extra);
+    else arr.push('in ' + allArticles[arr.length % allArticles.length]);
+  }
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+// ════════════════════════════════════════════════════════════
+//  RENDER QUESTION
+// ════════════════════════════════════════════════════════════
+
+function renderQuestion() {
+  const { aiData, options } = currentQuestion;
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'block';
+
+  // Build sentence HTML with blank
+  const parts = aiData.sentence.split('___');
+  const sentenceEl = document.getElementById('sentenceDisplay');
+  if (parts.length >= 2) {
+    sentenceEl.innerHTML = escHtml(parts[0]) + '<span class="blank" id="blankEl">___</span>' + escHtml(parts.slice(1).join('___'));
+  } else {
+    sentenceEl.textContent = aiData.sentence;
+  }
+
+  // Build options
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(opt, btn);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('feedbackRow').classList.remove('visible');
+  document.getElementById('nextBtn').classList.remove('visible');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ════════════════════════════════════════════════════════════
+//  ANSWER HANDLING
+// ════════════════════════════════════════════════════════════
+
+function selectOption(chosen, btn) {
+  if (answered) return;
+  answered = true;
+
+  const { verbObj, aiData, options } = currentQuestion;
+  const correct = aiData.correct;
+  const isCorrect = chosen.trim().toLowerCase() === correct.trim().toLowerCase();
+
+  // Update blank
+  const blankEl = document.getElementById('blankEl');
+  if (blankEl) {
+    blankEl.textContent = chosen;
+    blankEl.className = 'blank ' + (isCorrect ? 'reveal-correct' : 'reveal-wrong');
+  }
+
+  // Highlight all options
+  document.querySelectorAll('.option-btn').forEach(b => {
+    b.disabled = true;
+    const t = b.textContent.trim().toLowerCase();
+    if (t === correct.trim().toLowerCase()) b.classList.add('opt-correct');
+    else if (b === btn && !isCorrect) b.classList.add('opt-wrong');
+  });
+
+  // Card state
+  document.getElementById('quizCard').classList.add(isCorrect ? 'correct' : 'wrong');
+
+  // Feedback
+  const fbRow = document.getElementById('feedbackRow');
+  fbRow.className = 'feedback-row visible ' + (isCorrect ? 'fb-correct' : 'fb-wrong');
+  document.getElementById('fbIcon').textContent = isCorrect ? '✓' : '✗';
+  document.getElementById('fbText').innerHTML = isCorrect
+    ? `<strong>Richtig!</strong> <em>${aiData.hint}</em>`
+    : `<strong>Falsch.</strong> The correct answer is <strong>${correct}</strong>. <em>${aiData.hint}</em>`;
+
+  // Persist SRS
+  verbUpdate(verbObj.id, isCorrect);
+  sessionResults.push({ id: verbObj.id, correct: isCorrect });
+
+  // Update score display
+  const corr = sessionResults.filter(r => r.correct).length;
+  const wrong = sessionResults.filter(r => !r.correct).length;
+  document.getElementById('scoreCorrect').textContent = corr;
+  document.getElementById('scoreWrong').textContent = wrong;
+
+  document.getElementById('nextBtn').classList.add('visible');
+
+  // Keyboard shortcut: Enter / Space to advance
+}
+
+// ════════════════════════════════════════════════════════════
+//  PROGRESS
+// ════════════════════════════════════════════════════════════
+
+function updateProgressBar() {
+  const pct = Math.round((sessionIdx / SESSION_SIZE) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('qIdx').textContent = sessionIdx + 1;
+  document.getElementById('qTotal').textContent = SESSION_SIZE;
+}
+
+// ════════════════════════════════════════════════════════════
+//  SESSION COMPLETE
+// ════════════════════════════════════════════════════════════
+
+function showComplete() {
+  document.getElementById('progressArea').style.display = 'none';
+  document.getElementById('quizCard').style.display = 'none';
+
+  const corr = sessionResults.filter(r => r.correct).length;
+  const wrong = SESSION_SIZE - corr;
+  const pct = Math.round((corr / SESSION_SIZE) * 100);
+
+  document.getElementById('cCorrect').textContent = corr;
+  document.getElementById('cWrong').textContent = wrong;
+  document.getElementById('cPct').textContent = pct + '%';
+
+  let emoji, title, sub;
+  if (pct >= 90) { emoji='🏆'; title='Ausgezeichnet!'; sub=`Perfect score — ${pct}% correct. You've mastered these constructions!`; }
+  else if (pct >= 70) { emoji='🎉'; title='Sehr gut!'; sub=`${pct}% correct — solid performance. Review the weaker verbs below.`; }
+  else if (pct >= 50) { emoji='📚'; title='Gut gemacht!'; sub=`${pct}% correct — keep practising. Next session will focus on your weak spots.`; }
+  else { emoji='💪'; title='Weiter üben!'; sub=`${pct}% correct — don't give up! The algorithm will prioritise your problem areas.`; }
+
+  document.getElementById('completeEmoji').textContent = emoji;
+  document.getElementById('completeTitle').textContent = title;
+  document.getElementById('completeSub').textContent = sub;
+
+  // Build weak verb list
+  buildWeakList();
+  updateStartStats();
+
+  const screen = document.getElementById('completeScreen');
+  screen.style.display = 'flex';
+  screen.classList.add('visible');
+}
+
+function buildWeakList() {
+  const s = store();
+  // Gather verbs that appeared this session
+  const seen = [...new Set(sessionResults.map(r => r.id))];
+  const stats = seen.map(id => {
+    const r = s[id] || { attempts: 0, correct: 0 };
+    const verb = VERBS.find(v => v.id === id);
+    const rate = r.attempts ? Math.round(r.correct / r.attempts * 100) : 0;
+    return { id, verb, rate };
+  }).sort((a, b) => a.rate - b.rate);
+
+  const container = document.getElementById('weakList');
+  const weak = stats.filter(s => s.rate < 75);
+  if (!weak.length) {
+    container.innerHTML = '<div style="text-align:center;font-family:\'JetBrains Mono\',monospace;font-size:0.75rem;color:var(--b1);padding:0.8rem">✓ No problem areas — well done!</div>';
+    return;
+  }
+
+  container.innerHTML = '<h3>Focus areas for next session</h3>';
+  weak.slice(0, 6).forEach(({ verb, rate }) => {
+    if (!verb) return;
+    const cls = rate < 40 ? 'bad' : rate < 65 ? 'mid' : 'good';
+    container.innerHTML += `
+      <div class="weak-item">
+        <span class="weak-verb">${verb.verb} ${verb.prep} <span style="color:var(--text3)">(${verb.en})</span></span>
+        <span class="weak-rate ${cls}">${rate}%</span>
+      </div>`;
+  });
+}
+
+function showStart() {
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display = 'none';
+  document.getElementById('quizCard').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'flex';
+  updateStartStats();
+}
+
+// ════════════════════════════════════════════════════════════
+//  KEYBOARD
+// ════════════════════════════════════════════════════════════
+
+document.addEventListener('keydown', e => {
+  if (!answered) {
+    // 1–5 to select options
+    const n = parseInt(e.key);
+    if (n >= 1 && n <= 5) {
+      const btns = document.querySelectorAll('.option-btn:not(:disabled)');
+      if (btns[n-1]) btns[n-1].click();
+    }
+    return;
+  }
+  if ((e.key === ' ' || e.key === 'Enter') && document.getElementById('nextBtn').classList.contains('visible')) {
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════════════════
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════
+
+updateStartStats();
+</script>
+</body>
+</html>

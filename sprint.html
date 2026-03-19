@@ -49,11 +49,11 @@ body::before {
 .top-right { display:flex; align-items:center; gap:0.5rem; justify-self:end; }
 .nav-btn {
   display:flex; align-items:center; gap:0.35rem;
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2);
-  border-radius:20px; padding:0.28rem 0.7rem; font-family:'JetBrains Mono',monospace; font-size:0.72rem;
-  color:var(--text); text-decoration:none; transition:all 0.2s; font-weight:600;
+  background:var(--surf2); border:1px solid var(--bord2); border-radius:20px;
+  padding:0.28rem 0.7rem; font-family:'JetBrains Mono',monospace; font-size:0.72rem;
+  color:var(--text2); text-decoration:none; transition:all 0.2s;
 }
-.nav-btn:hover { background:rgba(255,255,255,0.1); border-color:var(--green); color:var(--green); }
+.nav-btn:hover { border-color:var(--green); color:var(--green); }
 
 /* Arena */
 .arena {
@@ -226,10 +226,7 @@ body::before {
     <span>Deutsch<span style="color:var(--green)">Karten</span></span><span style="font-size:11px;margin-left:5px;color:var(--text3);font-weight:400;letter-spacing:0;font-family:'JetBrains Mono',monospace;">by Praanav</span>
   </div>
   <div style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--text3);">⚡ 30-sec Sprint</div>
-  <div class="top-right">
-    <a href="wordle.html" class="nav-btn">Wördle</a>
-    <a href="app.html" class="nav-btn">← Cards</a>
-  </div>
+  <a href="app.html" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text3);text-decoration:none;padding:4px 12px;border:1px solid var(--border2,#32323d);border-radius:8px;background:var(--surface2,#1c1c22);transition:all 0.18s;white-space:nowrap;" onmouseover="this.style.color='#eeeef0';this.style.borderColor='#555'" onmouseout="this.style.color='';this.style.borderColor=''">← Flashcards</a>
 </header>
 
 <div class="arena" id="arena">
