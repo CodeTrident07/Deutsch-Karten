@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,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">
+<title>DeutschKarten – Der Die Das</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0a0a09;
+  --surface:  #111110;
+  --surface2: #181816;
+  --surface3: #1f1f1d;
+  --surf:     #111110;
+  --surf2:    #181816;
+  --surf3:    #1f1f1d;
+  --sf2:      #181816;
+  --sf3:      #1f1f1d;
+  --border:   #252523;
+  --border2:  #2f2f2d;
+  --bord:     #252523;
+  --bord2:    #2f2f2d;
+  --text:     #f0efe9;
+  --text2:    #787870;
+  --text3:    #454540;
+  --ink:      #f0efe9;
+  --ink2:     #787870;
+  --ink3:     #454540;
+  --green:    #4ec965;  --greend:  #0b2212;
+  --red:      #e85d5d;  --redd:    #2a0f0f;
+  --gold:     #e8a838;  --goldd:   #281c06;
+  --amber:    #e8a838;  --amberd:  #281c06;
+  --yellow:   #e8a838;  --yellowd: #281c06;
+  --orange:   #e07840;  --oranged: #261208;
+  --purple:   #b07de0;  --purpled: #1b0d2e;
+  --blue:     #4a9fd4;  --blued:   #091a28;
+  --der:  #4a9fd4; --derd: #091a28;
+  --die:  #d4608a; --died: #280d18;
+  --das:  #7ab83a; --dasd: #162806;
+}
+.nav-btn, .back-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink3);
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid var(--border2);
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+.nav-btn:hover, .back-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink3);
+  background: var(--surface2);
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:18px; }
+body {
+  background:var(--bg);
+  font-family:'Bricolage Grotesque',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:48px 48px;
+  opacity:0.18;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Topbar */
+.topbar {
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0.9rem 1.6rem;
+  border-bottom:1px solid var(--border);
+  background: var(--bg);
+  position:sticky; top:0; z-index:100;
+}
+.logo {
+  font-size:1.25rem; font-weight:800; letter-spacing:-0.04em;
+  display:flex; align-items:center; gap:0.5rem;
+}
+.top-right {
+  display:flex; align-items:center; gap:0.5rem; justify-self:end;
+}
+
+
+
+/* Stats bar */
+.stats-bar {
+  display:flex; align-items:center; gap:1.2rem;
+  padding:0.6rem 1.6rem;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  font-family:'JetBrains Mono',monospace; font-size:0.78rem;
+  color:var(--text3); position:relative; z-index:1; flex-wrap:wrap;
+}
+.stat { display:flex; align-items:center; gap:0.4rem; }
+.stat-val { color:var(--text2); font-weight:700; }
+.stat-der { color:var(--der); }
+.stat-die { color:var(--die); }
+.stat-das { color:var(--das); }
+.acc-bar {
+  flex:1; max-width:180px; height:5px;
+  background:var(--surf2); border-radius:10px; overflow:hidden;
+  border:1px solid var(--border);
+}
+.acc-fill { height:100%; background:var(--green); border-radius:10px; transition:width 0.5s ease; width:0%; }
+.session-info { margin-left:auto; color:var(--text3); font-size:0.72rem; }
+
+/* Main arena */
+.arena {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:2rem 1rem; position:relative; z-index:1;
+  gap:1.5rem;
+}
+
+/* Card */
+.question-card {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius: 14px; padding:2.5rem 3rem;
+  text-align:center; max-width:540px; width:100%;
+  animation:cardIn 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  transition:border-color 0.3s, box-shadow 0.3s;
+}
+.question-card.correct-der { border-color:var(--der); box-shadow:0 0 32px rgba(116,192,252,0.15); }
+.question-card.correct-die { border-color:var(--die); box-shadow:0 0 32px rgba(247,131,172,0.15); }
+.question-card.correct-das { border-color:var(--das); box-shadow:0 0 32px rgba(169,227,75,0.15); }
+.question-card.wrong { border-color:var(--red); box-shadow:0 0 32px rgba(255,107,107,0.15); animation:shake 0.35s ease; }
+
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(12px) scale(0.97); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  20% { transform:translateX(-8px); }
+  60% { transform:translateX(8px); }
+}
+
+.word-english {
+  font-family:'DM Serif Display',serif; font-style:italic;
+  font-size:1.1rem; color:var(--text3); margin-bottom:0.5rem;
+}
+.word-german {
+  font-size:2.4rem; font-weight:800; letter-spacing:-0.03em;
+  margin-bottom:0.3rem; color:var(--text);
+}
+.word-blank {
+  font-size:2.4rem; font-weight:800; letter-spacing:-0.03em;
+  color:var(--text3);
+}
+.article-reveal {
+  font-size:2.4rem; font-weight:800; letter-spacing:-0.03em;
+  transition:color 0.3s;
+}
+.article-reveal.der { color:var(--der); }
+.article-reveal.die { color:var(--die); }
+.article-reveal.das { color:var(--das); }
+
+.result-msg {
+  font-family:'JetBrains Mono',monospace; font-size:0.82rem;
+  min-height:1.4rem; transition:all 0.2s;
+}
+.result-msg.correct { color:var(--green); }
+.result-msg.wrong { color:var(--red); }
+.hint-text {
+  font-size:0.78rem; color:var(--text3); margin-top:0.3rem;
+  font-family:'JetBrains Mono',monospace; min-height:1.2rem;
+}
+
+/* Article buttons */
+.article-btns {
+  display:flex; gap:1rem; max-width:540px; width:100%;
+}
+.art-btn {
+  flex:1; padding:1rem;
+  border-radius: 10px; border:2px solid var(--border2);
+  background:var(--surface); font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.4rem; font-weight:800; cursor:pointer;
+  transition:all 0.15s; position:relative; overflow:hidden;
+  color:var(--text2);
+}
+.art-btn::before {
+  content:''; position:absolute; inset:0;
+  opacity:0; transition:opacity 0.2s;
+}
+.art-btn.btn-der { border-color:var(--derd); }
+.art-btn.btn-der:hover { border-color:var(--der); color:var(--der); background:rgba(116,192,252,0.07); }
+.art-btn.btn-die { border-color:var(--died); }
+.art-btn.btn-die:hover { border-color:var(--die); color:var(--die); background:rgba(247,131,172,0.07); }
+.art-btn.btn-das { border-color:var(--dasd); }
+.art-btn.btn-das:hover { border-color:var(--das); color:var(--das); background:rgba(169,227,75,0.07); }
+
+.art-btn.chosen-correct.btn-der { background:var(--derd); border-color:var(--der); color:var(--der); }
+.art-btn.chosen-correct.btn-die { background:var(--died); border-color:var(--die); color:var(--die); }
+.art-btn.chosen-correct.btn-das { background:var(--dasd); border-color:var(--das); color:var(--das); }
+.art-btn.chosen-wrong { background:var(--redd); border-color:var(--red); color:var(--red); }
+.art-btn.show-correct.btn-der { background:rgba(116,192,252,0.1); border-color:var(--der); color:var(--der); opacity:0.6; }
+.art-btn.show-correct.btn-die { background:rgba(247,131,172,0.1); border-color:var(--die); color:var(--die); opacity:0.6; }
+.art-btn.show-correct.btn-das { background:rgba(169,227,75,0.1); border-color:var(--das); color:var(--das); opacity:0.6; }
+.art-btn:disabled { cursor:default; }
+
+.art-btn .art-label { font-size:0.72rem; display:block; font-weight:500; opacity:0.7; margin-top:0.2rem; font-family:'JetBrains Mono',monospace; }
+
+/* Next btn */
+.next-btn {
+  padding:0.8rem 2.5rem; background:var(--green); color:var(--bg);
+  border:none; border-radius:14px;
+  font-family:'Bricolage Grotesque',sans-serif; font-size:1rem; font-weight:800;
+  cursor:pointer; transition:opacity 0.2s, transform 0.15s;
+  display:none;
+}
+.next-btn:hover { opacity:0.88; }
+.next-btn:active { transform:scale(0.97); }
+.next-btn.show { display:block; }
+
+/* Progress */
+.progress-wrap { max-width:540px; width:100%; }
+.progress-track {
+  height:4px; background:var(--surf2); border-radius:10px;
+  overflow:hidden; border:1px solid var(--border);
+}
+.progress-fill {
+  height:100%; background:var(--green); border-radius:10px;
+  transition:width 0.4s cubic-bezier(0.34,1.56,0.64,1); width:0%;
+}
+
+/* Complete screen */
+.complete-screen {
+  display:none; flex-direction:column; align-items:center;
+  text-align:center; gap:1.2rem; padding:2rem;
+  animation:cardIn 0.4s ease;
+}
+.complete-screen.show { display:flex; }
+.complete-emoji { font-size:3.5rem; }
+.complete-title { font-size:2rem; font-weight:800; letter-spacing:-0.03em; }
+.complete-stats {
+  display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+  margin-top:0.5rem;
+}
+.cstat { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+.cstat-val { font-size:2rem; font-weight:800; }
+.cstat-label {
+  font-size:0.75rem; font-family:'JetBrains Mono',monospace;
+  color:var(--text3); text-transform:uppercase; letter-spacing:0.05em;
+}
+.cstat-der { color:var(--der); }
+.cstat-die { color:var(--die); }
+.cstat-das { color:var(--das); }
+
+/* Weak words panel */
+.weak-panel {
+  max-width:540px; width:100%;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius: 10px; padding:1.2rem;
+  display:none;
+}
+.weak-panel.show { display:block; }
+.weak-panel h3 {
+  font-size:0.9rem; font-weight:700; margin-bottom:0.8rem;
+  display:flex; align-items:center; gap:0.4rem;
+}
+.weak-grid { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.weak-word {
+  padding:0.25rem 0.6rem; border-radius:8px;
+  font-family:'JetBrains Mono',monospace; font-size:0.75rem;
+  font-weight:700;
+}
+.weak-word.der { background:var(--derd); color:var(--der); }
+.weak-word.die { background:var(--died); color:var(--die); }
+.weak-word.das { background:var(--dasd); color:var(--das); }
+
+.btn-row {
+  display:flex; gap:0.8rem; flex-wrap:wrap; justify-content:center;
+}
+.btn-restart {
+  padding:0.75rem 2rem; background:var(--green); color:var(--bg);
+  border:none; border-radius:14px;
+  font-family:'Bricolage Grotesque',sans-serif; font-size:1rem; font-weight:800;
+  cursor:pointer; transition:opacity 0.2s;
+}
+.btn-restart:hover { opacity:0.88; }
+.btn-weak-only {
+  padding:0.75rem 1.5rem; background:var(--surf2); color:var(--text2);
+  border:1px solid var(--border2); border-radius:14px;
+  font-family:'Bricolage Grotesque',sans-serif; font-size:0.9rem; font-weight:700;
+  cursor:pointer; transition:all 0.2s;
+}
+.btn-weak-only:hover { border-color:var(--red); color:var(--red); }
+
+/* Level badge */
+.level-badge {
+  display:inline-flex; align-items:center; gap:0.35rem;
+  font-family:'JetBrains Mono',monospace; font-size:0.68rem;
+  font-weight:700; padding:0.2rem 0.55rem;
+  border-radius: 6px; border:1px solid var(--border2); color:var(--text3);
+  margin-bottom:0.8rem;
+}
+
+/* Keyboard shortcut hint */
+.kbd-hint-bar {
+  display:flex; gap:1rem; justify-content:center;
+  font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--text3);
+  padding:0.5rem 0; position:relative; z-index:1;
+}
+.kbd {
+  display:inline-block; background:var(--surf2); border:1px solid var(--border2);
+  border-radius:5px; padding:0.1rem 0.4rem; font-size:0.65rem;
+}
+
+@media(max-width:600px) {
+  .word-german, .word-blank { font-size:1.8rem; }
+  .article-reveal { font-size:1.8rem; }
+  .question-card { padding:1.5rem 1.2rem; }
+  .art-btn { font-size:1.1rem; padding:0.8rem 0.5rem; }
+  .topbar { padding:0.8rem 1rem; }
+  .article-btns { gap:0.6rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <img src="data:image/png;base64,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" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+    <span>Deutsch<span style="color:var(--green)">Karten</span></span><span style="font-size:11px;margin-left:5px;color:var(--text3);font-weight:400;letter-spacing:0;font-family:'JetBrains Mono',monospace;">by Praanav</span>
+  </div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--text3);">der · die · das</div>
+  <a href="app.html" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text3);text-decoration:none;padding:4px 12px;border:1px solid var(--border2);border-radius:5px;background:var(--surface2);transition:all 0.18s;white-space:nowrap;" onmouseover="this.style.color='#eeeef0';this.style.borderColor='#555'" onmouseout="this.style.color='';this.style.borderColor=''">← Flashcards</a>
+</header>
+
+<div class="stats-bar">
+  <div class="stat">✓ <span class="stat-val" id="statCorrect">0</span> correct</div>
+  <div class="stat">✗ <span class="stat-val" id="statWrong">0</span> wrong</div>
+  <div class="stat acc-bar-wrap" style="display:flex;align-items:center;gap:0.5rem;">
+    <span>acc</span>
+    <div class="acc-bar"><div class="acc-fill" id="accFill"></div></div>
+    <span class="stat-val" id="statAcc">—</span>
+  </div>
+  <div class="stat">
+    <span style="color:var(--der)">der <span class="stat-val stat-der" id="statDer">0</span></span>
+    <span style="color:var(--text3);margin:0 0.2rem">/</span>
+    <span style="color:var(--die)">die <span class="stat-val stat-die" id="statDie">0</span></span>
+    <span style="color:var(--text3);margin:0 0.2rem">/</span>
+    <span style="color:var(--das)">das <span class="stat-val stat-das" id="statDas">0</span></span>
+    <span style="color:var(--text3);margin-left:0.3rem">wrong</span>
+  </div>
+  <div class="session-info" id="sessionInfo">Session: 0/20</div>
+</div>
+
+<div class="arena" id="mainArena">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="question-card" id="questionCard">
+    <div class="level-badge" id="levelBadge">A1 · noun</div>
+    <div class="word-english" id="wordEnglish">mother</div>
+    <div style="display:flex;align-items:baseline;justify-content:center;gap:0.5rem;">
+      <span class="article-reveal" id="articleReveal" style="display:none;"></span>
+      <span class="word-blank" id="wordBlank">___</span>
+      <span class="word-german" id="wordGerman" style="display:none;"></span>
+    </div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="hint-text" id="hintText"></div>
+  </div>
+
+  <div class="article-btns" id="articleBtns">
+    <button class="art-btn btn-der" id="btnDer" onclick="guess('der')">
+      der
+      <span class="art-label">masculine</span>
+    </button>
+    <button class="art-btn btn-die" id="btnDie" onclick="guess('die')">
+      die
+      <span class="art-label">feminine</span>
+    </button>
+    <button class="art-btn btn-das" id="btnDas" onclick="guess('das')">
+      das
+      <span class="art-label">neuter</span>
+    </button>
+  </div>
+
+  <button class="next-btn" id="nextBtn" onclick="nextWord()">Next word →</button>
+
+  <!-- Complete screen -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-title" id="completeTitle">Session complete!</div>
+    <div style="font-family:'DM Serif Display',serif;font-style:italic;color:var(--text2);font-size:1.1rem;" id="completeSub"></div>
+    <div class="complete-stats" id="completeStats"></div>
+    <div class="weak-panel" id="weakPanel">
+      <h3>🔴 Words to study more</h3>
+      <div class="weak-grid" id="weakGrid"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-restart" onclick="startSession(false)">New session</button>
+      <button class="btn-weak-only" id="btnWeakOnly" onclick="startSession(true)" style="display:none;">Retry weak words</button>
+    </div>
+  </div>
+</div>
+
+<div class="kbd-hint-bar">
+  <span><span class="kbd">1</span> der</span>
+  <span><span class="kbd">2</span> die</span>
+  <span><span class="kbd">3</span> das</span>
+  <span><span class="kbd">Enter</span> next</span>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────
+const ALL_NOUNS = [{"w": "die Mutter", "a": "die", "en": "mother"}, {"w": "der Vater", "a": "der", "en": "father"}, {"w": "die Schwester", "a": "die", "en": "sister"}, {"w": "der Bruder", "a": "der", "en": "brother"}, {"w": "das Kind", "a": "das", "en": "child"}, {"w": "die Gro\u00dfmutter", "a": "die", "en": "grandmother"}, {"w": "der Gro\u00dfvater", "a": "der", "en": "grandfather"}, {"w": "das Baby", "a": "das", "en": "baby"}, {"w": "der Name", "a": "der", "en": "name"}, {"w": "die Familie", "a": "die", "en": "family"}, {"w": "der Freund", "a": "der", "en": "friend / boyfriend"}, {"w": "die Freundin", "a": "die", "en": "friend / girlfriend"}, {"w": "der Mann", "a": "der", "en": "man / husband"}, {"w": "die Frau", "a": "die", "en": "woman / wife"}, {"w": "das Haus", "a": "das", "en": "house"}, {"w": "das Zimmer", "a": "das", "en": "room"}, {"w": "die T\u00fcr", "a": "die", "en": "door"}, {"w": "das Fenster", "a": "das", "en": "window"}, {"w": "der Tisch", "a": "der", "en": "table"}, {"w": "der Stuhl", "a": "der", "en": "chair"}, {"w": "das Bett", "a": "das", "en": "bed"}, {"w": "die K\u00fcche", "a": "die", "en": "kitchen"}, {"w": "das Bad", "a": "das", "en": "bathroom"}, {"w": "die Wohnung", "a": "die", "en": "apartment"}, {"w": "das Wasser", "a": "das", "en": "water"}, {"w": "das Brot", "a": "das", "en": "bread"}, {"w": "der Apfel", "a": "der", "en": "apple"}, {"w": "die Milch", "a": "die", "en": "milk"}, {"w": "der Kaffee", "a": "der", "en": "coffee"}, {"w": "die Banane", "a": "die", "en": "banana"}, {"w": "das Fleisch", "a": "das", "en": "meat"}, {"w": "der Reis", "a": "der", "en": "rice"}, {"w": "die Suppe", "a": "die", "en": "soup"}, {"w": "das Restaurant", "a": "das", "en": "restaurant"}, {"w": "der Laden", "a": "der", "en": "shop / store"}, {"w": "der Preis", "a": "der", "en": "price"}, {"w": "das Geld", "a": "das", "en": "money"}, {"w": "die Kasse", "a": "die", "en": "checkout / cashier"}, {"w": "die Rechnung", "a": "die", "en": "bill / invoice"}, {"w": "der Markt", "a": "der", "en": "market"}, {"w": "die Tasche", "a": "die", "en": "bag"}, {"w": "die Kleidung", "a": "die", "en": "clothing"}, {"w": "der Bus", "a": "der", "en": "bus"}, {"w": "der Zug", "a": "der", "en": "train"}, {"w": "das Taxi", "a": "das", "en": "taxi"}, {"w": "die Stra\u00dfe", "a": "die", "en": "street / road"}, {"w": "der Bahnhof", "a": "der", "en": "train station"}, {"w": "der Flughafen", "a": "der", "en": "airport"}, {"w": "das Ticket", "a": "das", "en": "ticket"}, {"w": "die Uhr", "a": "die", "en": "clock / o\\"}, {"w": "die Woche", "a": "die", "en": "week"}, {"w": "der Monat", "a": "der", "en": "month"}, {"w": "das Jahr", "a": "das", "en": "year"}, {"w": "der Tag", "a": "der", "en": "day"}, {"w": "die Zeit", "a": "die", "en": "time"}, {"w": "der Morgen", "a": "der", "en": "morning"}, {"w": "der Abend", "a": "der", "en": "evening"}, {"w": "der Preis", "a": "der", "en": "price"}, {"w": "der Laden", "a": "der", "en": "shop / store"}, {"w": "die Kasse", "a": "die", "en": "checkout / cashier"}, {"w": "das Angebot", "a": "das", "en": "special offer"}, {"w": "die Erm\u00e4\u00dfigung", "a": "die", "en": "discount"}, {"w": "die Wohnung", "a": "die", "en": "apartment"}, {"w": "die Miete", "a": "die", "en": "rent"}, {"w": "der Nachbar", "a": "der", "en": "neighbour"}, {"w": "das Treppenhaus", "a": "das", "en": "stairwell"}, {"w": "der Vorhang", "a": "der", "en": "curtain"}, {"w": "das Erdgeschoss", "a": "das", "en": "ground floor"}, {"w": "die Etage", "a": "die", "en": "floor / storey"}, {"w": "die Arbeit", "a": "die", "en": "work / job"}, {"w": "der Chef", "a": "der", "en": "boss"}, {"w": "das Gehalt", "a": "das", "en": "salary"}, {"w": "das B\u00fcro", "a": "das", "en": "office"}, {"w": "die Besprechung", "a": "die", "en": "meeting"}, {"w": "der Kollege", "a": "der", "en": "colleague"}, {"w": "der Bus", "a": "der", "en": "bus"}, {"w": "die Bahn", "a": "die", "en": "train / railway"}, {"w": "der Bahnhof", "a": "der", "en": "train station"}, {"w": "die Haltestelle", "a": "die", "en": "stop (bus/tram)"}, {"w": "das Ticket", "a": "das", "en": "ticket"}, {"w": "die Versp\u00e4tung", "a": "die", "en": "delay"}, {"w": "das Hobby", "a": "das", "en": "hobby"}, {"w": "das Konzert", "a": "das", "en": "concert"}, {"w": "das Museum", "a": "das", "en": "museum"}, {"w": "die Verabredung", "a": "die", "en": "appointment / date"}, {"w": "das Camping", "a": "das", "en": "camping"}, {"w": "die Krankheit", "a": "die", "en": "illness / disease"}, {"w": "die Erk\u00e4ltung", "a": "die", "en": "cold (illness)"}, {"w": "die Infektion", "a": "die", "en": "infection"}, {"w": "die Wunde", "a": "die", "en": "wound"}, {"w": "das Pflaster", "a": "das", "en": "plaster / band-aid"}, {"w": "der Verband", "a": "der", "en": "bandage"}, {"w": "die Spritze", "a": "die", "en": "injection"}, {"w": "das Rezept", "a": "das", "en": "prescription"}, {"w": "die Therapie", "a": "die", "en": "therapy"}, {"w": "die Notaufnahme", "a": "die", "en": "emergency room"}, {"w": "der Krankenwagen", "a": "der", "en": "ambulance"}, {"w": "die Schulter", "a": "die", "en": "shoulder"}, {"w": "das Knie", "a": "das", "en": "knee"}, {"w": "die Arztpraxis", "a": "die", "en": "doctor\\"}, {"w": "die Alternative", "a": "die", "en": "alternative"}, {"w": "die Di\u00e4t", "a": "die", "en": "diet"}, {"w": "der Pfleger", "a": "der", "en": "nurse / carer"}, {"w": "die Erh\u00f6hung", "a": "die", "en": "increase / rise"}, {"w": "die Gymnastik", "a": "die", "en": "gymnastics / exercises"}, {"w": "das Picknick", "a": "das", "en": "picnic"}, {"w": "das Altenheim", "a": "das", "en": "care home"}, {"w": "die Salbe", "a": "die", "en": "ointment / cream"}, {"w": "das Konto", "a": "das", "en": "bank account"}, {"w": "das Bargeld", "a": "das", "en": "cash"}, {"w": "das Einkommen", "a": "das", "en": "income"}, {"w": "die \u00dcberweisung", "a": "die", "en": "bank transfer"}, {"w": "die M\u00fcnze", "a": "die", "en": "coin"}, {"w": "der Schein", "a": "der", "en": "banknote"}, {"w": "der Betrag", "a": "der", "en": "amount (of money)"}, {"w": "der Kredit", "a": "der", "en": "loan / credit"}, {"w": "das Ersatzteil", "a": "das", "en": "spare part"}, {"w": "die Bremse", "a": "die", "en": "brake"}, {"w": "der Reifen", "a": "der", "en": "tyre"}, {"w": "der Motor", "a": "der", "en": "engine"}, {"w": "der Schaden", "a": "der", "en": "damage"}, {"w": "die Werkstatt", "a": "die", "en": "workshop / garage"}, {"w": "der Mechaniker", "a": "der", "en": "mechanic"}, {"w": "das \u00d6l", "a": "das", "en": "oil"}, {"w": "die Versicherung", "a": "die", "en": "insurance"}, {"w": "die Einbahnstra\u00dfe", "a": "die", "en": "one-way street"}, {"w": "die Eisenbahn", "a": "die", "en": "railway"}, {"w": "die Fahrschule", "a": "die", "en": "driving school"}, {"w": "die Geschwindigkeitsbeschr\u00e4nkung", "a": "die", "en": "speed limit"}, {"w": "die Querstra\u00dfe", "a": "die", "en": "cross street"}, {"w": "die Umleitung", "a": "die", "en": "diversion / detour"}, {"w": "das Verkehrszeichen", "a": "das", "en": "traffic sign"}, {"w": "die Vorfahrt", "a": "die", "en": "right of way"}, {"w": "der Gehsteig", "a": "der", "en": "pavement / sidewalk"}, {"w": "die WG", "a": "die", "en": "shared flat"}, {"w": "das Tempo", "a": "das", "en": "speed"}, {"w": "die Beh\u00f6rde", "a": "die", "en": "authority / government office"}, {"w": "das Dokument", "a": "das", "en": "document"}, {"w": "das Visum", "a": "das", "en": "visa"}, {"w": "die Genehmigung", "a": "die", "en": "permission / permit"}, {"w": "das Zeugnis", "a": "das", "en": "certificate / report"}, {"w": "die Staatsb\u00fcrgerschaft", "a": "die", "en": "citizenship"}, {"w": "die Unterschrift", "a": "die", "en": "signature"}, {"w": "die Anmeldung", "a": "die", "en": "registration"}, {"w": "die Werbung", "a": "die", "en": "advertising"}, {"w": "die Wahrheit", "a": "die", "en": "truth"}, {"w": "die Meinung", "a": "die", "en": "opinion"}, {"w": "die Entwicklung", "a": "die", "en": "development"}, {"w": "der Fortschritt", "a": "der", "en": "progress"}, {"w": "die Gesellschaft", "a": "die", "en": "society"}, {"w": "die Demonstration", "a": "die", "en": "demonstration"}, {"w": "die Geschichte", "a": "die", "en": "history / story"}, {"w": "die Literatur", "a": "die", "en": "literature"}, {"w": "der Politiker", "a": "der", "en": "politician"}, {"w": "die Wiederholung", "a": "die", "en": "repetition / revision"}, {"w": "der Wissenschaftler", "a": "der", "en": "scientist"}, {"w": "die Wissenschaft", "a": "die", "en": "science"}, {"w": "der Professor", "a": "der", "en": "professor"}, {"w": "der Staat", "a": "der", "en": "state / country"}, {"w": "die Staatsb\u00fcrgerschaft", "a": "die", "en": "citizenship"}, {"w": "die Theorie", "a": "die", "en": "theory"}, {"w": "der Bundeskanzler", "a": "der", "en": "Federal Chancellor"}, {"w": "der Friede", "a": "der", "en": "peace"}, {"w": "die Mannschaft", "a": "die", "en": "team"}, {"w": "die Physik", "a": "die", "en": "physics"}, {"w": "der Erfolg", "a": "der", "en": "success"}, {"w": "die Jugend", "a": "die", "en": "youth"}, {"w": "der Krieg", "a": "der", "en": "war"}, {"w": "die Erinnerung", "a": "die", "en": "memory / recollection"}, {"w": "die Demokratie", "a": "die", "en": "democracy"}, {"w": "die Partei", "a": "die", "en": "political party"}, {"w": "das Verh\u00e4ltnis", "a": "das", "en": "relationship / ratio"}, {"w": "der Inhalt", "a": "der", "en": "content / contents"}, {"w": "die Mehrheit", "a": "die", "en": "majority"}, {"w": "die Minderheit", "a": "die", "en": "minority"}, {"w": "die Opposition", "a": "die", "en": "opposition"}, {"w": "das Parlament", "a": "das", "en": "parliament"}, {"w": "die Reform", "a": "die", "en": "reform"}, {"w": "der Bundespr\u00e4sident", "a": "der", "en": "Federal President"}, {"w": "der Bundesland", "a": "der", "en": "federal state"}, {"w": "das Asyl", "a": "das", "en": "asylum"}, {"w": "die Ausnahme", "a": "die", "en": "exception"}, {"w": "die Ehre", "a": "die", "en": "honour"}, {"w": "die Gewalt", "a": "die", "en": "violence / force"}, {"w": "die Migration", "a": "die", "en": "migration"}, {"w": "der Verbrecher", "a": "der", "en": "criminal"}, {"w": "die Galerie", "a": "die", "en": "gallery"}, {"w": "der Bedarf", "a": "der", "en": "need / demand"}, {"w": "die Bev\u00f6lkerung", "a": "die", "en": "population"}, {"w": "die F\u00f6rderung", "a": "die", "en": "funding / support"}, {"w": "die Grundlage", "a": "die", "en": "basis / foundation"}, {"w": "die Sozialversicherung", "a": "die", "en": "social insurance"}, {"w": "das Werk", "a": "das", "en": "work / factory"}, {"w": "die \u00dcbersetzung", "a": "die", "en": "translation"}, {"w": "die Begr\u00fcndung", "a": "die", "en": "justification / reason"}, {"w": "die B\u00fcrgerinitiative", "a": "die", "en": "citizens\\"}, {"w": "die Laune", "a": "die", "en": "mood"}, {"w": "die Unterschrift", "a": "die", "en": "signature"}, {"w": "die Biologie", "a": "die", "en": "biology"}, {"w": "die Einzelheit", "a": "die", "en": "detail"}, {"w": "die Europ\u00e4ische Union", "a": "die", "en": "European Union"}, {"w": "die Wahl", "a": "die", "en": "election / choice"}, {"w": "das Volk", "a": "das", "en": "people / nation"}, {"w": "das Mitglied", "a": "das", "en": "member"}, {"w": "die Presse", "a": "die", "en": "the press / media"}, {"w": "die Steuer", "a": "die", "en": "tax"}, {"w": "die \u00d6ffentlichkeit", "a": "die", "en": "the public"}, {"w": "die Gemeinde", "a": "die", "en": "municipality / community"}, {"w": "der B\u00fcrgermeister", "a": "der", "en": "mayor"}, {"w": "die Versammlung", "a": "die", "en": "assembly / meeting"}, {"w": "die Verwaltung", "a": "die", "en": "administration"}, {"w": "die Religion", "a": "die", "en": "religion"}, {"w": "die Nachfrage", "a": "die", "en": "demand (economic)"}, {"w": "die Umwelt", "a": "die", "en": "environment"}, {"w": "das Klima", "a": "das", "en": "climate"}, {"w": "die Energie", "a": "die", "en": "energy"}, {"w": "die Ern\u00e4hrung", "a": "die", "en": "diet / nutrition"}, {"w": "die Qualit\u00e4t", "a": "die", "en": "quality"}, {"w": "die Tatsache", "a": "die", "en": "fact"}, {"w": "die Ursache", "a": "die", "en": "cause / reason"}, {"w": "die Ausbildung", "a": "die", "en": "vocational training"}, {"w": "das Studium", "a": "das", "en": "university studies"}, {"w": "die Pr\u00fcfung", "a": "die", "en": "exam"}, {"w": "die F\u00e4higkeit", "a": "die", "en": "ability / skill"}, {"w": "die Karriere", "a": "die", "en": "career"}, {"w": "die Leistung", "a": "die", "en": "performance / achievement"}, {"w": "die Methode", "a": "die", "en": "method"}, {"w": "die Qualifikation", "a": "die", "en": "qualification"}, {"w": "der Lebenslauf", "a": "der", "en": "CV / r\u00e9sum\u00e9"}, {"w": "der Arbeitgeber", "a": "der", "en": "employer"}, {"w": "der Arbeitnehmer", "a": "der", "en": "employee"}, {"w": "die Gewerkschaft", "a": "die", "en": "trade union"}, {"w": "der Kompromiss", "a": "der", "en": "compromise"}, {"w": "die Konkurrenz", "a": "die", "en": "competition"}, {"w": "die K\u00fcndigung", "a": "die", "en": "dismissal / resignation"}, {"w": "die Entlassung", "a": "die", "en": "dismissal / redundancy"}, {"w": "der Betriebsrat", "a": "der", "en": "works council"}, {"w": "die Entscheidung", "a": "die", "en": "decision"}, {"w": "die Schuld", "a": "die", "en": "guilt / debt / fault"}, {"w": "die Trennung", "a": "die", "en": "separation"}, {"w": "das Wohl", "a": "das", "en": "wellbeing"}, {"w": "die Fortbildung", "a": "die", "en": "further training"}, {"w": "die Zukunft", "a": "die", "en": "future"}, {"w": "die Teilzeit", "a": "die", "en": "part-time (work)"}, {"w": "die Vollzeit", "a": "die", "en": "full-time (work)"}, {"w": "die Schicht", "a": "die", "en": "shift (work)"}, {"w": "das Seminar", "a": "das", "en": "seminar"}, {"w": "das Schreiben", "a": "das", "en": "(formal) letter"}, {"w": "die Abteilung", "a": "die", "en": "department"}, {"w": "die Empfehlung", "a": "die", "en": "recommendation"}, {"w": "die Aprikose", "a": "die", "en": "apricot"}, {"w": "das Gew\u00fcrz", "a": "das", "en": "spice / seasoning"}, {"w": "der Kakao", "a": "der", "en": "cocoa / hot chocolate"}, {"w": "die Atmosph\u00e4re", "a": "die", "en": "atmosphere"}, {"w": "das Ballett", "a": "das", "en": "ballet"}, {"w": "das Ereignis", "a": "das", "en": "event"}, {"w": "die Karriere", "a": "die", "en": "career"}, {"w": "das Stadion", "a": "das", "en": "stadium"}, {"w": "die Uniform", "a": "die", "en": "uniform"}, {"w": "die Ansicht", "a": "die", "en": "view / opinion"}, {"w": "das Erlebnis", "a": "das", "en": "experience"}, {"w": "der Ball", "a": "der", "en": "ball"}, {"w": "der Dialog", "a": "der", "en": "dialogue"}, {"w": "der Handwerker", "a": "der", "en": "craftsman / tradesman"}, {"w": "das Jahrzehnt", "a": "das", "en": "decade"}, {"w": "die Lippe", "a": "die", "en": "lip"}, {"w": "der Schritt", "a": "der", "en": "step"}, {"w": "die Wirkung", "a": "die", "en": "effect"}, {"w": "die Platte", "a": "die", "en": "record / plate"}, {"w": "der Intensivkurs", "a": "der", "en": "intensive course"}, {"w": "das Leder", "a": "das", "en": "leather"}, {"w": "das Plastik", "a": "das", "en": "plastic"}, {"w": "die Folie", "a": "die", "en": "foil / film"}, {"w": "das Gas", "a": "das", "en": "gas"}, {"w": "die Pfanne", "a": "die", "en": "frying pan"}, {"w": "der Einfluss", "a": "der", "en": "influence"}, {"w": "das Ergebnis", "a": "das", "en": "result"}, {"w": "die Zeichnung", "a": "die", "en": "drawing"}, {"w": "das Bargeld", "a": "das", "en": "cash"}, {"w": "das Einkommen", "a": "das", "en": "income"}, {"w": "die Hoffnung", "a": "die", "en": "hope"}, {"w": "der Fleck", "a": "der", "en": "stain / spot"}, {"w": "der Bewohner", "a": "der", "en": "resident / inhabitant"}, {"w": "der Empfang", "a": "der", "en": "reception"}, {"w": "der Apparat", "a": "der", "en": "apparatus / device"}, {"w": "die Anlage", "a": "die", "en": "facility / attachment"}, {"w": "die Illustrierte", "a": "die", "en": "illustrated magazine"}, {"w": "der Spot", "a": "der", "en": "advertisement / spotlight"}, {"w": "die Tafel", "a": "die", "en": "blackboard / bar (chocolate)"}, {"w": "der Feind", "a": "der", "en": "enemy"}, {"w": "die Zahncreme", "a": "die", "en": "toothpaste"}, {"w": "die Kiste", "a": "die", "en": "crate / box"}, {"w": "die Er\u00f6ffnung", "a": "die", "en": "opening"}, {"w": "die Konferenz", "a": "die", "en": "conference"}, {"w": "die Pr\u00e4sentation", "a": "die", "en": "presentation"}, {"w": "der Vortrag", "a": "der", "en": "lecture / talk"}, {"w": "das Fach", "a": "das", "en": "subject / compartment"}, {"w": "die Grafik", "a": "die", "en": "graphic / chart"}, {"w": "das Sprichwort", "a": "das", "en": "proverb"}, {"w": "das Geb\u00e4ude", "a": "das", "en": "building"}, {"w": "das Camping", "a": "das", "en": "camping"}, {"w": "der Swimmingpool", "a": "der", "en": "swimming pool"}, {"w": "der Betrag", "a": "der", "en": "amount"}, {"w": "die M\u00fcnze", "a": "die", "en": "coin"}, {"w": "der Zuschlag", "a": "der", "en": "surcharge / supplement"}, {"w": "das Festival", "a": "das", "en": "festival"}, {"w": "die M\u00fche", "a": "die", "en": "effort / trouble"}, {"w": "der Autor", "a": "der", "en": "author"}, {"w": "die Katastrophe", "a": "die", "en": "catastrophe"}, {"w": "die Beh\u00f6rde", "a": "die", "en": "authority / office"}, {"w": "die Best\u00e4tigung", "a": "die", "en": "confirmation"}, {"w": "die Bundesrepublik Deutschland", "a": "die", "en": "Federal Republic of Germany"}, {"w": "die Flucht", "a": "die", "en": "flight / escape"}, {"w": "die Frisur", "a": "die", "en": "hairstyle"}, {"w": "das Gebiet", "a": "das", "en": "area / field / territory"}, {"w": "die Glocke", "a": "die", "en": "bell"}, {"w": "das Lager", "a": "das", "en": "camp / warehouse"}, {"w": "die Macht", "a": "die", "en": "power"}, {"w": "das Missverst\u00e4ndnis", "a": "das", "en": "misunderstanding"}, {"w": "der Roman", "a": "der", "en": "novel"}, {"w": "der Vorwurf", "a": "der", "en": "accusation / reproach"}, {"w": "die Zone", "a": "die", "en": "zone"}, {"w": "die \u00c4nderung", "a": "die", "en": "change / amendment"}, {"w": "der Bau", "a": "der", "en": "construction / building"}, {"w": "der Gott", "a": "der", "en": "god"}, {"w": "das Grundst\u00fcck", "a": "das", "en": "plot of land"}, {"w": "die Kirche", "a": "die", "en": "church"}, {"w": "der Laster", "a": "der", "en": "lorry / truck"}, {"w": "die Leiter", "a": "die", "en": "ladder / manager"}, {"w": "das Ma\u00df", "a": "das", "en": "measure / degree"}, {"w": "die Mauer", "a": "die", "en": "wall"}, {"w": "der Meister", "a": "der", "en": "master / champion"}, {"w": "das Stockwerk", "a": "das", "en": "floor / storey"}, {"w": "die Vorschrift", "a": "die", "en": "regulation / rule"}, {"w": "der Schriftsteller", "a": "der", "en": "writer / author"}, {"w": "die Summe", "a": "die", "en": "sum / total"}, {"w": "der Vertreter", "a": "der", "en": "representative"}, {"w": "das Spielzeug", "a": "das", "en": "toy"}, {"w": "die Botschaft", "a": "die", "en": "embassy / message"}, {"w": "das Gedicht", "a": "das", "en": "poem"}, {"w": "die Reklame", "a": "die", "en": "advertisement"}, {"w": "das Plakat", "a": "das", "en": "poster"}, {"w": "die Aufnahme", "a": "der", "en": "recording / admission"}, {"w": "der Auftritt", "a": "der", "en": "appearance / performance"}, {"w": "der Dichter", "a": "der", "en": "poet"}, {"w": "die Intelligenz", "a": "die", "en": "intelligence"}, {"w": "der Kalender", "a": "der", "en": "calendar"}, {"w": "der Rand", "a": "der", "en": "edge / margin"}, {"w": "der Sack", "a": "der", "en": "sack / bag"}, {"w": "die Schere", "a": "die", "en": "scissors"}, {"w": "die Mahnung", "a": "die", "en": "reminder / warning"}, {"w": "das Gewissen", "a": "das", "en": "conscience"}, {"w": "das Gold", "a": "das", "en": "gold"}, {"w": "der Anspruch", "a": "der", "en": "claim / entitlement"}, {"w": "die Entt\u00e4uschung", "a": "die", "en": "disappointment"}, {"w": "der Wettbewerb", "a": "der", "en": "competition"}, {"w": "der Dialekt", "a": "der", "en": "dialect"}, {"w": "das Ehepaar", "a": "das", "en": "married couple"}, {"w": "der Humor", "a": "der", "en": "humour"}, {"w": "die Scheidung", "a": "die", "en": "divorce"}, {"w": "der Typ", "a": "der", "en": "type / guy"}, {"w": "der Zorn", "a": "der", "en": "anger / wrath"}, {"w": "der Artikel", "a": "der", "en": "article"}, {"w": "das Paar", "a": "das", "en": "pair / couple"}, {"w": "die Gegenwart", "a": "die", "en": "present (time)"}, {"w": "die Vergangenheit", "a": "die", "en": "past"}, {"w": "die Atmosph\u00e4re", "a": "die", "en": "atmosphere"}, {"w": "das Gras", "a": "das", "en": "grass"}, {"w": "die Erde", "a": "die", "en": "earth / soil"}, {"w": "die Fl\u00fcssigkeit", "a": "die", "en": "liquid / fluid"}, {"w": "die Datei", "a": "die", "en": "file (computer)"}, {"w": "die Fantasie", "a": "die", "en": "fantasy / imagination"}, {"w": "das Gebirge", "a": "das", "en": "mountains / mountain range"}, {"w": "die Gegend", "a": "die", "en": "area / region"}, {"w": "der H\u00fcgel", "a": "der", "en": "hill"}, {"w": "der Kontinent", "a": "der", "en": "continent"}, {"w": "der Ozean", "a": "der", "en": "ocean"}, {"w": "die Region", "a": "die", "en": "region"}, {"w": "die Stelle", "a": "die", "en": "place / position / job"}, {"w": "das Ufer", "a": "das", "en": "bank / shore"}, {"w": "die Umgebung", "a": "die", "en": "surroundings"}, {"w": "der Vorort", "a": "der", "en": "suburb"}, {"w": "die Wiese", "a": "die", "en": "meadow"}, {"w": "die Geografie", "a": "die", "en": "geography"}, {"w": "der Hof", "a": "der", "en": "courtyard / farm"}, {"w": "die Kohle", "a": "die", "en": "coal"}, {"w": "der L\u00f6we", "a": "der", "en": "lion"}, {"w": "die Biene", "a": "die", "en": "bee"}, {"w": "die Fliege", "a": "die", "en": "fly"}, {"w": "das Getreide", "a": "das", "en": "grain / cereal"}, {"w": "das Kreuz", "a": "das", "en": "cross"}, {"w": "die Schlange", "a": "die", "en": "snake / queue"}, {"w": "das Tuch", "a": "das", "en": "cloth / scarf"}, {"w": "das Insekt", "a": "das", "en": "insect"}, {"w": "die Maus", "a": "die", "en": "mouse"}, {"w": "das Hackfleisch", "a": "das", "en": "minced meat"}, {"w": "das Nahrungsmittel", "a": "das", "en": "foodstuff"}, {"w": "die Zwiebel", "a": "die", "en": "onion"}, {"w": "das Mehl", "a": "das", "en": "flour"}, {"w": "das M\u00fcsli", "a": "das", "en": "muesli"}, {"w": "der Nachtisch", "a": "der", "en": "dessert"}, {"w": "die Ente", "a": "die", "en": "duck"}, {"w": "der Klo\u00df", "a": "der", "en": "dumpling"}, {"w": "die Aprikose", "a": "die", "en": "apricot"}, {"w": "das Gew\u00fcrz", "a": "das", "en": "spice / seasoning"}, {"w": "der Kakao", "a": "der", "en": "cocoa / hot chocolate"}, {"w": "das B\u00fcfett", "a": "das", "en": "buffet"}, {"w": "die Frucht", "a": "die", "en": "fruit"}, {"w": "der Chip", "a": "der", "en": "chip"}, {"w": "die Explosion", "a": "die", "en": "explosion"}, {"w": "die Festplatte", "a": "die", "en": "hard drive"}, {"w": "die Landwirtschaft", "a": "die", "en": "agriculture"}, {"w": "die Technologie", "a": "die", "en": "technology"}, {"w": "das Laufwerk", "a": "das", "en": "drive (computer)"}, {"w": "der Stecker", "a": "der", "en": "plug"}, {"w": "das Ersatzteil", "a": "das", "en": "spare part"}, {"w": "die Abbildung", "a": "die", "en": "illustration / figure"}, {"w": "der Alarm", "a": "der", "en": "alarm"}, {"w": "der Einfall", "a": "der", "en": "idea / notion"}, {"w": "die Nadel", "a": "die", "en": "needle"}, {"w": "die Strafe", "a": "die", "en": "punishment / penalty"}, {"w": "der/die Tote", "a": "der", "en": "the dead / deceased"}, {"w": "der Fall", "a": "der", "en": "case / event"}, {"w": "der Mord", "a": "der", "en": "murder"}, {"w": "der Prozess", "a": "der", "en": "trial / process"}, {"w": "die Tat", "a": "die", "en": "act / deed"}, {"w": "der Verdacht", "a": "der", "en": "suspicion"}, {"w": "der Einbrecher", "a": "der", "en": "burglar"}, {"w": "der Einbruch", "a": "der", "en": "burglary"}, {"w": "der Konflikt", "a": "der", "en": "conflict"}, {"w": "das Gef\u00e4ngnis", "a": "das", "en": "prison"}, {"w": "das Verhalten", "a": "das", "en": "behaviour"}, {"w": "das Eigentum", "a": "das", "en": "property / ownership"}, {"w": "der Abschluss", "a": "der", "en": "conclusion / qualification"}, {"w": "die Station", "a": "die", "en": "station / ward"}, {"w": "die \u00dcberraschung", "a": "die", "en": "surprise"}, {"w": "die Hoffnung", "a": "die", "en": "hope"}, {"w": "die Sorge", "a": "die", "en": "worry / concern"}, {"w": "die Freude", "a": "die", "en": "joy"}, {"w": "die Geduld", "a": "die", "en": "patience"}, {"w": "der Zweifel", "a": "der", "en": "doubt"}, {"w": "das Vertrauen", "a": "das", "en": "trust"}, {"w": "die \u00dcberraschung", "a": "die", "en": "surprise"}, {"w": "die Entt\u00e4uschung", "a": "die", "en": "disappointment"}, {"w": "der Respekt", "a": "der", "en": "respect"}, {"w": "der Witz", "a": "der", "en": "joke"}, {"w": "der Charakter", "a": "der", "en": "character"}, {"w": "der Mut", "a": "der", "en": "courage"}, {"w": "das Misstrauen", "a": "das", "en": "distrust"}, {"w": "das Talent", "a": "das", "en": "talent"}, {"w": "der Misserfolg", "a": "der", "en": "failure"}, {"w": "das Pech", "a": "das", "en": "bad luck"}, {"w": "das Gewissen", "a": "das", "en": "conscience"}, {"w": "das Poster", "a": "das", "en": "poster"}, {"w": "der Kinderwagen", "a": "der", "en": "pram / pushchair"}, {"w": "der Briefkasten", "a": "der", "en": "letterbox / mailbox"}, {"w": "der Hammer", "a": "der", "en": "hammer"}, {"w": "die Kerze", "a": "die", "en": "candle"}, {"w": "der Nagel", "a": "der", "en": "nail"}, {"w": "das Feuer", "a": "das", "en": "fire"}, {"w": "der Tropfen", "a": "der", "en": "drop"}, {"w": "die Rose", "a": "die", "en": "rose"}, {"w": "der Schlaf", "a": "der", "en": "sleep"}, {"w": "die St\u00f6rung", "a": "die", "en": "disturbance / disruption"}, {"w": "der Abfalleimer", "a": "der", "en": "bin / waste bin"}, {"w": "die Homepage", "a": "die", "en": "homepage / website"}, {"w": "die Mensa", "a": "die", "en": "university canteen"}, {"w": "das Referat", "a": "das", "en": "presentation / paper"}, {"w": "die Torte", "a": "die", "en": "cake / gateau"}, {"w": "die Anleitung", "a": "die", "en": "instructions / guide"}, {"w": "die Bedienungsanleitung", "a": "die", "en": "instruction manual"}, {"w": "der Griff", "a": "der", "en": "handle / grip"}, {"w": "das Taschengeld", "a": "das", "en": "pocket money"}, {"w": "das Zuhause", "a": "das", "en": "home"}, {"w": "die B\u00fchne", "a": "die", "en": "stage"}, {"w": "die Drogerie", "a": "die", "en": "drugstore / chemist"}, {"w": "die Haut", "a": "die", "en": "skin"}, {"w": "der Honig", "a": "der", "en": "honey"}, {"w": "das Kapitel", "a": "das", "en": "chapter"}, {"w": "die Kindertagesst\u00e4tte", "a": "die", "en": "daycare centre"}, {"w": "der Kunststoff", "a": "der", "en": "plastic / synthetic material"}, {"w": "die M\u00fcllabfuhr", "a": "die", "en": "rubbish collection"}, {"w": "die Schachtel", "a": "die", "en": "box"}, {"w": "der Staub", "a": "der", "en": "dust"}, {"w": "das Viertel", "a": "das", "en": "quarter / neighbourhood"}, {"w": "die Feier", "a": "die", "en": "celebration / party"}, {"w": "die Marmelade", "a": "die", "en": "jam"}, {"w": "die Schlagsahne", "a": "die", "en": "whipped cream"}, {"w": "der Kuss", "a": "der", "en": "kiss"}, {"w": "das Vertrauen", "a": "das", "en": "trust"}, {"w": "das E-Bike", "a": "das", "en": "e-bike"}, {"w": "die Innenstadt", "a": "die", "en": "city centre"}, {"w": "der Wohnort", "a": "der", "en": "place of residence"}, {"w": "die Couch", "a": "die", "en": "couch / sofa"}, {"w": "die F\u00e4hre", "a": "die", "en": "ferry"}, {"w": "der Treffpunkt", "a": "der", "en": "meeting point"}, {"w": "der Backofen", "a": "der", "en": "oven"}, {"w": "der Bildschirm", "a": "der", "en": "screen"}, {"w": "die Einrichtung", "a": "die", "en": "furnishings / facility"}, {"w": "die Fernbedienung", "a": "die", "en": "remote control"}, {"w": "der Hocker", "a": "der", "en": "stool"}, {"w": "die Klinke", "a": "die", "en": "door handle"}, {"w": "das Zeug", "a": "das", "en": "stuff / things"}, {"w": "die Klimaanlage", "a": "die", "en": "air conditioning"}, {"w": "das Taschentuch", "a": "das", "en": "handkerchief / tissue"}, {"w": "die Bedingung", "a": "die", "en": "condition / requirement"}, {"w": "die Realit\u00e4t", "a": "die", "en": "reality"}, {"w": "der Rat", "a": "der", "en": "advice"}, {"w": "der Rest", "a": "der", "en": "rest / remainder"}, {"w": "der Streit", "a": "der", "en": "argument / dispute"}, {"w": "der Druck", "a": "der", "en": "pressure"}, {"w": "die N\u00e4he", "a": "die", "en": "proximity / closeness"}, {"w": "der Vorteil", "a": "der", "en": "advantage"}, {"w": "der Nachteil", "a": "der", "en": "disadvantage"}, {"w": "das Verst\u00e4ndnis", "a": "das", "en": "understanding / comprehension"}, {"w": "der Flohmarkt", "a": "der", "en": "flea market"}, {"w": "die Rolle", "a": "die", "en": "role"}, {"w": "die Besch\u00e4ftigung", "a": "die", "en": "occupation / activity"}, {"w": "der Lautsprecher", "a": "der", "en": "speaker (audio)"}, {"w": "der Ordner", "a": "der", "en": "folder / file"}, {"w": "die Zigarette", "a": "die", "en": "cigarette"}, {"w": "der Titel", "a": "der", "en": "title"}, {"w": "die Erholung", "a": "die", "en": "recovery / relaxation"}, {"w": "die Verantwortung", "a": "die", "en": "responsibility"}, {"w": "die M\u00f6glichkeit", "a": "die", "en": "possibility / opportunity"}, {"w": "die Langeweile", "a": "die", "en": "boredom"}, {"w": "die Rente", "a": "die", "en": "pension"}, {"w": "die Sicherheit", "a": "die", "en": "safety / security"}, {"w": "der Trend", "a": "der", "en": "trend"}, {"w": "der Verlag", "a": "der", "en": "publishing house"}, {"w": "der Sinn", "a": "der", "en": "meaning / sense"}, {"w": "die Absicht", "a": "die", "en": "intention"}, {"w": "der Auftrag", "a": "der", "en": "commission / order"}, {"w": "der Grund", "a": "der", "en": "reason / ground"}, {"w": "der Mangel", "a": "der", "en": "lack / shortage"}, {"w": "die R\u00fcckkehr", "a": "die", "en": "return"}, {"w": "das Ungl\u00fcck", "a": "das", "en": "misfortune / accident"}, {"w": "das Vergn\u00fcgen", "a": "das", "en": "pleasure"}, {"w": "der Bereich", "a": "der", "en": "area / field"}, {"w": "der Wert", "a": "der", "en": "value / worth"}, {"w": "die H\u00e4lfte", "a": "die", "en": "half"}, {"w": "die Kopie", "a": "die", "en": "copy"}, {"w": "das Original", "a": "das", "en": "original"}, {"w": "die Unterst\u00fctzung", "a": "die", "en": "support"}, {"w": "das Trinkgeld", "a": "das", "en": "tip (gratuity)"}, {"w": "der Hinweis", "a": "der", "en": "hint / reference"}, {"w": "die M\u00fche", "a": "die", "en": "effort / trouble"}, {"w": "die Ausgabe", "a": "die", "en": "expenditure / edition"}, {"w": "der Beginn", "a": "der", "en": "beginning"}, {"w": "die Einnahme", "a": "die", "en": "income / intake"}, {"w": "die Konsequenz", "a": "die", "en": "consequence"}, {"w": "das Personal", "a": "das", "en": "staff / personnel"}, {"w": "der Skandal", "a": "der", "en": "scandal"}, {"w": "die Betreuung", "a": "die", "en": "care / supervision"}, {"w": "die Gemeinschaft", "a": "die", "en": "community"}, {"w": "der Neffe", "a": "der", "en": "nephew"}, {"w": "die Nichte", "a": "die", "en": "niece"}, {"w": "der Bericht", "a": "der", "en": "report"}, {"w": "die Spur", "a": "die", "en": "trace / clue / lane"}, {"w": "die Zahlung", "a": "die", "en": "payment"}, {"w": "der Augenblick", "a": "der", "en": "moment"}, {"w": "die Entfernung", "a": "die", "en": "distance"}, {"w": "der Protest", "a": "der", "en": "protest"}, {"w": "die Aussicht", "a": "die", "en": "prospect / view"}, {"w": "der Start", "a": "der", "en": "start / launch"}, {"w": "der Tod", "a": "der", "en": "death"}, {"w": "der Schreck", "a": "der", "en": "fright / shock"}, {"w": "der Sprung", "a": "der", "en": "jump / leap"}, {"w": "die Ehe", "a": "die", "en": "marriage"}, {"w": "die Erziehung", "a": "die", "en": "upbringing / education"}, {"w": "der Feiertag", "a": "der", "en": "public holiday"}, {"w": "der Anspruch", "a": "der", "en": "claim / standard"}, {"w": "das Gesetz", "a": "das", "en": "law"}, {"w": "das Recht", "a": "das", "en": "right / law"}, {"w": "der Anwalt", "a": "der", "en": "lawyer"}, {"w": "der Richter", "a": "der", "en": "judge"}, {"w": "das Urteil", "a": "das", "en": "verdict / judgement"}, {"w": "der Zeuge", "a": "der", "en": "witness"}, {"w": "der Beweis", "a": "der", "en": "proof / evidence"}, {"w": "das Vergehen", "a": "das", "en": "offence"}, {"w": "die Demokratie", "a": "die", "en": "democracy"}, {"w": "die Regierung", "a": "die", "en": "government"}, {"w": "das Parlament", "a": "das", "en": "parliament"}, {"w": "die Partei", "a": "die", "en": "political party"}, {"w": "die Reform", "a": "die", "en": "reform"}, {"w": "die Mehrheit", "a": "die", "en": "majority"}, {"w": "die Minderheit", "a": "die", "en": "minority"}, {"w": "die Opposition", "a": "die", "en": "opposition"}, {"w": "die Wahl", "a": "die", "en": "election"}, {"w": "die Wirtschaft", "a": "die", "en": "economy"}, {"w": "die Investition", "a": "die", "en": "investment"}, {"w": "der Handel", "a": "der", "en": "trade"}, {"w": "der Unternehmer", "a": "der", "en": "entrepreneur"}, {"w": "die Produktion", "a": "die", "en": "production"}, {"w": "der Markt", "a": "der", "en": "market"}, {"w": "der Konkurrent", "a": "der", "en": "competitor"}, {"w": "der Gewinn", "a": "der", "en": "profit"}, {"w": "der Verlust", "a": "der", "en": "loss"}, {"w": "die Forschung", "a": "die", "en": "research"}, {"w": "die Technologie", "a": "die", "en": "technology"}, {"w": "die Erfindung", "a": "die", "en": "invention"}, {"w": "die Festplatte", "a": "die", "en": "hard drive"}, {"w": "die Explosion", "a": "die", "en": "explosion"}, {"w": "der Chip", "a": "der", "en": "chip"}, {"w": "der Alarm", "a": "der", "en": "alarm"}, {"w": "das Asyl", "a": "das", "en": "asylum"}, {"w": "die Migration", "a": "die", "en": "migration"}, {"w": "die Flucht", "a": "die", "en": "flight / escape"}, {"w": "die Integration", "a": "die", "en": "integration"}, {"w": "die Ausnahme", "a": "die", "en": "exception"}, {"w": "die Gewalt", "a": "die", "en": "violence / force"}, {"w": "der Verbrecher", "a": "der", "en": "criminal"}, {"w": "die Ehre", "a": "die", "en": "honour"}, {"w": "die F\u00f6rderung", "a": "die", "en": "funding / support"}, {"w": "die Bev\u00f6lkerung", "a": "die", "en": "population"}, {"w": "die Entt\u00e4uschung", "a": "die", "en": "disappointment"}, {"w": "das Vertrauen", "a": "das", "en": "trust"}, {"w": "der Zweifel", "a": "der", "en": "doubt"}, {"w": "der Zorn", "a": "der", "en": "anger / wrath"}, {"w": "die \u00dcberzeugung", "a": "die", "en": "conviction / belief"}, {"w": "das Gewissen", "a": "das", "en": "conscience"}, {"w": "die Wahrnehmung", "a": "die", "en": "perception"}, {"w": "die Voraussetzung", "a": "die", "en": "prerequisite"}, {"w": "die Auseinandersetzung", "a": "die", "en": "confrontation / debate"}, {"w": "die Erkenntnis", "a": "die", "en": "insight / realisation"}, {"w": "die Notwendigkeit", "a": "die", "en": "necessity"}, {"w": "die Herausforderung", "a": "die", "en": "challenge"}, {"w": "die Auswirkung", "a": "die", "en": "impact / effect"}, {"w": "der Zusammenhang", "a": "der", "en": "context / connection"}, {"w": "die Grundlage", "a": "die", "en": "basis / foundation"}, {"w": "das Verh\u00e4ltnis", "a": "das", "en": "relationship / ratio"}, {"w": "die Schlagzeile", "a": "die", "en": "headline"}, {"w": "der Standpunkt", "a": "der", "en": "standpoint"}, {"w": "der Inhalt", "a": "der", "en": "content"}, {"w": "die \u00dcbersetzung", "a": "die", "en": "translation"}, {"w": "das Sprichwort", "a": "das", "en": "proverb"}, {"w": "die Rede", "a": "die", "en": "speech"}, {"w": "der Betriebsrat", "a": "der", "en": "works council"}, {"w": "die Gewerkschaft", "a": "die", "en": "trade union"}, {"w": "der Streik", "a": "der", "en": "strike"}, {"w": "der Kompromiss", "a": "der", "en": "compromise"}, {"w": "die K\u00fcndigung", "a": "die", "en": "dismissal / notice"}, {"w": "die Mitbestimmung", "a": "die", "en": "co-determination / participation"}, {"w": "die Leitung", "a": "die", "en": "management / leadership"}, {"w": "das Werk", "a": "das", "en": "work (of art)"}, {"w": "der Dichter", "a": "der", "en": "poet"}, {"w": "die Galerie", "a": "die", "en": "gallery"}, {"w": "der Auftritt", "a": "der", "en": "performance / appearance"}, {"w": "das Ballett", "a": "das", "en": "ballet"}, {"w": "der Schriftsteller", "a": "der", "en": "author / writer"}, {"w": "das Symbol", "a": "das", "en": "symbol"}, {"w": "die Aufnahme", "a": "die", "en": "recording"}, {"w": "die Biologie", "a": "die", "en": "biology"}, {"w": "die Theorie", "a": "die", "en": "theory"}, {"w": "das Misstrauen", "a": "das", "en": "distrust / mistrust"}, {"w": "die Einzelheit", "a": "die", "en": "detail"}];
+const SESSION_SIZE = 20;
+
+// ── Storage ───────────────────────────────────────────────────
+function getSession() {
+  try {
+    const s = JSON.parse(localStorage.getItem('dk_session') || 'null');
+    return s && s.email ? s : null;
+  } catch { return null; }
+}
+
+function getDDDKey() {
+  const s = getSession();
+  return 'dk_ddd_' + (s ? s.email.replace(/[^a-z0-9]/gi,'_') : 'guest');
+}
+
+function loadDDD() {
+  try { return JSON.parse(localStorage.getItem(getDDDKey())) || {}; } catch { return {}; }
+}
+
+function saveDDD(data) {
+  localStorage.setItem(getDDDKey(), JSON.stringify(data));
+}
+
+// DDD data structure per word: { correct: N, wrong: N, lastWrong: bool }
+function getDDDRecord(data, word) {
+  if (!data[word]) data[word] = { correct:0, wrong:0, lastWrong:false };
+  return data[word];
+}
+
+// ── Scoring hints ──────────────────────────────────────────────
+const ARTICLE_HINTS = {
+  der: [
+    'Days, months & seasons → der (Montag, Januar, Sommer)',
+    'Nouns ending in -er, -en, -el often → der',
+    'Compass points → der (der Norden, der Süden)',
+    'Most "-ismus" nouns → der (der Kapitalismus)',
+  ],
+  die: [
+    'Nouns ending in -ung, -heit, -keit → die',
+    'Nouns ending in -schaft, -tion, -tät → die',
+    'Most nouns ending in -e → die (die Straße)',
+    'Numbers and letters as nouns → die (die Eins)',
+  ],
+  das: [
+    'Diminutives (-chen, -lein) → always das',
+    'Infinitives used as nouns → das (das Essen)',
+    'Most metals & chemical elements → das',
+    'Colors as nouns → das (das Blau, das Grün)',
+  ],
+};
+
+// ── State ──────────────────────────────────────────────────────
+let deck = [];
+let idx = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+let derWrong = 0, dieWrong = 0, dasWrong = 0;
+let sessionWeak = []; // words wrong this session
+
+// ── Init ───────────────────────────────────────────────────────
+function getWeakWords() {
+  const data = loadDDD();
+  // Words with more wrongs than corrects, or wrong > 2
+  return ALL_NOUNS.filter(n => {
+    const r = data[n.w];
+    if (!r) return false;
+    return r.wrong > r.correct || r.wrong >= 2;
+  });
+}
+
+function startSession(weakOnly) {
+  const data = loadDDD();
+  let pool = weakOnly ? getWeakWords() : ALL_NOUNS;
+  if (pool.length === 0) pool = ALL_NOUNS;
+
+  // Shuffle, prioritize weak words
+  const weak = weakOnly ? pool : pool.filter(n => {
+    const r = data[n.w];
+    return r && (r.wrong > r.correct || r.wrong >= 2);
+  });
+  const rest = pool.filter(n => !weak.includes(n));
+
+  // Shuffle each group
+  const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+  deck = [...shuffle(weak), ...shuffle(rest)].slice(0, SESSION_SIZE);
+
+  idx = 0; correct = 0; wrong = 0;
+  derWrong = 0; dieWrong = 0; dasWrong = 0;
+  sessionWeak = [];
+  answered = false;
+
+  document.getElementById('completeScreen').classList.remove('show');
+  document.getElementById('mainArena').querySelector('.progress-wrap').style.display = '';
+  document.getElementById('questionCard').style.display = '';
+  document.getElementById('articleBtns').style.display = '';
+  document.getElementById('nextBtn').classList.remove('show');
+
+  updateStats();
+  showWord();
+}
+
+function showWord() {
+  if (idx >= deck.length) { showComplete(); return; }
+  const noun = deck[idx];
+
+  answered = false;
+  const card = document.getElementById('questionCard');
+  card.className = 'question-card';
+
+  document.getElementById('wordEnglish').textContent = noun.en;
+
+  // Show word without article
+  const bare = noun.w.replace(/^(der|die|das) /,'');
+  document.getElementById('wordBlank').textContent = bare;
+  document.getElementById('wordBlank').style.display = '';
+  document.getElementById('wordGerman').style.display = 'none';
+  document.getElementById('articleReveal').style.display = 'none';
+  document.getElementById('resultMsg').textContent = '';
+  document.getElementById('resultMsg').className = 'result-msg';
+  document.getElementById('hintText').textContent = '';
+
+  document.getElementById('nextBtn').classList.remove('show');
+
+  // Reset buttons
+  ['btnDer','btnDie','btnDas'].forEach(id => {
+    const b = document.getElementById(id);
+    b.disabled = false;
+    b.className = b.dataset.base;
+  });
+  document.getElementById('btnDer').dataset.base = 'art-btn btn-der';
+  document.getElementById('btnDie').dataset.base = 'art-btn btn-die';
+  document.getElementById('btnDas').dataset.base = 'art-btn btn-das';
+  document.getElementById('btnDer').className = 'art-btn btn-der';
+  document.getElementById('btnDie').className = 'art-btn btn-die';
+  document.getElementById('btnDas').className = 'art-btn btn-das';
+
+  // Progress
+  const pct = (idx / deck.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('sessionInfo').textContent = `Session: ${idx}/${deck.length}`;
+}
+
+function guess(article) {
+  if (answered) return;
+  answered = true;
+  const noun = deck[idx];
+  const isCorrect = article === noun.a;
+
+  // Update storage
+  const data = loadDDD();
+  const r = getDDDRecord(data, noun.w);
+  if (isCorrect) { r.correct++; r.lastWrong = false; }
+  else { r.wrong++; r.lastWrong = true; }
+  saveDDD(data);
+
+  // Update session stats
+  if (isCorrect) { correct++; }
+  else {
+    wrong++;
+    if (noun.a === 'der') derWrong++;
+    else if (noun.a === 'die') dieWrong++;
+    else dasWrong++;
+    if (!sessionWeak.includes(noun)) sessionWeak.push(noun);
+  }
+
+  // Reveal article on card
+  const revEl = document.getElementById('articleReveal');
+  revEl.textContent = noun.a;
+  revEl.className = 'article-reveal ' + noun.a;
+  revEl.style.display = '';
+
+  const bare = noun.w.replace(/^(der|die|das) /,'');
+  document.getElementById('wordBlank').style.display = 'none';
+
+  // Style card
+  const card = document.getElementById('questionCard');
+  if (isCorrect) {
+    card.className = 'question-card correct-' + noun.a;
+    document.getElementById('resultMsg').textContent = '✓ Correct!';
+    document.getElementById('resultMsg').className = 'result-msg correct';
+  } else {
+    card.className = 'question-card wrong';
+    document.getElementById('resultMsg').textContent = `✗ It's ${noun.a} ${bare}`;
+    document.getElementById('resultMsg').className = 'result-msg wrong';
+    // Show a rule hint
+    const hints = ARTICLE_HINTS[noun.a];
+    document.getElementById('hintText').textContent = hints[Math.floor(Math.random()*hints.length)];
+  }
+
+  // Style buttons
+  const btnMap = { der:'btnDer', die:'btnDie', das:'btnDas' };
+  const btnClassMap = { der:'btn-der', die:'btn-die', das:'btn-das' };
+  Object.entries(btnMap).forEach(([art, btnId]) => {
+    const btn = document.getElementById(btnId);
+    btn.disabled = true;
+    if (art === article && isCorrect) {
+      btn.className = `art-btn ${btnClassMap[art]} chosen-correct`;
+    } else if (art === article && !isCorrect) {
+      btn.className = `art-btn ${btnClassMap[art]} chosen-wrong`;
+    } else if (art === noun.a && !isCorrect) {
+      btn.className = `art-btn ${btnClassMap[art]} show-correct`;
+    } else {
+      btn.className = `art-btn ${btnClassMap[art]}`;
+      btn.style.opacity = '0.3';
+    }
+  });
+
+  updateStats();
+  document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextWord() {
+  if (!answered) return;
+  idx++;
+  // Reset opacity
+  ['btnDer','btnDie','btnDas'].forEach(id => {
+    document.getElementById(id).style.opacity = '';
+  });
+  showWord();
+}
+
+function updateStats() {
+  const total = correct + wrong;
+  const acc = total > 0 ? Math.round((correct/total)*100) : null;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statAcc').textContent = acc !== null ? acc+'%' : '—';
+  document.getElementById('accFill').style.width = (acc||0) + '%';
+  document.getElementById('statDer').textContent = derWrong;
+  document.getElementById('statDie').textContent = dieWrong;
+  document.getElementById('statDas').textContent = dasWrong;
+}
+
+function showComplete() {
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('questionCard').style.display = 'none';
+  document.getElementById('articleBtns').style.display = 'none';
+  document.getElementById('nextBtn').classList.remove('show');
+
+  const total = correct + wrong;
+  const acc = total > 0 ? Math.round((correct/total)*100) : 0;
+
+  let emoji = '😅';
+  let title = 'Keep going!';
+  let sub = 'Practice makes perfect.';
+  if (acc >= 90) { emoji='🏆'; title='Ausgezeichnet!'; sub='Outstanding performance!'; }
+  else if (acc >= 75) { emoji='🎉'; title='Sehr gut!'; sub='Great work this session!'; }
+  else if (acc >= 60) { emoji='👍'; title='Gut gemacht!'; sub="You're getting there!"; }
+
+  document.getElementById('completeEmoji').textContent = emoji;
+  document.getElementById('completeTitle').textContent = title;
+  document.getElementById('completeSub').textContent = sub;
+
+  document.getElementById('completeStats').innerHTML = `
+    <div class="cstat"><div class="cstat-val" style="color:var(--green)">${correct}</div><div class="cstat-label">correct</div></div>
+    <div class="cstat"><div class="cstat-val" style="color:var(--red)">${wrong}</div><div class="cstat-label">wrong</div></div>
+    <div class="cstat"><div class="cstat-val" style="color:var(--gold)">${acc}%</div><div class="cstat-label">accuracy</div></div>
+    <div class="cstat"><div class="cstat-val cstat-der">${derWrong}</div><div class="cstat-label">der missed</div></div>
+    <div class="cstat"><div class="cstat-val cstat-die">${dieWrong}</div><div class="cstat-label">die missed</div></div>
+    <div class="cstat"><div class="cstat-val cstat-das">${dasWrong}</div><div class="cstat-label">das missed</div></div>
+  `;
+
+  // Weak words panel
+  const weakPanel = document.getElementById('weakPanel');
+  const weakGrid = document.getElementById('weakGrid');
+  if (sessionWeak.length > 0) {
+    weakPanel.classList.add('show');
+    weakGrid.innerHTML = sessionWeak.map(n => {
+      const bare = n.w.replace(/^(der|die|das) /,'');
+      return `<span class="weak-word ${n.a}">${n.a} ${bare}</span>`;
+    }).join('');
+  } else {
+    weakPanel.classList.remove('show');
+  }
+
+  // Show "retry weak" button if there are persistent weak words
+  const allWeak = getWeakWords();
+  document.getElementById('btnWeakOnly').style.display = allWeak.length > 0 ? '' : 'none';
+
+  document.getElementById('completeScreen').classList.add('show');
+}
+
+// ── Keyboard ───────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === '1') guess('der');
+  else if (e.key === '2') guess('die');
+  else if (e.key === '3') guess('das');
+  else if (e.key === 'Enter') {
+    if (answered) nextWord();
+  }
+});
+
+// ── Start ──────────────────────────────────────────────────────
+startSession(false);
+</script>
+</body>
+</html>
