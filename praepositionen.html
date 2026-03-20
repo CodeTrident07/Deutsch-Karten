@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verben mit Präpositionen – DeutschKarten</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --s1: #0f0f0f;
+  --s2: #161616;
+  --s3: #1e1e1e;
+  --g1: #f5f5f5;
+  --g2: #888888;
+  --g3: #444444;
+  --g4: #2e2e2e;
+  /* geometry */
+  --r1: 4px;
+  --r2: 8px;
+  --r3: 12px;
+  --r4: 16px;
+  /* max width */
+  --w: 640px;
+  /* glow */
+  --glow: 0 0 16px rgba(255,255,255,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--g1);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.8rem;
+  border-bottom: 1px solid var(--g4);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.logo {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.logo:hover { opacity: 0.6; }
+.logo-slash {
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--g3);
+  font-weight: 400;
+  margin-left: 8px;
+}
+.back-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--g3);
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid var(--g4);
+  border-radius: var(--r1);
+  background: transparent;
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.04em;
+}
+.back-link:hover { color: var(--g1); border-color: var(--g3); box-shadow: var(--glow); }
+
+/* ── MAIN ── */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.2rem 4rem;
+  gap: 1rem;
+}
+
+/* ── START SCREEN ── */
+.start-screen {
+  width: 100%;
+  max-width: var(--w);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.start-block {
+  padding: 1.6rem 2rem;
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-bottom: none;
+}
+.start-block:first-child { border-radius: var(--r4) var(--r4) 0 0; }
+.start-block:last-child  { border-bottom: 1px solid var(--g4); border-radius: 0 0 var(--r4) var(--r4); }
+.start-block + .start-block { border-top: 1px solid var(--s3); }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--g3);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--g3); }
+.start-screen h1 {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  line-height: 1.05;
+  margin-bottom: 0.65rem;
+}
+.start-screen p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--g2);
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+/* level buttons */
+.config-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--g3);
+  margin-bottom: 0.55rem;
+}
+.level-grid { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.lvl-btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--r1);
+  border: 1px solid var(--g4);
+  background: transparent;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--g3);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lvl-btn:hover  { color: var(--g2); border-color: var(--g3); }
+.lvl-btn.active { color: var(--g1); border-color: var(--g2); background: var(--s2); }
+
+/* stats */
+.stats-row { display: flex; gap: 2.5rem; }
+.stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-val { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.04em; color: var(--g1); line-height: 1; }
+.stat-lbl { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g3); }
+
+/* start button */
+.start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.8rem;
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r2);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: opacity 0.15s, box-shadow 0.2s, transform 0.12s;
+  letter-spacing: -0.02em;
+}
+.start-btn:hover  { opacity: 0.88; box-shadow: 0 0 24px rgba(255,255,255,0.12); transform: translateY(-1px); }
+.start-btn:active { transform: scale(0.97); }
+
+/* ── VERB REFERENCE ── */
+.verb-ref {
+  width: 100%;
+  max-width: var(--w);
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r4);
+  overflow: hidden;
+}
+.vref-header {
+  padding: 0.85rem 2rem;
+  background: var(--s2);
+  border-bottom: 1px solid var(--g4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+.vref-header:hover { background: var(--s3); }
+.vref-header-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--g3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.vref-header-title::before { content: ''; width: 14px; height: 1px; background: var(--g3); }
+.vref-toggle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--g3);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.toggle-chevron { display: inline-block; transition: transform 0.25s; }
+.verb-ref.open .toggle-chevron { transform: rotate(180deg); }
+.vref-body { background: var(--s1); display: none; padding: 0 2rem 1.5rem; }
+.verb-ref.open .vref-body { display: block; }
+.vref-group { padding-top: 1.2rem; }
+.vref-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--g3);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--g4);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.vref-group-label::after { content: ''; flex: 1; height: 1px; background: var(--g4); }
+.vref-grid { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.vref-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.6rem;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r1);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--g2);
+  cursor: default;
+  transition: border-color 0.13s, color 0.13s;
+}
+.vref-pill:hover { border-color: var(--g3); color: var(--g1); }
+.vp-prep { color: var(--g1); font-weight: 600; }
+.vp-case { font-size: 0.52rem; color: var(--g3); }
+
+/* ── PROGRESS BAR ── */
+.progress-area {
+  width: 100%;
+  max-width: var(--w);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.progress-meta { display: flex; justify-content: space-between; align-items: center; }
+.progress-label { font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; color: var(--g3); }
+.progress-label strong { color: var(--g2); }
+.progress-score { font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; display: flex; gap: 1rem; }
+.score-correct { color: var(--g2); }
+.score-wrong   { color: var(--g3); }
+.progress-bar  { width: 100%; height: 2px; background: var(--g4); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--g1); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+/* ── QUIZ CARD ── */
+.quiz-card {
+  width: 100%;
+  max-width: var(--w);
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r4);
+  padding: 2rem 2.2rem 1.8rem;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  transition: border-color 0.22s;
+}
+.quiz-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  border-radius: var(--r4) var(--r4) 0 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+}
+.quiz-card.correct { border-color: var(--g2); }
+.quiz-card.wrong   { border-color: var(--g3); }
+
+.card-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--g3);
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+}
+.card-tag-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--g3); flex-shrink: 0; }
+.card-tag-verb { color: var(--g2); font-weight: 600; }
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 0;
+}
+.spinner {
+  width: 26px; height: 26px;
+  border: 1.5px solid var(--g4);
+  border-top-color: var(--g2);
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; color: var(--g3); }
+
+.sentence-area { margin-bottom: 1.8rem; }
+.sentence {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  line-height: 1.75;
+  color: var(--g1);
+  text-align: center;
+}
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 30px;
+  padding: 0 10px;
+  border-bottom: 2px solid var(--g3);
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--r1) var(--r1) 0 0;
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--g1);
+  margin: 0 3px;
+  vertical-align: middle;
+  transition: all 0.2s;
+}
+.blank.reveal-correct { color: var(--g1); background: rgba(255,255,255,0.05); border-color: var(--g2); }
+.blank.reveal-wrong   { color: var(--g3); background: rgba(255,255,255,0.02); border-color: var(--g4); }
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(126px, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+.option-btn {
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--r2);
+  border: 1px solid var(--g4);
+  background: var(--s2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--g2);
+  cursor: pointer;
+  transition: border-color 0.12s, color 0.12s, box-shadow 0.15s, transform 0.1s;
+  text-align: center;
+}
+.option-btn:hover:not(:disabled) {
+  border-color: var(--g2);
+  color: var(--g1);
+  box-shadow: var(--glow);
+  transform: translateY(-1px);
+}
+.option-btn:active:not(:disabled) { transform: scale(0.97); }
+.option-btn.opt-correct { border-color: var(--g2); color: var(--g1); background: var(--s3); }
+.option-btn.opt-wrong   { border-color: var(--g4); color: var(--g3); background: var(--s2); }
+.option-btn:disabled    { cursor: default; }
+
+.feedback-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.8rem 0.95rem;
+  border-radius: var(--r2);
+  font-size: 0.82rem;
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s, transform 0.2s;
+  line-height: 1.5;
+  border: 1px solid var(--g4);
+  background: rgba(255,255,255,0.02);
+}
+.feedback-row.visible { opacity: 1; transform: translateY(0); }
+.fb-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 1px; }
+.fb-text strong { color: var(--g1); }
+.fb-text em { font-family: 'DM Serif Display', serif; font-size: 0.88rem; color: var(--g2); }
+
+.next-btn {
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: var(--r2);
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.15s, box-shadow 0.2s;
+  display: none;
+  letter-spacing: -0.02em;
+}
+.next-btn.visible { display: block; }
+.next-btn:hover { opacity: 0.88; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+.next-btn:active { transform: scale(0.98); }
+
+/* ── COMPLETE ── */
+.complete-screen {
+  width: 100%;
+  max-width: var(--w);
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r4);
+  padding: 2.5rem 2.2rem 2rem;
+  text-align: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.complete-screen.visible { display: flex; }
+.complete-emoji { font-size: 2.4rem; line-height: 1; }
+.complete-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.05em; color: var(--g1); }
+.complete-sub   { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 0.93rem; color: var(--g2); line-height: 1.65; }
+.complete-stats {
+  display: flex; gap: 3rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--g4);
+  border-bottom: 1px solid var(--g4);
+  width: 100%;
+  justify-content: center;
+}
+.c-stat-val { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.2rem; color: var(--g1); }
+.c-stat-lbl { font-size: 0.57rem; font-family: 'JetBrains Mono', monospace; color: var(--g3); letter-spacing: 0.1em; text-transform: uppercase; }
+.weak-list { width: 100%; text-align: left; }
+.weak-list h3 {
+  font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; color: var(--g3);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.weak-list h3::after { content: ''; flex: 1; height: 1px; background: var(--g4); }
+.weak-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--r1);
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  margin-bottom: 0.3rem;
+}
+.weak-verb    { font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; color: var(--g1); }
+.weak-verb-en { color: var(--g3); font-size: 0.66rem; }
+.weak-rate    { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--g2); }
+.complete-btns { display: flex; gap: 0.45rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  padding: 0.62rem 1.7rem; border-radius: var(--r2);
+  background: var(--g1); color: var(--bg); border: none;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 0.85rem;
+  cursor: pointer; transition: opacity 0.15s, box-shadow 0.2s, transform 0.12s;
+}
+.btn-primary:hover { opacity: 0.88; box-shadow: 0 0 20px rgba(255,255,255,0.12); transform: translateY(-1px); }
+.btn-ghost {
+  padding: 0.62rem 1.3rem; border-radius: var(--r2);
+  background: transparent; color: var(--g2); border: 1px solid var(--g4);
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.85rem;
+  cursor: pointer; transition: border-color 0.15s, color 0.15s, box-shadow 0.2s;
+}
+.btn-ghost:hover { border-color: var(--g3); color: var(--g1); box-shadow: var(--glow); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--s2); border: 1px solid var(--g4); border-radius: var(--r1);
+  padding: 0.42rem 0.9rem; font-size: 0.68rem; color: var(--g2);
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0; transition: opacity 0.22s, transform 0.22s;
+  pointer-events: none; z-index: 200; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 560px) {
+  .topbar { padding: 0 1rem; }
+  main { padding: 1.2rem 0.8rem 3rem; }
+  .start-block { padding: 1.2rem 1.2rem; }
+  .quiz-card   { padding: 1.4rem 1.2rem 1.2rem; }
+  .complete-screen { padding: 2rem 1.2rem; }
+  .options-grid { grid-template-columns: 1fr 1fr; }
+  .complete-stats { gap: 1.5rem; }
+  .vref-header, .vref-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="app.html" class="logo">
+    DeutschKarten
+    <span class="logo-slash">/ Präpositionen</span>
+  </a>
+  <a href="app.html" class="back-link">← Flashcards</a>
+</header>
+
+<main id="mainArea">
+
+  <!-- START SCREEN -->
+  <div class="start-screen" id="startScreen">
+    <div class="start-block">
+      <div class="eyebrow">Grammar Practice</div>
+      <h1>Verben mit Präpositionen</h1>
+      <p>Fill in the correct preposition + article. Each session has 20 questions. The algorithm tracks your weak spots and drills them harder next time.</p>
+    </div>
+
+    <div class="start-block" style="display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap">
+      <div>
+        <div class="config-label">Level</div>
+        <div class="level-grid" id="levelGrid">
+          <button class="lvl-btn" data-l="A2">A2</button>
+          <button class="lvl-btn" data-l="B1">B1</button>
+          <button class="lvl-btn" data-l="B2">B2</button>
+          <button class="lvl-btn" data-l="C1">C1</button>
+          <button class="lvl-btn active" data-l="all">All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="start-block">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="smSessions">0</div><div class="stat-lbl">Sessions</div></div>
+        <div class="stat-item"><div class="stat-val" id="smTotal">0</div><div class="stat-lbl">Answered</div></div>
+        <div class="stat-item"><div class="stat-val" id="smAccuracy">—</div><div class="stat-lbl">Accuracy</div></div>
+      </div>
+    </div>
+
+    <div class="start-block">
+      <button class="start-btn" onclick="startSession()">Start Session →</button>
+    </div>
+  </div>
+
+  <!-- VERB REFERENCE -->
+  <div class="verb-ref" id="verbRef">
+    <div class="vref-header" onclick="toggleVerbRef()">
+      <div class="vref-header-title">All Verbs — Quick Reference</div>
+      <div class="vref-toggle">
+        <span id="toggleLabel">Show all</span>
+        <span class="toggle-chevron" id="toggleIcon">↓</span>
+      </div>
+    </div>
+    <div class="vref-body" id="verbRefBody"></div>
+  </div>
+
+  <!-- PROGRESS BAR (hidden until session starts) -->
+  <div class="progress-area" id="progressArea" style="display:none">
+    <div class="progress-meta">
+      <div class="progress-label"><strong id="qIdx">1</strong> / <strong id="qTotal">20</strong></div>
+      <div class="progress-score">
+        <span class="score-correct">✓ <span id="scoreCorrect">0</span></span>
+        <span class="score-wrong">✗ <span id="scoreWrong">0</span></span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- QUIZ CARD (hidden until session starts) -->
+  <div class="quiz-card" id="quizCard" style="display:none">
+    <div class="card-tag">
+      <span class="card-tag-dot"></span>
+      <span id="tagVerb" class="card-tag-verb">warten auf</span>
+      <span style="color:var(--g4)">·</span>
+      <span id="tagCase">+Akk</span>
+    </div>
+
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <div class="loading-text">Generating sentence…</div>
+    </div>
+
+    <div id="questionArea" style="display:none">
+      <div class="sentence-area"><div class="sentence" id="sentenceDisplay"></div></div>
+      <div class="options-grid" id="optionsGrid"></div>
+      <div class="feedback-row" id="feedbackRow">
+        <span class="fb-icon" id="fbIcon"></span>
+        <span class="fb-text" id="fbText"></span>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- COMPLETE SCREEN -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-title" id="completeTitle">Session complete!</div>
+    <div class="complete-sub"   id="completeSub"></div>
+    <div class="complete-stats">
+      <div><div class="c-stat-val" id="cCorrect">0</div><div class="c-stat-lbl">Correct</div></div>
+      <div><div class="c-stat-val" id="cWrong">0</div><div class="c-stat-lbl">Wrong</div></div>
+      <div><div class="c-stat-val" id="cPct">0%</div><div class="c-stat-lbl">Score</div></div>
+    </div>
+    <div class="weak-list" id="weakList"></div>
+    <div class="complete-btns">
+      <button class="btn-primary" onclick="startSession()">Next Session →</button>
+      <button class="btn-ghost"   onclick="showStart()">Back to Start</button>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════
+//  VERB DATA
+// ════════════════════════════════════════
+var VERBS = [
+  // A2
+  {id:'warten_auf',    verb:'warten',               prep:'auf',   kase:'Akk', en:'to wait for',              level:'A2'},
+  {id:'denken_an',     verb:'denken',               prep:'an',    kase:'Akk', en:'to think of/about',        level:'A2'},
+  {id:'fragen_nach',   verb:'fragen',               prep:'nach',  kase:'Dat', en:'to ask about',             level:'A2'},
+  {id:'antworten_auf', verb:'antworten',            prep:'auf',   kase:'Akk', en:'to reply to',              level:'A2'},
+  {id:'sprechen_ueber',verb:'sprechen',             prep:'über',  kase:'Akk', en:'to talk about',            level:'A2'},
+  {id:'sprechen_mit',  verb:'sprechen',             prep:'mit',   kase:'Dat', en:'to talk with',             level:'A2'},
+  {id:'helfen_bei',    verb:'helfen',               prep:'bei',   kase:'Dat', en:'to help with',             level:'A2'},
+  {id:'einladen_zu',   verb:'einladen',             prep:'zu',    kase:'Dat', en:'to invite to',             level:'A2'},
+  {id:'fahren_mit',    verb:'fahren',               prep:'mit',   kase:'Dat', en:'to travel by',             level:'A2'},
+  {id:'arbeiten_als',  verb:'arbeiten',             prep:'als',   kase:'Nom', en:'to work as',               level:'A2'},
+  // B1
+  {id:'freuen_auf',    verb:'sich freuen',          prep:'auf',   kase:'Akk', en:'to look forward to',      level:'B1'},
+  {id:'freuen_ueber',  verb:'sich freuen',          prep:'über',  kase:'Akk', en:'to be pleased about',     level:'B1'},
+  {id:'interessieren', verb:'sich interessieren',   prep:'für',   kase:'Akk', en:'to be interested in',     level:'B1'},
+  {id:'aergern_ueber', verb:'sich ärgern',          prep:'über',  kase:'Akk', en:'to be annoyed about',     level:'B1'},
+  {id:'kuemmern_um',   verb:'sich kümmern',         prep:'um',    kase:'Akk', en:'to take care of',         level:'B1'},
+  {id:'bewerben_um',   verb:'sich bewerben',        prep:'um',    kase:'Akk', en:'to apply for',            level:'B1'},
+  {id:'gehoeren_zu',   verb:'gehören',              prep:'zu',    kase:'Dat', en:'to belong to',            level:'B1'},
+  {id:'bestehen_aus',  verb:'bestehen',             prep:'aus',   kase:'Dat', en:'to consist of',           level:'B1'},
+  {id:'anfangen_mit',  verb:'anfangen',             prep:'mit',   kase:'Dat', en:'to start with',           level:'B1'},
+  {id:'aufhoeren_mit', verb:'aufhören',             prep:'mit',   kase:'Dat', en:'to stop doing',           level:'B1'},
+  {id:'nachdenken',    verb:'nachdenken',           prep:'über',  kase:'Akk', en:'to reflect on',           level:'B1'},
+  {id:'traeumen_von',  verb:'träumen',              prep:'von',   kase:'Dat', en:'to dream of',             level:'B1'},
+  // B2
+  {id:'gewoehnen_an',  verb:'sich gewöhnen',        prep:'an',    kase:'Akk', en:'to get used to',          level:'B2'},
+  {id:'verlassen_auf', verb:'sich verlassen',       prep:'auf',   kase:'Akk', en:'to rely on',              level:'B2'},
+  {id:'zweifeln_an',   verb:'zweifeln',             prep:'an',    kase:'Dat', en:'to doubt',                level:'B2'},
+  {id:'leiden_unter',  verb:'leiden',               prep:'unter', kase:'Dat', en:'to suffer from',          level:'B2'},
+  {id:'verzichten_auf',verb:'verzichten',           prep:'auf',   kase:'Akk', en:'to give up',              level:'B2'},
+  {id:'hinweisen_auf', verb:'hinweisen',            prep:'auf',   kase:'Akk', en:'to point out',            level:'B2'},
+  {id:'einigen_auf',   verb:'sich einigen',         prep:'auf',   kase:'Akk', en:'to agree on',             level:'B2'},
+  {id:'bestehen_auf',  verb:'bestehen',             prep:'auf',   kase:'Dat', en:'to insist on',            level:'B2'},
+  {id:'beitragen_zu',  verb:'beitragen',            prep:'zu',    kase:'Dat', en:'to contribute to',        level:'B2'},
+  {id:'beziehen_auf',  verb:'sich beziehen',        prep:'auf',   kase:'Akk', en:'to refer to',             level:'B2'},
+  {id:'reagieren_auf', verb:'reagieren',            prep:'auf',   kase:'Akk', en:'to react to',             level:'B2'},
+  {id:'verfuegen_ueber',verb:'verfügen',            prep:'über',  kase:'Akk', en:"to have at one's disposal",level:'B2'},
+  // C1
+  {id:'appellieren_an',verb:'appellieren',          prep:'an',    kase:'Akk', en:'to appeal to',            level:'C1'},
+  {id:'plaedieren_fuer',verb:'plädieren',           prep:'für',   kase:'Akk', en:'to argue for',            level:'C1'},
+  {id:'abfinden_mit',  verb:'sich abfinden',        prep:'mit',   kase:'Dat', en:'to come to terms with',   level:'C1'},
+  {id:'anknuepfen_an', verb:'anknüpfen',            prep:'an',    kase:'Akk', en:'to build on',             level:'C1'},
+  {id:'ausgehen_von',  verb:'ausgehen',             prep:'von',   kase:'Dat', en:'to assume from',          level:'C1'},
+  {id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',          level:'C1'},
+  {id:'beruhen_auf',   verb:'beruhen',              prep:'auf',   kase:'Dat', en:'to be based on',          level:'C1'},
+  {id:'einwirken_auf', verb:'einwirken',            prep:'auf',   kase:'Akk', en:'to influence',            level:'C1'},
+  {id:'entscheiden_fuer',verb:'sich entscheiden',   prep:'für',   kase:'Akk', en:'to decide for',           level:'C1'},
+  {id:'richten_nach',  verb:'sich richten',         prep:'nach',  kase:'Dat', en:'to be guided by',         level:'C1'},
+  {id:'zurueckfuehren',verb:'zurückführen',         prep:'auf',   kase:'Akk', en:'to attribute to',         level:'C1'}
+];
+
+var PREP_DISTRACTORS = {
+  'auf':  ['an','für','über','nach','um'],
+  'an':   ['auf','für','über','nach','bei'],
+  'für':  ['an','auf','über','zu','mit'],
+  'über': ['an','auf','für','nach','mit'],
+  'mit':  ['bei','von','zu','nach','unter'],
+  'zu':   ['bei','mit','von','nach','für'],
+  'bei':  ['mit','von','nach','zu','für'],
+  'nach': ['bei','für','von','über','auf'],
+  'von':  ['bei','mit','nach','zu','über'],
+  'um':   ['für','nach','auf','über','zu'],
+  'unter':['von','mit','bei','nach','in'],
+  'als':  ['wie','für','mit','zu','bei']
+};
+
+var LVL_META = {
+  A2: 'A2 — Beginner',
+  B1: 'B1 — Intermediate',
+  B2: 'B2 — Upper Intermediate',
+  C1: 'C1 — Advanced'
+};
+
+// ════════════════════════════════════════
+//  VERB REFERENCE
+// ════════════════════════════════════════
+function buildVerbRef() {
+  var body = document.getElementById('verbRefBody');
+  var html = '';
+  var levels = ['A2','B1','B2','C1'];
+  for (var i = 0; i < levels.length; i++) {
+    var lvl = levels[i];
+    var verbs = VERBS.filter(function(v){ return v.level === lvl; });
+    html += '<div class="vref-group"><div class="vref-group-label">' + LVL_META[lvl] + '</div><div class="vref-grid">';
+    for (var j = 0; j < verbs.length; j++) {
+      var v = verbs[j];
+      html += '<div class="vref-pill" title="' + v.en + '">'
+            + '<span>' + v.verb + '</span>'
+            + '<span class="vp-prep">' + v.prep + '</span>'
+            + '<span class="vp-case">+' + v.kase + '</span>'
+            + '</div>';
+    }
+    html += '</div></div>';
+  }
+  body.innerHTML = html;
+}
+
+function toggleVerbRef() {
+  var ref  = document.getElementById('verbRef');
+  var lbl  = document.getElementById('toggleLabel');
+  var icon = document.getElementById('toggleIcon');
+  var open = ref.classList.toggle('open');
+  lbl.textContent  = open ? 'Hide' : 'Show all';
+  icon.textContent = open ? '↑' : '↓';
+}
+
+// ════════════════════════════════════════
+//  STORAGE
+// ════════════════════════════════════════
+var STORE_KEY = 'dk_praep_v1';
+function store() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch(e) { return {}; }
+}
+function storeSet(d) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch(e) {}
+}
+function verbUpdate(id, ok) {
+  var s = store();
+  if (!s[id]) s[id] = {attempts:0, correct:0};
+  s[id].attempts++;
+  if (ok) s[id].correct++;
+  if (!s._meta) s._meta = {sessions:0, totalAnswered:0, totalCorrect:0};
+  s._meta.totalAnswered++;
+  if (ok) s._meta.totalCorrect++;
+  storeSet(s);
+}
+function metaIncrementSession() {
+  var s = store();
+  if (!s._meta) s._meta = {sessions:0, totalAnswered:0, totalCorrect:0};
+  s._meta.sessions++;
+  storeSet(s);
+}
+function updateStartStats() {
+  var s = store();
+  var m = s._meta || {sessions:0, totalAnswered:0, totalCorrect:0};
+  document.getElementById('smSessions').textContent = m.sessions;
+  document.getElementById('smTotal').textContent    = m.totalAnswered;
+  document.getElementById('smAccuracy').textContent = m.totalAnswered > 0
+    ? Math.round(m.totalCorrect / m.totalAnswered * 100) + '%' : '—';
+}
+
+// ════════════════════════════════════════
+//  WEIGHTED SELECTION
+// ════════════════════════════════════════
+function pickWeightedVerbs(pool, count) {
+  var s = store();
+  var weighted = pool.map(function(v) {
+    var r = s[v.id] || {attempts:0, correct:0};
+    var w = 1;
+    if (!r.attempts) { w = 3; }
+    else {
+      var wr = 1 - (r.correct / r.attempts);
+      if (wr >= 0.5) w = 5;
+      else if (wr >= 0.25) w = 3;
+    }
+    return {verb: v, weight: w};
+  });
+  var total = weighted.reduce(function(s,x){ return s + x.weight; }, 0);
+  var picked = [];
+  var lastId = null;
+  for (var i = 0; i < count; i++) {
+    var chosen = null;
+    var tries = 0;
+    while (tries++ < 50) {
+      var rng = Math.random() * total;
+      for (var j = 0; j < weighted.length; j++) {
+        rng -= weighted[j].weight;
+        if (rng <= 0) { chosen = weighted[j].verb; break; }
+      }
+      if (!chosen) chosen = weighted[0].verb;
+      if (chosen.id !== lastId) break;
+    }
+    picked.push(chosen);
+    lastId = chosen.id;
+  }
+  return picked;
+}
+
+// ════════════════════════════════════════
+//  OPTION GENERATION
+// ════════════════════════════════════════
+function buildOptions(verbObj, correctAnswer) {
+  var prep = verbObj.prep;
+  var kase = verbObj.kase;
+  var wrongPreps = (PREP_DISTRACTORS[prep] || ['an','auf','für','über']).slice(0, 4);
+  var seen = {};
+  seen[correctAnswer] = true;
+  var dists = [];
+  var parts = correctAnswer.split(' ');
+  var cPrep = parts[0];
+  var cArt  = parts.slice(1).join(' ');
+  var caseArts = kase === 'Dat' ? ['den','die','das','der'] : ['dem','der','des','eine'];
+  for (var i = 0; i < caseArts.length && dists.length < 2; i++) {
+    var o = cPrep + ' ' + caseArts[i];
+    if (!seen[o]) { seen[o] = true; dists.push(o); }
+  }
+  for (var i = 0; i < wrongPreps.length && dists.length < 4; i++) {
+    var a1 = kase === 'Dat' ? cArt : (cArt === 'den' ? 'die' : 'den');
+    var o1 = wrongPreps[i] + ' ' + a1;
+    if (!seen[o1]) { seen[o1] = true; dists.push(o1); }
+    var a2 = kase === 'Dat' ? 'dem' : 'den';
+    var o2 = wrongPreps[i] + ' ' + a2;
+    if (!seen[o2] && dists.length < 4) { seen[o2] = true; dists.push(o2); }
+  }
+  var arr = [correctAnswer].concat(dists).slice(0, 5);
+  while (arr.length < 5) {
+    var fallback = (wrongPreps[arr.length % wrongPreps.length] || 'in') + ' ' + cArt;
+    if (!seen[fallback]) { seen[fallback] = true; arr.push(fallback); }
+    else arr.push('von ' + (arr.length % 2 === 0 ? 'dem' : 'der'));
+  }
+  // shuffle
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+// ════════════════════════════════════════
+//  API CALL
+// ════════════════════════════════════════
+async function generateQuestion(verbObj, sid) {
+  var prompt = 'Generate a German fill-in-the-blank exercise for the verb+preposition: "'
+    + verbObj.verb + ' ' + verbObj.prep + '" (' + verbObj.en + ').\n'
+    + 'Replace ONLY the preposition+article with "___". Case: ' + verbObj.kase + '.\n'
+    + 'Make it natural, B1-C1 level. Vary nouns and subjects each time. Session: ' + sid + '\n'
+    + 'Respond ONLY with JSON (no markdown): {"sentence":"...with ___ ...","correct":"prep article","hint":"why this prep, max 8 words"}';
+
+  var response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 300,
+      messages: [{role: 'user', content: prompt}]
+    })
+  });
+
+  var data = await response.json();
+
+  if (!response.ok) {
+    throw new Error('API error: ' + (data.error && data.error.message ? data.error.message : response.status));
+  }
+
+  var text = data.content.map(function(b){ return b.text || ''; }).join('').trim();
+  // Strip any markdown fences if model ignores instructions
+  text = text.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+  return JSON.parse(text);
+}
+
+// ════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════
+var selectedLevel = 'all';
+var sessionQueue  = [];
+var sessionIdx    = 0;
+var sessionResults = [];
+var currentQuestion = null;
+var answered   = false;
+var sessionId  = 0;
+var SESSION_SIZE = 20;
+
+// ════════════════════════════════════════
+//  LEVEL PICKER
+// ════════════════════════════════════════
+document.getElementById('levelGrid').addEventListener('click', function(e) {
+  var btn = e.target.closest('.lvl-btn');
+  if (!btn) return;
+  var l = btn.dataset.l;
+  if (l === 'all') {
+    selectedLevel = 'all';
+    document.querySelectorAll('.lvl-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  } else {
+    document.querySelector('.lvl-btn[data-l="all"]').classList.remove('active');
+    btn.classList.toggle('active');
+    var active = Array.from(document.querySelectorAll('.lvl-btn.active'))
+      .map(function(b){ return b.dataset.l; })
+      .filter(function(x){ return x !== 'all'; });
+    selectedLevel = active.length ? active : 'all';
+  }
+});
+
+function getVerbPool() {
+  if (selectedLevel === 'all') return VERBS;
+  if (Array.isArray(selectedLevel) && selectedLevel.includes('all')) return VERBS;
+  var ls = Array.isArray(selectedLevel) ? selectedLevel : [selectedLevel];
+  return VERBS.filter(function(v){ return ls.includes(v.level); });
+}
+
+// ════════════════════════════════════════
+//  SESSION FLOW
+// ════════════════════════════════════════
+function startSession() {
+  var pool = getVerbPool();
+  if (!pool.length) { showToast('No verbs for this level!'); return; }
+  metaIncrementSession();
+  sessionId      = Date.now();
+  sessionQueue   = pickWeightedVerbs(pool, SESSION_SIZE);
+  sessionIdx     = 0;
+  sessionResults = [];
+  answered       = false;
+
+  document.getElementById('startScreen').style.display    = 'none';
+  document.getElementById('verbRef').style.display        = 'none';
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display   = 'flex';
+  document.getElementById('quizCard').style.display       = 'block';
+
+  updateProgressBar();
+  loadQuestion(sessionQueue[0]);
+}
+
+function nextQuestion() {
+  sessionIdx++;
+  if (sessionIdx >= SESSION_SIZE) { showComplete(); return; }
+  document.getElementById('quizCard').className = 'quiz-card';
+  answered = false;
+  document.getElementById('nextBtn').classList.remove('visible');
+  document.getElementById('feedbackRow').classList.remove('visible');
+  updateProgressBar();
+  loadQuestion(sessionQueue[sessionIdx]);
+}
+
+async function loadQuestion(verbObj) {
+  currentQuestion = null;
+  document.getElementById('loadingState').style.display  = 'flex';
+  document.getElementById('questionArea').style.display  = 'none';
+  document.getElementById('tagVerb').textContent = verbObj.verb + ' ' + verbObj.prep;
+  document.getElementById('tagCase').textContent = '+' + verbObj.kase;
+
+  try {
+    var aiData  = await generateQuestion(verbObj, sessionId + '_' + sessionIdx);
+    var options = buildOptions(verbObj, aiData.correct);
+    currentQuestion = {verbObj: verbObj, aiData: aiData, options: options};
+    renderQuestion();
+  } catch(err) {
+    console.error('loadQuestion error:', err);
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('questionArea').style.display = 'block';
+    document.getElementById('sentenceDisplay').textContent = 'Error loading question. Tap Next to skip.';
+    document.getElementById('optionsGrid').innerHTML = '';
+    document.getElementById('nextBtn').classList.add('visible');
+    answered = true;
+  }
+}
+
+function renderQuestion() {
+  var aiData  = currentQuestion.aiData;
+  var options = currentQuestion.options;
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'block';
+
+  // Build sentence with blank
+  var parts = aiData.sentence.split('___');
+  var el = document.getElementById('sentenceDisplay');
+  if (parts.length >= 2) {
+    el.innerHTML = escHtml(parts[0])
+      + '<span class="blank" id="blankEl">___</span>'
+      + escHtml(parts.slice(1).join('___'));
+  } else {
+    el.textContent = aiData.sentence;
+  }
+
+  // Build option buttons
+  var grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  options.forEach(function(opt) {
+    var btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.addEventListener('click', function(){ selectOption(opt, btn); });
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('feedbackRow').classList.remove('visible');
+  document.getElementById('nextBtn').classList.remove('visible');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function selectOption(chosen, btn) {
+  if (answered) return;
+  answered = true;
+
+  var verbObj = currentQuestion.verbObj;
+  var aiData  = currentQuestion.aiData;
+  var correct = aiData.correct;
+  var ok = chosen.trim().toLowerCase() === correct.trim().toLowerCase();
+
+  // Update blank
+  var blankEl = document.getElementById('blankEl');
+  if (blankEl) {
+    blankEl.textContent = chosen;
+    blankEl.className = 'blank ' + (ok ? 'reveal-correct' : 'reveal-wrong');
+  }
+
+  // Highlight all options
+  document.querySelectorAll('.option-btn').forEach(function(b) {
+    b.disabled = true;
+    if (b.textContent.trim().toLowerCase() === correct.trim().toLowerCase()) {
+      b.classList.add('opt-correct');
+    } else if (b === btn && !ok) {
+      b.classList.add('opt-wrong');
+    }
+  });
+
+  // Card border
+  document.getElementById('quizCard').classList.add(ok ? 'correct' : 'wrong');
+
+  // Feedback
+  var fb = document.getElementById('feedbackRow');
+  fb.classList.add('visible');
+  document.getElementById('fbIcon').textContent = ok ? '✓' : '✗';
+  var hint = aiData.hint || '';
+  document.getElementById('fbText').innerHTML = ok
+    ? '<strong>Richtig!</strong> <em>' + hint + '</em>'
+    : '<strong>Falsch.</strong> Correct: <strong>' + correct + '</strong>. <em>' + hint + '</em>';
+
+  // Persist
+  verbUpdate(verbObj.id, ok);
+  sessionResults.push({id: verbObj.id, correct: ok});
+
+  // Score
+  var corr  = sessionResults.filter(function(r){ return  r.correct; }).length;
+  var wrong = sessionResults.filter(function(r){ return !r.correct; }).length;
+  document.getElementById('scoreCorrect').textContent = corr;
+  document.getElementById('scoreWrong').textContent   = wrong;
+
+  document.getElementById('nextBtn').classList.add('visible');
+}
+
+function updateProgressBar() {
+  var pct = Math.round(sessionIdx / SESSION_SIZE * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('qIdx').textContent     = sessionIdx + 1;
+  document.getElementById('qTotal').textContent   = SESSION_SIZE;
+}
+
+// ════════════════════════════════════════
+//  COMPLETE
+// ════════════════════════════════════════
+function showComplete() {
+  document.getElementById('progressArea').style.display = 'none';
+  document.getElementById('quizCard').style.display     = 'none';
+
+  var corr = sessionResults.filter(function(r){ return r.correct; }).length;
+  var pct  = Math.round(corr / SESSION_SIZE * 100);
+
+  document.getElementById('cCorrect').textContent = corr;
+  document.getElementById('cWrong').textContent   = SESSION_SIZE - corr;
+  document.getElementById('cPct').textContent     = pct + '%';
+
+  var e, t, s;
+  if      (pct >= 90) { e = '🏆'; t = 'Ausgezeichnet!'; s = pct + '% — mastered!'; }
+  else if (pct >= 70) { e = '🎉'; t = 'Sehr gut!';      s = pct + '% — great work.'; }
+  else if (pct >= 50) { e = '📚'; t = 'Gut gemacht!';   s = pct + '% — keep practising.'; }
+  else                { e = '💪'; t = 'Weiter üben!';    s = pct + '% — next session drills your weak spots.'; }
+
+  document.getElementById('completeEmoji').textContent = e;
+  document.getElementById('completeTitle').textContent = t;
+  document.getElementById('completeSub').textContent   = s;
+
+  buildWeakList();
+  updateStartStats();
+
+  var sc = document.getElementById('completeScreen');
+  sc.style.display = 'flex';
+  sc.classList.add('visible');
+}
+
+function buildWeakList() {
+  var s = store();
+  var seen = [];
+  sessionResults.forEach(function(r){
+    if (seen.indexOf(r.id) === -1) seen.push(r.id);
+  });
+  var stats = seen.map(function(id) {
+    var r    = s[id] || {attempts:0, correct:0};
+    var verb = VERBS.find(function(v){ return v.id === id; });
+    var rate = r.attempts ? Math.round(r.correct / r.attempts * 100) : 0;
+    return {id: id, verb: verb, rate: rate};
+  }).sort(function(a,b){ return a.rate - b.rate; });
+
+  var container = document.getElementById('weakList');
+  var weak = stats.filter(function(x){ return x.rate < 75; });
+  if (!weak.length) {
+    container.innerHTML = '<div style="text-align:center;font-family:\'JetBrains Mono\',monospace;font-size:.7rem;color:var(--g2);padding:.75rem 0">No weak areas this session</div>';
+    return;
+  }
+  container.innerHTML = '<h3>Focus areas for next session</h3>';
+  weak.slice(0, 6).forEach(function(item) {
+    if (!item.verb) return;
+    container.innerHTML += '<div class="weak-item">'
+      + '<span class="weak-verb">' + item.verb.verb
+      + ' <strong style="color:var(--g2)">' + item.verb.prep + '</strong>'
+      + ' <span class="weak-verb-en">(' + item.verb.en + ')</span></span>'
+      + '<span class="weak-rate">' + item.rate + '%</span>'
+      + '</div>';
+  });
+}
+
+function showStart() {
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display  = 'none';
+  document.getElementById('quizCard').style.display      = 'none';
+  document.getElementById('startScreen').style.display   = 'flex';
+  document.getElementById('verbRef').style.display       = 'block';
+  updateStartStats();
+}
+
+// ════════════════════════════════════════
+//  KEYBOARD
+// ════════════════════════════════════════
+document.addEventListener('keydown', function(e) {
+  if (!answered) {
+    var n = parseInt(e.key);
+    if (n >= 1 && n <= 5) {
+      var btns = document.querySelectorAll('.option-btn:not(:disabled)');
+      if (btns[n-1]) btns[n-1].click();
+    }
+    return;
+  }
+  if ((e.key === ' ' || e.key === 'Enter')
+      && document.getElementById('nextBtn').classList.contains('visible')) {
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+
+// ════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════
+var toastTimer;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+buildVerbRef();
+updateStartStats();
+</script>
+</body>
+</html>
