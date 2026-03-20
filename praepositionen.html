@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verben mit Präpositionen – DeutschKarten</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:   #080808;
+  --s1:   #0f0f0f;
+  --s2:   #161616;
+  --s3:   #1e1e1e;
+  --g1:   #f5f5f5;
+  --g2:   #888;
+  --g3:   #444;
+  --g4:   #2e2e2e;
+  --surface:  #0f0f0f;
+  --surface2: #161616;
+  --surface3: #1e1e1e;
+  --surf:  #0f0f0f;
+  --surf2: #161616;
+  --surf3: #1e1e1e;
+  --sf2:   #161616;
+  --sf3:   #1e1e1e;
+  --border:  #2e2e2e;
+  --border2: #444;
+  --bord:    #2e2e2e;
+  --bord2:   #444;
+  --text:  #f5f5f5;
+  --text2: #888;
+  --text3: #444;
+  --ink:   #f5f5f5;
+  --ink2:  #888;
+  --ink3:  #444;
+  /* All colour vars → greyscale */
+  --green:   #f5f5f5; --greend: #161616;
+  --red:     #888;    --redd:   #161616;
+  --gold:    #f5f5f5; --goldd:  #161616;
+  --amber:   #f5f5f5; --amberd: #161616;
+  --yellow:  #f5f5f5; --yellowd:#161616;
+  --orange:  #888;    --oranged:#161616;
+  --purple:  #888;    --purpled:#161616;
+  --blue:    #888;    --blued:  #161616;
+  --silver:  #888;
+  --bronze:  #444;
+  --lvl:     #f5f5f5; --lvld:  #161616;
+  --accent:  #f5f5f5; --accentd:#161616;
+  /* Glow token */
+  --glow-sm: 0 0 12px rgba(255,255,255,0.06);
+  --glow-md: 0 0 24px rgba(255,255,255,0.09);
+}
+
+/* ── Hover glow for interactive elements ── */
+button:not(:disabled):hover,
+a.nav-btn:hover, a.back-btn:hover, a.back-link:hover {
+  box-shadow: 0 0 12px rgba(255,255,255,0.06);
+}
+.card-scene:hover .card-face,
+.quiz-card:hover {
+  border-color: #444 !important;
+  box-shadow: 0 0 30px rgba(255,255,255,0.05), 0 20px 48px rgba(0,0,0,0.5) !important;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Bricolage Grotesque',sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  height:52px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.8rem;border-bottom:1px solid var(--line);background:var(--bg);
+  position:sticky;top:0;z-index:100;flex-shrink:0;
+}
+.logo{font-size:1.05rem;font-weight:800;letter-spacing:-0.05em;color:var(--ink);
+  text-decoration:none;display:flex;align-items:center;transition:opacity .2s;}
+.logo:hover{opacity:.6}
+.logo em{font-style:normal;color:var(--amber)}
+.logo-slash{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--ink3);
+  font-weight:400;margin-left:8px;letter-spacing:.02em}
+.back-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink3);
+  text-decoration:none;padding:5px 10px;border:1px solid var(--ln2);border-radius:var(--r1);
+  background:transparent;transition:color .15s,border-color .15s,background .15s;letter-spacing:.04em}
+.back-link:hover{color:var(--ink);border-color:var(--ink3);background:var(--s2)}
+
+/* ── MAIN ── */
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2.5rem 1.5rem 4rem;gap:1.2rem}
+
+/* ══════════════════════════════════════
+   START SCREEN — stacked card blocks
+══════════════════════════════════════ */
+.start-screen{width:100%;max-width:var(--w);display:flex;flex-direction:column;gap:0}
+
+.start-block{
+  padding:1.8rem 2.2rem;
+  background:var(--s1);
+  border:1px solid var(--line);
+  border-bottom:none;
+}
+.start-block:first-child{border-radius:var(--r4) var(--r4) 0 0}
+.start-block:last-child{border-bottom:1px solid var(--line);border-radius:0 0 var(--r4) var(--r4)}
+.start-block+.start-block{border-top:1px solid var(--ln2)}
+
+/* hero block */
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:.7rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--amber);opacity:.5}
+.start-screen h1{font-size:clamp(1.5rem,4vw,1.9rem);font-weight:800;letter-spacing:-.05em;
+  color:var(--ink);line-height:1.05;margin-bottom:.7rem}
+.start-screen h1 em{font-style:normal;color:var(--amber)}
+.start-screen p{font-family:'DM Serif Display',serif;font-style:italic;font-size:.95rem;
+  color:var(--ink2);line-height:1.7;max-width:460px}
+
+/* config block */
+.config-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:.55rem}
+.level-grid{display:flex;gap:.3rem;flex-wrap:wrap}
+.lvl-btn{padding:.25rem .75rem;border-radius:var(--r1);border:1px solid var(--ln2);
+  background:transparent;font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  font-weight:600;letter-spacing:.06em;color:var(--ink3);cursor:pointer;transition:all .15s}
+.lvl-btn[data-l='A2']{--tc:#888}
+.lvl-btn[data-l='B1']{--tc:#f5f5f5}
+.lvl-btn[data-l='B2']{--tc:#888}
+.lvl-btn[data-l='C1']{--tc:#888}
+.lvl-btn[data-l='all']{--tc:#f5f5f5}
+.lvl-btn:hover{color:var(--tc);border-color:var(--tc)}
+.lvl-btn.active{color:var(--tc);border-color:var(--tc);background:color-mix(in srgb,var(--tc) 10%,transparent)}
+
+/* stats block */
+.stats-row{display:flex;gap:2.5rem}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-val{font-size:1.25rem;font-weight:800;letter-spacing:-.04em;color:var(--amber);line-height:1}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink3)}
+
+/* cta block */
+.start-btn{
+  display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.8rem;
+  background:var(--g1);color:var(--bg);border:none;border-radius:var(--r2);
+  font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.88rem;
+  cursor:pointer;transition:filter .15s,transform .12s;letter-spacing:-.02em;
+}
+.start-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.start-btn:active{transform:scale(.97)}
+.btn-arrow{transition:transform .15s}
+.start-btn:hover .btn-arrow{transform:translateX(3px)}
+
+/* ── VERB REFERENCE TABLE ── */
+.verb-ref{
+  width:100%;max-width:var(--w);
+  background:var(--s1);border:1px solid var(--line);border-radius:var(--r4);
+  overflow:hidden;
+}
+.vref-header{
+  padding:.9rem 2.2rem;background:var(--s2);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;
+}
+.vref-header-title{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:.5rem;
+}
+.vref-header-title::before{content:'';width:14px;height:1px;background:var(--ink3)}
+.vref-toggle{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);
+  display:flex;align-items:center;gap:.35rem;transition:color .15s}
+.vref-header:hover .vref-toggle{color:var(--ink2)}
+.toggle-chevron{display:inline-block;transition:transform .25s}
+.verb-ref.open .toggle-chevron{transform:rotate(180deg)}
+.vref-body{background:var(--s1);display:none;padding:0 2.2rem 1.5rem}
+.verb-ref.open .vref-body{display:block}
+
+.vref-group{padding-top:1.2rem}
+.vref-group-label{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--group-clr,var(--ink3));margin-bottom:.6rem;
+  padding-bottom:.4rem;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:.5rem;
+}
+.vref-group-label::after{content:'';flex:1;height:1px;background:var(--line)}
+.vref-grid{display:flex;flex-wrap:wrap;gap:.3rem}
+.vref-pill{
+  display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .6rem;
+  background:var(--s2);border:1px solid var(--ln2);border-radius:var(--r1);
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink2);
+  cursor:default;transition:border-color .13s,color .13s;
+}
+.vref-pill:hover{border-color:var(--ink3);color:var(--ink)}
+.vp-prep{color:var(--pill-clr,var(--amber));font-weight:600}
+.vp-case{font-size:.52rem;color:var(--ink3);letter-spacing:.03em}
+
+/* ══════════════════════════════════════
+   PROGRESS
+══════════════════════════════════════ */
+.progress-area{width:100%;max-width:var(--w);display:flex;flex-direction:column;gap:.45rem}
+.progress-meta{display:flex;justify-content:space-between;align-items:center}
+.progress-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink3);letter-spacing:.03em}
+.progress-label strong{color:var(--ink2)}
+.progress-score{font-family:'JetBrains Mono',monospace;font-size:.63rem;display:flex;gap:1rem}
+.score-correct{color:var(--g1)}
+.score-wrong{color:var(--g3)}
+.progress-bar{width:100%;height:2px;background:var(--line);overflow:hidden}
+.progress-fill{height:100%;background:#f5f5f5;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+/* ══════════════════════════════════════
+   QUIZ CARD
+══════════════════════════════════════ */
+.quiz-card{
+  width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--line);
+  border-radius:var(--r4);padding:2rem 2.2rem 1.8rem;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);transition:border-color .22s;
+}
+.quiz-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  border-radius:var(--r4) var(--r4) 0 0;background:var(--amber);opacity:.45;
+  transition:background .22s,opacity .22s;
+}
+.quiz-card.correct{border-color:#444}
+.quiz-card.correct::before{background:#f5f5f5;opacity:.4}
+.quiz-card.wrong{border-color:#333}
+.quiz-card.wrong::before{background:#888;opacity:.4}
+
+.card-tag{
+  display:flex;align-items:center;gap:.45rem;
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;
+  color:var(--ink3);text-transform:uppercase;margin-bottom:1.8rem;
+}
+.card-tag-dot{width:5px;height:5px;border-radius:50%;background:#444;flex-shrink:0}
+.card-tag-verb{color:var(--amber);font-weight:600}
+
+.loading-state{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:3rem 0}
+.spinner{width:26px;height:26px;border:1.5px solid var(--ln2);border-top-color:var(--amber);
+  border-radius:50%;animation:spin .65s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink3);letter-spacing:.05em}
+
+.sentence-area{margin-bottom:1.8rem}
+.sentence{font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,3.5vw,1.6rem);
+  line-height:1.75;color:var(--ink);text-align:center}
+.blank{
+  display:inline-flex;align-items:center;justify-content:center;min-width:84px;height:30px;
+  padding:0 10px;border-bottom:2px solid var(--amber);
+  background:color-mix(in srgb,var(--amber) 7%,transparent);
+  border-radius:var(--r1) var(--r1) 0 0;font-style:normal;
+  font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.88rem;
+  color:#f5f5f5;margin:0 3px;vertical-align:middle;transition:all .2s;
+}
+.blank.reveal-correct{color:#f5f5f5;background:rgba(255,255,255,0.05);border-color:#888}
+.blank.reveal-wrong{color:#888;background:rgba(255,255,255,0.03);border-color:#444}
+
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(126px,1fr));gap:.4rem;margin-bottom:1.1rem}
+.option-btn{
+  padding:.55rem .8rem;border-radius:var(--r2);border:1px solid var(--ln2);background:var(--s2);
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:500;color:var(--ink2);
+  cursor:pointer;transition:border-color .12s,color .12s,background .12s,transform .1s;text-align:center;
+}
+.option-btn:hover:not(:disabled){
+  border-color:var(--amber);color:var(--amber);
+  background:color-mix(in srgb,var(--amber) 6%,var(--s2));transform:translateY(-1px);
+}
+.option-btn:active:not(:disabled){transform:scale(.97)}
+.option-btn.opt-correct{border-color:#f5f5f5;color:#f5f5f5;background:#161616}
+.option-btn.opt-wrong{border-color:#444;color:#888;background:#161616}
+.option-btn:disabled{cursor:default}
+
+.feedback-row{
+  display:flex;align-items:flex-start;gap:.7rem;padding:.8rem .95rem;border-radius:var(--r2);
+  font-size:.8rem;margin-bottom:.8rem;opacity:0;transform:translateY(5px);
+  transition:opacity .2s,transform .2s;line-height:1.5;
+}
+.feedback-row.visible{opacity:1;transform:translateY(0)}
+.feedback-row.fb-correct{background:rgba(255,255,255,0.03);border:1px solid #2e2e2e}
+.feedback-row.fb-wrong{background:rgba(255,255,255,0.02);border:1px solid #2e2e2e}
+.fb-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
+.fb-text strong{color:var(--ink)}
+.fb-text em{font-family:'DM Serif Display',serif;font-size:.88rem;color:var(--ink2)}
+
+.next-btn{
+  width:100%;padding:.65rem;border-radius:var(--r2);background:var(--amber);color:var(--bg);
+  border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;
+  cursor:pointer;transition:filter .15s,transform .12s;display:none;letter-spacing:-.02em;
+}
+.next-btn.visible{display:block}
+.next-btn:hover{filter:brightness(1.08)}
+.next-btn:active{transform:scale(.98)}
+
+/* ══════════════════════════════════════
+   COMPLETE
+══════════════════════════════════════ */
+.complete-screen{
+  width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--line);
+  border-radius:var(--r4);padding:2.5rem 2.2rem 2rem;text-align:center;
+  display:none;flex-direction:column;align-items:center;gap:1.4rem;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.complete-screen.visible{display:flex}
+.complete-emoji{font-size:2.4rem;line-height:1}
+.complete-title{font-size:1.55rem;font-weight:800;letter-spacing:-.05em;color:var(--g1);line-height:1}
+.complete-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:var(--ink2);line-height:1.65;max-width:380px}
+.complete-stats{
+  display:flex;gap:3rem;padding:1.1rem 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  width:100%;justify-content:center;
+}
+.c-stat-val{font-size:1.7rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.2rem}
+.c-stat-lbl{font-size:.57rem;font-family:'JetBrains Mono',monospace;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase}
+.weak-list{width:100%;text-align:left}
+.weak-list h3{
+  font-size:.58rem;font-family:'JetBrains Mono',monospace;color:var(--ink3);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.weak-list h3::after{content:'';flex:1;height:1px;background:var(--line)}
+.weak-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.4rem .65rem;border-radius:var(--r1);background:var(--s2);
+  border:1px solid var(--line);margin-bottom:.3rem;
+}
+.weak-verb{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--ink)}
+.weak-verb-en{color:var(--ink3);font-size:.66rem}
+.weak-rate{font-family:'JetBrains Mono',monospace;font-size:.68rem}
+.weak-rate.bad{color:#888}
+.weak-rate.mid{color:#666}
+.weak-rate.good{color:#f5f5f5}
+.complete-btns{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center}
+.btn-next-session{
+  padding:.62rem 1.7rem;border-radius:var(--r2);background:var(--amber);color:var(--bg);
+  border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;
+  cursor:pointer;transition:filter .15s,transform .12s;letter-spacing:-.02em;
+}
+.btn-next-session:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-go-start{
+  padding:.62rem 1.3rem;border-radius:var(--r2);background:transparent;color:var(--ink2);
+  border:1px solid var(--ln2);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+  font-size:.85rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;
+}
+.btn-go-start:hover{background:var(--s2);color:var(--ink);border-color:var(--ink3)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(12px);
+  background:var(--s2);border:1px solid var(--ln2);border-radius:var(--r1);
+  padding:.42rem .9rem;font-size:.68rem;color:var(--ink2);
+  font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity .22s,transform .22s;
+  pointer-events:none;z-index:200;white-space:nowrap;letter-spacing:.03em;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:560px){
+  .topbar{padding:0 1rem}
+  main{padding:1.5rem 1rem 3rem}
+  .start-block,.vref-header,.vref-body{padding-left:1.2rem;padding-right:1.2rem}
+  .quiz-card{padding:1.5rem 1.2rem 1.2rem}
+  .complete-screen{padding:2rem 1.2rem}
+  .options-grid{grid-template-columns:1fr 1fr}
+  .complete-stats{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="app.html" class="logo">
+    DeutschKarten
+    <span class="logo-slash">/ Präpositionen</span>
+  </a>
+  <a href="app.html" class="back-link">← Flashcards</a>
+</header>
+
+<main id="mainArea">
+
+  <!-- ══ START ══ -->
+  <div class="start-screen" id="startScreen">
+
+    <div class="start-block">
+      <div class="eyebrow">Grammar Practice</div>
+      <h1>Verben mit <em>Präpositionen</em></h1>
+      <p>Fill in the correct preposition + article. Each session has 20 questions. The algorithm tracks your weak spots and drills them harder next time.</p>
+    </div>
+
+    <div class="start-block" style="display:flex;align-items:flex-start;gap:2.5rem;flex-wrap:wrap">
+      <div>
+        <div class="config-label">Level</div>
+        <div class="level-grid" id="levelGrid">
+          <button class="lvl-btn" data-l="A2">A2</button>
+          <button class="lvl-btn" data-l="B1">B1</button>
+          <button class="lvl-btn" data-l="B2">B2</button>
+          <button class="lvl-btn" data-l="C1">C1</button>
+          <button class="lvl-btn active" data-l="all">All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="start-block">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="smSessions">0</div><div class="stat-lbl">Sessions</div></div>
+        <div class="stat-item"><div class="stat-val" id="smTotal">0</div><div class="stat-lbl">Answered</div></div>
+        <div class="stat-item"><div class="stat-val" id="smAccuracy">—</div><div class="stat-lbl">Accuracy</div></div>
+      </div>
+    </div>
+
+    <div class="start-block" style="border-radius:0">
+      <button class="start-btn" onclick="startSession()">
+        Start Session <span class="btn-arrow">→</span>
+      </button>
+    </div>
+
+  </div><!-- /start-screen -->
+
+  <!-- ══ VERB REFERENCE ══ -->
+  <div class="verb-ref" id="verbRef">
+    <div class="vref-header" onclick="toggleVerbRef()">
+      <div class="vref-header-title">All Verbs — Quick Reference</div>
+      <div class="vref-toggle">
+        <span id="toggleLabel">Show all</span>
+        <span class="toggle-chevron" id="toggleIcon">↓</span>
+      </div>
+    </div>
+    <div class="vref-body" id="verbRefBody"></div>
+  </div>
+
+  <!-- ══ PROGRESS ══ -->
+  <div class="progress-area" id="progressArea" style="display:none">
+    <div class="progress-meta">
+      <div class="progress-label"><strong id="qIdx">1</strong> / <strong id="qTotal">20</strong></div>
+      <div class="progress-score">
+        <span class="score-correct">✓ <span id="scoreCorrect">0</span></span>
+        <span class="score-wrong">✗ <span id="scoreWrong">0</span></span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- ══ QUIZ CARD ══ -->
+  <div class="quiz-card" id="quizCard" style="display:none">
+    <div class="card-tag">
+      <span class="card-tag-dot"></span>
+      <span id="tagVerb" class="card-tag-verb">warten auf</span>
+      <span style="color:var(--ln2)">·</span>
+      <span id="tagCase">+Akk</span>
+    </div>
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <div class="loading-text">Generating sentence…</div>
+    </div>
+    <div id="questionArea" style="display:none">
+      <div class="sentence-area"><div class="sentence" id="sentenceDisplay"></div></div>
+      <div class="options-grid" id="optionsGrid"></div>
+      <div class="feedback-row" id="feedbackRow">
+        <span class="fb-icon" id="fbIcon"></span>
+        <span class="fb-text" id="fbText"></span>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ COMPLETE ══ -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-title" id="completeTitle">Session complete!</div>
+    <div class="complete-sub" id="completeSub"></div>
+    <div class="complete-stats">
+      <div><div class="c-stat-val" style="color:var(--g1)" id="cCorrect">0</div><div class="c-stat-lbl">Correct</div></div>
+      <div><div class="c-stat-val" style="color:var(--g1)" id="cWrong">0</div><div class="c-stat-lbl">Wrong</div></div>
+      <div><div class="c-stat-val" style="color:var(--g1)" id="cPct">0%</div><div class="c-stat-lbl">Score</div></div>
+    </div>
+    <div class="weak-list" id="weakList"></div>
+    <div class="complete-btns">
+      <button class="btn-next-session" onclick="startSession()">Next Session →</button>
+      <button class="btn-go-start" onclick="showStart()">Back to Start</button>
+    </div>
+  </div>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+// ══ DATA ══
+const VERBS = [
+  {id:'warten_auf',    verb:'warten',       prep:'auf',   kase:'Akk', en:'to wait for',              level:'A2'},
+  {id:'denken_an',     verb:'denken',       prep:'an',    kase:'Akk', en:'to think of/about',         level:'A2'},
+  {id:'fragen_nach',   verb:'fragen',       prep:'nach',  kase:'Dat', en:'to ask about',              level:'A2'},
+  {id:'antworten_auf', verb:'antworten',    prep:'auf',   kase:'Akk', en:'to reply to',               level:'A2'},
+  {id:'sprechen_über', verb:'sprechen',     prep:'über',  kase:'Akk', en:'to talk about',             level:'A2'},
+  {id:'sprechen_mit',  verb:'sprechen',     prep:'mit',   kase:'Dat', en:'to talk with',              level:'A2'},
+  {id:'helfen_bei',    verb:'helfen',       prep:'bei',   kase:'Dat', en:'to help with',              level:'A2'},
+  {id:'einladen_zu',   verb:'einladen',     prep:'zu',    kase:'Dat', en:'to invite to',              level:'A2'},
+  {id:'fahren_mit',    verb:'fahren',       prep:'mit',   kase:'Dat', en:'to travel by',              level:'A2'},
+  {id:'arbeiten_als',  verb:'arbeiten',     prep:'als',   kase:'Nom', en:'to work as',                level:'A2'},
+  {id:'freuen_auf',    verb:'sich freuen',  prep:'auf',   kase:'Akk', en:'to look forward to',        level:'B1'},
+  {id:'freuen_über',   verb:'sich freuen',  prep:'über',  kase:'Akk', en:'to be pleased about',       level:'B1'},
+  {id:'interessieren', verb:'sich interessieren',prep:'für',kase:'Akk',en:'to be interested in',      level:'B1'},
+  {id:'ärgern_über',   verb:'sich ärgern',  prep:'über',  kase:'Akk', en:'to be annoyed about',       level:'B1'},
+  {id:'kümmern_um',    verb:'sich kümmern', prep:'um',    kase:'Akk', en:'to take care of',           level:'B1'},
+  {id:'bewerben_um',   verb:'sich bewerben',prep:'um',    kase:'Akk', en:'to apply for',              level:'B1'},
+  {id:'gehören_zu',    verb:'gehören',      prep:'zu',    kase:'Dat', en:'to belong to',              level:'B1'},
+  {id:'bestehen_aus',  verb:'bestehen',     prep:'aus',   kase:'Dat', en:'to consist of',             level:'B1'},
+  {id:'anfangen_mit',  verb:'anfangen',     prep:'mit',   kase:'Dat', en:'to start with',             level:'B1'},
+  {id:'aufhören_mit',  verb:'aufhören',     prep:'mit',   kase:'Dat', en:'to stop doing',             level:'B1'},
+  {id:'nachdenken_über',verb:'nachdenken',  prep:'über',  kase:'Akk', en:'to reflect on',             level:'B1'},
+  {id:'träumen_von',   verb:'träumen',      prep:'von',   kase:'Dat', en:'to dream of',               level:'B1'},
+  {id:'gewöhnen_an',   verb:'sich gewöhnen',prep:'an',    kase:'Akk', en:'to get used to',            level:'B2'},
+  {id:'verlassen_auf', verb:'sich verlassen',prep:'auf',  kase:'Akk', en:'to rely on',                level:'B2'},
+  {id:'zweifeln_an',   verb:'zweifeln',     prep:'an',    kase:'Dat', en:'to doubt',                  level:'B2'},
+  {id:'leiden_unter',  verb:'leiden',       prep:'unter', kase:'Dat', en:'to suffer from',            level:'B2'},
+  {id:'verzichten_auf',verb:'verzichten',   prep:'auf',   kase:'Akk', en:'to give up',                level:'B2'},
+  {id:'hinweisen_auf', verb:'hinweisen',    prep:'auf',   kase:'Akk', en:'to point out',              level:'B2'},
+  {id:'einigen_auf',   verb:'sich einigen', prep:'auf',   kase:'Akk', en:'to agree on',               level:'B2'},
+  {id:'bestehen_auf',  verb:'bestehen',     prep:'auf',   kase:'Dat', en:'to insist on',              level:'B2'},
+  {id:'beitragen_zu',  verb:'beitragen',    prep:'zu',    kase:'Dat', en:'to contribute to',          level:'B2'},
+  {id:'beziehen_auf',  verb:'sich beziehen',prep:'auf',   kase:'Akk', en:'to refer to',               level:'B2'},
+  {id:'reagieren_auf', verb:'reagieren',    prep:'auf',   kase:'Akk', en:'to react to',               level:'B2'},
+  {id:'verfügen_über', verb:'verfügen',     prep:'über',  kase:'Akk', en:"to have at one's disposal", level:'B2'},
+  {id:'appellieren_an',verb:'appellieren',  prep:'an',    kase:'Akk', en:'to appeal to',              level:'C1'},
+  {id:'plädieren_für', verb:'plädieren',    prep:'für',   kase:'Akk', en:'to argue for',              level:'C1'},
+  {id:'abfinden_mit',  verb:'sich abfinden',prep:'mit',   kase:'Dat', en:'to come to terms with',     level:'C1'},
+  {id:'anknüpfen_an',  verb:'anknüpfen',    prep:'an',    kase:'Akk', en:'to build on',               level:'C1'},
+  {id:'ausgehen_von',  verb:'ausgehen',     prep:'von',   kase:'Dat', en:'to assume from',            level:'C1'},
+  {id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',    level:'C1'},
+  {id:'beruhen_auf',   verb:'beruhen',      prep:'auf',   kase:'Dat', en:'to be based on',            level:'C1'},
+  {id:'einwirken_auf', verb:'einwirken',    prep:'auf',   kase:'Akk', en:'to influence',              level:'C1'},
+  {id:'entscheiden_für',verb:'sich entscheiden',prep:'für',kase:'Akk',en:'to decide for',             level:'C1'},
+  {id:'richten_nach',  verb:'sich richten', prep:'nach',  kase:'Dat', en:'to be guided by',           level:'C1'},
+  {id:'zurückführen_auf',verb:'zurückführen',prep:'auf',  kase:'Akk', en:'to attribute to',           level:'C1'},
+];
+
+const PREP_COLORS = {
+  auf:'#f5f5f5',an:'#888',für:'#f5f5f5',über:'#888',
+  mit:'#888',zu:'#888',bei:'#888',nach:'#f5f5f5',
+  von:'#888',um:'#f5f5f5',unter:'#888',als:'#444',
+};
+
+const PREP_DISTRACTORS = {
+  auf:['an','für','über','nach','um'],an:['auf','für','über','nach','bei'],
+  für:['an','auf','über','zu','mit'],über:['an','auf','für','nach','mit'],
+  mit:['bei','von','zu','nach','unter'],zu:['bei','mit','von','nach','für'],
+  bei:['mit','von','nach','zu','für'],nach:['bei','für','von','über','auf'],
+  von:['bei','mit','nach','zu','über'],um:['für','nach','auf','über','zu'],
+  unter:['von','mit','bei','nach','in'],als:['wie','für','mit','zu','bei'],
+};
+
+const LVL_META = {
+  A2:{color:'#888',label:'A2 — Beginner'},
+  B1:{color:'#888',label:'B1 — Intermediate'},
+  B2:{color:'#888',label:'B2 — Upper Intermediate'},
+  C1:{color:'#888',label:'C1 — Advanced'},
+};
+
+// ══ VERB REFERENCE ══
+function buildVerbRef() {
+  const body = document.getElementById('verbRefBody');
+  let html = '';
+  for (const [lvl, meta] of Object.entries(LVL_META)) {
+    const verbs = VERBS.filter(v => v.level === lvl);
+    html += `<div class="vref-group">
+      <div class="vref-group-label" style="--group-clr:${meta.color}">${meta.label}</div>
+      <div class="vref-grid">`;
+    verbs.forEach(v => {
+      const col = PREP_COLORS[v.prep] || '#e8a838';
+      html += `<div class="vref-pill" style="--pill-clr:${col}" title="${v.en}">
+        <span>${v.verb}</span>
+        <span class="vp-prep">${v.prep}</span>
+        <span class="vp-case">+${v.kase}</span>
+      </div>`;
+    });
+    html += '</div></div>';
+  }
+  body.innerHTML = html;
+}
+
+function toggleVerbRef() {
+  const ref  = document.getElementById('verbRef');
+  const lbl  = document.getElementById('toggleLabel');
+  const icon = document.getElementById('toggleIcon');
+  const open = ref.classList.toggle('open');
+  lbl.textContent  = open ? 'Hide' : 'Show all';
+  icon.textContent = open ? '↑' : '↓';
+}
+
+// ══ STORAGE ══
+const STORE_KEY = 'dk_praep_v1';
+const store    = () => { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; } };
+const storeSet = d  => { try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch {} };
+
+function verbUpdate(id, ok) {
+  const s = store();
+  if (!s[id]) s[id] = {attempts:0,correct:0};
+  s[id].attempts++; if (ok) s[id].correct++;
+  if (!s._meta) s._meta = {sessions:0,totalAnswered:0,totalCorrect:0};
+  s._meta.totalAnswered++; if (ok) s._meta.totalCorrect++;
+  storeSet(s);
+}
+function metaIncrementSession() {
+  const s = store();
+  if (!s._meta) s._meta = {sessions:0,totalAnswered:0,totalCorrect:0};
+  s._meta.sessions++; storeSet(s);
+}
+
+// ══ WEIGHTED PICK ══
+function pickWeightedVerbs(pool, count) {
+  const d = store();
+  const w = pool.map(v => {
+    const r = d[v.id] || {attempts:0,correct:0};
+    let wt = 1;
+    if (!r.attempts) wt = 3;
+    else { const wr = 1-(r.correct/r.attempts); if (wr>=.5) wt=5; else if (wr>=.25) wt=3; }
+    return {verb:v,weight:wt};
+  });
+  const total = w.reduce((s,x)=>s+x.weight,0);
+  const picked=[]; let lastId=null;
+  for (let i=0;i<count;i++) {
+    let chosen=null,tries=0;
+    while(tries++<50){
+      let rng=Math.random()*total;
+      for(const item of w){rng-=item.weight;if(rng<=0){chosen=item.verb;break;}}
+      if(!chosen)chosen=w[0].verb;
+      if(chosen.id!==lastId)break;
+    }
+    picked.push(chosen); lastId=chosen.id;
+  }
+  return picked;
+}
+
+// ══ OPTIONS ══
+function buildOptions(v, correct) {
+  const {prep,kase} = v;
+  const wp = (PREP_DISTRACTORS[prep]||['an','auf','für','über']).slice(0,4);
+  const seen=new Set([correct]);
+  const dists=[];
+  const [cp,...cap]=correct.split(' '); const ca=cap.join(' ');
+  const caseArts = kase==='Dat'?['den','die','das','der']:['dem','der','des','eine'];
+  for(const a of caseArts){if(dists.length>=2)break;const o=cp+' '+a;if(!seen.has(o)){seen.add(o);dists.push(o);}}
+  for(const p of wp){
+    if(dists.length>=4)break;
+    const a=kase==='Dat'?ca:(ca==='den'?'die':'den');
+    const o=p+' '+a; if(!seen.has(o)){seen.add(o);dists.push(o);}
+    const o2=p+' '+(kase==='Dat'?'dem':'den'); if(!seen.has(o2)){seen.add(o2);dists.push(o2);}
+  }
+  const arr=[correct,...dists].slice(0,5);
+  while(arr.length<5)arr.push(wp[arr.length%wp.length]+' '+ca);
+  return arr.sort(()=>Math.random()-.5);
+}
+
+// ══ AI GEN ══
+async function generateQuestion(v, sid) {
+  const r = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:300,messages:[{role:'user',content:
+      `Generate a German fill-in-the-blank for "${v.verb} ${v.prep}" (${v.en}).\nReplace ONLY the preposition+article with "___". Case: ${v.kase}. Make it natural B1-C1 level. Vary nouns and subjects. Session: ${sid}\nRespond ONLY with JSON: {"sentence":"...with ___...","correct":"prep article","article_gender":"m|f|n|pl","hint":"why this prep (max 10 words)"}`
+    }]})
+  });
+  const d = await r.json();
+  const t = d.content.map(b=>b.text||'').join('').trim();
+  return JSON.parse(t.replace(/```json|```/g,'').trim());
+}
+
+// ══ STATE ══
+let selectedLevel='all',sessionQueue=[],sessionIdx=0,sessionResults=[],
+    currentQuestion=null,answered=false,sessionId=0;
+const SESSION_SIZE=20;
+
+function updateStartStats(){
+  const s=store(); const m=s._meta||{sessions:0,totalAnswered:0,totalCorrect:0};
+  document.getElementById('smSessions').textContent=m.sessions;
+  document.getElementById('smTotal').textContent=m.totalAnswered;
+  document.getElementById('smAccuracy').textContent=m.totalAnswered>0?Math.round(m.totalCorrect/m.totalAnswered*100)+'%':'—';
+}
+
+document.getElementById('levelGrid').addEventListener('click',e=>{
+  const btn=e.target.closest('.lvl-btn'); if(!btn)return;
+  const l=btn.dataset.l;
+  if(l==='all'){
+    selectedLevel='all';
+    document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    document.querySelector('.lvl-btn[data-l="all"]').classList.remove('active');
+    btn.classList.toggle('active');
+    const active=[...document.querySelectorAll('.lvl-btn.active')].map(b=>b.dataset.l).filter(x=>x!=='all');
+    selectedLevel=active.length?active:'all';
+  }
+});
+
+function getVerbPool(){
+  if(selectedLevel==='all'||(Array.isArray(selectedLevel)&&selectedLevel.includes('all')))return VERBS;
+  const ls=Array.isArray(selectedLevel)?selectedLevel:[selectedLevel];
+  return VERBS.filter(v=>ls.includes(v.level));
+}
+
+function startSession(){
+  const pool=getVerbPool(); if(!pool.length){showToast('No verbs for this level!');return;}
+  metaIncrementSession();
+  sessionId=Date.now(); sessionQueue=pickWeightedVerbs(pool,SESSION_SIZE);
+  sessionIdx=0; sessionResults=[]; answered=false;
+  document.getElementById('startScreen').style.display='none';
+  document.getElementById('verbRef').style.display='none';
+  document.getElementById('completeScreen').style.display='none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display='flex';
+  document.getElementById('quizCard').style.display='block';
+  updateProgressBar(); loadQuestion(sessionQueue[0]);
+}
+
+function nextQuestion(){
+  sessionIdx++;
+  if(sessionIdx>=SESSION_SIZE){showComplete();return;}
+  document.getElementById('quizCard').className='quiz-card';
+  answered=false;
+  document.getElementById('nextBtn').classList.remove('visible');
+  document.getElementById('feedbackRow').classList.remove('visible','fb-correct','fb-wrong');
+  updateProgressBar(); loadQuestion(sessionQueue[sessionIdx]);
+}
+
+async function loadQuestion(v){
+  currentQuestion=null;
+  document.getElementById('loadingState').style.display='flex';
+  document.getElementById('questionArea').style.display='none';
+  document.getElementById('tagVerb').textContent=v.verb+' '+v.prep;
+  document.getElementById('tagCase').textContent='+'+v.kase;
+  try {
+    const ai=await generateQuestion(v,sessionId+'_'+sessionIdx);
+    currentQuestion={verbObj:v,aiData:ai,options:buildOptions(v,ai.correct)};
+    renderQuestion();
+  } catch(e){
+    console.error('generateQuestion error:', e);
+    // Show error in the card instead of silently looping
+    document.getElementById('loadingState').style.display='none';
+    document.getElementById('questionArea').style.display='block';
+    document.getElementById('sentenceDisplay').innerHTML = '<span style="color:var(--g3);font-family:'JetBrains Mono',monospace;font-size:.8rem">Could not generate sentence — check console. Tap Next to retry.</span>';
+    document.getElementById('optionsGrid').innerHTML='';
+    document.getElementById('nextBtn').classList.add('visible');
+    answered=true;
+  }
+}
+
+function renderQuestion(){
+  const {aiData,options}=currentQuestion;
+  document.getElementById('loadingState').style.display='none';
+  document.getElementById('questionArea').style.display='block';
+  const parts=aiData.sentence.split('___');
+  const el=document.getElementById('sentenceDisplay');
+  el.innerHTML=parts.length>=2
+    ?escHtml(parts[0])+'<span class="blank" id="blankEl">___</span>'+escHtml(parts.slice(1).join('___'))
+    :escHtml(aiData.sentence);
+  const grid=document.getElementById('optionsGrid');
+  grid.innerHTML='';
+  options.forEach(o=>{
+    const b=document.createElement('button'); b.className='option-btn'; b.textContent=o;
+    b.onclick=()=>selectOption(o,b); grid.appendChild(b);
+  });
+  document.getElementById('feedbackRow').classList.remove('visible');
+  document.getElementById('nextBtn').classList.remove('visible');
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function selectOption(chosen,btn){
+  if(answered)return; answered=true;
+  const{verbObj,aiData}=currentQuestion;
+  const correct=aiData.correct;
+  const ok=chosen.trim().toLowerCase()===correct.trim().toLowerCase();
+  const bl=document.getElementById('blankEl');
+  if(bl){bl.textContent=chosen;bl.className='blank '+(ok?'reveal-correct':'reveal-wrong');}
+  document.querySelectorAll('.option-btn').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.trim().toLowerCase()===correct.trim().toLowerCase())b.classList.add('opt-correct');
+    else if(b===btn&&!ok)b.classList.add('opt-wrong');
+  });
+  document.getElementById('quizCard').classList.add(ok?'correct':'wrong');
+  const fb=document.getElementById('feedbackRow');
+  fb.className='feedback-row visible '+(ok?'fb-correct':'fb-wrong');
+  document.getElementById('fbIcon').textContent=ok?'✓':'✗';
+  document.getElementById('fbText').innerHTML=ok
+    ?`<strong>Richtig!</strong> <em>${aiData.hint}</em>`
+    :`<strong>Falsch.</strong> Correct: <strong>${correct}</strong>. <em>${aiData.hint}</em>`;
+  verbUpdate(verbObj.id,ok); sessionResults.push({id:verbObj.id,correct:ok});
+  document.getElementById('scoreCorrect').textContent=sessionResults.filter(r=>r.correct).length;
+  document.getElementById('scoreWrong').textContent=sessionResults.filter(r=>!r.correct).length;
+  document.getElementById('nextBtn').classList.add('visible');
+}
+
+function updateProgressBar(){
+  document.getElementById('progFill').style.width=Math.round(sessionIdx/SESSION_SIZE*100)+'%';
+  document.getElementById('qIdx').textContent=sessionIdx+1;
+  document.getElementById('qTotal').textContent=SESSION_SIZE;
+}
+
+function showComplete(){
+  document.getElementById('progressArea').style.display='none';
+  document.getElementById('quizCard').style.display='none';
+  const corr=sessionResults.filter(r=>r.correct).length;
+  const pct=Math.round(corr/SESSION_SIZE*100);
+  document.getElementById('cCorrect').textContent=corr;
+  document.getElementById('cWrong').textContent=SESSION_SIZE-corr;
+  document.getElementById('cPct').textContent=pct+'%';
+  let e,t,s;
+  if(pct>=90){e='🏆';t='Ausgezeichnet!';s=pct+'% correct — mastered!';}
+  else if(pct>=70){e='🎉';t='Sehr gut!';s=pct+'% correct — great work.';}
+  else if(pct>=50){e='📚';t='Gut gemacht!';s=pct+'% correct — keep practising.';}
+  else{e='💪';t='Weiter üben!';s=pct+'% correct — next session drills your weak spots.';}
+  document.getElementById('completeEmoji').textContent=e;
+  document.getElementById('completeTitle').textContent=t;
+  document.getElementById('completeSub').textContent=s;
+  buildWeakList(); updateStartStats();
+  const sc=document.getElementById('completeScreen');
+  sc.style.display='flex'; sc.classList.add('visible');
+}
+
+function buildWeakList(){
+  const s=store();
+  const seen=[...new Set(sessionResults.map(r=>r.id))];
+  const stats=seen.map(id=>{
+    const r=s[id]||{attempts:0,correct:0};
+    const verb=VERBS.find(v=>v.id===id);
+    const rate=r.attempts?Math.round(r.correct/r.attempts*100):0;
+    return{id,verb,rate};
+  }).sort((a,b)=>a.rate-b.rate);
+  const container=document.getElementById('weakList');
+  const weak=stats.filter(s=>s.rate<75);
+  if(!weak.length){container.innerHTML=`<div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--green);padding:.75rem 0">✓ No weak areas this session</div>`;return;}
+  container.innerHTML='<h3>Focus areas for next session</h3>';
+  weak.slice(0,6).forEach(({verb,rate})=>{
+    if(!verb)return;
+    const cls=rate<40?'bad':rate<65?'mid':'good';
+    container.innerHTML+=`<div class="weak-item"><span class="weak-verb">${verb.verb} <span style="color:var(--amber);font-weight:600">${verb.prep}</span> <span class="weak-verb-en">(${verb.en})</span></span><span class="weak-rate ${cls}">${rate}%</span></div>`;
+  });
+}
+
+function showStart(){
+  document.getElementById('completeScreen').style.display='none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display='none';
+  document.getElementById('quizCard').style.display='none';
+  document.getElementById('startScreen').style.display='flex';
+  document.getElementById('verbRef').style.display='block';
+  updateStartStats();
+}
+
+// ══ KEYBOARD ══
+document.addEventListener('keydown',e=>{
+  if(!answered){
+    const n=parseInt(e.key);
+    if(n>=1&&n<=5){const btns=document.querySelectorAll('.option-btn:not(:disabled)');if(btns[n-1])btns[n-1].click();}
+    return;
+  }
+  if((e.key===' '||e.key==='Enter')&&document.getElementById('nextBtn').classList.contains('visible')){e.preventDefault();nextQuestion();}
+});
+
+// ══ TOAST ══
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ══ INIT ══
+buildVerbRef();
+updateStartStats();
+</script>
+</body>
+</html>
