@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeutschKarten – Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root {
+  /* ── Surfaces ── */
+  --bg:   #080808;
+  --s1:   #0f0f0f;
+  --s2:   #161616;
+  --s3:   #1e1e1e;
+  --s4:   #242424;
+
+  /* ── Greyscale ── */
+  --g1:   #f0f0f0;
+  --g2:   #909090;
+  --g3:   #484848;
+  --g4:   #303030;
+
+  /* ── Semantic aliases ── */
+  --surface:   var(--s1);
+  --surface2:  var(--s2);
+  --surface3:  var(--s3);
+  --border:    var(--g4);
+  --border2:   var(--g3);
+  --text:      var(--g1);
+  --text2:     var(--g2);
+  --text3:     var(--g3);
+  --ink:       var(--g1);
+  --ink2:      var(--g2);
+  --ink3:      var(--g3);
+
+  /* ── Spacing scale (4px base) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* ── Typography ── */
+  --font-sans:  'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.65rem;   /* 10.4px — labels, badges */
+  --text-sm:   0.75rem;   /* 12px   — secondary text */
+  --text-base: 0.875rem;  /* 14px   — body */
+  --text-md:   1rem;      /* 16px   — UI text */
+  --text-lg:   1.25rem;   /* 20px   — card headings */
+  --text-xl:   1.5rem;    /* 24px   — section headings */
+  --text-2xl:  2rem;      /* 32px   — display */
+  --text-3xl:  2.8rem;    /* 44px   — hero */
+
+  /* ── Border radius ── */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.7);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.6), 0 16px 40px rgba(0,0,0,0.5);
+
+  /* ── Glow (monochrome white) ── */
+  --glow-xs:  0 0 8px  rgba(255,255,255,0.04);
+  --glow-sm:  0 0 16px rgba(255,255,255,0.06);
+  --glow-md:  0 0 28px rgba(255,255,255,0.08);
+
+  /* ── Transitions ── */
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast:     100ms;
+  --t-base:     160ms;
+  --t-slow:     280ms;
+
+  /* ── Layout ── */
+  --topbar-h:   52px;
+  --card-max:   600px;
+  --page-max:   860px;
+
+  /* ── Keep old names pointing to new tokens (backward compat) ── */
+  --surf:    var(--s1);
+  --surf2:   var(--s2);
+  --surf3:   var(--s3);
+  --sf2:     var(--s2);
+  --sf3:     var(--s3);
+  --bord:    var(--g4);
+  --bord2:   var(--g3);
+  --rule:    var(--g4);
+  --rule2:   var(--g3);
+  --ln2:     var(--g3);
+  --line:    var(--g4);
+  --glow:    var(--glow-sm);
+  --glow-sm: 0 0 16px rgba(255,255,255,0.06);
+
+  /* ── Activity-specific (keep for derdiedas, old level vars) ── */
+  --der:  var(--g1); --derd: var(--s2);
+  --die:  var(--g2); --died: var(--s2);
+  --das:  var(--g2); --dasd: var(--s2);
+  --a1: var(--g1); --a1d: var(--s2); --a1m: rgba(255,255,255,0.04);
+  --a2: var(--g1); --a2d: var(--s2); --a2m: rgba(255,255,255,0.04);
+  --b1: var(--g1); --b1d: var(--s2); --b1m: rgba(255,255,255,0.04);
+  --b2: var(--g1); --b2d: var(--s2); --b2m: rgba(255,255,255,0.04);
+  --c1: var(--g1); --c1d: var(--s2); --c1m: rgba(255,255,255,0.04);
+  --amber: var(--g1); --amberd: var(--s2);
+  --accent: var(--g1); --accentd: var(--s2);
+  --lvl: var(--g1); --lvld: var(--s2); --lvlm: rgba(255,255,255,0.04);
+  --green:   var(--g1); --greend: var(--s2);
+  --red:     var(--g2); --redd:   var(--s2);
+  --gold:    var(--g1); --goldd:  var(--s2);
+  --silver:  var(--g2);
+  --bronze:  var(--g3);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--g1);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font-family: inherit; }
+
+/* ── Focus ring — accessibility ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--g4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--g3); }
+
+/* ── Topbar — shared across all pages ── */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  border-bottom: 1px solid var(--g4);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.logo {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  transition: opacity var(--t-base) var(--ease);
+  user-select: none;
+}
+.logo:hover { opacity: 0.6; }
+.logo-slash {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--g3);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── Back link / nav buttons — universal ── */
+.back-link, .nav-btn, .back-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--g3);
+  text-decoration: none;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xs);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.back-link:hover, .nav-btn:hover, .back-btn:hover {
+  color: var(--g1);
+  border-color: var(--g3);
+  box-shadow: var(--glow-sm);
+}
+:is(.back-link, .nav-btn, .back-btn):focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+}
+
+/* ── Primary button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.6rem;
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: opacity var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.btn-primary:hover {
+  opacity: 0.88;
+  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: scale(0.97); opacity: 0.8; }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  color: var(--g2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.btn-ghost:hover { color: var(--g1); border-color: var(--g3); box-shadow: var(--glow-sm); }
+.btn-ghost:active { transform: scale(0.97); }
+.btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── Card surface ── */
+.card {
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+}
+
+/* ── Input ── */
+.input {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--g1);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.input:focus {
+  border-color: var(--g3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+}
+.input::placeholder { color: var(--g3); }
+.input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Progress bar ── */
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--g4);
+  overflow: hidden;
+  border-radius: 1px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--g1);
+  border-radius: 1px;
+  transition: width 0.4s var(--ease);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: var(--sp-8);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--g2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  transition: opacity var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ══ LOGIN PAGE ══════════════════════════════════════════ */
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--g4) 1px, transparent 1px),
+    linear-gradient(90deg, var(--g4) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-2xl);
+  padding: var(--sp-12) var(--sp-10) var(--sp-8);
+  width: 100%;
+  max-width: 400px;
+  margin: var(--sp-4);
+  box-shadow: var(--shadow-lg);
+  animation: cardIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Logo */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-8);
+}
+.auth-logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.auth-logo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+}
+
+/* Heading */
+.auth-title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--g1);
+  margin-bottom: var(--sp-1);
+  line-height: 1.1;
+}
+.auth-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-base);
+  color: var(--g2);
+  margin-bottom: var(--sp-8);
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-md);
+  padding: 3px;
+  margin-bottom: var(--sp-6);
+  gap: 3px;
+}
+.auth-tab {
+  flex: 1;
+  padding: 0.45rem var(--sp-3);
+  border: none;
+  background: transparent;
+  border-radius: var(--r-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--g3);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+  letter-spacing: -0.01em;
+}
+.auth-tab:hover { color: var(--g2); }
+.auth-tab.active {
+  background: var(--s3);
+  color: var(--g1);
+  box-shadow: var(--glow-xs);
+}
+
+/* Fields */
+.auth-field {
+  margin-bottom: var(--sp-4);
+}
+.auth-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--g3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-1);
+}
+.auth-input {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.65rem var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--g1);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.auth-input:focus {
+  border-color: var(--g3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+}
+.auth-input::placeholder { color: var(--g3); }
+
+/* Saved accounts */
+.saved-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--g3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-1);
+}
+.saved-accounts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-4);
+}
+.saved-account {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.5rem var(--sp-3);
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
+  animation: fadeSlide 0.2s var(--ease-out) both;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+.saved-account:hover { border-color: var(--g3); background: var(--s3); }
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--s3);
+  border: 1px solid var(--g4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--g2);
+  flex-shrink: 0;
+}
+.saved-email {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--g2);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: var(--g3);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  padding: 2px var(--sp-1);
+  border-radius: var(--r-xs);
+  transition: color var(--t-fast) var(--ease);
+  line-height: 1;
+}
+.remove-btn:hover { color: var(--g2); }
+
+/* Submit button */
+.auth-submit {
+  width: 100%;
+  padding: 0.7rem var(--sp-4);
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: var(--sp-2);
+  letter-spacing: -0.02em;
+  transition: opacity var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.auth-submit:hover {
+  opacity: 0.88;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+.auth-submit:active { transform: scale(0.98); opacity: 0.8; }
+.auth-submit:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+/* Messages */
+.auth-msg {
+  font-size: var(--text-sm);
+  border-radius: var(--r-sm);
+  padding: 0.5rem var(--sp-3);
+  margin-bottom: var(--sp-3);
+  display: none;
+  border: 1px solid transparent;
+}
+.auth-msg.error {
+  display: block;
+  background: rgba(255,255,255,0.03);
+  border-color: var(--g3);
+  color: var(--g2);
+}
+.auth-msg.success {
+  display: block;
+  background: rgba(255,255,255,0.05);
+  border-color: var(--g2);
+  color: var(--g1);
+}
+
+/* Footer */
+.auth-footer {
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--g4);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--g3);
+}
+.auth-footer a {
+  color: var(--g2);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--t-fast) var(--ease);
+}
+.auth-footer a:hover { color: var(--g1); }
+</style>
+</head>
+<body>
+
+<div class="auth-card" id="authCard" class="auth-card">
+
+  <div class="auth-logo">
+    <div class="auth-logo-mark">🇩🇪</div>
+    <div class="auth-logo-text">Deutsch<span>Karten</span></div>
+  </div>
+
+  <div style="display:none">
+    <span class="flag-pill pill-a1">A1</span>
+    <span class="flag-pill pill-b1">B1</span>
+    <span class="flag-pill pill-c1">C1</span>
+  </div>
+
+  <div class="auth-tabs">
+    <button class="auth-tab active" onclick="switchTab('login')">Sign in</button>
+    <button class="auth-tab" onclick="switchTab('register')">Create account</button>
+  </div>
+
+  <div id="msgBox" class="auth-msg"></div>
+
+  <!-- ── Login form ── -->
+  <div id="loginForm">
+
+    <!-- Saved accounts -->
+    <div id="savedSection" style="display:none;">
+      <div class="saved-label">Saved accounts</div>
+      <div class="saved-accounts" id="savedList"></div>
+    </div>
+
+    <div class="auth-field">
+      <label for="loginEmail">Email</label>
+      <input type="email" class="auth-input" id="loginEmail" placeholder="your@email.com" autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label for="loginPassword">Password</label>
+      <input type="password" class="auth-input" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+    </div>
+
+    <button class="auth-submit" onclick="handleLogin()">Sign in →</button>
+
+  </div>
+
+  <!-- ── Register form ── -->
+  <div id="registerForm" style="display:none;">
+
+    <div class="field">
+      <label for="regName">Display name</label>
+      <input type="text" class="auth-input" id="regName" placeholder="e.g. Anna" autocomplete="name">
+    </div>
+
+    <div class="field">
+      <label for="regEmail">Email</label>
+      <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label for="regPassword">Password</label>
+      <input type="password" id="regPassword" placeholder="at least 6 characters" autocomplete="new-password">
+    </div>
+
+    <button class="btn-submit" onclick="handleRegister()">Create account →</button>
+  </div>
+
+  <div class="card-footer">
+    Your progress is saved locally in your browser 🔒
+  </div>
+</div>
+
+<script>
+// ── Storage helpers ──────────────────────────────────────────
+const USERS_KEY = 'dk_users';
+const SESSION_KEY = 'dk_session';
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch { return {}; }
+}
+function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+function getSession() {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; }
+}
+function saveSession(email) { localStorage.setItem(SESSION_KEY, JSON.stringify({ email, ts: Date.now() })); }
+function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+// ── Saved accounts (emails list for quick login) ──────────────
+const SAVED_KEY = 'dk_saved_emails';
+function getSavedEmails() {
+  try { return JSON.parse(localStorage.getItem(SAVED_KEY)) || []; } catch { return []; }
+}
+function addSavedEmail(email) {
+  const list = getSavedEmails().filter(e => e !== email);
+  list.unshift(email);
+  localStorage.setItem(SAVED_KEY, JSON.stringify(list.slice(0, 5)));
+}
+function removeSavedEmail(email) {
+  const list = getSavedEmails().filter(e => e !== email);
+  localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+  renderSaved();
+}
+
+// ── Redirect if already signed in ───────────────────────────
+(function() {
+  const session = getSession();
+  if (session) {
+    const users = getUsers();
+    if (users[session.email]) {
+      window.location.href = 'index.html';
+    }
+  }
+})();
+
+// ── Tab switching ────────────────────────────────────────────
+function switchTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('registerForm').style.display = tab === 'register' ? '' : 'none';
+  document.querySelectorAll('.auth-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+  });
+  showMsg('', '');
+}
+
+// ── Message helper ───────────────────────────────────────────
+function showMsg(text, type) {
+  const box = document.getElementById('msgBox');
+  box.textContent = text;
+  box.className = 'message' + (type ? ' ' + type : '');
+}
+
+// ── Render saved accounts ────────────────────────────────────
+function renderSaved() {
+  const emails = getSavedEmails();
+  const section = document.getElementById('savedSection');
+  const list = document.getElementById('savedList');
+
+  if (emails.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = '';
+  list.innerHTML = '';
+
+  emails.forEach((email, i) => {
+    const row = document.createElement('div');
+    row.className = 'saved-account';
+    row.style.animationDelay = (i * 0.05) + 's';
+
+    const initials = email.slice(0, 2).toUpperCase();
+    row.innerHTML = `
+      <div class="avatar">${initials}</div>
+      <div class="saved-email">${email}</div>
+      <button class="remove-btn" title="Remove" onclick="event.stopPropagation(); removeSavedEmail('${email}')">✕</button>
+    `;
+    row.addEventListener('click', () => {
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPassword').focus();
+    });
+    list.appendChild(row);
+  });
+}
+
+// ── Hash password (simple, client-side) ─────────────────────
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ── Register ─────────────────────────────────────────────────
+async function handleRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const password = document.getElementById('regPassword').value;
+
+  if (!name) return showMsg('Please enter your name.', 'error');
+  if (!email || !email.includes('@')) return showMsg('Please enter a valid email.', 'error');
+  if (password.length < 6) return showMsg('Password must be at least 6 characters.', 'error');
+
+  const users = getUsers();
+  if (users[email]) return showMsg('An account with this email already exists.', 'error');
+
+  const hash = await hashPassword(password);
+  users[email] = { name, email, hash, joined: Date.now() };
+  saveUsers(users);
+  addSavedEmail(email);
+  saveSession(email);
+
+  showMsg('Account created! Redirecting…', 'success');
+  setTimeout(() => window.location.href = 'index.html', 900);
+}
+
+// ── Login ────────────────────────────────────────────────────
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const password = document.getElementById('loginPassword').value;
+
+  if (!email) return showMsg('Please enter your email.', 'error');
+  if (!password) return showMsg('Please enter your password.', 'error');
+
+  const users = getUsers();
+  const user = users[email];
+  if (!user) return showMsg('No account found with this email.', 'error');
+
+  const hash = await hashPassword(password);
+  if (hash !== user.hash) return showMsg('Incorrect password.', 'error');
+
+  addSavedEmail(email);
+  saveSession(email);
+
+  showMsg('Welcome back, ' + user.name + '! 🎉', 'success');
+  setTimeout(() => window.location.href = 'index.html', 700);
+}
+
+// ── Enter key support ────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const loginVisible = document.getElementById('loginForm').style.display !== 'none';
+    if (loginVisible) handleLogin();
+    else handleRegister();
+  }
+});
+
+// ── Init ─────────────────────────────────────────────────────
+renderSaved();
+
+// Pre-fill email if saved accounts exist
+const saved = getSavedEmails();
+if (saved.length > 0) {
+  document.getElementById('loginEmail').value = saved[0];
+}
+</script>
+
+</body>
+</html>

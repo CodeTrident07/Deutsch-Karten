@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verben mit Präpositionen – DeutschKarten</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ── Surfaces ── */
+  --bg:   #080808;
+  --s1:   #0f0f0f;
+  --s2:   #161616;
+  --s3:   #1e1e1e;
+  --s4:   #242424;
+
+  /* ── Greyscale ── */
+  --g1:   #f0f0f0;
+  --g2:   #909090;
+  --g3:   #484848;
+  --g4:   #303030;
+
+  /* ── Semantic aliases ── */
+  --surface:   var(--s1);
+  --surface2:  var(--s2);
+  --surface3:  var(--s3);
+  --border:    var(--g4);
+  --border2:   var(--g3);
+  --text:      var(--g1);
+  --text2:     var(--g2);
+  --text3:     var(--g3);
+  --ink:       var(--g1);
+  --ink2:      var(--g2);
+  --ink3:      var(--g3);
+
+  /* ── Spacing scale (4px base) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* ── Typography ── */
+  --font-sans:  'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.65rem;   /* 10.4px — labels, badges */
+  --text-sm:   0.75rem;   /* 12px   — secondary text */
+  --text-base: 0.875rem;  /* 14px   — body */
+  --text-md:   1rem;      /* 16px   — UI text */
+  --text-lg:   1.25rem;   /* 20px   — card headings */
+  --text-xl:   1.5rem;    /* 24px   — section headings */
+  --text-2xl:  2rem;      /* 32px   — display */
+  --text-3xl:  2.8rem;    /* 44px   — hero */
+
+  /* ── Border radius ── */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.7);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.6), 0 16px 40px rgba(0,0,0,0.5);
+
+  /* ── Glow (monochrome white) ── */
+  --glow-xs:  0 0 8px  rgba(255,255,255,0.04);
+  --glow-sm:  0 0 16px rgba(255,255,255,0.06);
+  --glow-md:  0 0 28px rgba(255,255,255,0.08);
+
+  /* ── Transitions ── */
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast:     100ms;
+  --t-base:     160ms;
+  --t-slow:     280ms;
+
+  /* ── Layout ── */
+  --topbar-h:   52px;
+  --card-max:   600px;
+  --page-max:   860px;
+
+  /* ── Keep old names pointing to new tokens (backward compat) ── */
+  --surf:    var(--s1);
+  --surf2:   var(--s2);
+  --surf3:   var(--s3);
+  --sf2:     var(--s2);
+  --sf3:     var(--s3);
+  --bord:    var(--g4);
+  --bord2:   var(--g3);
+  --rule:    var(--g4);
+  --rule2:   var(--g3);
+  --ln2:     var(--g3);
+  --line:    var(--g4);
+  --glow:    var(--glow-sm);
+  --glow-sm: 0 0 16px rgba(255,255,255,0.06);
+
+  /* ── Activity-specific (keep for derdiedas, old level vars) ── */
+  --der:  var(--g1); --derd: var(--s2);
+  --die:  var(--g2); --died: var(--s2);
+  --das:  var(--g2); --dasd: var(--s2);
+  --a1: var(--g1); --a1d: var(--s2); --a1m: rgba(255,255,255,0.04);
+  --a2: var(--g1); --a2d: var(--s2); --a2m: rgba(255,255,255,0.04);
+  --b1: var(--g1); --b1d: var(--s2); --b1m: rgba(255,255,255,0.04);
+  --b2: var(--g1); --b2d: var(--s2); --b2m: rgba(255,255,255,0.04);
+  --c1: var(--g1); --c1d: var(--s2); --c1m: rgba(255,255,255,0.04);
+  --amber: var(--g1); --amberd: var(--s2);
+  --accent: var(--g1); --accentd: var(--s2);
+  --lvl: var(--g1); --lvld: var(--s2); --lvlm: rgba(255,255,255,0.04);
+  --green:   var(--g1); --greend: var(--s2);
+  --red:     var(--g2); --redd:   var(--s2);
+  --gold:    var(--g1); --goldd:  var(--s2);
+  --silver:  var(--g2);
+  --bronze:  var(--g3);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--g1);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font-family: inherit; }
+
+/* ── Focus ring — accessibility ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--g4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--g3); }
+
+/* ── Topbar — shared across all pages ── */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  border-bottom: 1px solid var(--g4);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.logo {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  transition: opacity var(--t-base) var(--ease);
+  user-select: none;
+}
+.logo:hover { opacity: 0.6; }
+.logo-slash {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--g3);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── Back link / nav buttons — universal ── */
+.back-link, .nav-btn, .back-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--g3);
+  text-decoration: none;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xs);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.back-link:hover, .nav-btn:hover, .back-btn:hover {
+  color: var(--g1);
+  border-color: var(--g3);
+  box-shadow: var(--glow-sm);
+}
+:is(.back-link, .nav-btn, .back-btn):focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+}
+
+/* ── Primary button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.6rem;
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: opacity var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.btn-primary:hover {
+  opacity: 0.88;
+  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: scale(0.97); opacity: 0.8; }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  color: var(--g2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.btn-ghost:hover { color: var(--g1); border-color: var(--g3); box-shadow: var(--glow-sm); }
+.btn-ghost:active { transform: scale(0.97); }
+.btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── Card surface ── */
+.card {
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+}
+
+/* ── Input ── */
+.input {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--g1);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.input:focus {
+  border-color: var(--g3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+}
+.input::placeholder { color: var(--g3); }
+.input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Progress bar ── */
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--g4);
+  overflow: hidden;
+  border-radius: 1px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--g1);
+  border-radius: 1px;
+  transition: width 0.4s var(--ease);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: var(--sp-8);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--g2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  transition: opacity var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{background:var(--bg);color:var(--g1);font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+
+/* TOPBAR */
+.topbar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;border-bottom:1px solid var(--g4);background:var(--bg);position:sticky;top:0;z-index:100;flex-shrink:0}
+.logo{font-size:1.05rem;font-weight:800;letter-spacing:-.05em;color:var(--g1);text-decoration:none;transition:opacity .2s}
+.logo:hover{opacity:.6}
+.logo-slash{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--g3);font-weight:400;margin-left:8px}
+.back-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--g3);text-decoration:none;padding:5px 10px;border:1px solid var(--g4);border-radius:var(--r1);background:transparent;transition:color .15s,border-color .15s,box-shadow .2s}
+.back-link:hover{color:var(--g1);border-color:var(--g3);box-shadow:var(--glow)}
+
+/* MAIN */
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1.2rem 4rem;gap:1rem}
+
+/* START SCREEN */
+.start-screen{width:100%;max-width:var(--w);display:flex;flex-direction:column;gap:0}
+.start-block{padding:1.6rem 2rem;background:var(--s1);border:1px solid var(--g4);border-bottom:none}
+.start-block:first-child{border-radius:var(--r4) var(--r4) 0 0}
+.start-block:last-child{border-bottom:1px solid var(--g4);border-radius:0 0 var(--r4) var(--r4)}
+.start-block+.start-block{border-top:1px solid var(--s3)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--g3)}
+.start-screen h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:800;letter-spacing:-.05em;color:var(--g1);line-height:1.05;margin-bottom:.65rem}
+.start-screen p{font-family:'DM Serif Display',serif;font-style:italic;font-size:.92rem;color:var(--g2);line-height:1.7;max-width:460px}
+.config-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3);margin-bottom:.55rem}
+.level-grid{display:flex;gap:.3rem;flex-wrap:wrap}
+.lvl-btn{padding:.25rem .75rem;border-radius:var(--r1);border:1px solid var(--g4);background:transparent;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;color:var(--g3);cursor:pointer;transition:all .15s}
+.lvl-btn:hover{color:var(--g2);border-color:var(--g3)}
+.lvl-btn.active{color:var(--g1);border-color:var(--g2);background:var(--s2)}
+.stats-row{display:flex;gap:2.5rem}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-val{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--g1);line-height:1}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+.start-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.8rem;background:var(--g1);color:var(--bg);border:none;border-radius:var(--r2);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.88rem;cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s;letter-spacing:-.02em}
+.start-btn:hover{opacity:.88;box-shadow:0 0 24px rgba(255,255,255,.12);transform:translateY(-1px)}
+.start-btn:active{transform:scale(.97)}
+
+/* VERB REFERENCE */
+.verb-ref{width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);overflow:hidden}
+.vref-header{padding:.85rem 2rem;background:var(--s2);border-bottom:1px solid var(--g4);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .15s}
+.vref-header:hover{background:var(--s3)}
+.vref-header-title{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3);display:flex;align-items:center;gap:.5rem}
+.vref-header-title::before{content:'';width:14px;height:1px;background:var(--g3)}
+.vref-toggle{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--g3);display:flex;align-items:center;gap:.35rem}
+.toggle-chevron{display:inline-block;transition:transform .25s}
+.verb-ref.open .toggle-chevron{transform:rotate(180deg)}
+.vref-body{background:var(--s1);display:none;padding:0 2rem 1.5rem}
+.verb-ref.open .vref-body{display:block}
+.vref-group{padding-top:1.2rem}
+.vref-group-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--g4);display:flex;align-items:center;gap:.5rem}
+.vref-group-label::after{content:'';flex:1;height:1px;background:var(--g4)}
+.vref-grid{display:flex;flex-direction:column;gap:.25rem}
+.vref-pill{display:flex;align-items:baseline;gap:.4rem;padding:.35rem .65rem;background:var(--s2);border:1px solid var(--g4);border-radius:var(--r1);font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--g2);cursor:default;transition:border-color .13s,color .13s;flex-wrap:wrap}
+.vref-pill:hover{border-color:var(--g3);color:var(--g1)}
+.vp-verb{color:var(--g1);font-weight:600;white-space:nowrap}
+.vp-prep{color:var(--g1);font-weight:700;white-space:nowrap}
+.vp-case{font-size:.52rem;color:var(--g3);white-space:nowrap}
+.vp-en{font-family:'DM Serif Display',serif;font-style:italic;font-size:.72rem;color:var(--g3);margin-left:auto;padding-left:.5rem;white-space:nowrap}
+
+/* PROGRESS */
+.progress-area{width:100%;max-width:var(--w);display:flex;flex-direction:column;gap:.45rem}
+.progress-meta{display:flex;justify-content:space-between;align-items:center}
+.progress-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--g3)}
+.progress-label strong{color:var(--g2)}
+.progress-score{font-family:'JetBrains Mono',monospace;font-size:.63rem;display:flex;gap:1rem}
+.score-correct{color:var(--g2)}
+.score-wrong{color:var(--g3)}
+.progress-bar{width:100%;height:2px;background:var(--g4);overflow:hidden}
+.progress-fill{height:100%;background:var(--g1);transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+/* QUIZ CARD */
+.quiz-card{width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);padding:2rem 2.2rem 1.8rem;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.5);transition:border-color .22s}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:var(--r4) var(--r4) 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+.quiz-card.correct{border-color:var(--g2)}
+.quiz-card.wrong{border-color:var(--g3)}
+.card-tag{display:flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--g3);text-transform:uppercase;margin-bottom:1.8rem}
+.card-tag-dot{width:4px;height:4px;border-radius:50%;background:var(--g3);flex-shrink:0}
+.card-tag-verb{color:var(--g2);font-weight:600}
+
+/* SENTENCE */
+.sentence-area{margin-bottom:1.8rem}
+.sentence{font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,3.5vw,1.6rem);line-height:1.75;color:var(--g1);text-align:center}
+.blank{display:inline-flex;align-items:center;justify-content:center;min-width:80px;height:30px;padding:0 10px;border-bottom:2px solid var(--g3);background:rgba(255,255,255,.03);border-radius:var(--r1) var(--r1) 0 0;font-style:normal;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.88rem;color:var(--g1);margin:0 3px;vertical-align:middle;transition:all .2s}
+.blank.reveal-correct{color:var(--g1);background:rgba(255,255,255,.06);border-color:var(--g2)}
+.blank.reveal-wrong{color:var(--g3);background:rgba(255,255,255,.02);border-color:var(--g4)}
+
+/* OPTIONS */
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(126px,1fr));gap:.4rem;margin-bottom:1.1rem}
+.option-btn{padding:.55rem .8rem;border-radius:var(--r2);border:1px solid var(--g4);background:var(--s2);font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:500;color:var(--g2);cursor:pointer;transition:border-color .12s,color .12s,box-shadow .15s,transform .1s;text-align:center}
+.option-btn:hover:not(:disabled){border-color:var(--g2);color:var(--g1);box-shadow:var(--glow);transform:translateY(-1px)}
+.option-btn:active:not(:disabled){transform:scale(.97)}
+.option-btn.opt-correct{border-color:var(--g2);color:var(--g1);background:var(--s3)}
+.option-btn.opt-wrong{border-color:var(--g4);color:var(--g3)}
+.option-btn:disabled{cursor:default}
+
+/* FEEDBACK */
+.feedback-row{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem .95rem;border-radius:var(--r2);font-size:.82rem;margin-bottom:.8rem;opacity:0;transform:translateY(5px);transition:opacity .2s,transform .2s;border:1px solid var(--g4);background:rgba(255,255,255,.02)}
+.feedback-row.visible{opacity:1;transform:translateY(0)}
+.why-text{display:block;margin-top:.3rem;font-family:'DM Serif Display',serif;font-style:italic;font-size:.85rem;color:var(--g2)}
+.no-weak-msg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--g2);padding:.75rem 0}
+.fb-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
+.fb-text strong{color:var(--g1)}
+
+/* NEXT BTN */
+.next-btn{width:100%;padding:.65rem;border-radius:var(--r2);background:var(--g1);color:var(--bg);border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .15s,box-shadow .2s;display:none;letter-spacing:-.02em}
+.next-btn.visible{display:block}
+.next-btn:hover{opacity:.88;box-shadow:0 0 20px rgba(255,255,255,.1)}
+.next-btn:active{transform:scale(.98)}
+
+/* COMPLETE */
+.complete-screen{width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);padding:2.5rem 2.2rem 2rem;text-align:center;display:none;flex-direction:column;align-items:center;gap:1.4rem;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.complete-screen.visible{display:flex}
+.complete-emoji{font-size:2.4rem;line-height:1}
+.complete-title{font-size:1.5rem;font-weight:800;letter-spacing:-.05em;color:var(--g1)}
+.complete-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:var(--g2);line-height:1.65}
+.complete-stats{display:flex;gap:3rem;padding:1.1rem 0;border-top:1px solid var(--g4);border-bottom:1px solid var(--g4);width:100%;justify-content:center}
+.c-stat-val{font-size:1.7rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.2rem;color:var(--g1)}
+.c-stat-lbl{font-size:.57rem;font-family:'JetBrains Mono',monospace;color:var(--g3);letter-spacing:.1em;text-transform:uppercase}
+.weak-list{width:100%;text-align:left}
+.weak-list h3{font-size:.58rem;font-family:'JetBrains Mono',monospace;color:var(--g3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.weak-list h3::after{content:'';flex:1;height:1px;background:var(--g4)}
+.weak-item{display:flex;align-items:center;justify-content:space-between;padding:.4rem .65rem;border-radius:var(--r1);background:var(--s2);border:1px solid var(--g4);margin-bottom:.3rem}
+.weak-verb{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--g1)}
+.weak-verb-en{color:var(--g3);font-size:.66rem}
+.weak-rate{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--g2)}
+.complete-btns{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{padding:.62rem 1.7rem;border-radius:var(--r2);background:var(--g1);color:var(--bg);border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s}
+.btn-primary:hover{opacity:.88;box-shadow:0 0 20px rgba(255,255,255,.12);transform:translateY(-1px)}
+.btn-ghost{padding:.62rem 1.3rem;border-radius:var(--r2);background:transparent;color:var(--g2);border:1px solid var(--g4);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:border-color .15s,color .15s,box-shadow .2s}
+.btn-ghost:hover{border-color:var(--g3);color:var(--g1);box-shadow:var(--glow)}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(12px);background:var(--s2);border:1px solid var(--g4);border-radius:var(--r1);padding:.42rem .9rem;font-size:.68rem;color:var(--g2);font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity .22s,transform .22s;pointer-events:none;z-index:200;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:560px){
+  .topbar{padding:0 1rem}
+  main{padding:1.2rem .8rem 3rem}
+  .start-block{padding:1.2rem}
+  .vref-header,.vref-body{padding-left:1.2rem;padding-right:1.2rem}
+  .quiz-card{padding:1.4rem 1.2rem 1.2rem}
+  .complete-screen{padding:2rem 1.2rem}
+  .options-grid{grid-template-columns:1fr 1fr}
+  .complete-stats{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="app.html" class="logo">DeutschKarten<span class="logo-slash">/ Präpositionen</span></a>
+  <a href="app.html" class="back-link">← Flashcards</a>
+</header>
+
+<main>
+
+  <div class="start-screen" id="startScreen">
+    <div class="start-block">
+      <div class="eyebrow">Grammar Practice</div>
+      <h1>Verben mit Präpositionen</h1>
+      <p>Fill in the correct preposition + article. Each session has 20 questions. The algorithm tracks your weak spots and drills them harder next time.</p>
+    </div>
+    <div class="start-block" style="display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap">
+      <div>
+        <div class="config-label">Level</div>
+        <div class="level-grid" id="levelGrid">
+          <button class="lvl-btn" data-l="A2">A2</button>
+          <button class="lvl-btn" data-l="B1">B1</button>
+          <button class="lvl-btn" data-l="B2">B2</button>
+          <button class="lvl-btn" data-l="C1">C1</button>
+          <button class="lvl-btn active" data-l="all">All</button>
+        </div>
+      </div>
+    </div>
+    <div class="start-block">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="smSessions">0</div><div class="stat-lbl">Sessions</div></div>
+        <div class="stat-item"><div class="stat-val" id="smTotal">0</div><div class="stat-lbl">Answered</div></div>
+        <div class="stat-item"><div class="stat-val" id="smAccuracy">—</div><div class="stat-lbl">Accuracy</div></div>
+      </div>
+    </div>
+    <div class="start-block">
+      <button class="start-btn" onclick="startSession()">Start Session →</button>
+    </div>
+  </div>
+
+  <div class="verb-ref" id="verbRef">
+    <div class="vref-header" onclick="toggleVerbRef()">
+      <div class="vref-header-title">All Verbs — Quick Reference</div>
+      <div class="vref-toggle"><span id="toggleLabel">Show all</span><span class="toggle-chevron" id="toggleIcon">↓</span></div>
+    </div>
+    <div class="vref-body" id="verbRefBody"></div>
+  </div>
+
+  <div class="progress-area" id="progressArea" style="display:none">
+    <div class="progress-meta">
+      <div class="progress-label"><strong id="qIdx">1</strong> / <strong id="qTotal">20</strong></div>
+      <div class="progress-score">
+        <span class="score-correct">✓ <span id="scoreCorrect">0</span></span>
+        <span class="score-wrong">✗ <span id="scoreWrong">0</span></span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="quiz-card" id="quizCard" style="display:none">
+    <div class="card-tag">
+      <span class="card-tag-dot"></span>
+      <span id="tagLevel" class="card-tag-verb">B2</span>
+    </div>
+    <div id="questionArea">
+      <div class="sentence-area"><div class="sentence" id="sentenceDisplay"></div></div>
+      <div class="options-grid" id="optionsGrid"></div>
+      <div class="feedback-row" id="feedbackRow">
+        <span class="fb-icon" id="fbIcon"></span>
+        <span class="fb-text" id="fbText"></span>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-title" id="completeTitle">Session complete!</div>
+    <div class="complete-sub"   id="completeSub"></div>
+    <div class="complete-stats">
+      <div><div class="c-stat-val" id="cCorrect">0</div><div class="c-stat-lbl">Correct</div></div>
+      <div><div class="c-stat-val" id="cWrong">0</div><div class="c-stat-lbl">Wrong</div></div>
+      <div><div class="c-stat-val" id="cPct">0%</div><div class="c-stat-lbl">Score</div></div>
+    </div>
+    <div class="weak-list" id="weakList"></div>
+    <div class="complete-btns">
+      <button class="btn-primary" onclick="startSession()">Next Session →</button>
+      <button class="btn-ghost" onclick="showStart()">Back to Start</button>
+    </div>
+  </div>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+var QUESTIONS = {
+  "warten_auf": [
+    {sentence: "Ich warte ___ den Bus.", correct: "auf"},
+    {sentence: "Sie wartet ___ ihre Schwester.", correct: "auf"},
+    {sentence: "Wir warten ___ das Ergebnis.", correct: "auf"},
+    {sentence: "Er wartet ___ einen Anruf.", correct: "auf"},
+    {sentence: "Die Kinder warten ___ den Weihnachtsmann.", correct: "auf"},
+  ],
+  "denken_an": [
+    {sentence: "Ich denke oft ___ dich.", correct: "an"},
+    {sentence: "Er denkt ___ die Pr\u00fcfung.", correct: "an"},
+    {sentence: "Denk ___ deinen Termin!", correct: "an"},
+    {sentence: "Sie denkt ___ ihren Urlaub.", correct: "an"},
+    {sentence: "Man muss ___ die Zukunft denken.", correct: "an"},
+  ],
+  "fragen_nach": [
+    {sentence: "Er fragt ___ dem Weg.", correct: "nach"},
+    {sentence: "Sie fragt ___ der Uhrzeit.", correct: "nach"},
+    {sentence: "Ich fragte ___ dem Preis.", correct: "nach"},
+    {sentence: "Die \u00c4rztin fragt ___ seinen Symptomen.", correct: "nach"},
+    {sentence: "Wir fragen ___ der \u00d6ffnungszeit.", correct: "nach"},
+  ],
+  "antworten_auf": [
+    {sentence: "Bitte antworte ___ meine E-Mail.", correct: "auf"},
+    {sentence: "Er antwortete nicht ___ die Frage.", correct: "auf"},
+    {sentence: "Sie antwortete ___ den Brief.", correct: "auf"},
+    {sentence: "Ich antworte immer ___ deine Nachrichten.", correct: "auf"},
+    {sentence: "Man sollte h\u00f6flich ___ Kritik antworten.", correct: "auf"},
+  ],
+  "sprechen_ueber": [
+    {sentence: "Wir sprechen ___ das Problem.", correct: "\u00fcber"},
+    {sentence: "Sie sprechen ___ die Ergebnisse.", correct: "\u00fcber"},
+    {sentence: "K\u00f6nnen wir ___ deinen Plan sprechen?", correct: "\u00fcber"},
+    {sentence: "Er spricht nie ___ seine Vergangenheit.", correct: "\u00fcber"},
+    {sentence: "Man sprach ___ den Vorfall.", correct: "\u00fcber"},
+  ],
+  "sprechen_mit": [
+    {sentence: "Ich muss ___ dir sprechen.", correct: "mit"},
+    {sentence: "Sie spricht t\u00e4glich ___ ihrer Mutter.", correct: "mit"},
+    {sentence: "Er hat ___ dem Chef gesprochen.", correct: "mit"},
+    {sentence: "Bitte sprich ___ dem Arzt.", correct: "mit"},
+    {sentence: "Wir sprechen ___ unseren Kollegen.", correct: "mit"},
+  ],
+  "helfen_bei": [
+    {sentence: "Kannst du mir ___ den Hausaufgaben helfen?", correct: "bei"},
+    {sentence: "Er hilft ihr ___ der Arbeit.", correct: "bei"},
+    {sentence: "Sie half uns ___ dem Umzug.", correct: "bei"},
+    {sentence: "Ich helfe dir ___ dem Formular.", correct: "bei"},
+    {sentence: "Wer hilft mir ___ dieser Aufgabe?", correct: "bei"},
+  ],
+  "einladen_zu": [
+    {sentence: "Er l\u00e4dt uns ___ seiner Party ein.", correct: "zu"},
+    {sentence: "Sie hat mich ___ dem Essen eingeladen.", correct: "zu"},
+    {sentence: "Wir laden euch ___ einem Abendessen ein.", correct: "zu"},
+    {sentence: "Die Firma lud uns ___ einer Konferenz ein.", correct: "zu"},
+    {sentence: "Er lud sie ___ dem Konzert ein.", correct: "zu"},
+  ],
+  "fahren_mit": [
+    {sentence: "Ich fahre ___ dem Zug.", correct: "mit"},
+    {sentence: "Sie f\u00e4hrt ___ dem Fahrrad zur Arbeit.", correct: "mit"},
+    {sentence: "Wir fahren ___ dem Auto.", correct: "mit"},
+    {sentence: "Er ist ___ dem Bus gefahren.", correct: "mit"},
+    {sentence: "F\u00e4hrst du ___ der U-Bahn?", correct: "mit"},
+  ],
+  "arbeiten_als": [
+    {sentence: "Er arbeitet ___ Lehrer.", correct: "als"},
+    {sentence: "Sie arbeitet ___ \u00c4rztin in Berlin.", correct: "als"},
+    {sentence: "Ich arbeite ___ Programmierer.", correct: "als"},
+    {sentence: "Nach dem Studium arbeitete sie ___ Ingenieurin.", correct: "als"},
+    {sentence: "Er hat fr\u00fcher ___ Koch gearbeitet.", correct: "als"},
+  ],
+  "freuen_auf": [
+    {sentence: "Ich freue mich ___ den Urlaub.", correct: "auf"},
+    {sentence: "Sie freut sich ___ das Konzert.", correct: "auf"},
+    {sentence: "Wir freuen uns ___ euren Besuch.", correct: "auf"},
+    {sentence: "Er freut sich ___ die Ferien.", correct: "auf"},
+    {sentence: "Die Kinder freuen sich ___ Weihnachten.", correct: "auf"},
+  ],
+  "freuen_ueber": [
+    {sentence: "Sie freut sich ___ das Geschenk.", correct: "\u00fcber"},
+    {sentence: "Er freut sich ___ die gute Note.", correct: "\u00fcber"},
+    {sentence: "Ich freue mich ___ deinen Besuch.", correct: "\u00fcber"},
+    {sentence: "Wir freuen uns ___ den Erfolg.", correct: "\u00fcber"},
+    {sentence: "Sie hat sich ___ die Nachricht gefreut.", correct: "\u00fcber"},
+  ],
+  "interessieren": [
+    {sentence: "Er interessiert sich ___ Musik.", correct: "f\u00fcr"},
+    {sentence: "Sie interessiert sich ___ die Geschichte.", correct: "f\u00fcr"},
+    {sentence: "Ich interessiere mich ___ das Thema.", correct: "f\u00fcr"},
+    {sentence: "Wir interessieren uns ___ neue Technologien.", correct: "f\u00fcr"},
+    {sentence: "Er interessiert sich nicht ___ Sport.", correct: "f\u00fcr"},
+  ],
+  "aergern_ueber": [
+    {sentence: "Ich \u00e4rgere mich ___ den Stau.", correct: "\u00fcber"},
+    {sentence: "Sie \u00e4rgert sich ___ seine Aussage.", correct: "\u00fcber"},
+    {sentence: "Er \u00e4rgert sich ___ die Versp\u00e4tung.", correct: "\u00fcber"},
+    {sentence: "Wir \u00e4rgern uns ___ das Ergebnis.", correct: "\u00fcber"},
+    {sentence: "Sie hat sich ___ den Fehler ge\u00e4rgert.", correct: "\u00fcber"},
+  ],
+  "kuemmern_um": [
+    {sentence: "Sie k\u00fcmmert sich ___ ihre Eltern.", correct: "um"},
+    {sentence: "Er k\u00fcmmert sich ___ den Hund.", correct: "um"},
+    {sentence: "Ich k\u00fcmmere mich ___ das Problem.", correct: "um"},
+    {sentence: "Wer k\u00fcmmert sich ___ die Kinder?", correct: "um"},
+    {sentence: "Bitte k\u00fcmmere dich ___ die Reservierung.", correct: "um"},
+  ],
+  "bewerben_um": [
+    {sentence: "Er bewirbt sich ___ die Stelle.", correct: "um"},
+    {sentence: "Sie hat sich ___ einen Job beworben.", correct: "um"},
+    {sentence: "Ich bewerbe mich ___ das Stipendium.", correct: "um"},
+    {sentence: "Wir bewerben uns ___ den Auftrag.", correct: "um"},
+    {sentence: "Hast du dich ___ die Position beworben?", correct: "um"},
+  ],
+  "gehoeren_zu": [
+    {sentence: "Das geh\u00f6rt ___ meinen Pflichten.", correct: "zu"},
+    {sentence: "Geduld geh\u00f6rt ___ den wichtigsten Tugenden.", correct: "zu"},
+    {sentence: "Das Buch geh\u00f6rt ___ der Pflichtlekt\u00fcre.", correct: "zu"},
+    {sentence: "Sport geh\u00f6rt ___ seinem Alltag.", correct: "zu"},
+    {sentence: "Das geh\u00f6rt ___ den besten Filmen des Jahres.", correct: "zu"},
+  ],
+  "bestehen_aus": [
+    {sentence: "Das Team besteht ___ zehn Personen.", correct: "aus"},
+    {sentence: "Die L\u00f6sung besteht ___ drei Schritten.", correct: "aus"},
+    {sentence: "Das Gericht besteht ___ Reis und Gem\u00fcse.", correct: "aus"},
+    {sentence: "Die Gruppe besteht ___ Studenten.", correct: "aus"},
+    {sentence: "Der Kurs besteht ___ zw\u00f6lf Einheiten.", correct: "aus"},
+  ],
+  "anfangen_mit": [
+    {sentence: "Wir fangen ___ Kapitel 1 an.", correct: "mit"},
+    {sentence: "Fang ___ dem Einfachsten an!", correct: "mit"},
+    {sentence: "Sie fing ___ der Arbeit an.", correct: "mit"},
+    {sentence: "Ich fange ___ dem Training an.", correct: "mit"},
+    {sentence: "Wann f\u00e4ngst du ___ dem Lernen an?", correct: "mit"},
+  ],
+  "aufhoeren_mit": [
+    {sentence: "H\u00f6r endlich ___ dem Rauchen auf!", correct: "mit"},
+    {sentence: "Er h\u00f6rt ___ dem Sport auf.", correct: "mit"},
+    {sentence: "Sie hat ___ der Di\u00e4t aufgeh\u00f6rt.", correct: "mit"},
+    {sentence: "Ich h\u00f6re ___ dem Spielen auf.", correct: "mit"},
+    {sentence: "Wann h\u00f6rst du ___ dem L\u00e4rm auf?", correct: "mit"},
+  ],
+  "nachdenken": [
+    {sentence: "Ich muss ___ dar\u00fcber nachdenken.", correct: "\u00fcber"},
+    {sentence: "Sie denkt ___ die Situation nach.", correct: "\u00fcber"},
+    {sentence: "Er denkt lange ___ die Entscheidung nach.", correct: "\u00fcber"},
+    {sentence: "Wir m\u00fcssen ___ die Konsequenzen nachdenken.", correct: "\u00fcber"},
+    {sentence: "Denk mal ___ das Angebot nach!", correct: "\u00fcber"},
+  ],
+  "traeumen_von": [
+    {sentence: "Sie tr\u00e4umt ___ einer Weltreise.", correct: "von"},
+    {sentence: "Er tr\u00e4umt ___ dem Erfolg.", correct: "von"},
+    {sentence: "Ich tr\u00e4ume ___ einem besseren Leben.", correct: "von"},
+    {sentence: "Als Kind tr\u00e4umte ich ___ dem Fliegen.", correct: "von"},
+    {sentence: "Wir tr\u00e4umen ___ unserem eigenen Haus.", correct: "von"},
+  ],
+  "gewoehnen_an": [
+    {sentence: "Ich gew\u00f6hne mich langsam ___ das Klima.", correct: "an"},
+    {sentence: "Sie hat sich ___ den L\u00e4rm gew\u00f6hnt.", correct: "an"},
+    {sentence: "Er gew\u00f6hnt sich ___ die neue Arbeit.", correct: "an"},
+    {sentence: "Wir gew\u00f6hnen uns ___ das Leben hier.", correct: "an"},
+    {sentence: "Es dauert, bis man sich ___ den Rhythmus gew\u00f6hnt.", correct: "an"},
+  ],
+  "verlassen_auf": [
+    {sentence: "Auf ihn kann man sich ___ verlassen.", correct: "auf ihn"},
+    {sentence: "Ich verlasse mich ___ dich.", correct: "auf"},
+    {sentence: "Sie verl\u00e4sst sich ___ ihre Freunde.", correct: "auf"},
+    {sentence: "Er hat sich ___ sein Gl\u00fcck verlassen.", correct: "auf"},
+    {sentence: "Man kann sich ___ diese Aussage verlassen.", correct: "auf"},
+  ],
+  "zweifeln_an": [
+    {sentence: "Sie zweifelt ___ seiner Ehrlichkeit.", correct: "an"},
+    {sentence: "Ich zweifle ___ der Richtigkeit.", correct: "an"},
+    {sentence: "Er zweifelt ___ sich selbst.", correct: "an"},
+    {sentence: "Wir zweifeln ___ dem Ergebnis.", correct: "an"},
+    {sentence: "Niemand zweifelt ___ ihrer Kompetenz.", correct: "an"},
+  ],
+  "leiden_unter": [
+    {sentence: "Er leidet ___ dem Stress.", correct: "unter"},
+    {sentence: "Sie leidet ___ der K\u00e4lte.", correct: "unter"},
+    {sentence: "Viele leiden ___ dem L\u00e4rm.", correct: "unter"},
+    {sentence: "Das Land leidet ___ der D\u00fcrre.", correct: "unter"},
+    {sentence: "Er leidet ___ seiner Einsamkeit.", correct: "unter"},
+  ],
+  "verzichten_auf": [
+    {sentence: "Er verzichtet ___ Zucker.", correct: "auf"},
+    {sentence: "Sie hat ___ das Dessert verzichtet.", correct: "auf"},
+    {sentence: "Ich verzichte ___ mein Recht.", correct: "auf"},
+    {sentence: "Wir verzichten ___ den Urlaub dieses Jahr.", correct: "auf"},
+    {sentence: "Man muss manchmal ___ Komfort verzichten.", correct: "auf"},
+  ],
+  "hinweisen_auf": [
+    {sentence: "Der Arzt wies ___ die Risiken hin.", correct: "auf"},
+    {sentence: "Sie weist ___ das Problem hin.", correct: "auf"},
+    {sentence: "Ich weise dich ___ die Regelung hin.", correct: "auf"},
+    {sentence: "Er hat ___ den Fehler hingewiesen.", correct: "auf"},
+    {sentence: "Das Schild weist ___ den Ausgang hin.", correct: "auf"},
+  ],
+  "einigen_auf": [
+    {sentence: "Wir haben uns ___ einen Kompromiss geeinigt.", correct: "auf"},
+    {sentence: "Sie einigten sich ___ den Preis.", correct: "auf"},
+    {sentence: "Er hat sich ___ die L\u00f6sung geeinigt.", correct: "auf"},
+    {sentence: "Die Parteien einigten sich ___ einen Plan.", correct: "auf"},
+    {sentence: "K\u00f6nnen wir uns ___ einen Termin einigen?", correct: "auf"},
+  ],
+  "bestehen_auf": [
+    {sentence: "Sie besteht ___ einer Antwort.", correct: "auf"},
+    {sentence: "Er besteht ___ seinem Recht.", correct: "auf"},
+    {sentence: "Ich bestehe ___ der Einhaltung der Regeln.", correct: "auf"},
+    {sentence: "Die Chefin besteht ___ P\u00fcnktlichkeit.", correct: "auf"},
+    {sentence: "Er bestand ___ einer sofortigen L\u00f6sung.", correct: "auf"},
+  ],
+  "beitragen_zu": [
+    {sentence: "Das tr\u00e4gt ___ der L\u00f6sung bei.", correct: "zu"},
+    {sentence: "Sie tr\u00e4gt ___ dem Erfolg bei.", correct: "zu"},
+    {sentence: "Jeder kann ___ dem Klimaschutz beitragen.", correct: "zu"},
+    {sentence: "Das hat ___ einer Verbesserung beigetragen.", correct: "zu"},
+    {sentence: "Er tr\u00e4gt viel ___ dem Projekt bei.", correct: "zu"},
+  ],
+  "beziehen_auf": [
+    {sentence: "Worauf beziehen Sie sich?", correct: "auf"},
+    {sentence: "Er bezieht sich ___ den letzten Bericht.", correct: "auf"},
+    {sentence: "Ich beziehe mich ___ deinen Kommentar.", correct: "auf"},
+    {sentence: "Sie bezieht sich ___ die Statistiken.", correct: "auf"},
+    {sentence: "Das Zitat bezieht sich ___ ein altes Gesetz.", correct: "auf"},
+  ],
+  "reagieren_auf": [
+    {sentence: "Wie soll ich ___ das reagieren?", correct: "auf"},
+    {sentence: "Er reagiert nicht ___ meine Nachrichten.", correct: "auf"},
+    {sentence: "Sie reagierte positiv ___ das Angebot.", correct: "auf"},
+    {sentence: "Das Publikum reagierte ___ die Nachricht.", correct: "auf"},
+    {sentence: "Man muss schnell ___ Ver\u00e4nderungen reagieren.", correct: "auf"},
+  ],
+  "verfuegen_ueber": [
+    {sentence: "Sie verf\u00fcgt ___ viel Erfahrung.", correct: "\u00fcber"},
+    {sentence: "Das Land verf\u00fcgt ___ gro\u00dfe Ressourcen.", correct: "\u00fcber"},
+    {sentence: "Er verf\u00fcgt ___ ausgezeichnete Kenntnisse.", correct: "\u00fcber"},
+    {sentence: "Wir verf\u00fcgen ___ ein gro\u00dfes Netzwerk.", correct: "\u00fcber"},
+    {sentence: "Die Stadt verf\u00fcgt ___ gute Verkehrsanbindung.", correct: "\u00fcber"},
+  ],
+  "appellieren_an": [
+    {sentence: "Er appellierte ___ die Vernunft der B\u00fcrger.", correct: "an"},
+    {sentence: "Sie appelliert ___ unser Gewissen.", correct: "an"},
+    {sentence: "Der Politiker appellierte ___ die Solidarit\u00e4t.", correct: "an"},
+    {sentence: "Ich appelliere ___ deinen Verstand.", correct: "an"},
+    {sentence: "Man appellierte ___ die Gemeinschaft.", correct: "an"},
+  ],
+  "plaedieren_fuer": [
+    {sentence: "Der Anwalt pl\u00e4dierte ___ einen Freispruch.", correct: "f\u00fcr"},
+    {sentence: "Sie pl\u00e4diert ___ eine friedliche L\u00f6sung.", correct: "f\u00fcr"},
+    {sentence: "Er pl\u00e4dierte ___ strengere Gesetze.", correct: "f\u00fcr"},
+    {sentence: "Die Expertin pl\u00e4diert ___ mehr Investitionen.", correct: "f\u00fcr"},
+    {sentence: "Ich pl\u00e4diere ___ einen offenen Dialog.", correct: "f\u00fcr"},
+  ],
+  "abfinden_mit": [
+    {sentence: "Er hat sich ___ der Situation abgefunden.", correct: "mit"},
+    {sentence: "Sie fand sich ___ dem Ergebnis ab.", correct: "mit"},
+    {sentence: "Ich kann mich nicht ___ dieser Entscheidung abfinden.", correct: "mit"},
+    {sentence: "Man muss sich manchmal ___ Kompromissen abfinden.", correct: "mit"},
+    {sentence: "Er hat sich schwer ___ dem Verlust abgefunden.", correct: "mit"},
+  ],
+  "anknuepfen_an": [
+    {sentence: "Ich m\u00f6chte ___ Ihre Aussage ankn\u00fcpfen.", correct: "an"},
+    {sentence: "Er kn\u00fcpfte ___ die Tradition an.", correct: "an"},
+    {sentence: "Sie kn\u00fcpft ___ fr\u00fchere Gespr\u00e4che an.", correct: "an"},
+    {sentence: "Die Forschung kn\u00fcpft ___ \u00e4ltere Studien an.", correct: "an"},
+    {sentence: "Man kann ___ diese Idee ankn\u00fcpfen.", correct: "an"},
+  ],
+  "ausgehen_von": [
+    {sentence: "Wir gehen ___ einer positiven Entwicklung aus.", correct: "von"},
+    {sentence: "Er geht ___ dem Worst Case aus.", correct: "von"},
+    {sentence: "Ich gehe ___ deiner Aussage aus.", correct: "von"},
+    {sentence: "Man kann ___ falschen Annahmen ausgehen.", correct: "von"},
+    {sentence: "Die Polizei geht ___ einem Unfall aus.", correct: "von"},
+  ],
+  "auseinandersetzen": [
+    {sentence: "Man muss sich ___ dem Thema auseinandersetzen.", correct: "mit"},
+    {sentence: "Sie hat sich intensiv ___ der Frage auseinandergesetzt.", correct: "mit"},
+    {sentence: "Er setzt sich kritisch ___ dem Text auseinander.", correct: "mit"},
+    {sentence: "Wir m\u00fcssen uns ___ diesen Problemen auseinandersetzen.", correct: "mit"},
+    {sentence: "Die Gesellschaft muss sich ___ dem Wandel auseinandersetzen.", correct: "mit"},
+  ],
+  "beruhen_auf": [
+    {sentence: "Die Theorie beruht ___ falschen Annahmen.", correct: "auf"},
+    {sentence: "Das Urteil beruht ___ den Fakten.", correct: "auf"},
+    {sentence: "Vertrauen beruht ___ gegenseitigem Respekt.", correct: "auf"},
+    {sentence: "Der Erfolg beruht ___ harter Arbeit.", correct: "auf"},
+    {sentence: "Seine Aussage beruht ___ einem Missverst\u00e4ndnis.", correct: "auf"},
+  ],
+  "einwirken_auf": [
+    {sentence: "Stress wirkt negativ ___ die Gesundheit ein.", correct: "auf"},
+    {sentence: "Die Therapie wirkt ___ das Gehirn ein.", correct: "auf"},
+    {sentence: "Er versucht, ___ die Entscheidung einzuwirken.", correct: "auf"},
+    {sentence: "L\u00e4rm wirkt ___ die Konzentration ein.", correct: "auf"},
+    {sentence: "Das Medikament wirkt ___ den Blutdruck ein.", correct: "auf"},
+  ],
+  "entscheiden_fuer": [
+    {sentence: "Sie hat sich ___ die Stelle entschieden.", correct: "f\u00fcr"},
+    {sentence: "Er entschied sich ___ das g\u00fcnstigere Modell.", correct: "f\u00fcr"},
+    {sentence: "Ich entscheide mich ___ einen anderen Weg.", correct: "f\u00fcr"},
+    {sentence: "Wir haben uns ___ den Kandidaten entschieden.", correct: "f\u00fcr"},
+    {sentence: "Am Ende entschied er sich ___ die Wahrheit.", correct: "f\u00fcr"},
+  ],
+  "richten_nach": [
+    {sentence: "Das Urteil richtet sich ___ dem Gesetz.", correct: "nach"},
+    {sentence: "Sie richtet sich ___ den Vorgaben.", correct: "nach"},
+    {sentence: "Das Verhalten richtet sich ___ der Situation.", correct: "nach"},
+    {sentence: "Er richtet sich immer ___ den Regeln.", correct: "nach"},
+    {sentence: "Wir richten uns ___ euren W\u00fcnschen.", correct: "nach"},
+  ],
+  "zurueckfuehren": [
+    {sentence: "Man kann das ___ mangelnde Kommunikation zur\u00fcckf\u00fchren.", correct: "auf"},
+    {sentence: "Der Fehler l\u00e4sst sich ___ einen Irrtum zur\u00fcckf\u00fchren.", correct: "auf"},
+    {sentence: "Das Problem ist ___ alte Strukturen zur\u00fcckzuf\u00fchren.", correct: "auf"},
+    {sentence: "Er f\u00fchrt seinen Erfolg ___ harte Arbeit zur\u00fcck.", correct: "auf"},
+    {sentence: "Die Krise l\u00e4sst sich ___ mehrere Faktoren zur\u00fcckf\u00fchren.", correct: "auf"},
+  ],
+};
+
+var VERBS = [
+  {id:'warten_auf',    verb:'warten',             prep:'auf',   kase:'Akk', en:'to wait for',              level:'A2',why:'warten auf is a fixed collocation — auf always takes Akkusativ here'},
+  {id:'denken_an',     verb:'denken',             prep:'an',    kase:'Akk', en:'to think of/about',        level:'A2',why:'denken an means to have s.o./sth in mind — an + Akkusativ for direction of thought'},
+  {id:'fragen_nach',   verb:'fragen',             prep:'nach',  kase:'Dat', en:'to ask about',             level:'A2',why:'fragen nach asks about information — nach + Dativ for inquiry'},
+  {id:'antworten_auf', verb:'antworten',          prep:'auf',   kase:'Akk', en:'to reply to',              level:'A2',why:'antworten auf responds to something — auf + Akkusativ for the trigger'},
+  {id:'sprechen_ueber',verb:'sprechen',           prep:'über',  kase:'Akk', en:'to talk about',            level:'A2',why:'sprechen über discusses a topic — über + Akkusativ for subject matter'},
+  {id:'sprechen_mit',  verb:'sprechen',           prep:'mit',   kase:'Dat', en:'to talk with',             level:'A2',why:'sprechen mit talks with a person — mit + Dativ for accompaniment'},
+  {id:'helfen_bei',    verb:'helfen',             prep:'bei',   kase:'Dat', en:'to help with',             level:'A2',why:'helfen bei helps with an activity — bei + Dativ for assistance context'},
+  {id:'einladen_zu',   verb:'einladen',           prep:'zu',    kase:'Dat', en:'to invite to',             level:'A2',why:'einladen zu invites to an event — zu + Dativ for destination'},
+  {id:'fahren_mit',    verb:'fahren',             prep:'mit',   kase:'Dat', en:'to travel by',             level:'A2',why:'fahren mit travels by a vehicle — mit + Dativ for means of transport'},
+  {id:'arbeiten_als',  verb:'arbeiten',           prep:'als',   kase:'Nom', en:'to work as',               level:'A2',why:'arbeiten als works as a role — als + Nominativ for identity/role'},
+  {id:'freuen_auf',    verb:'sich freuen',        prep:'auf',   kase:'Akk', en:'to look forward to',      level:'B1',why:'freuen auf anticipates the future — auf + Akkusativ for forward-looking emotion'},
+  {id:'freuen_ueber',  verb:'sich freuen',        prep:'über',  kase:'Akk', en:'to be pleased about',     level:'B1',why:'freuen über is pleased about sth — über + Akkusativ for a reaction to an event'},
+  {id:'interessieren', verb:'sich interessieren', prep:'für',   kase:'Akk', en:'to be interested in',     level:'B1',why:'interessieren für shows interest in a field — für + Akkusativ for what attracts'},
+  {id:'aergern_ueber', verb:'sich ärgern',        prep:'über',  kase:'Akk', en:'to be annoyed about',     level:'B1',why:'ärgern über is annoyed about sth — über + Akkusativ for the cause of irritation'},
+  {id:'kuemmern_um',   verb:'sich kümmern',       prep:'um',    kase:'Akk', en:'to take care of',         level:'B1',why:'kümmern um takes care of s.o./sth — um + Akkusativ for the object of concern'},
+  {id:'bewerben_um',   verb:'sich bewerben',      prep:'um',    kase:'Akk', en:'to apply for',            level:'B1',why:'bewerben um applies for a position — um + Akkusativ for what is sought'},
+  {id:'gehoeren_zu',   verb:'gehören',            prep:'zu',    kase:'Dat', en:'to belong to',            level:'B1',why:'gehören zu belongs to a group — zu + Dativ for membership'},
+  {id:'bestehen_aus',  verb:'bestehen',           prep:'aus',   kase:'Dat', en:'to consist of',           level:'B1',why:'bestehen aus consists of components — aus + Dativ for composition'},
+  {id:'anfangen_mit',  verb:'anfangen',           prep:'mit',   kase:'Dat', en:'to start with',           level:'B1',why:'anfangen mit starts with an activity — mit + Dativ for what is begun'},
+  {id:'aufhoeren_mit', verb:'aufhören',           prep:'mit',   kase:'Dat', en:'to stop doing',           level:'B1',why:'aufhören mit stops an activity — mit + Dativ for what is ended'},
+  {id:'nachdenken',    verb:'nachdenken',         prep:'über',  kase:'Akk', en:'to reflect on',           level:'B1',why:'nachdenken über reflects on a topic — über + Akkusativ for the subject of thought'},
+  {id:'traeumen_von',  verb:'träumen',            prep:'von',   kase:'Dat', en:'to dream of',             level:'B1',why:'träumen von dreams of sth — von + Dativ for the content of dreams'},
+  {id:'gewoehnen_an',  verb:'sich gewöhnen',      prep:'an',    kase:'Akk', en:'to get used to',          level:'B2',why:'gewöhnen an gets used to sth — an + Akkusativ for the new normal'},
+  {id:'verlassen_auf', verb:'sich verlassen',     prep:'auf',   kase:'Akk', en:'to rely on',              level:'B2',why:'verlassen auf relies on s.o. — auf + Akkusativ for the source of trust'},
+  {id:'zweifeln_an',   verb:'zweifeln',           prep:'an',    kase:'Dat', en:'to doubt',                level:'B2',why:'zweifeln an doubts sth — an + Dativ for the object of doubt'},
+  {id:'leiden_unter',  verb:'leiden',             prep:'unter', kase:'Dat', en:'to suffer from',          level:'B2',why:'leiden unter suffers from a condition — unter + Dativ for the cause'},
+  {id:'verzichten_auf',verb:'verzichten',         prep:'auf',   kase:'Akk', en:'to give up',              level:'B2',why:'verzichten auf gives up sth — auf + Akkusativ for what is renounced'},
+  {id:'hinweisen_auf', verb:'hinweisen',          prep:'auf',   kase:'Akk', en:'to point out',            level:'B2',why:'hinweisen auf points out sth — auf + Akkusativ for what is indicated'},
+  {id:'einigen_auf',   verb:'sich einigen',       prep:'auf',   kase:'Akk', en:'to agree on',             level:'B2',why:'einigen auf agrees on sth — auf + Akkusativ for the agreed outcome'},
+  {id:'bestehen_auf',  verb:'bestehen',           prep:'auf',   kase:'Dat', en:'to insist on',            level:'B2',why:'bestehen auf insists on sth — auf + Dativ for the demanded condition'},
+  {id:'beitragen_zu',  verb:'beitragen',          prep:'zu',    kase:'Dat', en:'to contribute to',        level:'B2',why:'beitragen zu contributes to sth — zu + Dativ for the goal supported'},
+  {id:'beziehen_auf',  verb:'sich beziehen',      prep:'auf',   kase:'Akk', en:'to refer to',             level:'B2',why:'beziehen auf refers to sth — auf + Akkusativ for the reference point'},
+  {id:'reagieren_auf', verb:'reagieren',          prep:'auf',   kase:'Akk', en:'to react to',             level:'B2',why:'reagieren auf reacts to sth — auf + Akkusativ for the stimulus'},
+  {id:'verfuegen_ueber',verb:'verfügen',          prep:'über',  kase:'Akk', en:"to have at one's disposal",level:'B2',why:'verfügen über has sth at disposal — über + Akkusativ for what is possessed'},
+  {id:'appellieren_an',verb:'appellieren',        prep:'an',    kase:'Akk', en:'to appeal to',            level:'C1',why:'appellieren an appeals to a quality — an + Akkusativ for what is invoked'},
+  {id:'plaedieren_fuer',verb:'plädieren',         prep:'für',   kase:'Akk', en:'to argue for',            level:'C1',why:'plädieren für argues for sth — für + Akkusativ for what is advocated'},
+  {id:'abfinden_mit',  verb:'sich abfinden',      prep:'mit',   kase:'Dat', en:'to come to terms with',   level:'C1',why:'abfinden mit comes to terms with sth — mit + Dativ for the accepted situation'},
+  {id:'anknuepfen_an', verb:'anknüpfen',          prep:'an',    kase:'Akk', en:'to build on',             level:'C1',why:'anknüpfen an builds on sth existing — an + Akkusativ for the prior reference'},
+  {id:'ausgehen_von',  verb:'ausgehen',           prep:'von',   kase:'Dat', en:'to assume from',          level:'C1',why:'ausgehen von assumes a premise — von + Dativ for the starting assumption'},
+  {id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',        level:'C1',why:'auseinandersetzen mit engages critically with sth — mit + Dativ for the subject'},
+  {id:'beruhen_auf',   verb:'beruhen',            prep:'auf',   kase:'Dat', en:'to be based on',          level:'C1',why:'beruhen auf is based on sth — auf + Dativ for the foundation'},
+  {id:'einwirken_auf', verb:'einwirken',          prep:'auf',   kase:'Akk', en:'to influence',            level:'C1',why:'einwirken auf influences sth — auf + Akkusativ for the target'},
+  {id:'entscheiden_fuer',verb:'sich entscheiden', prep:'für',   kase:'Akk', en:'to decide for',           level:'C1',why:'entscheiden für decides in favour of sth — für + Akkusativ for the chosen option'},
+  {id:'richten_nach',  verb:'sich richten',       prep:'nach',  kase:'Dat', en:'to be guided by',         level:'C1',why:'richten nach is guided by sth — nach + Dativ for the standard followed'},
+  {id:'zurueckfuehren',verb:'zurückführen',       prep:'auf',   kase:'Akk', en:'to attribute to',         level:'C1',why:'zurückführen auf attributes sth to a cause — auf + Akkusativ for the cause'}
+];
+
+var PREP_DISTRACTORS = {
+  'auf':['an','für','über','nach','um'],'an':['auf','für','über','nach','bei'],
+  'für':['an','auf','über','zu','mit'],'über':['an','auf','für','nach','mit'],
+  'mit':['bei','von','zu','nach','unter'],'zu':['bei','mit','von','nach','für'],
+  'bei':['mit','von','nach','zu','für'],'nach':['bei','für','von','über','auf'],
+  'von':['bei','mit','nach','zu','über'],'um':['für','nach','auf','über','zu'],
+  'unter':['von','mit','bei','nach','in'],'als':['wie','für','mit','zu','bei']
+};
+
+var LVL_META = {A2:'A2 — Beginner',B1:'B1 — Intermediate',B2:'B2 — Upper Intermediate',C1:'C1 — Advanced'};
+
+// ── VERB REFERENCE ──
+function buildVerbRef() {
+  var body = document.getElementById('verbRefBody');
+  var html = '';
+  ['A2','B1','B2','C1'].forEach(function(lvl) {
+    var verbs = VERBS.filter(function(v){return v.level===lvl;});
+    html += '<div class="vref-group"><div class="vref-group-label">'+LVL_META[lvl]+'</div><div class="vref-grid">';
+    verbs.forEach(function(v){
+      html += '<div class="vref-pill">'
+            + '<span class="vp-verb">'+v.verb+'</span>'
+            + '<span class="vp-prep">'+v.prep+'</span>'
+            + '<span class="vp-case">+'+v.kase+'</span>'
+            + '<span class="vp-en">'+v.en+'</span>'
+            + '</div>';
+    });
+    html += '</div></div>';
+  });
+  body.innerHTML = html;
+}
+function toggleVerbRef() {
+  var ref=document.getElementById('verbRef'), open=ref.classList.toggle('open');
+  document.getElementById('toggleLabel').textContent = open?'Hide':'Show all';
+  document.getElementById('toggleIcon').textContent  = open?'↑':'↓';
+}
+
+// ── STORAGE ──
+var STORE_KEY = 'dk_praep_v1';
+function store(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch(e){return {};}}
+function storeSet(d){try{localStorage.setItem(STORE_KEY,JSON.stringify(d));}catch(e){}}
+function verbUpdate(id,ok){
+  var s=store();
+  if(!s[id])s[id]={attempts:0,correct:0};
+  s[id].attempts++; if(ok)s[id].correct++;
+  if(!s._meta)s._meta={sessions:0,totalAnswered:0,totalCorrect:0};
+  s._meta.totalAnswered++; if(ok)s._meta.totalCorrect++;
+  storeSet(s);
+}
+function metaIncrementSession(){var s=store();if(!s._meta)s._meta={sessions:0,totalAnswered:0,totalCorrect:0};s._meta.sessions++;storeSet(s);}
+function updateStartStats(){
+  var s=store(),m=s._meta||{sessions:0,totalAnswered:0,totalCorrect:0};
+  document.getElementById('smSessions').textContent=m.sessions;
+  document.getElementById('smTotal').textContent=m.totalAnswered;
+  document.getElementById('smAccuracy').textContent=m.totalAnswered>0?Math.round(m.totalCorrect/m.totalAnswered*100)+'%':'—';
+}
+
+// ── WEIGHTED PICK ──
+function pickWeightedVerbs(pool,count){
+  var s=store();
+  var w=pool.map(function(v){
+    var r=s[v.id]||{attempts:0,correct:0},wt=1;
+    if(!r.attempts)wt=3;
+    else{var wr=1-(r.correct/r.attempts);if(wr>=.5)wt=5;else if(wr>=.25)wt=3;}
+    return{verb:v,weight:wt};
+  });
+  var total=w.reduce(function(s,x){return s+x.weight;},0);
+  var picked=[],lastId=null;
+  for(var i=0;i<count;i++){
+    var chosen=null,tries=0;
+    while(tries++<50){
+      var rng=Math.random()*total;
+      for(var j=0;j<w.length;j++){rng-=w[j].weight;if(rng<=0){chosen=w[j].verb;break;}}
+      if(!chosen)chosen=w[0].verb;
+      if(chosen.id!==lastId)break;
+    }
+    picked.push(chosen); lastId=chosen.id;
+  }
+  return picked;
+}
+
+// ── GET A QUESTION FOR A VERB (from pre-baked bank, never repeats same sentence back-to-back) ──
+var usedIndices = {};
+function getQuestion(verbObj) {
+  var pool = QUESTIONS[verbObj.id];
+  if (!pool || !pool.length) return null;
+  var used = usedIndices[verbObj.id] || [];
+  // Reset if all used
+  if (used.length >= pool.length) { used = []; }
+  // Pick a random unused index
+  var available = [];
+  for (var i=0; i<pool.length; i++) { if (used.indexOf(i) === -1) available.push(i); }
+  var pick = available[Math.floor(Math.random() * available.length)];
+  used.push(pick);
+  usedIndices[verbObj.id] = used;
+  return pool[pick];
+}
+
+// ── BUILD OPTIONS ──
+// correctAnswer is now just the preposition (article already in sentence)
+// or "prep article" for cases where article is NOT in the sentence
+function buildOptions(verbObj, correctAnswer) {
+  var prep = verbObj.prep;
+  var wrongPreps = (PREP_DISTRACTORS[prep] || ['an','auf','für','über']).slice(0, 4);
+  var seen = {};
+  seen[correctAnswer.toLowerCase()] = true;
+  var dists = [];
+
+  // Check if correct answer is just a preposition or has an article too
+  var correctParts = correctAnswer.trim().split(' ');
+  var justPrep = correctParts.length === 1;
+
+  if (justPrep) {
+    // Options are just prepositions
+    for (var i = 0; i < wrongPreps.length && dists.length < 4; i++) {
+      var wp = wrongPreps[i];
+      if (!seen[wp.toLowerCase()]) { seen[wp.toLowerCase()] = true; dists.push(wp); }
+    }
+    // Extra fallbacks
+    var extras = ['in','durch','gegen','ohne','wegen'];
+    for (var i = 0; dists.length < 4 && i < extras.length; i++) {
+      if (!seen[extras[i]]) { seen[extras[i]] = true; dists.push(extras[i]); }
+    }
+  } else {
+    // correctAnswer has an article — build options with prep+article
+    var cPrep = correctParts[0], cArt = correctParts.slice(1).join(' ');
+    var kase = verbObj.kase;
+    var caseArts = kase === 'Dat' ? ['den','die','das','der'] : ['dem','der','des','eine'];
+    for (var i = 0; i < caseArts.length && dists.length < 2; i++) {
+      var o = cPrep + ' ' + caseArts[i];
+      if (!seen[o.toLowerCase()]) { seen[o.toLowerCase()] = true; dists.push(o); }
+    }
+    for (var i = 0; i < wrongPreps.length && dists.length < 4; i++) {
+      var a = kase === 'Dat' ? cArt : (cArt === 'den' ? 'die' : 'den');
+      var o1 = wrongPreps[i] + ' ' + a;
+      if (!seen[o1.toLowerCase()]) { seen[o1.toLowerCase()] = true; dists.push(o1); }
+    }
+  }
+
+  var arr = [correctAnswer].concat(dists).slice(0, 5);
+  while (arr.length < 5) { arr.push(wrongPreps[arr.length % wrongPreps.length] || 'in'); }
+  arr = arr.slice(0, 5);
+  // Shuffle
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+
+// ── STATE ──
+var selectedLevel='all', sessionQueue=[], sessionIdx=0, sessionResults=[], currentQuestion=null, answered=false, sessionId=0;
+var SESSION_SIZE=20;
+
+// ── LEVEL PICKER ──
+document.getElementById('levelGrid').addEventListener('click',function(e){
+  var btn=e.target.closest('.lvl-btn'); if(!btn)return;
+  var l=btn.dataset.l;
+  if(l==='all'){
+    selectedLevel='all';
+    document.querySelectorAll('.lvl-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+  } else {
+    document.querySelector('.lvl-btn[data-l="all"]').classList.remove('active');
+    btn.classList.toggle('active');
+    var active=Array.from(document.querySelectorAll('.lvl-btn.active')).map(function(b){return b.dataset.l;}).filter(function(x){return x!=='all';});
+    selectedLevel=active.length?active:'all';
+  }
+});
+function getVerbPool(){
+  if(selectedLevel==='all')return VERBS;
+  if(Array.isArray(selectedLevel)&&selectedLevel.includes('all'))return VERBS;
+  var ls=Array.isArray(selectedLevel)?selectedLevel:[selectedLevel];
+  return VERBS.filter(function(v){return ls.indexOf(v.level)>-1;});
+}
+
+// ── SESSION ──
+function startSession(){
+  var pool=getVerbPool();
+  if(!pool.length){showToast('No verbs for this level!');return;}
+  metaIncrementSession();
+  sessionId=Date.now(); sessionQueue=pickWeightedVerbs(pool,SESSION_SIZE);
+  sessionIdx=0; sessionResults=[]; answered=false;
+  document.getElementById('startScreen').style.display='none';
+  document.getElementById('verbRef').style.display='none';
+  document.getElementById('completeScreen').style.display='none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display='flex';
+  document.getElementById('quizCard').style.display='block';
+  updateProgressBar(); loadQuestion(sessionQueue[0]);
+}
+
+function nextQuestion(){
+  sessionIdx++;
+  if(sessionIdx>=SESSION_SIZE){showComplete();return;}
+  document.getElementById('quizCard').className='quiz-card';
+  answered=false;
+  document.getElementById('nextBtn').classList.remove('visible');
+  document.getElementById('feedbackRow').classList.remove('visible');
+  updateProgressBar(); loadQuestion(sessionQueue[sessionIdx]);
+}
+
+function loadQuestion(verbObj){
+  currentQuestion=null;
+  document.getElementById('tagLevel').textContent=verbObj.level;
+  var q=getQuestion(verbObj);
+  if(!q){showToast('No question found, skipping');answered=true;document.getElementById('nextBtn').classList.add('visible');return;}
+  var options=buildOptions(verbObj,q.correct);
+  currentQuestion={verbObj:verbObj,q:q,options:options};
+  renderQuestion();
+}
+
+function renderQuestion(){
+  var q=currentQuestion.q, options=currentQuestion.options;
+  var parts=q.sentence.split('___');
+  var el=document.getElementById('sentenceDisplay');
+  if(parts.length>=2){
+    el.innerHTML=escHtml(parts[0])+'<span class="blank" id="blankEl">___</span>'+escHtml(parts.slice(1).join('___'));
+  } else {
+    el.textContent=q.sentence;
+  }
+  var grid=document.getElementById('optionsGrid');
+  grid.innerHTML='';
+  options.forEach(function(opt){
+    var btn=document.createElement('button');
+    btn.className='option-btn'; btn.textContent=opt;
+    btn.addEventListener('click',function(){selectOption(opt,btn);});
+    grid.appendChild(btn);
+  });
+  document.getElementById('feedbackRow').classList.remove('visible');
+  document.getElementById('nextBtn').classList.remove('visible');
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function selectOption(chosen,btn){
+  if(answered)return; answered=true;
+  var verbObj=currentQuestion.verbObj, q=currentQuestion.q;
+  var correct=q.correct;
+  var ok=chosen.trim().toLowerCase()===correct.trim().toLowerCase();
+  var bl=document.getElementById('blankEl');
+  if(bl){bl.textContent=chosen;bl.className='blank '+(ok?'reveal-correct':'reveal-wrong');}
+  document.querySelectorAll('.option-btn').forEach(function(b){
+    b.disabled=true;
+    if(b.textContent.trim().toLowerCase()===correct.trim().toLowerCase())b.classList.add('opt-correct');
+    else if(b===btn&&!ok)b.classList.add('opt-wrong');
+  });
+  document.getElementById('quizCard').classList.add(ok?'correct':'wrong');
+  var fb=document.getElementById('feedbackRow');
+  fb.classList.add('visible');
+  document.getElementById('fbIcon').textContent = ok ? '✓' : '✗';
+  var why = verbObj.why || '';
+  var wrongHtml = '<strong>Falsch.</strong> Correct: <strong>' + correct + '</strong>';
+  if (why) { wrongHtml += '<br><span class="why-text">' + why + '</span>'; }
+  document.getElementById('fbText').innerHTML = ok ? '<strong>Richtig!</strong>' : wrongHtml;
+  verbUpdate(verbObj.id,ok);
+  sessionResults.push({id:verbObj.id,correct:ok});
+  document.getElementById('scoreCorrect').textContent=sessionResults.filter(function(r){return r.correct;}).length;
+  document.getElementById('scoreWrong').textContent=sessionResults.filter(function(r){return !r.correct;}).length;
+  document.getElementById('nextBtn').classList.add('visible');
+}
+
+function updateProgressBar(){
+  document.getElementById('progFill').style.width=Math.round(sessionIdx/SESSION_SIZE*100)+'%';
+  document.getElementById('qIdx').textContent=sessionIdx+1;
+  document.getElementById('qTotal').textContent=SESSION_SIZE;
+}
+
+function showComplete(){
+  document.getElementById('progressArea').style.display='none';
+  document.getElementById('quizCard').style.display='none';
+  var corr=sessionResults.filter(function(r){return r.correct;}).length;
+  var pct=Math.round(corr/SESSION_SIZE*100);
+  document.getElementById('cCorrect').textContent=corr;
+  document.getElementById('cWrong').textContent=SESSION_SIZE-corr;
+  document.getElementById('cPct').textContent=pct+'%';
+  var e,t,s;
+  if(pct>=90){e='🏆';t='Ausgezeichnet!';s=pct+'% — mastered!';}
+  else if(pct>=70){e='🎉';t='Sehr gut!';s=pct+'% — great work.';}
+  else if(pct>=50){e='📚';t='Gut gemacht!';s=pct+'% — keep practising.';}
+  else{e='💪';t='Weiter üben!';s=pct+'% — next session drills your weak spots.';}
+  document.getElementById('completeEmoji').textContent=e;
+  document.getElementById('completeTitle').textContent=t;
+  document.getElementById('completeSub').textContent=s;
+  buildWeakList(); updateStartStats();
+  var sc=document.getElementById('completeScreen');
+  sc.style.display='flex'; sc.classList.add('visible');
+}
+
+function buildWeakList(){
+  var s=store(), seen=[], container=document.getElementById('weakList');
+  sessionResults.forEach(function(r){if(seen.indexOf(r.id)===-1)seen.push(r.id);});
+  var stats=seen.map(function(id){
+    var r=s[id]||{attempts:0,correct:0};
+    var verb=VERBS.filter(function(v){return v.id===id;})[0];
+    var rate=r.attempts?Math.round(r.correct/r.attempts*100):0;
+    return{id:id,verb:verb,rate:rate};
+  }).sort(function(a,b){return a.rate-b.rate;});
+  var weak=stats.filter(function(x){return x.rate<75;});
+  if(!weak.length){container.innerHTML='<div class="no-weak-msg">No weak areas this session</div>';return;}
+  container.innerHTML='<h3>Focus areas for next session</h3>';
+  weak.slice(0,6).forEach(function(item){
+    if(!item.verb)return;
+    container.innerHTML+='<div class="weak-item"><span class="weak-verb">'+item.verb.verb+' <strong style="color:var(--g2)">'+item.verb.prep+'</strong> <span class="weak-verb-en">('+item.verb.en+')</span></span><span class="weak-rate">'+item.rate+'%</span></div>';
+  });
+}
+
+function showStart(){
+  document.getElementById('completeScreen').style.display='none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  document.getElementById('progressArea').style.display='none';
+  document.getElementById('quizCard').style.display='none';
+  document.getElementById('startScreen').style.display='flex';
+  document.getElementById('verbRef').style.display='block';
+  updateStartStats();
+}
+
+// ── KEYBOARD ──
+document.addEventListener('keydown',function(e){
+  if(!answered){
+    var n=parseInt(e.key);
+    if(n>=1&&n<=5){var btns=document.querySelectorAll('.option-btn:not(:disabled)');if(btns[n-1])btns[n-1].click();}
+    return;
+  }
+  if((e.key===' '||e.key==='Enter')&&document.getElementById('nextBtn').classList.contains('visible')){e.preventDefault();nextQuestion();}
+});
+
+// ── TOAST ──
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},2200);
+}
+
+buildVerbRef();
+updateStartStats();
+</script>
+</body>
+</html>

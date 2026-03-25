@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starke Verben – DeutschKarten</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ── Surfaces ── */
+  --bg:   #080808;
+  --s1:   #0f0f0f;
+  --s2:   #161616;
+  --s3:   #1e1e1e;
+  --s4:   #242424;
+
+  /* ── Greyscale ── */
+  --g1:   #f0f0f0;
+  --g2:   #909090;
+  --g3:   #484848;
+  --g4:   #303030;
+
+  /* ── Semantic aliases ── */
+  --surface:   var(--s1);
+  --surface2:  var(--s2);
+  --surface3:  var(--s3);
+  --border:    var(--g4);
+  --border2:   var(--g3);
+  --text:      var(--g1);
+  --text2:     var(--g2);
+  --text3:     var(--g3);
+  --ink:       var(--g1);
+  --ink2:      var(--g2);
+  --ink3:      var(--g3);
+
+  /* ── Spacing scale (4px base) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* ── Typography ── */
+  --font-sans:  'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.65rem;   /* 10.4px — labels, badges */
+  --text-sm:   0.75rem;   /* 12px   — secondary text */
+  --text-base: 0.875rem;  /* 14px   — body */
+  --text-md:   1rem;      /* 16px   — UI text */
+  --text-lg:   1.25rem;   /* 20px   — card headings */
+  --text-xl:   1.5rem;    /* 24px   — section headings */
+  --text-2xl:  2rem;      /* 32px   — display */
+  --text-3xl:  2.8rem;    /* 44px   — hero */
+
+  /* ── Border radius ── */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.7);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.6), 0 16px 40px rgba(0,0,0,0.5);
+
+  /* ── Glow (monochrome white) ── */
+  --glow-xs:  0 0 8px  rgba(255,255,255,0.04);
+  --glow-sm:  0 0 16px rgba(255,255,255,0.06);
+  --glow-md:  0 0 28px rgba(255,255,255,0.08);
+
+  /* ── Transitions ── */
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast:     100ms;
+  --t-base:     160ms;
+  --t-slow:     280ms;
+
+  /* ── Layout ── */
+  --topbar-h:   52px;
+  --card-max:   600px;
+  --page-max:   860px;
+
+  /* ── Keep old names pointing to new tokens (backward compat) ── */
+  --surf:    var(--s1);
+  --surf2:   var(--s2);
+  --surf3:   var(--s3);
+  --sf2:     var(--s2);
+  --sf3:     var(--s3);
+  --bord:    var(--g4);
+  --bord2:   var(--g3);
+  --rule:    var(--g4);
+  --rule2:   var(--g3);
+  --ln2:     var(--g3);
+  --line:    var(--g4);
+  --glow:    var(--glow-sm);
+  --glow-sm: 0 0 16px rgba(255,255,255,0.06);
+
+  /* ── Activity-specific (keep for derdiedas, old level vars) ── */
+  --der:  var(--g1); --derd: var(--s2);
+  --die:  var(--g2); --died: var(--s2);
+  --das:  var(--g2); --dasd: var(--s2);
+  --a1: var(--g1); --a1d: var(--s2); --a1m: rgba(255,255,255,0.04);
+  --a2: var(--g1); --a2d: var(--s2); --a2m: rgba(255,255,255,0.04);
+  --b1: var(--g1); --b1d: var(--s2); --b1m: rgba(255,255,255,0.04);
+  --b2: var(--g1); --b2d: var(--s2); --b2m: rgba(255,255,255,0.04);
+  --c1: var(--g1); --c1d: var(--s2); --c1m: rgba(255,255,255,0.04);
+  --amber: var(--g1); --amberd: var(--s2);
+  --accent: var(--g1); --accentd: var(--s2);
+  --lvl: var(--g1); --lvld: var(--s2); --lvlm: rgba(255,255,255,0.04);
+  --green:   var(--g1); --greend: var(--s2);
+  --red:     var(--g2); --redd:   var(--s2);
+  --gold:    var(--g1); --goldd:  var(--s2);
+  --silver:  var(--g2);
+  --bronze:  var(--g3);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--g1);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font-family: inherit; }
+
+/* ── Focus ring — accessibility ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--g4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--g3); }
+
+/* ── Topbar — shared across all pages ── */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  border-bottom: 1px solid var(--g4);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.logo {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  transition: opacity var(--t-base) var(--ease);
+  user-select: none;
+}
+.logo:hover { opacity: 0.6; }
+.logo-slash {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--g3);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── Back link / nav buttons — universal ── */
+.back-link, .nav-btn, .back-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--g3);
+  text-decoration: none;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xs);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.back-link:hover, .nav-btn:hover, .back-btn:hover {
+  color: var(--g1);
+  border-color: var(--g3);
+  box-shadow: var(--glow-sm);
+}
+:is(.back-link, .nav-btn, .back-btn):focus-visible {
+  outline: 2px solid var(--g2);
+  outline-offset: 2px;
+}
+
+/* ── Primary button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.6rem;
+  background: var(--g1);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: opacity var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.btn-primary:hover {
+  opacity: 0.88;
+  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: scale(0.97); opacity: 0.8; }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  color: var(--g2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.btn-ghost:hover { color: var(--g1); border-color: var(--g3); box-shadow: var(--glow-sm); }
+.btn-ghost:active { transform: scale(0.97); }
+.btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── Card surface ── */
+.card {
+  background: var(--s1);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+}
+
+/* ── Input ── */
+.input {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--g1);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+.input:focus {
+  border-color: var(--g3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+}
+.input::placeholder { color: var(--g3); }
+.input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Progress bar ── */
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--g4);
+  overflow: hidden;
+  border-radius: 1px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--g1);
+  border-radius: 1px;
+  transition: width 0.4s var(--ease);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: var(--sp-8);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--s2);
+  border: 1px solid var(--g4);
+  border-radius: var(--r-sm);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--g2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  transition: opacity var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{
+  background:var(--bg);
+  color:var(--g1);
+  font-family:'Bricolage Grotesque',sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  height:52px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.8rem;border-bottom:1px solid var(--g4);background:var(--bg);
+  position:sticky;top:0;z-index:100;flex-shrink:0;
+}
+.logo{font-size:1.05rem;font-weight:800;letter-spacing:-.05em;color:var(--g1);
+  text-decoration:none;transition:opacity .2s}
+.logo:hover{opacity:.6}
+.logo-slash{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--g3);
+  font-weight:400;margin-left:8px}
+.back-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--g3);
+  text-decoration:none;padding:5px 10px;border:1px solid var(--g4);border-radius:var(--r1);
+  transition:color .15s,border-color .15s,box-shadow .2s}
+.back-link:hover{color:var(--g1);border-color:var(--g3);box-shadow:var(--glow-sm)}
+
+/* ── MAIN ── */
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem 4rem;gap:1.2rem}
+
+/* ── MODE SELECTOR ── */
+.mode-bar{
+  width:100%;max-width:680px;
+  display:flex;gap:.35rem;
+  background:var(--s1);border:1px solid var(--g4);border-radius:var(--r2);
+  padding:.4rem;
+}
+.mode-btn{
+  flex:1;padding:.45rem .5rem;border-radius:var(--r1);border:none;
+  background:transparent;font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;font-weight:500;letter-spacing:.05em;
+  color:var(--g3);cursor:pointer;transition:background .15s,color .15s,box-shadow .2s;
+  text-align:center;
+}
+.mode-btn:hover{color:var(--g2);background:var(--s2)}
+.mode-btn.active{background:var(--s2);color:var(--g1);box-shadow:var(--glow-sm)}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  width:100%;max-width:680px;
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+}
+.filter-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--g3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.search-input{
+  flex:1;min-width:160px;background:var(--s1);border:1px solid var(--g4);border-radius:var(--r1);
+  padding:.38rem .75rem;font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;
+  color:var(--g1);outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.search-input::placeholder{color:var(--g3)}
+.search-input:focus{border-color:var(--g3);box-shadow:var(--glow-sm)}
+.count-pill{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--g3);
+  border:1px solid var(--g4);border-radius:var(--r1);padding:2px 7px;white-space:nowrap}
+
+/* ── NEEDS PRACTICE CHIP ── */
+.practice-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;
+  color:var(--g3);border:1px solid var(--g4);border-radius:var(--r1);
+  padding:2px 7px;cursor:pointer;transition:color .15s,border-color .15s,box-shadow .2s;
+  white-space:nowrap;background:transparent;
+}
+.practice-chip:hover{color:var(--g2);border-color:var(--g3);box-shadow:var(--glow-sm)}
+.practice-chip.active{color:var(--g1);border-color:var(--g2);background:var(--s2)}
+.practice-badge{
+  background:var(--g3);color:var(--g1);border-radius:3px;
+  padding:0 4px;font-size:.55rem;font-weight:700;min-width:14px;text-align:center;
+}
+
+/* ── PROGRESS ── */
+.progress-area{width:100%;max-width:680px;display:flex;flex-direction:column;gap:.4rem}
+.progress-meta{display:flex;justify-content:space-between;align-items:center}
+.progress-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--g3)}
+.progress-label strong{color:var(--g2)}
+.score-row{font-family:'JetBrains Mono',monospace;font-size:.63rem;display:flex;gap:1rem}
+.sc-correct{color:var(--g2)}
+.sc-wrong{color:var(--g3)}
+.progress-bar{width:100%;height:2px;background:var(--g4);overflow:hidden}
+.progress-fill{height:100%;background:var(--g1);transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+/* ── FLASH CARD ── */
+.card-wrap{width:100%;max-width:680px}
+.flash-card{
+  background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);
+  padding:2.2rem 2.5rem 2rem;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);
+  transition:border-color .25s,box-shadow .3s;
+  cursor:pointer;user-select:none;
+}
+.flash-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  border-radius:var(--r4) var(--r4) 0 0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+}
+.flash-card:hover{border-color:var(--g3);box-shadow:0 0 30px rgba(255,255,255,.05),0 20px 50px rgba(0,0,0,.55)}
+
+.card-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--g3);margin-bottom:1.6rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.card-eyebrow-dot{width:4px;height:4px;border-radius:50%;background:var(--g3);flex-shrink:0}
+
+/* The German word — huge */
+.card-infinitiv{
+  font-size:clamp(2rem,7vw,3.5rem);font-weight:800;letter-spacing:-.05em;
+  color:var(--g1);line-height:1;margin-bottom:.5rem;
+}
+.card-meaning{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:1rem;color:var(--g2);margin-bottom:2rem;
+}
+.card-flip-hint{
+  position:absolute;bottom:1rem;right:1.4rem;
+  font-size:.58rem;font-family:'JetBrains Mono',monospace;color:var(--g4);
+}
+
+/* Answer area (shown after flip) */
+.answer-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem;
+  margin-top:1.5rem;padding-top:1.5rem;
+  border-top:1px solid var(--g4);
+}
+.answer-col{display:flex;flex-direction:column;gap:.2rem}
+.answer-col-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--g3);margin-bottom:.1rem}
+.answer-col-value{font-size:1rem;font-weight:700;letter-spacing:-.02em;color:var(--g1)}
+.answer-col-sub{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--g3)}
+.answer-hidden{filter:blur(6px);transition:filter .25s;cursor:pointer}
+.answer-hidden.revealed{filter:none}
+
+/* ── QUIZ MODE ── */
+.quiz-card{
+  background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);
+  padding:2rem 2.2rem 1.8rem;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);
+  transition:border-color .25s;
+}
+.quiz-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  border-radius:var(--r4) var(--r4) 0 0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
+}
+.quiz-card.correct{border-color:var(--g2)}
+.quiz-card.wrong{border-color:var(--g3)}
+
+.quiz-prompt-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--g3);margin-bottom:.5rem}
+.quiz-prompt-word{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;letter-spacing:-.05em;
+  color:var(--g1);margin-bottom:.3rem}
+.quiz-prompt-meaning{font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:.9rem;color:var(--g2);margin-bottom:1.6rem}
+
+.quiz-input-row{display:flex;flex-direction:column;gap:.7rem}
+.quiz-field{display:flex;flex-direction:column;gap:.25rem}
+.quiz-field label{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+.quiz-input{
+  background:var(--s2);border:1px solid var(--g4);border-radius:var(--r1);
+  padding:.55rem .85rem;font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1rem;font-weight:600;color:var(--g1);outline:none;
+  transition:border-color .15s,box-shadow .15s;width:100%;
+}
+.quiz-input:focus{border-color:var(--g3);box-shadow:var(--glow-sm)}
+.quiz-input.inp-correct{border-color:var(--g2);background:rgba(255,255,255,.03)}
+.quiz-input.inp-wrong{border-color:var(--g3)}
+.quiz-input.inp-wrong + .field-answer{display:block}
+.field-answer{display:none;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--g2);margin-top:.15rem;padding-left:.1rem}
+
+.quiz-submit{
+  margin-top:.5rem;padding:.65rem 1.8rem;border-radius:var(--r2);
+  background:var(--g1);color:var(--bg);border:none;
+  font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;
+  cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s;
+  letter-spacing:-.02em;align-self:flex-start;
+}
+.quiz-submit:hover{opacity:.85;box-shadow:0 0 20px rgba(255,255,255,.12);transform:translateY(-1px)}
+.quiz-submit:active{transform:scale(.97)}
+
+.feedback-row{
+  display:flex;align-items:flex-start;gap:.7rem;padding:.8rem .95rem;
+  border-radius:var(--r2);font-size:.82rem;margin-top:.9rem;
+  opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;
+  border:1px solid var(--g4);background:rgba(255,255,255,.02);
+}
+.feedback-row.visible{opacity:1;transform:translateY(0)}
+.feedback-row.fb-wrong{border-color:var(--g3)}
+.feedback-row.fb-correct{border-color:var(--g3)}
+.fb-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
+.fb-text strong{color:var(--g1)}
+.fb-text em{font-family:'DM Serif Display',serif;font-size:.9rem;color:var(--g2)}
+
+/* ── ACTION ROW ── */
+.action-row{
+  width:100%;max-width:680px;
+  display:grid;grid-template-columns:42px 1fr 1fr 42px;gap:.5rem;
+}
+.icon-btn{
+  width:42px;height:42px;border-radius:var(--r2);border:1px solid var(--g4);
+  background:var(--s1);color:var(--g3);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;font-size:.95rem;
+  transition:border-color .15s,color .15s,box-shadow .2s;
+}
+.icon-btn:hover{border-color:var(--g2);color:var(--g1);box-shadow:var(--glow-sm)}
+.icon-btn:active{opacity:.6;transform:scale(.95)}
+.act-btn{
+  height:42px;border-radius:var(--r2);border:1px solid var(--g4);background:var(--s1);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:border-color .15s,color .15s,box-shadow .2s;
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  color:var(--g2);
+}
+.act-btn:hover{border-color:var(--g2);color:var(--g1);box-shadow:var(--glow-sm)}
+.act-btn:active{transform:scale(.97)}
+.act-btn.marked{background:var(--s2);border-color:var(--g2);color:var(--g1)}
+
+/* ── TABLE MODE ── */
+.table-wrap{width:100%;max-width:860px;overflow-x:auto}
+.verb-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.verb-table th{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--g3);padding:.6rem 1rem;
+  text-align:left;border-bottom:1px solid var(--g4);background:var(--s1);
+  position:sticky;top:52px;
+}
+.verb-table td{
+  padding:.55rem 1rem;border-bottom:1px solid var(--g4);
+  vertical-align:middle;transition:background .12s;
+}
+.verb-table tr:hover td{background:var(--s2)}
+.verb-table .col-inf{font-weight:700;color:var(--g1);font-size:.9rem}
+.verb-table .col-3p{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--g3)}
+.verb-table .col-prat{color:var(--g2)}
+.verb-table .col-aux{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--g3)}
+.verb-table .col-p2{color:var(--g2)}
+.verb-table .col-en{font-family:'DM Serif Display',serif;font-style:italic;color:var(--g3);font-size:.82rem}
+
+/* ── COMPLETE ── */
+.complete-screen{
+  width:100%;max-width:680px;background:var(--s1);border:1px solid var(--g4);
+  border-radius:var(--r4);padding:2.5rem 2.2rem 2rem;text-align:center;
+  display:none;flex-direction:column;align-items:center;gap:1.4rem;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);
+}
+.complete-screen.visible{display:flex}
+.complete-emoji{font-size:2.4rem;line-height:1}
+.complete-title{font-size:1.5rem;font-weight:800;letter-spacing:-.05em;color:var(--g1)}
+.complete-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:.95rem;color:var(--g2);line-height:1.65}
+.complete-stats{display:flex;gap:3rem;padding:1rem 0;border-top:1px solid var(--g4);border-bottom:1px solid var(--g4);width:100%;justify-content:center}
+.c-val{font-size:1.7rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.2rem;color:var(--g1)}
+.c-lbl{font-size:.57rem;font-family:'JetBrains Mono',monospace;color:var(--g3);letter-spacing:.1em;text-transform:uppercase}
+.complete-btns{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{padding:.62rem 1.7rem;border-radius:var(--r2);background:var(--g1);color:var(--bg);
+  border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;
+  cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s}
+.btn-primary:hover{opacity:.85;box-shadow:0 0 20px rgba(255,255,255,.12);transform:translateY(-1px)}
+.btn-ghost{padding:.62rem 1.3rem;border-radius:var(--r2);background:transparent;color:var(--g2);
+  border:1px solid var(--g4);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+  font-size:.85rem;cursor:pointer;transition:border-color .15s,color .15s,box-shadow .2s}
+.btn-ghost:hover{border-color:var(--g3);color:var(--g1);box-shadow:var(--glow-sm)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(12px);
+  background:var(--s2);border:1px solid var(--g4);border-radius:var(--r1);
+  padding:.42rem .9rem;font-size:.68rem;color:var(--g2);
+  font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity .22s,transform .22s;
+  pointer-events:none;z-index:200;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:560px){
+  .topbar{padding:0 1rem}
+  main{padding:1.2rem 1rem 3rem}
+  .flash-card,.quiz-card{padding:1.5rem 1.2rem 1.2rem}
+  .action-row{grid-template-columns:38px 1fr 1fr 38px}
+  .answer-grid{grid-template-columns:1fr 1fr}
+  .verb-table th,.verb-table td{padding:.45rem .6rem;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="app.html" class="logo">
+    DeutschKarten
+    <span class="logo-slash">/ Starke Verben</span>
+  </a>
+  <a href="app.html" class="back-link">← Flashcards</a>
+</header>
+
+<main id="mainArea">
+
+  <!-- MODE SELECTOR -->
+  <div class="mode-bar" id="modeBar">
+    <button class="mode-btn active" onclick="setMode('flash')" id="modeFlash">⟳ Flashcards</button>
+    <button class="mode-btn" onclick="setMode('quiz')"  id="modeQuiz">✎ Quiz</button>
+    <button class="mode-btn" onclick="setMode('table')" id="modeTable">☰ Reference</button>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Filter:</span>
+    <input class="search-input" id="searchInput" placeholder="Search verb or meaning…" oninput="applyFilter()">
+    <span class="count-pill" id="countPill">96 verbs</span>
+    <button class="practice-chip" id="practiceChip" onclick="togglePracticeMode()" style="display:none">
+      🔁 Needs Practice <span class="practice-badge" id="practiceBadge">0</span>
+    </button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-area" id="progressArea">
+    <div class="progress-meta">
+      <div class="progress-label"><strong id="progIdx">1</strong> / <strong id="progTotal">96</strong></div>
+      <div class="score-row">
+        <span class="sc-correct">✓ <span id="scoreCorrect">0</span></span>
+        <span class="sc-wrong">✗ <span id="scoreWrong">0</span></span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- FLASH CARD -->
+  <div class="card-wrap" id="flashWrap">
+    <div class="flash-card" id="flashCard" onclick="toggleReveal()">
+      <div class="card-eyebrow"><span class="card-eyebrow-dot"></span><span id="fcEyebrow">Infinitiv</span></div>
+      <div class="card-infinitiv" id="fcInfinitiv">—</div>
+      <div class="card-meaning" id="fcMeaning">—</div>
+      <div class="answer-grid" id="fcAnswer">
+        <div class="answer-col">
+          <div class="answer-col-label">3. Pers. Präs.</div>
+          <div class="answer-col-value answer-hidden" id="fc3p">—</div>
+        </div>
+        <div class="answer-col">
+          <div class="answer-col-label">Präteritum</div>
+          <div class="answer-col-value answer-hidden" id="fcPrat">—</div>
+          <div class="answer-col-sub answer-hidden" id="fcAux">—</div>
+        </div>
+        <div class="answer-col">
+          <div class="answer-col-label">Partizip II</div>
+          <div class="answer-col-value answer-hidden" id="fcP2">—</div>
+        </div>
+      </div>
+      <div class="card-flip-hint">tap to reveal</div>
+    </div>
+  </div>
+
+  <!-- FLASH ACTION ROW -->
+  <div class="action-row" id="flashActions">
+    <button class="icon-btn" onclick="prevCard()" title="Previous">←</button>
+    <button class="act-btn" id="btnWrong" onclick="markCard(false)">✗ Still learning</button>
+    <button class="act-btn" id="btnKnow"  onclick="markCard(true)">✓ Know it</button>
+    <button class="icon-btn" onclick="shuffleCards()" title="Shuffle">⇄</button>
+  </div>
+
+  <!-- QUIZ CARD -->
+  <div class="quiz-card" id="quizCard" style="display:none">
+    <div class="quiz-prompt-label" id="qPromptLabel">Give the forms for:</div>
+    <div class="quiz-prompt-word" id="qWord">—</div>
+    <div class="quiz-prompt-meaning" id="qMeaning">—</div>
+
+    <div class="quiz-input-row" id="qInputRow">
+      <div class="quiz-field" id="q3pField">
+        <label>3. Pers. Präsens</label>
+        <input class="quiz-input" id="q3pInput" placeholder="er/sie/es …" autocomplete="off" spellcheck="false">
+        <div class="field-answer" id="q3pAnswer"></div>
+      </div>
+      <div class="quiz-field">
+        <label>Präteritum</label>
+        <input class="quiz-input" id="qPratInput" placeholder="er/sie/es …" autocomplete="off" spellcheck="false">
+        <div class="field-answer" id="qPratAnswer"></div>
+      </div>
+      <div class="quiz-field">
+        <label>Partizip II</label>
+        <input class="quiz-input" id="qP2Input" placeholder="ge…" autocomplete="off" spellcheck="false">
+        <div class="field-answer" id="qP2Answer"></div>
+      </div>
+      <button class="quiz-submit" id="qSubmit" onclick="submitQuiz()">Check →</button>
+    </div>
+
+    <div class="feedback-row" id="qFeedback">
+      <span class="fb-icon" id="qFbIcon"></span>
+      <span class="fb-text" id="qFbText"></span>
+    </div>
+  </div>
+
+  <!-- QUIZ ACTION ROW -->
+  <div class="action-row" id="quizActions" style="display:none">
+    <button class="icon-btn" onclick="prevCard()">←</button>
+    <button class="act-btn" id="qBtnNext" onclick="nextCard()" style="grid-column:2/4">Next →</button>
+    <button class="icon-btn" onclick="shuffleCards()">⇄</button>
+  </div>
+
+  <!-- TABLE MODE -->
+  <div class="table-wrap" id="tableWrap" style="display:none">
+    <table class="verb-table" id="verbTable">
+      <thead>
+        <tr>
+          <th>Infinitiv</th>
+          <th>3. P. Präs.</th>
+          <th>Präteritum</th>
+          <th>Aux</th>
+          <th>Partizip II</th>
+          <th>English</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- COMPLETE -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-emoji" id="cEmoji">🏆</div>
+    <div class="complete-title" id="cTitle">Deck complete!</div>
+    <div class="complete-sub" id="cSub"></div>
+    <div class="complete-stats">
+      <div><div class="c-val" id="cKnown">0</div><div class="c-lbl">Known</div></div>
+      <div><div class="c-val" id="cLearn">0</div><div class="c-lbl">Learning</div></div>
+      <div><div class="c-val" id="cTotal">0</div><div class="c-lbl">Total</div></div>
+    </div>
+    <div class="complete-btns">
+      <button class="btn-primary" onclick="restartDeck()">↺ Restart</button>
+      <button class="btn-ghost"   onclick="reviewWrong()">Practice ✗ only</button>
+    </div>
+  </div>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  VERB DATA — all strong/irregular verbs from the book
+//  Format: [infinitiv, 3rdPres, prät, aux, partizipII, en]
+//  aux: '' = haben, 'ist' = sein, 'hat/ist' = both
+// ═══════════════════════════════════════════════════════
+const VERBS = [
+  // A–B
+  ['befehlen',    'befiehlt',   'befahl',      '',       'befohlen',         'to command'],
+  ['beginnen',    '',           'begann',      '',       'begonnen',         'to begin'],
+  ['beißen',      '',           'biss',        '',       'gebissen',         'to bite'],
+  ['betrügen',    '',           'betrog',      '',       'betrogen',         'to cheat/deceive'],
+  ['biegen',      '',           'bog',         '',       'gebogen',          'to bend'],
+  ['bieten',      '',           'bot',         '',       'geboten',          'to offer'],
+  ['binden',      '',           'band',        '',       'gebunden',         'to bind'],
+  ['bitten',      '',           'bat',         '',       'gebeten',          'to request'],
+  ['blasen',      'bläst',      'blies',       '',       'geblasen',         'to blow'],
+  ['bleiben',     '',           'blieb',       'ist',    'geblieben',        'to stay'],
+  ['braten',      'brät',       'briet',       '',       'gebraten',         'to roast/fry'],
+  ['brechen',     'bricht',     'brach',       'hat/ist','gebrochen',        'to break'],
+  ['bringen',     '',           'brachte',     '',       'gebracht',         'to bring'],
+  // D–F
+  ['denken',      '',           'dachte',      '',       'gedacht',          'to think'],
+  ['(ein)dringen','',           'drang (ein)', 'ist',    '(ein)gedrungen',   'to penetrate'],
+  ['empfehlen',   'empfiehlt',  'empfahl',     '',       'empfohlen',        'to recommend'],
+  ['entscheiden', '',           'entschied',   '',       'entschieden',      'to decide'],
+  ['essen',       'isst',       'aß',          '',       'gegessen',         'to eat'],
+  ['fahren',      'fährt',      'fuhr',        'ist',    'gefahren',         'to drive/travel'],
+  ['fallen',      'fällt',      'fiel',        'ist',    'gefallen',         'to fall'],
+  ['fangen',      'fängt',      'fing',        '',       'gefangen',         'to catch'],
+  ['finden',      '',           'fand',        '',       'gefunden',         'to find'],
+  ['fliegen',     '',           'flog',        'ist',    'geflogen',         'to fly'],
+  ['fließen',     '',           'floss',       'ist',    'geflossen',        'to flow'],
+  ['(ge)frieren', '',           '(ge)fror',    'ist',    'gefroren',         'to freeze'],
+  // G
+  ['geben',       'gibt',       'gab',         '',       'gegeben',          'to give'],
+  ['gehen',       '',           'ging',        'ist',    'gegangen',         'to go'],
+  ['gelingen',    '',           'gelang',      'ist',    'gelungen',         'to succeed'],
+  ['gelten',      'gilt',       'galt',        '',       'gegolten',         'to apply/be valid'],
+  ['genießen',    '',           'genoss',      '',       'genossen',         'to enjoy'],
+  ['geschehen',   'geschieht',  'geschah',     'ist',    'geschehen',        'to happen'],
+  ['gewinnen',    '',           'gewann',      '',       'gewonnen',         'to win'],
+  ['graben',      'gräbt',      'grub',        '',       'gegraben',         'to dig'],
+  ['greifen',     '',           'griff',       '',       'gegriffen',        'to grab'],
+  // H
+  ['halten',      'hält',       'hielt',       '',       'gehalten',         'to hold/stop'],
+  ['hängen',      '',           'hing',        '',       'gehangen',         'to hang'],
+  ['heben',       '',           'hob',         '',       'gehoben',          'to lift'],
+  ['helfen',      'hilft',      'half',        '',       'geholfen',         'to help'],
+  // K–L
+  ['kommen',      '',           'kam',         'ist',    'gekommen',         'to come'],
+  ['laden',       'lädt',       'lud',         '',       'geladen',          'to load/invite'],
+  ['lassen',      'lässt',      'ließ',        '',       'gelassen',         'to let/leave'],
+  ['laufen',      'läuft',      'lief',        'ist',    'gelaufen',         'to run'],
+  ['leiden',      '',           'litt',        '',       'gelitten',         'to suffer'],
+  ['leihen',      '',           'lieh',        '',       'geliehen',         'to lend'],
+  ['lesen',       'liest',      'las',         '',       'gelesen',          'to read'],
+  ['liegen',      '',           'lag',         '',       'gelegen',          'to lie (be located)'],
+  ['lügen',       '',           'log',         '',       'gelogen',          'to lie (tell lies)'],
+  // M–N
+  ['(ver)meiden', '',           '(ver)mied',   '',       '(ver)gemieden',    'to avoid'],
+  ['messen',      'misst',      'maß',         '',       'gemessen',         'to measure'],
+  ['nehmen',      'nimmt',      'nahm',        '',       'genommen',         'to take'],
+  ['nennen',      '',           'nannte',      '',       'genannt',          'to name/call'],
+  // R–S
+  ['raten',       'rät',        'riet',        '',       'geraten',          'to advise/guess'],
+  ['reiben',      '',           'rieb',        '',       'gerieben',         'to rub'],
+  ['reißen',      '',           'riss',        'hat/ist','gerissen',         'to tear'],
+  ['rennen',      '',           'rannte',      'ist',    'gerannt',          'to run (fast)'],
+  ['riechen',     '',           'roch',        '',       'gerochen',         'to smell'],
+  ['rufen',       '',           'rief',        '',       'gerufen',          'to call/shout'],
+  ['schaffen',    '',           'schuf',       '',       'geschaffen',       'to create'],
+  ['schlafen',    'schläft',    'schlief',     '',       'geschlafen',       'to sleep'],
+  ['schlagen',    'schlägt',    'schlug',      '',       'geschlagen',       'to hit'],
+  ['schließen',   '',           'schloss',     '',       'geschlossen',      'to close'],
+  ['schneiden',   '',           'schnitt',     '',       'geschnitten',      'to cut'],
+  ['schrecken',   'schrickt',   'schrak',      'ist',    'erschrocken',      'to be startled'],
+  ['schreiben',   '',           'schrieb',     '',       'geschrieben',      'to write'],
+  ['schreien',    '',           'schrie',      '',       'geschrien',        'to scream'],
+  ['schreiten',   '',           'schritt',     'ist',    'geschritten',      'to stride'],
+  ['schweigen',   '',           'schwieg',     '',       'geschwiegen',      'to be silent'],
+  ['schwimmen',   '',           'schwamm',     'ist',    'geschwommen',      'to swim'],
+  ['(ver)schwinden','',         '(ver)schwand','ist',    '(ver)geschwunden', 'to disappear'],
+  ['sehen',       'sieht',      'sah',         '',       'gesehen',          'to see'],
+  ['sein',        'ist',        'war',         'ist',    'gewesen',          'to be'],
+  ['singen',      '',           'sang',        '',       'gesungen',         'to sing'],
+  ['sinken',      '',           'sank',        'ist',    'gesunken',         'to sink'],
+  ['sitzen',      '',           'saß',         '',       'gesessen',         'to sit'],
+  ['sprechen',    'spricht',    'sprach',      '',       'gesprochen',       'to speak'],
+  ['springen',    '',           'sprang',      'ist',    'gesprungen',       'to jump'],
+  ['stechen',     'sticht',     'stach',       '',       'gestochen',        'to sting/stab'],
+  ['stehen',      '',           'stand',       '',       'gestanden',        'to stand'],
+  ['stehlen',     'stiehlt',    'stahl',       '',       'gestohlen',        'to steal'],
+  ['steigen',     '',           'stieg',       'ist',    'gestiegen',        'to climb'],
+  ['sterben',     'stirbt',     'starb',       'ist',    'gestorben',        'to die'],
+  ['stoßen',      'stößt',      'stieß',       'hat/ist','gestoßen',         'to push/encounter'],
+  ['streichen',   '',           'strich',      '',       'gestrichen',       'to paint/cross out'],
+  ['streiten',    '',           'stritt',      '',       'gestritten',       'to argue'],
+  // T
+  ['tragen',      'trägt',      'trug',        '',       'getragen',         'to carry/wear'],
+  ['treffen',     'trifft',     'traf',        '',       'getroffen',        'to meet'],
+  ['treiben',     '',           'trieb',       '',       'getrieben',        'to drive/do'],
+  ['treten',      'tritt',      'trat',        'hat/ist','getreten',         'to kick/step'],
+  ['trinken',     '',           'trank',       '',       'getrunken',        'to drink'],
+  ['tun',         'tut',        'tat',         '',       'getan',            'to do'],
+  // V–Z
+  ['verderben',   'verdirbt',   'verdarb',     'hat/ist','verdorben',        'to spoil'],
+  ['vergessen',   'vergisst',   'vergaß',      '',       'vergessen',        'to forget'],
+  ['verlieren',   '',           'verlor',      '',       'verloren',         'to lose'],
+  ['(ver)gleichen','',          '(ver)glich',  '',       '(ver)glichen',     'to compare'],
+  ['wachsen',     'wächst',     'wuchs',       'ist',    'gewachsen',        'to grow'],
+  ['waschen',     'wäscht',     'wusch',       '',       'gewaschen',        'to wash'],
+  ['weisen',      '',           'wies',        '',       'gewiesen',         'to show/point'],
+  ['wenden',      '',           'wandte',      '',       'gewandt',          'to turn around'],
+  ['werben',      'wirbt',      'warb',        '',       'geworben',         'to advertise'],
+  ['werden',      'wird',       'wurde',       'ist',    'geworden',         'to become'],
+  ['werfen',      'wirft',      'warf',        '',       'geworfen',         'to throw'],
+  ['wiegen',      '',           'wog',         '',       'gewogen',          'to weigh'],
+  ['wissen',      'weiß',       'wusste',      '',       'gewusst',          'to know'],
+  ['verzeihen',   '',           'verzieh',     '',       'verziehen',        'to forgive'],
+  ['ziehen',      '',           'zog',         'hat/ist','gezogen',          'to pull/move'],
+  ['zwingen',     '',           'zwang',       '',       'gezwungen',        'to force'],
+];
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+let mode = 'flash';       // 'flash' | 'quiz' | 'table'
+let deck = [...VERBS];    // filtered+shuffled working set
+let idx  = 0;
+let revealed = false;
+let known = {};           // idx in original VERBS → true/false
+let quizAnswered = false;
+let quizScoreC = 0, quizScoreW = 0;
+
+// ═══════════════════════════════════════════════
+//  FILTER
+// ═══════════════════════════════════════════════
+function applyFilter() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  deck = q
+    ? VERBS.filter(v => v[0].toLowerCase().includes(q) || v[5].toLowerCase().includes(q))
+    : [...VERBS];
+  idx = 0;
+  known = {};
+  quizScoreC = 0; quizScoreW = 0;
+  document.getElementById('countPill').textContent = deck.length + ' verbs';
+  renderCurrent();
+  hideComplete();
+  if (mode === 'table') buildTable();
+}
+
+// ═══════════════════════════════════════════════
+//  MODE SWITCHING
+// ═══════════════════════════════════════════════
+function setMode(m) {
+  mode = m;
+  ['flash','quiz','table'].forEach(n => {
+    document.getElementById('mode' + n.charAt(0).toUpperCase() + n.slice(1)).classList.toggle('active', n === m);
+  });
+
+  document.getElementById('flashWrap').style.display    = m === 'flash' ? 'block' : 'none';
+  document.getElementById('flashActions').style.display = m === 'flash' ? 'grid'  : 'none';
+  document.getElementById('quizCard').style.display     = m === 'quiz'  ? 'block' : 'none';
+  document.getElementById('quizActions').style.display  = m === 'quiz'  ? 'grid'  : 'none';
+  document.getElementById('tableWrap').style.display    = m === 'table' ? 'block' : 'none';
+  document.getElementById('progressArea').style.display = m === 'table' ? 'none'  : 'flex';
+  document.getElementById('filterBar').style.display    = 'flex';
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+
+  idx = 0; known = {}; quizScoreC = 0; quizScoreW = 0; revealed = false; quizAnswered = false;
+
+  if (m === 'table') { buildTable(); return; }
+  renderCurrent();
+}
+
+// ═══════════════════════════════════════════════
+//  FLASH MODE
+// ═══════════════════════════════════════════════
+function renderCurrent() {
+  if (!deck.length) return;
+  const v = deck[idx];
+  revealed = false;
+
+  // Flash card
+  document.getElementById('fcEyebrow').textContent  = 'Starkes Verb';
+  document.getElementById('fcInfinitiv').textContent = v[0];
+  document.getElementById('fcMeaning').textContent   = v[5];
+  document.getElementById('fc3p').textContent   = v[1] || '— (regular)';
+  document.getElementById('fcPrat').textContent = v[2];
+  document.getElementById('fcAux').textContent  = v[3] ? '(' + v[3] + ' +)' : '(hat +)';
+  document.getElementById('fcP2').textContent   = v[4];
+
+  // Hide answers
+  document.querySelectorAll('.answer-hidden').forEach(el => {
+    el.classList.add('answer-hidden');
+    if (!el.classList.contains('answer-hidden')) el.classList.add('answer-hidden');
+  });
+  // Re-add blur
+  document.getElementById('fc3p').classList.add('answer-hidden');
+  document.getElementById('fcPrat').classList.add('answer-hidden');
+  document.getElementById('fcAux').classList.add('answer-hidden');
+  document.getElementById('fcP2').classList.add('answer-hidden');
+
+  document.querySelector('.card-flip-hint').textContent = 'tap to reveal';
+
+  // Card state
+  document.getElementById('flashCard').style.borderColor = '';
+  document.getElementById('flashCard').style.boxShadow = '';
+
+  // Buttons
+  const k = known[idx];
+  document.getElementById('btnKnow').classList.toggle('marked', k === true);
+  document.getElementById('btnWrong').classList.toggle('marked', k === false);
+
+  updateProgress();
+
+  // Quiz card
+  if (mode === 'quiz') renderQuiz();
+}
+
+function toggleReveal() {
+  if (mode !== 'flash') return;
+  revealed = !revealed;
+  ['fc3p','fcPrat','fcAux','fcP2'].forEach(id => {
+    document.getElementById(id).classList.toggle('answer-hidden', !revealed);
+  });
+  document.querySelector('.card-flip-hint').textContent = revealed ? 'tap to hide' : 'tap to reveal';
+}
+
+function nextCard(animate) {
+  if (idx >= deck.length - 1) { showComplete(); return; }
+  idx++;
+  quizAnswered = false;
+  clearQuizInputs();
+  renderCurrent();
+}
+
+function prevCard() {
+  if (idx === 0) return;
+  idx--;
+  quizAnswered = false;
+  clearQuizInputs();
+  renderCurrent();
+}
+
+function markCard(isKnown) {
+  known[idx] = isKnown;
+  document.getElementById('btnKnow').classList.toggle('marked', isKnown);
+  document.getElementById('btnWrong').classList.toggle('marked', !isKnown);
+  showToast(isKnown ? '✓ Marked as known' : '✗ Still learning');
+  setTimeout(() => nextCard(), 180);
+}
+
+function shuffleCards() {
+  deck = deck.sort(() => Math.random() - 0.5);
+  idx = 0; known = {}; quizScoreC = 0; quizScoreW = 0;
+  quizAnswered = false;
+  clearQuizInputs();
+  renderCurrent();
+  showToast('⇄ Shuffled!');
+}
+
+// ═══════════════════════════════════════════════
+//  QUIZ MODE
+// ═══════════════════════════════════════════════
+function renderQuiz() {
+  const v = deck[idx];
+  quizAnswered = false;
+
+  // Randomly decide what to show: infinitiv → forms, OR one form → others
+  document.getElementById('qWord').textContent    = v[0];
+  document.getElementById('qMeaning').textContent = v[5];
+  document.getElementById('qPromptLabel').textContent = 'Give the forms for:';
+
+  clearQuizInputs();
+  document.getElementById('qFeedback').classList.remove('visible','fb-correct','fb-wrong');
+  document.getElementById('quizCard').className = 'quiz-card';
+  document.getElementById('qSubmit').style.display = 'block';
+
+  // Show 3rd person field only if verb has irregular present
+  document.getElementById('q3pField').style.display = v[1] ? 'flex' : 'none';
+  document.getElementById('qBtnNext').style.display = 'none';
+}
+
+function clearQuizInputs() {
+  ['q3pInput','qPratInput','qP2Input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('inp-correct','inp-wrong'); }
+  });
+  ['q3pAnswer','qPratAnswer','qP2Answer'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.display = 'none'; el.textContent = ''; }
+  });
+  ['q3pInput','qPratInput','qP2Input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = false;
+  });
+}
+
+function normalize(s) {
+  return s.trim().toLowerCase()
+    .replace(/ä/g,'ä').replace(/ö/g,'ö').replace(/ü/g,'ü').replace(/ß/g,'ß');
+}
+
+function submitQuiz() {
+  if (quizAnswered) { nextCard(); return; }
+  quizAnswered = true;
+  const v = deck[idx];
+
+  let allCorrect = true;
+
+  // Check 3rd pres (if applicable)
+  if (v[1]) {
+    const inp = document.getElementById('q3pInput');
+    const ok = normalize(inp.value) === normalize(v[1]);
+    inp.classList.add(ok ? 'inp-correct' : 'inp-wrong');
+    inp.disabled = true;
+    if (!ok) {
+      document.getElementById('q3pAnswer').textContent = '✓ ' + v[1];
+      document.getElementById('q3pAnswer').style.display = 'block';
+      allCorrect = false;
+    }
+  }
+
+  // Check Präteritum
+  const pratInp = document.getElementById('qPratInput');
+  const pratOk  = normalize(pratInp.value) === normalize(v[2]);
+  pratInp.classList.add(pratOk ? 'inp-correct' : 'inp-wrong');
+  pratInp.disabled = true;
+  if (!pratOk) {
+    document.getElementById('qPratAnswer').textContent = '✓ ' + v[2] + (v[3] ? ' (' + v[3] + ')' : '');
+    document.getElementById('qPratAnswer').style.display = 'block';
+    allCorrect = false;
+  }
+
+  // Check Partizip II
+  const p2Inp = document.getElementById('qP2Input');
+  const p2Ok  = normalize(p2Inp.value) === normalize(v[4]);
+  p2Inp.classList.add(p2Ok ? 'inp-correct' : 'inp-wrong');
+  p2Inp.disabled = true;
+  if (!p2Ok) {
+    document.getElementById('qP2Answer').textContent = '✓ ' + v[4];
+    document.getElementById('qP2Answer').style.display = 'block';
+    allCorrect = false;
+  }
+
+  // Update score
+  if (allCorrect) { quizScoreC++; known[idx] = true; }
+  else            { quizScoreW++; known[idx] = false; }
+  document.getElementById('scoreCorrect').textContent = quizScoreC;
+  document.getElementById('scoreWrong').textContent   = quizScoreW;
+
+  // Feedback
+  const fb = document.getElementById('qFeedback');
+  fb.className = 'feedback-row visible ' + (allCorrect ? 'fb-correct' : 'fb-wrong');
+  document.getElementById('qFbIcon').textContent = allCorrect ? '✓' : '✗';
+  document.getElementById('qFbText').innerHTML   = allCorrect
+    ? `<strong>Perfekt!</strong> All forms correct.`
+    : `<strong>Not quite.</strong> <em>Check the corrections above.</em>`;
+
+  document.getElementById('quizCard').classList.add(allCorrect ? 'correct' : 'wrong');
+  document.getElementById('qSubmit').style.display = 'none';
+  document.getElementById('qBtnNext').style.display = 'block';
+
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════════
+//  TABLE MODE
+// ═══════════════════════════════════════════════
+function buildTable() {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  deck.forEach(v => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="col-inf">${v[0]}</span>${v[1] ? '<br><span class="col-3p">(' + v[1] + ')</span>' : ''}</td>
+      <td class="col-3p">${v[1] || '—'}</td>
+      <td class="col-prat">${v[2]}</td>
+      <td class="col-aux">${v[3] || 'hat'}</td>
+      <td class="col-p2">${v[4]}</td>
+      <td class="col-en">${v[5]}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  PROGRESS
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  const total = deck.length;
+  const pct   = total ? Math.round((idx / total) * 100) : 0;
+  document.getElementById('progFill').style.width  = pct + '%';
+  document.getElementById('progIdx').textContent   = Math.min(idx + 1, total);
+  document.getElementById('progTotal').textContent = total;
+}
+
+// ═══════════════════════════════════════════════
+//  COMPLETE
+// ═══════════════════════════════════════════════
+function showComplete() {
+  document.getElementById('flashWrap').style.display    = 'none';
+  document.getElementById('flashActions').style.display = 'none';
+  document.getElementById('quizCard').style.display     = 'none';
+  document.getElementById('quizActions').style.display  = 'none';
+
+  const ks = Object.values(known).filter(v => v === true).length;
+  const ls = Object.values(known).filter(v => v === false).length;
+  const pct = deck.length ? Math.round((ks / deck.length) * 100) : 0;
+
+  document.getElementById('cKnown').textContent = ks;
+  document.getElementById('cLearn').textContent = ls;
+  document.getElementById('cTotal').textContent = deck.length;
+
+  let emoji, title, sub;
+  if (pct >= 90) { emoji='🏆'; title='Ausgezeichnet!'; sub=pct+'% — you know your strong verbs!'; }
+  else if (pct >= 70) { emoji='🎉'; title='Sehr gut!'; sub=pct+'% — great work, keep it up.'; }
+  else if (pct >= 50) { emoji='📚'; title='Gut gemacht!'; sub=pct+'% — practise the rest!'; }
+  else { emoji='💪'; title='Weiter üben!'; sub=pct+'% — review the "still learning" pile.'; }
+
+  document.getElementById('cEmoji').textContent = emoji;
+  document.getElementById('cTitle').textContent = title;
+  document.getElementById('cSub').textContent   = sub;
+
+  document.getElementById('reviewWrongBtn') && (document.getElementById('reviewWrongBtn').style.display = ls > 0 ? '' : 'none');
+
+  const screen = document.getElementById('completeScreen');
+  screen.style.display = 'flex';
+  screen.classList.add('visible');
+}
+
+function hideComplete() {
+  document.getElementById('completeScreen').style.display = 'none';
+  document.getElementById('completeScreen').classList.remove('visible');
+  if (mode === 'flash') {
+    document.getElementById('flashWrap').style.display    = 'block';
+    document.getElementById('flashActions').style.display = 'grid';
+  } else if (mode === 'quiz') {
+    document.getElementById('quizCard').style.display     = 'block';
+    document.getElementById('quizActions').style.display  = 'grid';
+  }
+}
+
+function restartDeck() {
+  idx = 0; known = {}; quizScoreC = 0; quizScoreW = 0; quizAnswered = false;
+  clearQuizInputs();
+  hideComplete();
+  renderCurrent();
+}
+
+function reviewWrong() {
+  const wrong = deck.filter((_, i) => known[i] === false);
+  if (!wrong.length) { showToast('No learning cards!'); return; }
+  deck = wrong;
+  idx  = 0; known = {}; quizScoreC = 0; quizScoreW = 0; quizAnswered = false;
+  clearQuizInputs();
+  document.getElementById('countPill').textContent = deck.length + ' verbs';
+  hideComplete();
+  renderCurrent();
+}
+
+// ═══════════════════════════════════════════════
+//  KEYBOARD
+// ═══════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (mode === 'flash') {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleReveal(); }
+    if (e.key === 'ArrowRight') nextCard();
+    if (e.key === 'ArrowLeft')  prevCard();
+    if (e.key === 'y' || e.key === 'Y') markCard(true);
+    if (e.key === 'n' || e.key === 'N') markCard(false);
+  }
+  if (mode === 'quiz' && e.key === 'Enter' && quizAnswered) nextCard();
+});
+
+// Submit quiz on Enter in last input
+document.getElementById('qP2Input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); submitQuiz(); }
+});
+
+// ═══════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════
+let toastT;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ═══════════════════════════════════════════════
+//  SRS STORAGE — per-verb tracking across sessions
+// ═══════════════════════════════════════════════
+const SRS_KEY = 'dk_sv_srs_v1'; // separate from präpositionen
+
+function srsLoad() {
+  try { return JSON.parse(localStorage.getItem(SRS_KEY)) || {}; } catch { return {}; }
+}
+function srsSave(d) {
+  try { localStorage.setItem(SRS_KEY, JSON.stringify(d)); } catch {}
+}
+
+// verbIndex = index in VERBS array (stable)
+function srsUpdate(verbInfinitiv, wasCorrect) {
+  const d = srsLoad();
+  if (!d[verbInfinitiv]) d[verbInfinitiv] = { attempts: 0, correct: 0 };
+  d[verbInfinitiv].attempts++;
+  if (wasCorrect) d[verbInfinitiv].correct++;
+  srsSave(d);
+  refreshPracticeChip();
+}
+
+// A verb "needs practice" if it has been seen AND accuracy < 75%
+function srsPracticeVerbs() {
+  const d = srsLoad();
+  return VERBS.filter(v => {
+    const r = d[v[0]];
+    if (!r || r.attempts === 0) return false;
+    return (r.correct / r.attempts) < 0.75;
+  });
+}
+
+function refreshPracticeChip() {
+  const weak = srsPracticeVerbs();
+  const chip  = document.getElementById('practiceChip');
+  const badge = document.getElementById('practiceBadge');
+  if (weak.length > 0) {
+    chip.style.display = 'inline-flex';
+    badge.textContent = weak.length;
+  } else {
+    chip.style.display = 'none';
+    // If currently in practice mode with no more weak verbs, exit
+    if (practiceMode) { practiceMode = false; chip.classList.remove('active'); applyFilter(); }
+  }
+}
+
+// ── PRACTICE MODE ──
+let practiceMode = false;
+
+function togglePracticeMode() {
+  practiceMode = !practiceMode;
+  document.getElementById('practiceChip').classList.toggle('active', practiceMode);
+  document.getElementById('searchInput').value = '';
+  applyFilter();
+  if (practiceMode) showToast('🔁 Showing ' + srsPracticeVerbs().length + ' needs-practice verbs');
+}
+
+// ── HOOK markCard to SRS ──
+const _markCardOrig = markCard;
+markCard = function(isKnown) {
+  if (deck[idx]) srsUpdate(deck[idx][0], isKnown);
+  _markCardOrig(isKnown);
+};
+
+// ── HOOK submitQuiz to SRS ──
+const _submitQuizOrig = submitQuiz;
+submitQuiz = function() {
+  // We read the result after the original runs
+  const wasAnswered = quizAnswered;
+  _submitQuizOrig();
+  // If it just got answered (wasAnswered=false before, quizAnswered=true after)
+  if (!wasAnswered && quizAnswered && deck[idx]) {
+    srsUpdate(deck[idx][0], known[idx] === true);
+  }
+};
+
+// ── OVERRIDE applyFilter to also handle practiceMode ──
+const _applyFilterOrig = applyFilter;
+applyFilter = function() {
+  if (practiceMode) {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    const weak = srsPracticeVerbs();
+    deck = q ? weak.filter(v => v[0].toLowerCase().includes(q) || v[5].toLowerCase().includes(q)) : [...weak];
+    if (!deck.length) {
+      practiceMode = false;
+      document.getElementById('practiceChip').classList.remove('active');
+      deck = [...VERBS];
+      showToast('✓ No more practice verbs!');
+    }
+    idx = 0; known = {}; quizScoreC = 0; quizScoreW = 0;
+    document.getElementById('countPill').textContent = deck.length + ' verbs';
+    renderCurrent();
+    hideComplete();
+    if (mode === 'table') buildTable();
+    return;
+  }
+  _applyFilterOrig();
+};
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+document.getElementById('countPill').textContent = deck.length + ' verbs';
+refreshPracticeChip();
+renderCurrent();
+</script>
+</body>
+</html>
