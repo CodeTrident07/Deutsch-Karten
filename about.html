@@ -103,14 +103,13 @@ main a.inline:hover { color: var(--g2); }
 /* Binary ripple behind the heading */
 body { position: relative; }
 #binary {
-  position: absolute; top: 52px; left: 0; width: 100%; height: 420px;
-  z-index: 0; cursor: crosshair;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 88%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 88%);
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
 }
-main { position: relative; z-index: 1; pointer-events: none; }
-main a, main li, main p, main h1, main h2 { pointer-events: auto; }
-@media (max-width: 500px) { #binary { height: 340px; } }
+.topbar { position: relative; z-index: 2; background: var(--bg); }
+main { position: relative; z-index: 1; }
+/* Soft halo so text stays readable when a ripple passes behind it */
+main h1, main h2, main p, main li a, .label { text-shadow: 0 0 2px var(--bg), 0 0 6px var(--bg), 0 0 12px var(--bg); }
 </style>
 </head>
 <body>
@@ -195,7 +194,7 @@ main a, main li, main p, main h1, main h2 { pointer-events: auto; }
         }
         const k = j * cols + i;
         if (glow > 0.55 && Math.random() < 0.08) digits[k] = digits[k] === '0' ? '1' : '0';
-        const a = 0.06 + glow * 0.42;
+        const a = 0.05 + glow * 0.34;
         ctx.fillStyle = glow > 0.6 ? `rgba(240,240,240,${a})` : `rgba(171,171,171,${a})`;
         ctx.fillText(digits[k], x, y);
       }
@@ -205,7 +204,7 @@ main a, main li, main p, main h1, main h2 { pointer-events: auto; }
   function frame(now) {
     if (now - last > 33) {          // about 30 fps is plenty
       if (now > nextAuto) {
-        addRipple(Math.random() * canvas.clientWidth, Math.random() * canvas.clientHeight * 0.7, now);
+        addRipple(Math.random() * canvas.clientWidth, Math.random() * canvas.clientHeight, now);
         nextAuto = now + 2600 + Math.random() * 1800;
       }
       draw(now); last = now;
@@ -219,9 +218,10 @@ main a, main li, main p, main h1, main h2 { pointer-events: auto; }
     raf = requestAnimationFrame(frame);
   }
 
-  canvas.addEventListener('pointerdown', e => {
-    const b = canvas.getBoundingClientRect();
-    addRipple(e.clientX - b.left, e.clientY - b.top, performance.now());
+  // Click or tap anywhere (except links) to send a ripple from that spot
+  document.addEventListener('pointerdown', e => {
+    if (e.target.closest('a, button')) return;
+    addRipple(e.clientX, e.clientY, performance.now());
     if (reduce.matches) draw(performance.now());
   });
   window.addEventListener('resize', resize);
@@ -229,7 +229,7 @@ main a, main li, main p, main h1, main h2 { pointer-events: auto; }
   reduce.addEventListener?.('change', start);
 
   resize();
-  addRipple(canvas.clientWidth * 0.3, 90, performance.now());   // first ripple from behind the name
+  addRipple(canvas.clientWidth * 0.3, 160, performance.now());  // first ripple from behind the name
   nextAuto = performance.now() + 2200;
   start();
 })();
