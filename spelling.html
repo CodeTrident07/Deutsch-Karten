@@ -3813,4 +3813,11 @@ function insertChar(ch) {
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') { e.preventDefault(); checkAnswer(); }
   if (e.key === 'ArrowRight' && answered) { e.preventDefault(); nextCard(); }
-  if (e.key === 'ArrowRight' && !answered) { e.preven
+  if (e.key === 'ArrowRight' && !answered) { e.preventDefault(); checkAnswer(); }
+});
+
+// ── Boot ─────────────────────────────────────────────────────
+startSession();
+</script>
+</body>
+</html>

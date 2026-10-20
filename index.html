@@ -1828,7 +1828,8 @@ function applyLevelStyle() {
   document.documentElement.style.setProperty('--lvl', c);
   document.documentElement.style.setProperty('--lvld', d);
   document.querySelector('.logo span').style.color = c;
-  document.querySelectorAll('.bg-orb { display: none; }
+  document.querySelectorAll('.bg-orb').forEach(o => o.style.background = c);
+}
 
 function buildCats() {
   const strip = document.getElementById('catStrip');
