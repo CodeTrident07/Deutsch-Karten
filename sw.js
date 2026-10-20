@@ -1,6 +1,6 @@
 // DeutschKarten Service Worker — Full Offline Cache
 // Version bump forces old caches to be replaced
-const CACHE_NAME = 'dk-v7';
+const CACHE_NAME = 'dk-v8';
 
 // All pages + critical assets to precache on install
 const PRECACHE = [
@@ -18,7 +18,7 @@ const PRECACHE = [
   './starke-verben.html',
   './deutschkarten.html',
   './about.html',
-  'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
+  'https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap',
 ];
 
 // ── Install: precache everything ─────────────────────────────

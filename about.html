@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#F4F4F2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About – DeutschKarten</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808;
-  --g1: #f0f0f0;
-  --g2: #ababab;
-  --g3: #7c7c7c;
-  --g4: #303030;
-  --font-sans: 'Bricolage Grotesque', system-ui, sans-serif;
+  --bg: #F4F4F2;
+  --g1: #111415;
+  --g2: #454A4B;
+  --g3: #5E6263;
+  --g4: #D3D4D3;
+  --font-sans: 'Archivo', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,10 +50,10 @@ body {
 }
 .back-link:hover { color: var(--g1); text-decoration: underline; text-underline-offset: 3px; }
 main {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 64px 24px;
+  padding: 12vh 28px 64px;
+  max-width: 1200px;
 }
+p { max-width: 34ch; }
 .label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -63,24 +63,29 @@ main {
   margin-bottom: 12px;
 }
 h1 {
-  font-size: 2.4rem;
+  font-size: clamp(4rem, 16vw, 12rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  margin-bottom: 16px;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+  text-transform: lowercase;
+  margin: 0 0 28px -0.05em;
 }
 p { font-size: 1.05rem; color: var(--g2); }
 @media (max-width: 500px) {
   .topbar { padding: 0 16px; }
   main { padding: 40px 16px; }
-  h1 { font-size: 2rem; }
+  h1 { font-size: 24vw; }
 }
+
+.mark { font-size: 0.72rem; font-weight: 800; line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase; }
+.logo.mark:hover { text-decoration: none; color: #2F4E56; }
+.back-link:hover { color: #2F4E56; }
 </style>
 </head>
 <body>
 
 <header class="topbar">
-  <a href="app.html" class="logo">DeutschKarten</a>
+  <a href="app.html" class="logo mark">Deutsch<br>Karten</a>
   <a href="app.html" class="back-link">← Home</a>
 </header>
 
