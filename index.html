@@ -974,6 +974,17 @@ main {
 /* Emoji slots are left in the markup for the scripts but not shown */
 .cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
 </style>
+<script>
+// Signed-in visitors use app.html (it has sign out, streaks and the chat).
+// Same check app.html uses, so the two pages never bounce between each other.
+(function () {
+  try {
+    const session = JSON.parse(localStorage.getItem('dk_session'));
+    const users = JSON.parse(localStorage.getItem('dk_users')) || {};
+    if (session && users[session.email]) location.replace('app.html');
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -992,6 +1003,7 @@ main {
       <span><span class="kbd">N</span> learning</span>
     </div>
     <a href="about.html" class="about-link">About</a>
+    <a href="login.html" class="about-link">Sign in</a>
   </div>
 </header>
 

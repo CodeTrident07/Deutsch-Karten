@@ -643,6 +643,13 @@ body::before {
 
 /* Emoji slots are left in the markup for the scripts but not shown */
 .cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
+
+.auth-back {
+  display: inline-block; margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: #ababab; text-decoration: none;
+}
+.auth-back:hover { color: #f0f0f0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -714,6 +721,7 @@ body::before {
   <div class="card-footer">
     Your progress is saved locally in your browser
   </div>
+  <a href="index.html" class="auth-back">← Back to flashcards</a>
 </div>
 
 <script>
@@ -753,7 +761,7 @@ function removeSavedEmail(email) {
   if (session) {
     const users = getUsers();
     if (users[session.email]) {
-      window.location.href = 'index.html';
+      window.location.href = 'app.html';
     }
   }
 })();
@@ -836,7 +844,7 @@ async function handleRegister() {
   saveSession(email);
 
   showMsg('Account created! Redirecting…', 'success');
-  setTimeout(() => window.location.href = 'index.html', 900);
+  setTimeout(() => window.location.href = 'app.html', 900);
 }
 
 // ── Login ────────────────────────────────────────────────────
@@ -858,7 +866,7 @@ async function handleLogin() {
   saveSession(email);
 
   showMsg('Welcome back, ' + user.name + '!', 'success');
-  setTimeout(() => window.location.href = 'index.html', 700);
+  setTimeout(() => window.location.href = 'app.html', 700);
 }
 
 // ── Enter key support ────────────────────────────────────────

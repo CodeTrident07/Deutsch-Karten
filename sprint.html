@@ -572,16 +572,39 @@ body::before {
 
 /* Emoji slots are left in the markup for the scripts but not shown */
 .cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
+
+/* Shared activity top bar: same on every activity page */
+.dk-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.dk-nav-brand {
+  display: flex; align-items: baseline; gap: 8px; min-width: 0;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 1rem; font-weight: 800; letter-spacing: -0.04em;
+  color: #f0f0f0; text-decoration: none; white-space: nowrap;
+}
+.dk-nav-brand:hover .dk-nav-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.dk-nav-page {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.02em; color: #ababab; overflow: hidden; text-overflow: ellipsis;
+}
+.dk-nav-home {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 500;
+  color: #f0f0f0; text-decoration: none; white-space: nowrap;
+  padding: 6px 14px; border: 1px solid #3d3d3d; border-radius: 6px; background: #161616;
+}
+.dk-nav-home:hover { background: #242424; border-color: #7c7c7c; }
+@media (max-width: 500px) {
+  .dk-nav { padding: 0 16px !important; }
+  .dk-nav-name { display: none; }
+  .dk-nav-page { font-size: 0.8rem; color: #f0f0f0; }
+}
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="logo">
-    <span>Deutsch<span style="color:var(--green)">Karten</span></span><span style="font-size:11px;margin-left:5px;color:var(--text3);font-weight:400;letter-spacing:0;font-family:'JetBrains Mono',monospace;">by Praanav</span>
-  </div>
-  <div style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--text3);">30-sec Sprint</div>
-  <a href="app.html" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text3);text-decoration:none;padding:4px 12px;border:1px solid var(--border2);border-radius:5px;background:var(--surface2);transition:all 0.18s;white-space:nowrap;">← Flashcards</a>
+<header class="topbar dk-nav">
+  <a href="app.html" class="dk-nav-brand"><span class="dk-nav-name">DeutschKarten</span><span class="dk-nav-page">/ Sprint</span></a>
+  <a href="app.html" class="dk-nav-home">← Home</a>
 </header>
 
 <div class="arena" id="arena">
