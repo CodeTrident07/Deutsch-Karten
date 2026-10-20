@@ -1,6 +1,6 @@
 // DeutschKarten Service Worker — Full Offline Cache
 // Version bump forces old caches to be replaced
-const CACHE_NAME = 'dk-v6';
+const CACHE_NAME = 'dk-v7';
 
 // All pages + critical assets to precache on install
 const PRECACHE = [
