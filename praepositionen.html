@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080808">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verben mit Präpositionen – DeutschKarten</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   /* ── Surfaces ── */
@@ -18,8 +18,8 @@
 
   /* ── Greyscale ── */
   --g1:   #f0f0f0;
-  --g2:   #909090;
-  --g3:   #484848;
+  --g2:   #ababab;
+  --g3:   #7c7c7c;
   --g4:   #303030;
 
   /* ── Semantic aliases ── */
@@ -27,7 +27,7 @@
   --surface2:  var(--s2);
   --surface3:  var(--s3);
   --border:    var(--g4);
-  --border2:   var(--g3);
+  --border2:   #3d3d3d;
   --text:      var(--g1);
   --text2:     var(--g2);
   --text3:     var(--g3);
@@ -48,7 +48,7 @@
 
   /* ── Typography ── */
   --font-sans:  'Bricolage Grotesque', system-ui, sans-serif;
-  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-serif: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   --text-xs:   0.65rem;   /* 10.4px — labels, badges */
@@ -99,10 +99,10 @@
   --sf2:     var(--s2);
   --sf3:     var(--s3);
   --bord:    var(--g4);
-  --bord2:   var(--g3);
+  --bord2:   #3d3d3d;
   --rule:    var(--g4);
-  --rule2:   var(--g3);
-  --ln2:     var(--g3);
+  --rule2:   #3d3d3d;
+  --ln2:     #3d3d3d;
   --line:    var(--g4);
   --glow:    var(--glow-sm);
   --glow-sm: 0 0 16px rgba(255,255,255,0.06);
@@ -181,7 +181,7 @@ button, input, select, textarea { font-family: inherit; }
   transition: opacity var(--t-base) var(--ease);
   user-select: none;
 }
-.logo:hover { opacity: 0.6; }
+.logo:hover {text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;}
 .logo-slash {
   font-size: var(--text-xs);
   font-family: var(--font-mono);
@@ -240,11 +240,7 @@ button, input, select, textarea { font-family: inherit; }
               box-shadow var(--t-base) var(--ease),
               transform var(--t-fast) var(--ease);
 }
-.btn-primary:hover {
-  opacity: 0.88;
-  box-shadow: 0 0 20px rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
+.btn-primary:hover {background: #cfcfcf;}
 .btn-primary:active { transform: scale(0.97); opacity: 0.8; }
 .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
 
@@ -286,7 +282,7 @@ button, input, select, textarea { font-family: inherit; }
   position: absolute;
   inset: 0 0 auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background: none;
   pointer-events: none;
 }
 
@@ -366,7 +362,7 @@ body{background:var(--bg);color:var(--g1);font-family:'Bricolage Grotesque',sans
 /* TOPBAR */
 .topbar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;border-bottom:1px solid var(--g4);background:var(--bg);position:sticky;top:0;z-index:100;flex-shrink:0}
 .logo{font-size:1.05rem;font-weight:800;letter-spacing:-.05em;color:var(--g1);text-decoration:none;transition:opacity .2s}
-.logo:hover{opacity:.6}
+.logo:hover{text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;}
 .logo-slash{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--g3);font-weight:400;margin-left:8px}
 .back-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--g3);text-decoration:none;padding:5px 10px;border:1px solid var(--g4);border-radius:var(--r1);background:transparent;transition:color .15s,border-color .15s,box-shadow .2s}
 .back-link:hover{color:var(--g1);border-color:var(--g3);box-shadow:var(--glow)}
@@ -383,7 +379,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
 .eyebrow::before{content:'';width:18px;height:1px;background:var(--g3)}
 .start-screen h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:800;letter-spacing:-.05em;color:var(--g1);line-height:1.05;margin-bottom:.65rem}
-.start-screen p{font-family:'DM Serif Display',serif;font-style:italic;font-size:.92rem;color:var(--g2);line-height:1.7;max-width:460px}
+.start-screen p{font-family: var(--font-sans);font-size:.92rem;color:var(--g2);line-height:1.7;max-width:460px}
 .config-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g3);margin-bottom:.55rem}
 .level-grid{display:flex;gap:.3rem;flex-wrap:wrap}
 .lvl-btn{padding:.25rem .75rem;border-radius:var(--r1);border:1px solid var(--g4);background:transparent;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;color:var(--g3);cursor:pointer;transition:all .15s}
@@ -394,7 +390,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 .stat-val{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--g1);line-height:1}
 .stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
 .start-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.8rem;background:var(--g1);color:var(--bg);border:none;border-radius:var(--r2);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.88rem;cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s;letter-spacing:-.02em}
-.start-btn:hover{opacity:.88;box-shadow:0 0 24px rgba(255,255,255,.12);transform:translateY(-1px)}
+.start-btn:hover{background: #cfcfcf;}
 .start-btn:active{transform:scale(.97)}
 
 /* VERB REFERENCE */
@@ -417,7 +413,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 .vp-verb{color:var(--g1);font-weight:600;white-space:nowrap}
 .vp-prep{color:var(--g1);font-weight:700;white-space:nowrap}
 .vp-case{font-size:.52rem;color:var(--g3);white-space:nowrap}
-.vp-en{font-family:'DM Serif Display',serif;font-style:italic;font-size:.72rem;color:var(--g3);margin-left:auto;padding-left:.5rem;white-space:nowrap}
+.vp-en{font-family: var(--font-sans);font-size:.72rem;color:var(--g3);margin-left:auto;padding-left:.5rem;white-space:nowrap}
 
 /* PROGRESS */
 .progress-area{width:100%;max-width:var(--w);display:flex;flex-direction:column;gap:.45rem}
@@ -432,7 +428,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 
 /* QUIZ CARD */
 .quiz-card{width:100%;max-width:var(--w);background:var(--s1);border:1px solid var(--g4);border-radius:var(--r4);padding:2rem 2.2rem 1.8rem;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.5);transition:border-color .22s}
-.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:var(--r4) var(--r4) 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:var(--r4) var(--r4) 0 0;background: none}
 .quiz-card.correct{border-color:var(--g2)}
 .quiz-card.wrong{border-color:var(--g3)}
 .card-tag{display:flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--g3);text-transform:uppercase;margin-bottom:1.8rem}
@@ -441,7 +437,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 
 /* SENTENCE */
 .sentence-area{margin-bottom:1.8rem}
-.sentence{font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,3.5vw,1.6rem);line-height:1.75;color:var(--g1);text-align:center}
+.sentence{font-family: var(--font-sans);font-size:clamp(1.2rem,3.5vw,1.6rem);line-height:1.75;color:var(--g1);text-align:center}
 .blank{display:inline-flex;align-items:center;justify-content:center;min-width:80px;height:30px;padding:0 10px;border-bottom:2px solid var(--g3);background:rgba(255,255,255,.03);border-radius:var(--r1) var(--r1) 0 0;font-style:normal;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.88rem;color:var(--g1);margin:0 3px;vertical-align:middle;transition:all .2s}
 .blank.reveal-correct{color:var(--g1);background:rgba(255,255,255,.06);border-color:var(--g2)}
 .blank.reveal-wrong{color:var(--g3);background:rgba(255,255,255,.02);border-color:var(--g4)}
@@ -458,11 +454,11 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 /* FEEDBACK */
 .feedback-row{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem .95rem;border-radius:var(--r2);font-size:.82rem;margin-bottom:.8rem;opacity:0;transform:translateY(5px);transition:opacity .2s,transform .2s;border:1px solid var(--g4);background:rgba(255,255,255,.02)}
 .feedback-row.visible{opacity:1;transform:translateY(0)}
-.why-text{display:block;margin-top:.35rem;font-family:'DM Serif Display',serif;font-style:italic;font-size:.84rem;color:var(--g2)}
+.why-text{display:block;margin-top:.35rem;font-family: var(--font-sans);font-size:.84rem;color:var(--g2)}
 .fb-def{display:inline-flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-top:.1rem}
 .fb-verb{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;color:var(--g1)}
 .fb-case{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--g3);background:var(--s3);border:1px solid var(--g4);border-radius:3px;padding:1px 5px;letter-spacing:.04em}
-.fb-en{font-family:'DM Serif Display',serif;font-style:italic;font-size:.82rem;color:var(--g2)}
+.fb-en{font-family: var(--font-sans);font-size:.82rem;color:var(--g2)}
 .fb-correct{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--g2)}
 .no-weak-msg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--g2);padding:.75rem 0}
 .fb-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
@@ -471,7 +467,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 /* NEXT BTN */
 .next-btn{width:100%;padding:.65rem;border-radius:var(--r2);background:var(--g1);color:var(--bg);border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .15s,box-shadow .2s;display:none;letter-spacing:-.02em}
 .next-btn.visible{display:block}
-.next-btn:hover{opacity:.88;box-shadow:0 0 20px rgba(255,255,255,.1)}
+.next-btn:hover{background: #cfcfcf;}
 .next-btn:active{transform:scale(.98)}
 
 /* COMPLETE */
@@ -479,7 +475,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 .complete-screen.visible{display:flex}
 .complete-emoji{font-size:2.4rem;line-height:1}
 .complete-title{font-size:1.5rem;font-weight:800;letter-spacing:-.05em;color:var(--g1)}
-.complete-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:var(--g2);line-height:1.65}
+.complete-sub{font-family: var(--font-sans);font-size:.93rem;color:var(--g2);line-height:1.65}
 .complete-stats{display:flex;gap:3rem;padding:1.1rem 0;border-top:1px solid var(--g4);border-bottom:1px solid var(--g4);width:100%;justify-content:center}
 .c-stat-val{font-size:1.7rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.2rem;color:var(--g1)}
 .c-stat-lbl{font-size:.57rem;font-family:'JetBrains Mono',monospace;color:var(--g3);letter-spacing:.1em;text-transform:uppercase}
@@ -492,7 +488,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 .weak-rate{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--g2)}
 .complete-btns{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center}
 .btn-primary{padding:.62rem 1.7rem;border-radius:var(--r2);background:var(--g1);color:var(--bg);border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .15s,box-shadow .2s,transform .12s}
-.btn-primary:hover{opacity:.88;box-shadow:0 0 20px rgba(255,255,255,.12);transform:translateY(-1px)}
+.btn-primary:hover{background: #cfcfcf;}
 .btn-ghost{padding:.62rem 1.3rem;border-radius:var(--r2);background:transparent;color:var(--g2);border:1px solid var(--g4);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:border-color .15s,color .15s,box-shadow .2s}
 .btn-ghost:hover{border-color:var(--g3);color:var(--g1);box-shadow:var(--glow)}
 
@@ -510,6 +506,9 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
   .options-grid{grid-template-columns:1fr 1fr}
   .complete-stats{gap:1.5rem}
 }
+
+/* Emoji slots are left in the markup for the scripts but not shown */
+.cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
 </style>
 </head>
 <body>
@@ -553,7 +552,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
 
   <div class="verb-ref" id="verbRef">
     <div class="vref-header" onclick="toggleVerbRef()">
-      <div class="vref-header-title">All Verbs — Quick Reference</div>
+      <div class="vref-header-title">All verbs: quick reference</div>
       <div class="vref-toggle"><span id="toggleLabel">Show all</span><span class="toggle-chevron" id="toggleIcon">↓</span></div>
     </div>
     <div class="vref-body" id="verbRefBody"></div>
@@ -587,7 +586,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1
   </div>
 
   <div class="complete-screen" id="completeScreen">
-    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-emoji" id="completeEmoji"></div>
     <div class="complete-title" id="completeTitle">Session complete!</div>
     <div class="complete-sub"   id="completeSub"></div>
     <div class="complete-stats">
@@ -925,51 +924,51 @@ var QUESTIONS = {
 };
 
 var VERBS = [
-  {id:'warten_auf',    verb:'warten',             prep:'auf',   kase:'Akk', en:'to wait for',              level:'A2',why:'warten auf is a fixed collocation — auf always takes Akkusativ here'},
-  {id:'denken_an',     verb:'denken',             prep:'an',    kase:'Akk', en:'to think of/about',        level:'A2',why:'denken an means to have s.o./sth in mind — an + Akkusativ for direction of thought'},
-  {id:'fragen_nach',   verb:'fragen',             prep:'nach',  kase:'Dat', en:'to ask about',             level:'A2',why:'fragen nach asks about information — nach + Dativ for inquiry'},
-  {id:'antworten_auf', verb:'antworten',          prep:'auf',   kase:'Akk', en:'to reply to',              level:'A2',why:'antworten auf responds to something — auf + Akkusativ for the trigger'},
-  {id:'sprechen_ueber',verb:'sprechen',           prep:'über',  kase:'Akk', en:'to talk about',            level:'A2',why:'sprechen über discusses a topic — über + Akkusativ for subject matter'},
-  {id:'sprechen_mit',  verb:'sprechen',           prep:'mit',   kase:'Dat', en:'to talk with',             level:'A2',why:'sprechen mit talks with a person — mit + Dativ for accompaniment'},
-  {id:'helfen_bei',    verb:'helfen',             prep:'bei',   kase:'Dat', en:'to help with',             level:'A2',why:'helfen bei helps with an activity — bei + Dativ for assistance context'},
-  {id:'einladen_zu',   verb:'einladen',           prep:'zu',    kase:'Dat', en:'to invite to',             level:'A2',why:'einladen zu invites to an event — zu + Dativ for destination'},
-  {id:'fahren_mit',    verb:'fahren',             prep:'mit',   kase:'Dat', en:'to travel by',             level:'A2',why:'fahren mit travels by a vehicle — mit + Dativ for means of transport'},
-  {id:'arbeiten_als',  verb:'arbeiten',           prep:'als',   kase:'Nom', en:'to work as',               level:'A2',why:'arbeiten als works as a role — als + Nominativ for identity/role'},
-  {id:'freuen_auf',    verb:'sich freuen',        prep:'auf',   kase:'Akk', en:'to look forward to',      level:'B1',why:'freuen auf anticipates the future — auf + Akkusativ for forward-looking emotion'},
-  {id:'freuen_ueber',  verb:'sich freuen',        prep:'über',  kase:'Akk', en:'to be pleased about',     level:'B1',why:'freuen über is pleased about sth — über + Akkusativ for a reaction to an event'},
-  {id:'interessieren', verb:'sich interessieren', prep:'für',   kase:'Akk', en:'to be interested in',     level:'B1',why:'interessieren für shows interest in a field — für + Akkusativ for what attracts'},
-  {id:'aergern_ueber', verb:'sich ärgern',        prep:'über',  kase:'Akk', en:'to be annoyed about',     level:'B1',why:'ärgern über is annoyed about sth — über + Akkusativ for the cause of irritation'},
-  {id:'kuemmern_um',   verb:'sich kümmern',       prep:'um',    kase:'Akk', en:'to take care of',         level:'B1',why:'kümmern um takes care of s.o./sth — um + Akkusativ for the object of concern'},
-  {id:'bewerben_um',   verb:'sich bewerben',      prep:'um',    kase:'Akk', en:'to apply for',            level:'B1',why:'bewerben um applies for a position — um + Akkusativ for what is sought'},
-  {id:'gehoeren_zu',   verb:'gehören',            prep:'zu',    kase:'Dat', en:'to belong to',            level:'B1',why:'gehören zu belongs to a group — zu + Dativ for membership'},
-  {id:'bestehen_aus',  verb:'bestehen',           prep:'aus',   kase:'Dat', en:'to consist of',           level:'B1',why:'bestehen aus consists of components — aus + Dativ for composition'},
-  {id:'anfangen_mit',  verb:'anfangen',           prep:'mit',   kase:'Dat', en:'to start with',           level:'B1',why:'anfangen mit starts with an activity — mit + Dativ for what is begun'},
-  {id:'aufhoeren_mit', verb:'aufhören',           prep:'mit',   kase:'Dat', en:'to stop doing',           level:'B1',why:'aufhören mit stops an activity — mit + Dativ for what is ended'},
-  {id:'nachdenken',    verb:'nachdenken',         prep:'über',  kase:'Akk', en:'to reflect on',           level:'B1',why:'nachdenken über reflects on a topic — über + Akkusativ for the subject of thought'},
-  {id:'traeumen_von',  verb:'träumen',            prep:'von',   kase:'Dat', en:'to dream of',             level:'B1',why:'träumen von dreams of sth — von + Dativ for the content of dreams'},
-  {id:'gewoehnen_an',  verb:'sich gewöhnen',      prep:'an',    kase:'Akk', en:'to get used to',          level:'B2',why:'gewöhnen an gets used to sth — an + Akkusativ for the new normal'},
-  {id:'verlassen_auf', verb:'sich verlassen',     prep:'auf',   kase:'Akk', en:'to rely on',              level:'B2',why:'verlassen auf relies on s.o. — auf + Akkusativ for the source of trust'},
-  {id:'zweifeln_an',   verb:'zweifeln',           prep:'an',    kase:'Dat', en:'to doubt',                level:'B2',why:'zweifeln an doubts sth — an + Dativ for the object of doubt'},
-  {id:'leiden_unter',  verb:'leiden',             prep:'unter', kase:'Dat', en:'to suffer from',          level:'B2',why:'leiden unter suffers from a condition — unter + Dativ for the cause'},
-  {id:'verzichten_auf',verb:'verzichten',         prep:'auf',   kase:'Akk', en:'to give up',              level:'B2',why:'verzichten auf gives up sth — auf + Akkusativ for what is renounced'},
-  {id:'hinweisen_auf', verb:'hinweisen',          prep:'auf',   kase:'Akk', en:'to point out',            level:'B2',why:'hinweisen auf points out sth — auf + Akkusativ for what is indicated'},
-  {id:'einigen_auf',   verb:'sich einigen',       prep:'auf',   kase:'Akk', en:'to agree on',             level:'B2',why:'einigen auf agrees on sth — auf + Akkusativ for the agreed outcome'},
-  {id:'bestehen_auf',  verb:'bestehen',           prep:'auf',   kase:'Dat', en:'to insist on',            level:'B2',why:'bestehen auf insists on sth — auf + Dativ for the demanded condition'},
-  {id:'beitragen_zu',  verb:'beitragen',          prep:'zu',    kase:'Dat', en:'to contribute to',        level:'B2',why:'beitragen zu contributes to sth — zu + Dativ for the goal supported'},
-  {id:'beziehen_auf',  verb:'sich beziehen',      prep:'auf',   kase:'Akk', en:'to refer to',             level:'B2',why:'beziehen auf refers to sth — auf + Akkusativ for the reference point'},
-  {id:'reagieren_auf', verb:'reagieren',          prep:'auf',   kase:'Akk', en:'to react to',             level:'B2',why:'reagieren auf reacts to sth — auf + Akkusativ for the stimulus'},
-  {id:'verfuegen_ueber',verb:'verfügen',          prep:'über',  kase:'Akk', en:"to have at one's disposal",level:'B2',why:'verfügen über has sth at disposal — über + Akkusativ for what is possessed'},
-  {id:'appellieren_an',verb:'appellieren',        prep:'an',    kase:'Akk', en:'to appeal to',            level:'C1',why:'appellieren an appeals to a quality — an + Akkusativ for what is invoked'},
-  {id:'plaedieren_fuer',verb:'plädieren',         prep:'für',   kase:'Akk', en:'to argue for',            level:'C1',why:'plädieren für argues for sth — für + Akkusativ for what is advocated'},
-  {id:'abfinden_mit',  verb:'sich abfinden',      prep:'mit',   kase:'Dat', en:'to come to terms with',   level:'C1',why:'abfinden mit comes to terms with sth — mit + Dativ for the accepted situation'},
-  {id:'anknuepfen_an', verb:'anknüpfen',          prep:'an',    kase:'Akk', en:'to build on',             level:'C1',why:'anknüpfen an builds on sth existing — an + Akkusativ for the prior reference'},
-  {id:'ausgehen_von',  verb:'ausgehen',           prep:'von',   kase:'Dat', en:'to assume from',          level:'C1',why:'ausgehen von assumes a premise — von + Dativ for the starting assumption'},
-  {id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',        level:'C1',why:'auseinandersetzen mit engages critically with sth — mit + Dativ for the subject'},
-  {id:'beruhen_auf',   verb:'beruhen',            prep:'auf',   kase:'Dat', en:'to be based on',          level:'C1',why:'beruhen auf is based on sth — auf + Dativ for the foundation'},
-  {id:'einwirken_auf', verb:'einwirken',          prep:'auf',   kase:'Akk', en:'to influence',            level:'C1',why:'einwirken auf influences sth — auf + Akkusativ for the target'},
-  {id:'entscheiden_fuer',verb:'sich entscheiden', prep:'für',   kase:'Akk', en:'to decide for',           level:'C1',why:'entscheiden für decides in favour of sth — für + Akkusativ for the chosen option'},
-  {id:'richten_nach',  verb:'sich richten',       prep:'nach',  kase:'Dat', en:'to be guided by',         level:'C1',why:'richten nach is guided by sth — nach + Dativ for the standard followed'},
-  {id:'zurueckfuehren',verb:'zurückführen',       prep:'auf',   kase:'Akk', en:'to attribute to',         level:'C1',why:'zurückführen auf attributes sth to a cause — auf + Akkusativ for the cause'}
+  {id:'warten_auf',    verb:'warten',             prep:'auf',   kase:'Akk', en:'to wait for',              level:'A2',why:'warten auf is a fixed collocation: auf always takes Akkusativ here'},
+  {id:'denken_an',     verb:'denken',             prep:'an',    kase:'Akk', en:'to think of/about',        level:'A2',why:'denken an means to have s.o./sth in mind: an + Akkusativ for direction of thought'},
+  {id:'fragen_nach',   verb:'fragen',             prep:'nach',  kase:'Dat', en:'to ask about',             level:'A2',why:'fragen nach asks about information: nach + Dativ for inquiry'},
+  {id:'antworten_auf', verb:'antworten',          prep:'auf',   kase:'Akk', en:'to reply to',              level:'A2',why:'antworten auf responds to something: auf + Akkusativ for the trigger'},
+  {id:'sprechen_ueber',verb:'sprechen',           prep:'über',  kase:'Akk', en:'to talk about',            level:'A2',why:'sprechen über discusses a topic: über + Akkusativ for subject matter'},
+  {id:'sprechen_mit',  verb:'sprechen',           prep:'mit',   kase:'Dat', en:'to talk with',             level:'A2',why:'sprechen mit talks with a person: mit + Dativ for accompaniment'},
+  {id:'helfen_bei',    verb:'helfen',             prep:'bei',   kase:'Dat', en:'to help with',             level:'A2',why:'helfen bei helps with an activity: bei + Dativ for assistance context'},
+  {id:'einladen_zu',   verb:'einladen',           prep:'zu',    kase:'Dat', en:'to invite to',             level:'A2',why:'einladen zu invites to an event: zu + Dativ for destination'},
+  {id:'fahren_mit',    verb:'fahren',             prep:'mit',   kase:'Dat', en:'to travel by',             level:'A2',why:'fahren mit travels by a vehicle: mit + Dativ for means of transport'},
+  {id:'arbeiten_als',  verb:'arbeiten',           prep:'als',   kase:'Nom', en:'to work as',               level:'A2',why:'arbeiten als works as a role: als + Nominativ for identity/role'},
+  {id:'freuen_auf',    verb:'sich freuen',        prep:'auf',   kase:'Akk', en:'to look forward to',      level:'B1',why:'freuen auf anticipates the future: auf + Akkusativ for forward-looking emotion'},
+  {id:'freuen_ueber',  verb:'sich freuen',        prep:'über',  kase:'Akk', en:'to be pleased about',     level:'B1',why:'freuen über is pleased about sth: über + Akkusativ for a reaction to an event'},
+  {id:'interessieren', verb:'sich interessieren', prep:'für',   kase:'Akk', en:'to be interested in',     level:'B1',why:'interessieren für shows interest in a field: für + Akkusativ for what attracts'},
+  {id:'aergern_ueber', verb:'sich ärgern',        prep:'über',  kase:'Akk', en:'to be annoyed about',     level:'B1',why:'ärgern über is annoyed about sth: über + Akkusativ for the cause of irritation'},
+  {id:'kuemmern_um',   verb:'sich kümmern',       prep:'um',    kase:'Akk', en:'to take care of',         level:'B1',why:'kümmern um takes care of s.o./sth: um + Akkusativ for the object of concern'},
+  {id:'bewerben_um',   verb:'sich bewerben',      prep:'um',    kase:'Akk', en:'to apply for',            level:'B1',why:'bewerben um applies for a position: um + Akkusativ for what is sought'},
+  {id:'gehoeren_zu',   verb:'gehören',            prep:'zu',    kase:'Dat', en:'to belong to',            level:'B1',why:'gehören zu belongs to a group: zu + Dativ for membership'},
+  {id:'bestehen_aus',  verb:'bestehen',           prep:'aus',   kase:'Dat', en:'to consist of',           level:'B1',why:'bestehen aus consists of components: aus + Dativ for composition'},
+  {id:'anfangen_mit',  verb:'anfangen',           prep:'mit',   kase:'Dat', en:'to start with',           level:'B1',why:'anfangen mit starts with an activity: mit + Dativ for what is begun'},
+  {id:'aufhoeren_mit', verb:'aufhören',           prep:'mit',   kase:'Dat', en:'to stop doing',           level:'B1',why:'aufhören mit stops an activity: mit + Dativ for what is ended'},
+  {id:'nachdenken',    verb:'nachdenken',         prep:'über',  kase:'Akk', en:'to reflect on',           level:'B1',why:'nachdenken über reflects on a topic: über + Akkusativ for the subject of thought'},
+  {id:'traeumen_von',  verb:'träumen',            prep:'von',   kase:'Dat', en:'to dream of',             level:'B1',why:'träumen von dreams of sth: von + Dativ for the content of dreams'},
+  {id:'gewoehnen_an',  verb:'sich gewöhnen',      prep:'an',    kase:'Akk', en:'to get used to',          level:'B2',why:'gewöhnen an gets used to sth: an + Akkusativ for the new normal'},
+  {id:'verlassen_auf', verb:'sich verlassen',     prep:'auf',   kase:'Akk', en:'to rely on',              level:'B2',why:'verlassen auf relies on s.o.: auf + Akkusativ for the source of trust'},
+  {id:'zweifeln_an',   verb:'zweifeln',           prep:'an',    kase:'Dat', en:'to doubt',                level:'B2',why:'zweifeln an doubts sth: an + Dativ for the object of doubt'},
+  {id:'leiden_unter',  verb:'leiden',             prep:'unter', kase:'Dat', en:'to suffer from',          level:'B2',why:'leiden unter suffers from a condition: unter + Dativ for the cause'},
+  {id:'verzichten_auf',verb:'verzichten',         prep:'auf',   kase:'Akk', en:'to give up',              level:'B2',why:'verzichten auf gives up sth: auf + Akkusativ for what is renounced'},
+  {id:'hinweisen_auf', verb:'hinweisen',          prep:'auf',   kase:'Akk', en:'to point out',            level:'B2',why:'hinweisen auf points out sth: auf + Akkusativ for what is indicated'},
+  {id:'einigen_auf',   verb:'sich einigen',       prep:'auf',   kase:'Akk', en:'to agree on',             level:'B2',why:'einigen auf agrees on sth: auf + Akkusativ for the agreed outcome'},
+  {id:'bestehen_auf',  verb:'bestehen',           prep:'auf',   kase:'Dat', en:'to insist on',            level:'B2',why:'bestehen auf insists on sth: auf + Dativ for the demanded condition'},
+  {id:'beitragen_zu',  verb:'beitragen',          prep:'zu',    kase:'Dat', en:'to contribute to',        level:'B2',why:'beitragen zu contributes to sth: zu + Dativ for the goal supported'},
+  {id:'beziehen_auf',  verb:'sich beziehen',      prep:'auf',   kase:'Akk', en:'to refer to',             level:'B2',why:'beziehen auf refers to sth: auf + Akkusativ for the reference point'},
+  {id:'reagieren_auf', verb:'reagieren',          prep:'auf',   kase:'Akk', en:'to react to',             level:'B2',why:'reagieren auf reacts to sth: auf + Akkusativ for the stimulus'},
+  {id:'verfuegen_ueber',verb:'verfügen',          prep:'über',  kase:'Akk', en:"to have at one's disposal",level:'B2',why:'verfügen über has sth at disposal: über + Akkusativ for what is possessed'},
+  {id:'appellieren_an',verb:'appellieren',        prep:'an',    kase:'Akk', en:'to appeal to',            level:'C1',why:'appellieren an appeals to a quality: an + Akkusativ for what is invoked'},
+  {id:'plaedieren_fuer',verb:'plädieren',         prep:'für',   kase:'Akk', en:'to argue for',            level:'C1',why:'plädieren für argues for sth: für + Akkusativ for what is advocated'},
+  {id:'abfinden_mit',  verb:'sich abfinden',      prep:'mit',   kase:'Dat', en:'to come to terms with',   level:'C1',why:'abfinden mit comes to terms with sth: mit + Dativ for the accepted situation'},
+  {id:'anknuepfen_an', verb:'anknüpfen',          prep:'an',    kase:'Akk', en:'to build on',             level:'C1',why:'anknüpfen an builds on sth existing: an + Akkusativ for the prior reference'},
+  {id:'ausgehen_von',  verb:'ausgehen',           prep:'von',   kase:'Dat', en:'to assume from',          level:'C1',why:'ausgehen von assumes a premise: von + Dativ for the starting assumption'},
+  {id:'auseinandersetzen',verb:'sich auseinandersetzen',prep:'mit',kase:'Dat',en:'to engage with',        level:'C1',why:'auseinandersetzen mit engages critically with sth: mit + Dativ for the subject'},
+  {id:'beruhen_auf',   verb:'beruhen',            prep:'auf',   kase:'Dat', en:'to be based on',          level:'C1',why:'beruhen auf is based on sth: auf + Dativ for the foundation'},
+  {id:'einwirken_auf', verb:'einwirken',          prep:'auf',   kase:'Akk', en:'to influence',            level:'C1',why:'einwirken auf influences sth: auf + Akkusativ for the target'},
+  {id:'entscheiden_fuer',verb:'sich entscheiden', prep:'für',   kase:'Akk', en:'to decide for',           level:'C1',why:'entscheiden für decides in favour of sth: für + Akkusativ for the chosen option'},
+  {id:'richten_nach',  verb:'sich richten',       prep:'nach',  kase:'Dat', en:'to be guided by',         level:'C1',why:'richten nach is guided by sth: nach + Dativ for the standard followed'},
+  {id:'zurueckfuehren',verb:'zurückführen',       prep:'auf',   kase:'Akk', en:'to attribute to',         level:'C1',why:'zurückführen auf attributes sth to a cause: auf + Akkusativ for the cause'}
 ];
 
 var PREP_DISTRACTORS = {
@@ -981,7 +980,7 @@ var PREP_DISTRACTORS = {
   'unter':['von','mit','bei','nach','in'],'als':['wie','für','mit','zu','bei']
 };
 
-var LVL_META = {A2:'A2 — Beginner',B1:'B1 — Intermediate',B2:'B2 — Upper Intermediate',C1:'C1 — Advanced'};
+var LVL_META = {A2:'A2 · Beginner',B1:'B1 · Intermediate',B2:'B2 · Upper Intermediate',C1:'C1 · Advanced'};
 
 // ── VERB REFERENCE ──
 function buildVerbRef() {
@@ -1262,10 +1261,10 @@ function showComplete(){
   document.getElementById('cWrong').textContent=SESSION_SIZE-corr;
   document.getElementById('cPct').textContent=pct+'%';
   var e,t,s;
-  if(pct>=90){e='🏆';t='Ausgezeichnet!';s=pct+'% — mastered!';}
-  else if(pct>=70){e='🎉';t='Sehr gut!';s=pct+'% — great work.';}
-  else if(pct>=50){e='📚';t='Gut gemacht!';s=pct+'% — keep practising.';}
-  else{e='💪';t='Weiter üben!';s=pct+'% — next session drills your weak spots.';}
+  if(pct>=90){e='';t='Ausgezeichnet!';s=pct+'%. Mastered.';}
+  else if(pct>=70){e='';t='Sehr gut!';s=pct+'%. Good work.';}
+  else if(pct>=50){e='';t='Gut gemacht!';s=pct+'%. Keep practising.';}
+  else{e='';t='Weiter üben!';s=pct+'%. Next session drills your weak spots.';}
   document.getElementById('completeEmoji').textContent=e;
   document.getElementById('completeTitle').textContent=t;
   document.getElementById('completeSub').textContent=s;

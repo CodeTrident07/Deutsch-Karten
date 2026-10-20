@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DeutschKarten</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
 /* ════════════════════════════════════════════
@@ -29,8 +29,7 @@
   background-size: 48px 48px;
   opacity: 0.35;
   pointer-events: none;
-  z-index: 0;
-}
+  z-index: 0; display: none;}
 
 #loginScreen::after {
   content: '';
@@ -38,7 +37,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(105,219,124,0.08) 0%, transparent 70%);
+  background: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -228,7 +227,7 @@
   transition: opacity 0.2s, transform 0.15s;
 }
 
-.auth-btn:hover { opacity: 0.88; }
+.auth-btn:hover {background: #cfcfcf;}
 .auth-btn:active { transform: scale(0.98); }
 
 .auth-msg {
@@ -296,8 +295,8 @@
   --border: #26262e;
   --border2: #32323d;
   --text: #eeeef0;
-  --text2: #8888a0;
-  --text3: #55556a;
+  --text2: #a7a7b8;
+  --text3: #80809a;
 
   --a1: #ff6b6b; --a1d: #3d1515;
   --a2: #ffa94d; --a2d: #3d2610;
@@ -326,7 +325,7 @@ body {
 }
 
 /* ─── ANIMATED BG ─── */
-.bg-orb {
+.bg-orb { display: none !important; 
   position: fixed;
   border-radius: 50%;
   filter: blur(120px);
@@ -347,8 +346,7 @@ body {
   justify-content: space-between;
   padding: 1.2rem 1.8rem;
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  background: rgba(20, 20, 24, 0.55);
+  background: var(--surface);
 }
 .logo {
   font-size: 1.25rem;
@@ -557,7 +555,7 @@ main {
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
-  background: radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--lvl) 8%, transparent), transparent 65%);
+  background: none;
   pointer-events: none;
   transition: background 0.4s;
 }
@@ -595,9 +593,8 @@ main {
 }
 
 .word-article {
-  font-family: 'Crimson Pro', serif;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
-  font-style: italic;
   color: var(--lvl);
   margin-bottom: 0.4rem;
   transition: color 0.4s;
@@ -635,7 +632,7 @@ main {
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
-  background: radial-gradient(ellipse at 70% 80%, color-mix(in srgb, var(--lvl) 10%, transparent), transparent 60%);
+  background: none;
   pointer-events: none;
   transition: background 0.4s;
 }
@@ -651,9 +648,8 @@ main {
   transition: color 0.4s;
 }
 .back-example {
-  font-family: 'Crimson Pro', serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
-  font-style: italic;
   color: var(--text2);
   line-height: 1.65;
   max-width: 420px;
@@ -757,7 +753,7 @@ main {
   margin-bottom: 0.5rem;
   color: var(--lvl);
 }
-.complete-sub { color: var(--text2); font-family: 'Crimson Pro', serif; font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6; }
+.complete-sub { color: var(--text2); font-family: var(--font-sans); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6; }
 .complete-stats {
   display: flex;
   gap: 2rem;
@@ -967,6 +963,9 @@ main {
 /* App hidden by default until logged in */
 #appScreen { display: none; }
 
+
+/* Emoji slots are left in the markup for the scripts but not shown */
+.cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
 </style>
 </head>
 <body>
@@ -978,7 +977,7 @@ main {
   <div class="auth-card">
 
     <div class="auth-logo">
-      <div class="auth-logo-icon">🇩🇪</div>
+      <div class="auth-logo-icon">DK</div>
       <div class="auth-logo-text">Deutsch<span>Karten</span></div>
     </div>
 
@@ -1030,7 +1029,7 @@ main {
       <button class="auth-btn" onclick="handleRegister()">Create account →</button>
     </div>
 
-    <div class="auth-footer">Your progress is saved locally in your browser 🔒</div>
+    <div class="auth-footer">Your progress is saved locally in your browser</div>
   </div>
 </div>
 
@@ -1105,14 +1104,14 @@ main {
         <div class="card-tag"><span class="card-tag-dot"></span><span id="backTagText">English</span></div>
         <div class="back-en" id="backEn">—</div>
         <div class="back-example" id="backEx"></div>
-        <button class="voice-btn" id="voiceBtn" onclick="event.stopPropagation(); speakGerman()">🔊 <span class="voice-label">Hear pronunciation</span></button>
+        <button class="voice-btn" id="voiceBtn" onclick="event.stopPropagation(); speakGerman()"><span class="voice-label">Hear pronunciation</span></button>
       </div>
     </div>
   </div>
 
   <!-- COMPLETE SCREEN -->
   <div class="complete-screen" id="completeScreen">
-    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-emoji" id="completeEmoji"></div>
     <div class="complete-title" id="completeTitle">Deck complete!</div>
     <div class="complete-sub" id="completeSub">You reviewed all cards in this deck.</div>
     <div class="complete-stats">
@@ -1174,7 +1173,6 @@ main {
 <div class="chat-panel" id="chatPanel" style="position:fixed;bottom:5.6rem;right:1.8rem;left:auto;top:auto;z-index:9998;">
   <div class="chat-header">
     <div class="chat-header-left">
-      <span class="chat-header-icon">🤖</span>
       <div>
         <div class="chat-header-title">Revision Assistant</div>
         <div class="chat-header-sub">German vocabulary tips</div>
@@ -1185,7 +1183,7 @@ main {
     </div>  </div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-msg chat-msg-ai">
-      <span class="chat-msg-bubble">Hallo! 👋 I'm your free German revision assistant — no internet needed! Ask me about <strong>der/die/das</strong>, cases, verb types, memory tricks, or type <em>"how do I remember this?"</em> for a tip on your current card.</span>
+      <span class="chat-msg-bubble">Hallo! I'm the free German revision helper — no internet needed! Ask me about <strong>der/die/das</strong>, cases, verb types, memory tricks, or type <em>"how do I remember this?"</em> for a tip on your current card.</span>
     </div>
   </div>
   <div class="chat-input-row">
@@ -1279,7 +1277,7 @@ async function handleRegister() {
   authSaveUsers(users);
   authAddSaved(email);
   authSaveSession(email);
-  authShowMsg('Account created! 🎉', 'success');
+  authShowMsg('Account created!', 'success');
   setTimeout(() => showApp({ name, email }), 700);
 }
 
@@ -1295,7 +1293,7 @@ async function handleLogin() {
   if (hash !== user.hash) return authShowMsg('Incorrect password.', 'error');
   authAddSaved(email);
   authSaveSession(email);
-  authShowMsg('Welcome back, ' + user.name + '! 🎉', 'success');
+  authShowMsg('Welcome back, ' + user.name + '!', 'success');
   setTimeout(() => showApp(user), 600);
 }
 
@@ -4188,7 +4186,7 @@ function buildCats() {
   const all = document.createElement('button');
   all.className = 'cat-chip' + (catKey === '__all__' ? ' active' : '');
   all.dataset.cat = '__all__';
-  all.innerHTML = '<span class="icon">✨</span> All topics';
+  all.innerHTML = 'All topics';
   all.onclick = () => selectCat('__all__');
   strip.appendChild(all);
 
@@ -4406,10 +4404,10 @@ function showComplete() {
   document.getElementById('cTotal').textContent = deck.length;
 
   let emoji, title, sub;
-  if (pct >= 90) { emoji = '🏆'; title = 'Ausgezeichnet!'; sub = 'You knew ' + pct + '% of this deck. Incredible work!'; }
-  else if (pct >= 70) { emoji = '🎉'; title = 'Sehr gut!'; sub = 'You knew ' + pct + '% of the deck. Keep it up!'; }
-  else if (pct >= 50) { emoji = '📚'; title = 'Gut gemacht!'; sub = 'You knew ' + pct + '% — practice the rest!'; }
-  else { emoji = '💪'; title = 'Weiter üben!'; sub = 'You knew ' + pct + '% — review the "still learning" pile.'; }
+  if (pct >= 90) { emoji = ''; title = 'Ausgezeichnet!'; sub = 'You knew ' + pct + '% of this deck. Incredible work!'; }
+  else if (pct >= 70) { emoji = ''; title = 'Sehr gut!'; sub = 'You knew ' + pct + '% of the deck. Keep it up!'; }
+  else if (pct >= 50) { emoji = ''; title = 'Gut gemacht!'; sub = 'You knew ' + pct + '%. Practise the rest.'; }
+  else { emoji = ''; title = 'Weiter üben!'; sub = 'You knew ' + pct + '%. Go through the "still learning" pile again.'; }
 
   document.getElementById('completeEmoji').textContent = emoji;
   document.getElementById('completeTitle').textContent = title;
@@ -4582,7 +4580,7 @@ function updatePracticeChip() {
   }
 
   chip.classList.toggle('active', catKey === PRACTICE_KEY);
-  chip.innerHTML = `<span class="icon">⚡</span>Needs Practice<span class="srs-badge">${cards.length}</span>`;
+  chip.innerHTML = `Needs practice<span class="srs-badge">${cards.length}</span>`;
 }
 
 // Move chat elements to document root to escape body flex container
@@ -4641,34 +4639,34 @@ function chatRemoveTyping() {
 
 const TIPS = {
   der: [
-    "🔵 <strong>der</strong> = masculine. Memory trick: think of strong, bold things — <em>der Mann, der Berg, der Hund</em>.",
+    "<strong>der</strong> = masculine. Memory trick: think of strong, bold things: <em>der Mann, der Berg, der Hund</em>.",
     "Masculine nouns often end in <strong>-er, -en, -el</strong> (der Lehrer, der Wagen, der Mantel).",
     "Days, months, seasons and compass points are all <em>der</em>: <em>der Montag, der Januar, der Sommer, der Norden</em>.",
   ],
   die: [
-    "🔴 <strong>die</strong> = feminine. Memory trick: think of elegant, flowing things — <em>die Frau, die Blume, die Stadt</em>.",
+    "<strong>die</strong> = feminine. Memory trick: think of elegant, flowing things: <em>die Frau, die Blume, die Stadt</em>.",
     "Nouns ending in <strong>-ung, -heit, -keit, -schaft, -tion, -tät</strong> are almost always <em>die</em>: <em>die Wohnung, die Freiheit, die Nation</em>.",
     "Most nouns ending in <strong>-e</strong> are feminine: <em>die Straße, die Küche, die Sprache</em>.",
   ],
   das: [
-    "⚪ <strong>das</strong> = neuter. Memory trick: think of small, young, or diminutive things — <em>das Kind, das Baby, das Mädchen</em>.",
+    "<strong>das</strong> = neuter. Memory trick: think of small, young, or diminutive things: <em>das Kind, das Baby, das Mädchen</em>.",
     "Diminutives ending in <strong>-chen</strong> or <strong>-lein</strong> are always <em>das</em>: <em>das Mädchen, das Büchlein</em>.",
     "Nouns ending in <strong>-ment, -um, -tum</strong> are usually neuter: <em>das Dokument, das Zentrum, das Reichtum</em>.",
   ],
   artikel: [
-    "German has 3 articles: <strong>der</strong> (masc), <strong>die</strong> (fem), <strong>das</strong> (neuter). Always learn the article with the noun — treat <em>der Tisch</em> as one word, not two!",
-    "A great trick: colour-code your notes — blue for <em>der</em>, red for <em>die</em>, green for <em>das</em>. Your brain remembers colour associations well.",
+    "German has 3 articles: <strong>der</strong> (masc), <strong>die</strong> (fem), <strong>das</strong> (neuter). Always learn the article with the noun, and treat <em>der Tisch</em> as one word, not two!",
+    "A great trick: colour-code your notes: blue for <em>der</em>, red for <em>die</em>, green for <em>das</em>. Your brain remembers colour associations well.",
     "There's no perfect rule for articles, but endings help: <em>-ung, -heit → die</em> | <em>-chen, -lein → das</em> | <em>-er (agent nouns) → der</em>.",
   ],
   akkusativ: [
     "Akkusativ = the <strong>direct object</strong> (what receives the action). Only <em>der</em> changes: <em>der → den</em>.\n<em>Ich sehe <strong>den</strong> Mann.</em>",
-    "Key Akkusativ prepositions: <strong>durch, für, gegen, ohne, um</strong> — always trigger Akkusativ.\n<em>Das ist ein Geschenk <strong>für</strong> meinen Vater.</em>",
+    "Key Akkusativ prepositions: <strong>durch, für, gegen, ohne, um</strong> always trigger Akkusativ.\n<em>Das ist ein Geschenk <strong>für</strong> meinen Vater.</em>",
     "Akkusativ verbs take a direct object: haben, sehen, hören, kaufen, nehmen, essen, trinken, lieben, kennen, finden.",
   ],
   dativ: [
     "Dativ = the <strong>indirect object</strong> (to/for whom). Changes: <em>der→dem, die→der, das→dem, die(pl)→den+n</em>.\n<em>Ich gebe <strong>dem</strong> Mann das Buch.</em>",
-    "Key Dativ prepositions: <strong>mit, nach, bei, seit, von, zu, aus, gegenüber</strong> — always Dativ.\n<em>Ich fahre <strong>mit dem</strong> Bus.</em>",
-    "Dativ verbs: helfen, danken, gefallen, gehören, glauben, folgen, passen, schmecken — these take Dativ, not Akkusativ!",
+    "Key Dativ prepositions: <strong>mit, nach, bei, seit, von, zu, aus, gegenüber</strong> always take Dativ.\n<em>Ich fahre <strong>mit dem</strong> Bus.</em>",
+    "Dativ verbs: helfen, danken, gefallen, gehören, glauben, folgen, passen, schmecken. These take Dativ, not Akkusativ.",
   ],
   genitiv: [
     "Genitiv = possession. <em>der→des+s, die→der, das→des+s</em>.\n<em>Das ist das Auto <strong>des Mannes</strong>.</em>",
@@ -4677,7 +4675,7 @@ const TIPS = {
   ],
   nominativ: [
     "Nominativ = the <strong>subject</strong> of the sentence (who is doing the action).\n<em><strong>Der Mann</strong> kauft ein Buch.</em>",
-    "After <em>sein</em> (to be) and <em>werden</em> (to become), use Nominativ — not Akkusativ!\n<em>Er ist <strong>ein guter Lehrer</strong>.</em>",
+    "After <em>sein</em> (to be) and <em>werden</em> (to become), use Nominativ, not Akkusativ.\n<em>Er ist <strong>ein guter Lehrer</strong>.</em>",
   ],
   perfekt: [
     "Perfekt = past tense used in spoken German. Structure: <strong>haben/sein + Partizip II</strong>.\n<em>Ich <strong>habe</strong> gegessen. / Ich <strong>bin</strong> gegangen.</em>",
@@ -4693,7 +4691,7 @@ const TIPS = {
     "Key forms to memorise: <em>wäre (sein), hätte (haben), würde (werden), könnte (können), müsste (müssen)</em>.",
   ],
   trennbar: [
-    "Separable verbs split in main clauses — prefix goes to the END.\n<em>Ich <strong>stehe</strong> um 7 Uhr <strong>auf</strong>.</em>\nBut stay together in subordinate clauses:\n<em>…weil ich um 7 Uhr <strong>aufstehe</strong>.</em>",
+    "Separable verbs split in main clauses, and the prefix goes to the end.\n<em>Ich <strong>stehe</strong> um 7 Uhr <strong>auf</strong>.</em>\nBut stay together in subordinate clauses:\n<em>…weil ich um 7 Uhr <strong>aufstehe</strong>.</em>",
     "Common separable prefixes: <strong>auf-, an-, aus-, ab-, ein-, mit-, nach-, vor-, zu-, zurück-</strong>.",
     "In infinitive constructions with modals, the verb stays together:\n<em>Ich muss früh <strong>aufstehen</strong>.</em>",
   ],
@@ -4709,21 +4707,21 @@ const TIPS = {
   ],
   wortschatz: [
     "Best way to build vocabulary: learn words in <strong>context</strong>, not isolated lists. Notice how words appear in sentences.",
-    "Use the <strong>spaced repetition</strong> built into this app — it schedules cards just before you'd forget them. Trust the system!",
+    "Use the <strong>spaced repetition</strong> built into this app. It schedules cards just before you'd forget them. Trust the system!",
     "Group words by <strong>word families</strong>: <em>arbeiten → die Arbeit → der Arbeiter → die Arbeitslosigkeit</em>. One root, many words!",
   ],
   gender: [
-    "The #1 tip: <strong>always learn the article with the noun</strong>. Don't learn <em>Tisch</em> — learn <em>der Tisch</em>.",
+    "The #1 tip: <strong>always learn the article with the noun</strong>. Don't learn <em>Tisch</em>, learn <em>der Tisch</em>.",
     "Helpful patterns:\n• <em>-ung, -heit, -keit, -schaft, -tion</em> → <strong>die</strong>\n• <em>-chen, -lein, -ment, -um</em> → <strong>das</strong>\n• <em>-er</em> (person doing sth), days/months/seasons → <strong>der</strong>",
-    "When in doubt, guess <em>die</em> — it's statistically the most common gender in German!",
+    "When in doubt, guess <em>die</em>. It's statistically the most common gender in German!",
   ],
   mnemonic: [
     "For nouns: create a vivid mental image linking the word to its gender colour (blue=der, red=die, green=das).",
     "For verbs: act them out or say them aloud while doing the action. Physical memory is powerful!",
-    "Make up a silly sentence using the word. The more ridiculous, the better — your brain remembers unusual things.",
+    "Make up a silly sentence using the word. The more ridiculous, the better. Your brain remembers unusual things.",
   ],
   plural: [
-    "German plurals are unpredictable — always learn them with the word.\nCommon patterns: <em>-e (der Tag→Tage), -er (das Kind→Kinder), -en (die Frau→Frauen), -(e)n (die Schwester→Schwestern), umlaut (der Vater→Väter)</em>.",
+    "German plurals are unpredictable, so always learn them with the word.\nCommon patterns: <em>-e (der Tag→Tage), -er (das Kind→Kinder), -en (die Frau→Frauen), -(e)n (die Schwester→Schwestern), umlaut (der Vater→Väter)</em>.",
     "Some nouns don't change in plural: <em>der Lehrer→die Lehrer, das Zimmer→die Zimmer</em>.",
     "Plural article is always <strong>die</strong> regardless of the singular gender: <em>der Mann→die Männer, das Kind→die Kinder</em>.",
   ],
@@ -4740,14 +4738,14 @@ function getBotReply(input) {
     if (card.t === 'noun') {
       const art = card.a;
       tips.push(`<strong>${card.w}</strong> = "${card.en}"`);
-      if (art === 'der') tips.push('It\'s <strong>der</strong> (masculine) 🔵 — try to picture a strong, bold image for it.');
-      if (art === 'die') tips.push('It\'s <strong>die</strong> (feminine) 🔴 — picture something elegant or flowing.');
-      if (art === 'das') tips.push('It\'s <strong>das</strong> (neuter) ⚪ — often small, young, or abstract things.');
+      if (art === 'der') tips.push('It\'s <strong>der</strong> (masculine) — try to picture a strong, bold image for it.');
+      if (art === 'die') tips.push('It\'s <strong>die</strong> (feminine) — picture something elegant or flowing.');
+      if (art === 'das') tips.push('It\'s <strong>das</strong> (neuter) — often small, young, or abstract things.');
       tips.push(`Example: <em>${card.ex.replace(/<[^>]+>/g,'')}</em>`);
     } else if (card.t === 'verb') {
       tips.push(`<strong>${card.w}</strong> = "${card.en}"`);
       tips.push(`Example: <em>${card.ex.replace(/<[^>]+>/g,'')}</em>`);
-      tips.push('Try saying it aloud while miming the action — physical memory sticks!');
+      tips.push('Try saying it aloud while miming the action. Physical memory sticks.');
     } else {
       tips.push(`<strong>${card.w}</strong> = "${card.en}"`);
       tips.push(`Try using it in a sentence: <em>${card.ex.replace(/<[^>]+>/g,'')}</em>`);
@@ -4779,13 +4777,13 @@ function getBotReply(input) {
 
   // ── Greeting ──
   if (/^(hi|hello|hallo|hey|guten)\b/.test(q)) {
-    const c = card ? ` You're currently on <strong>${card.w}</strong> — want a tip for it?` : '';
-    return `Hallo! 👋 Ask me about articles (der/die/das), cases (Akkusativ/Dativ), verb types, memory tricks, or anything else German.${c}`;
+    const c = card ? ` You're currently on <strong>${card.w}</strong>. Want a tip for it?` : '';
+    return `Hallo! Ask me about articles (der/die/das), cases (Akkusativ/Dativ), verb types, memory tricks, or anything else German.${c}`;
   }
 
   // ── What can you do ──
   if (/what can you|help|how does this work|what do you/.test(q)) {
-    return `I can help with:\n• <strong>Articles</strong> — der/die/das rules & tricks\n• <strong>Cases</strong> — Nominativ, Akkusativ, Dativ, Genitiv\n• <strong>Verbs</strong> — modal, separable, reflexive, Perfekt\n• <strong>Memory tips</strong> — mnemonics for any word\n• <strong>Current card</strong> — just ask "how do I remember this?"`;
+    return `I can help with:\n• <strong>Articles</strong>: der/die/das rules & tricks\n• <strong>Cases</strong>: Nominativ, Akkusativ, Dativ, Genitiv\n• <strong>Verbs</strong>: modal, separable, reflexive, Perfekt\n• <strong>Memory tips</strong>: mnemonics for any word\n• <strong>Current card</strong>: just ask "how do I remember this?"`;
   }
 
   // ── Fallback ──

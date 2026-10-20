@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080808">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch-Karten</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   .logo-author {
   font-size: 0.6rem;
@@ -32,8 +32,8 @@
 
   /* ── Greyscale ── */
   --g1:   #f0f0f0;
-  --g2:   #909090;
-  --g3:   #484848;
+  --g2:   #ababab;
+  --g3:   #7c7c7c;
   --g4:   #303030;
 
   /* ── Semantic aliases ── */
@@ -41,7 +41,7 @@
   --surface2:  var(--s2);
   --surface3:  var(--s3);
   --border:    var(--g4);
-  --border2:   var(--g3);
+  --border2:   #3d3d3d;
   --text:      var(--g1);
   --text2:     var(--g2);
   --text3:     var(--g3);
@@ -62,7 +62,7 @@
 
   /* ── Typography ── */
   --font-sans:  'Bricolage Grotesque', system-ui, sans-serif;
-  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-serif: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   --text-xs:   0.65rem;   /* 10.4px — labels, badges */
@@ -114,10 +114,10 @@
   --sf2:     var(--s2);
   --sf3:     var(--s3);
   --bord:    var(--g4);
-  --bord2:   var(--g3);
+  --bord2:   #3d3d3d;
   --rule:    var(--g4);
-  --rule2:   var(--g3);
-  --ln2:     var(--g3);
+  --rule2:   #3d3d3d;
+  --ln2:     #3d3d3d;
   --line:    var(--g4);
   --glow:    var(--glow-sm);
   --glow-sm: 0 0 16px rgba(255,255,255,0.06);
@@ -196,7 +196,7 @@ button, input, select, textarea { font-family: inherit; }
   transition: opacity var(--t-base) var(--ease);
   user-select: none;
 }
-.logo:hover { opacity: 0.6; }
+.logo:hover {text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;}
 .logo-slash {
   font-size: var(--text-xs);
   font-family: var(--font-mono);
@@ -255,11 +255,7 @@ button, input, select, textarea { font-family: inherit; }
               box-shadow var(--t-base) var(--ease),
               transform var(--t-fast) var(--ease);
 }
-.btn-primary:hover {
-  opacity: 0.88;
-  box-shadow: 0 0 20px rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
+.btn-primary:hover {background: #cfcfcf;}
 .btn-primary:active { transform: scale(0.97); opacity: 0.8; }
 .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
 
@@ -301,7 +297,7 @@ button, input, select, textarea { font-family: inherit; }
   position: absolute;
   inset: 0 0 auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background: none;
   pointer-events: none;
 }
 
@@ -412,7 +408,6 @@ body {
   justify-content: space-between;
   padding: 0 var(--sp-6);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
   background: var(--s1);
 }
 .logo {
@@ -423,10 +418,7 @@ body {
   transition: text-shadow 0.3s, transform 0.2s;
 }
 
-.logo:hover {
-  opacity: 0.65;
-  transform: translateY(-1px);
-}
+.logo:hover {text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;}
 .logo span { color: var(--g1); }
 
 .kbd-hint {
@@ -672,7 +664,7 @@ main {
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
-  background: radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--lvl) 8%, transparent), transparent 65%);
+  background: none;
   pointer-events: none;
   transition: background 0.4s;
 }
@@ -710,9 +702,8 @@ main {
 }
 
 .word-article {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
-  font-style: italic;
   color: var(--lvl);
   margin-bottom: 0.4rem;
   transition: color 0.4s;
@@ -750,7 +741,7 @@ main {
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
-  background: radial-gradient(ellipse at 70% 80%, color-mix(in srgb, var(--lvl) 10%, transparent), transparent 60%);
+  background: none;
   pointer-events: none;
   transition: background 0.4s;
 }
@@ -766,9 +757,8 @@ main {
   transition: color 0.4s;
 }
 .back-example {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
-  font-style: italic;
   color: var(--text2);
   line-height: 1.65;
   max-width: 420px;
@@ -904,7 +894,7 @@ main {
   margin-bottom: 0.5rem;
   color: var(--lvl);
 }
-.complete-sub { color: var(--text2); font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6; }
+.complete-sub { color: var(--text2); font-family: var(--font-sans); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6; }
 .complete-stats {
   display: flex;
   gap: 2rem;
@@ -970,6 +960,9 @@ main {
   .kbd-hint { display: none; }
   .action-row { grid-template-columns: 44px 1fr 1fr 44px; max-width: 100%; }
 }
+
+/* Emoji slots are left in the markup for the scripts but not shown */
+.cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
 </style>
 </head>
 <body>
@@ -1001,13 +994,13 @@ main {
 <!-- ACTIVITY STRIP -->
 <div class="activity-strip-wrap">
   <span class="activity-strip-label">Activities</span>
-  <a href="wordle.html"       class="act-chip">🟩 Wördle</a>
-  <a href="sprint.html"       class="act-chip">⚡ Sprint</a>
-  <a href="derdiedas.html"    class="act-chip">🔵 Der/Die/Das</a>
-  <a href="spelling.html"     class="act-chip">✍️ Spelling</a>
-  <a href="phrases.html"      class="act-chip">💬 Phrases</a>
-  <a href="praepositionen.html" class="act-chip">🔗 Präpositionen</a>
-  <a href="leaderboard.html"  class="act-chip">🏆 Leaderboard</a>
+  <a href="wordle.html"       class="act-chip">Wördle</a>
+  <a href="sprint.html"       class="act-chip">Sprint</a>
+  <a href="derdiedas.html"    class="act-chip">Der/Die/Das</a>
+  <a href="spelling.html"     class="act-chip">Spelling</a>
+  <a href="phrases.html"      class="act-chip">Phrases</a>
+  <a href="praepositionen.html" class="act-chip">Präpositionen</a>
+  <a href="leaderboard.html"  class="act-chip">Leaderboard</a>
 </div>
 
 <!-- CATEGORY STRIP -->
@@ -1050,7 +1043,7 @@ main {
 
   <!-- COMPLETE SCREEN -->
   <div class="complete-screen" id="completeScreen">
-    <div class="complete-emoji" id="completeEmoji">🎉</div>
+    <div class="complete-emoji" id="completeEmoji"></div>
     <div class="complete-title" id="completeTitle">Deck complete!</div>
     <div class="complete-sub" id="completeSub">You reviewed all cards in this deck.</div>
     <div class="complete-stats">
@@ -1845,7 +1838,7 @@ function buildCats() {
   const all = document.createElement('button');
   all.className = 'cat-chip' + (catKey === '__all__' ? ' active' : '');
   all.dataset.cat = '__all__';
-  all.innerHTML = '<span class="icon">✨</span> All topics';
+  all.innerHTML = 'All topics';
   all.onclick = () => selectCat('__all__');
   strip.appendChild(all);
 
@@ -1855,7 +1848,7 @@ function buildCats() {
     const pc = document.createElement('button');
     pc.className = 'cat-chip' + (catKey === '__practice__' ? ' active' : '');
     pc.dataset.cat = '__practice__';
-    pc.innerHTML = `<span class="icon">🔁</span> Needs Practice <span class="srs-badge">${practiceCards.length}</span>`;
+    pc.innerHTML = `Needs practice <span class="srs-badge">${practiceCards.length}</span>`;
     pc.onclick = () => selectCat('__practice__');
     strip.appendChild(pc);
   } else if (catKey === '__practice__') {
@@ -2059,10 +2052,10 @@ function showComplete() {
   document.getElementById('cTotal').textContent = deck.length;
 
   let emoji, title, sub;
-  if (pct >= 90) { emoji = '🏆'; title = 'Ausgezeichnet!'; sub = 'You knew ' + pct + '% of this deck. Incredible work!'; }
-  else if (pct >= 70) { emoji = '🎉'; title = 'Sehr gut!'; sub = 'You knew ' + pct + '% of the deck. Keep it up!'; }
-  else if (pct >= 50) { emoji = '📚'; title = 'Gut gemacht!'; sub = 'You knew ' + pct + '% — practice the rest!'; }
-  else { emoji = '💪'; title = 'Weiter üben!'; sub = 'You knew ' + pct + '% — review the "still learning" pile.'; }
+  if (pct >= 90) { emoji = ''; title = 'Ausgezeichnet!'; sub = 'You knew ' + pct + '% of this deck. Incredible work!'; }
+  else if (pct >= 70) { emoji = ''; title = 'Sehr gut!'; sub = 'You knew ' + pct + '% of the deck. Keep it up!'; }
+  else if (pct >= 50) { emoji = ''; title = 'Gut gemacht!'; sub = 'You knew ' + pct + '%. Practise the rest.'; }
+  else { emoji = ''; title = 'Weiter üben!'; sub = 'You knew ' + pct + '%. Go through the "still learning" pile again.'; }
 
   document.getElementById('completeEmoji').textContent = emoji;
   document.getElementById('completeTitle').textContent = title;
