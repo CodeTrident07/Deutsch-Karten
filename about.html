@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#080808">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About – DeutschKarten</title>
+<meta name="description" content="Who made DeutschKarten and why: free German flashcards and games from A1 to C1.">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -69,8 +70,31 @@ h1 {
   line-height: 1.1;
   margin-bottom: 16px;
 }
-p { font-size: 1.05rem; color: var(--g2); }
+p { font-size: 1.05rem; line-height: 1.65; color: var(--g2); }
+.intro { font-size: 1.15rem; color: var(--g1); }
+h2 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--g3);
+  margin: 44px 0 12px;
+}
+p + p { margin-top: 14px; }
+ul { list-style: none; border-top: 1px solid var(--g4); }
+li { border-bottom: 1px solid var(--g4); }
+li a {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 12px 0; color: var(--g1); text-decoration: none; font-weight: 600;
+}
+li a span { color: var(--g2); font-weight: 400; text-align: right; }
+li a:hover { text-decoration: underline; text-underline-offset: 3px; }
+main a.inline { color: var(--g1); text-underline-offset: 3px; }
+main a.inline:hover { color: var(--g2); }
 @media (max-width: 500px) {
+  li a { flex-direction: column; gap: 2px; }
+  li a span { text-align: left; }
   .topbar { padding: 0 16px; }
   main { padding: 40px 16px; }
   h1 { font-size: 2rem; }
@@ -87,7 +111,31 @@ p { font-size: 1.05rem; color: var(--g2); }
 <main>
   <div class="label">About</div>
   <h1>Praanav</h1>
-  <p>I founded DeutschKarten.</p>
+  <p class="intro">Hi, I'm Praanav. I'm a student living in Germany, and I built DeutschKarten.</p>
+
+  <h2>Why I made it</h2>
+  <p>I started learning German at a language school at the end of 2025, online at first and then in person after I moved to Germany in March. I went from A1 to C1 in about eight months and finished with an average grade of 1,4.</p>
+  <p>DeutschKarten started as what I used to study for those courses. I shared it because the things that helped me, like always learning a noun together with its article, could help anyone preparing for a course, an exam or a move to Germany. Building it also taught me a lot about making websites.</p>
+
+  <h2>What's on the site</h2>
+  <ul>
+    <li><a href="app.html">Flashcards <span>A1 to C1, with spaced repetition</span></a></li>
+    <li><a href="wordle.html">Wördle <span>A new German word every day</span></a></li>
+    <li><a href="sprint.html">Sprint <span>Spell as many words as you can in 30 seconds</span></a></li>
+    <li><a href="derdiedas.html">Der/Die/Das <span>Practise noun genders</span></a></li>
+    <li><a href="spelling.html">Spelling <span>Type the German word from the English</span></a></li>
+    <li><a href="phrases.html">Phrases <span>Everyday expressions and idioms</span></a></li>
+    <li><a href="praepositionen.html">Präpositionen <span>Verbs with fixed prepositions</span></a></li>
+    <li><a href="starke-verben.html">Starke Verben <span>Irregular verb forms</span></a></li>
+    <li><a href="leaderboard.html">Leaderboard <span>See how you compare</span></a></li>
+  </ul>
+
+  <h2>Free, no ads</h2>
+  <p>DeutschKarten is free and has no ads. Your progress is saved in your own browser, not on a server.</p>
+
+  <h2>Contact</h2>
+  <p>Questions, ideas, or spotted a wrong word? Email <a class="inline" href="mailto:deutschkarten2026@gmail.com">deutschkarten2026@gmail.com</a>.</p>
+  <p>The code is on GitHub: <a class="inline" href="https://github.com/CodeTrident07/Deutsch-Karten">github.com/CodeTrident07/Deutsch-Karten</a></p>
 </main>
 
 </body>
