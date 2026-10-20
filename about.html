@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#080808">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – DeutschKarten</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --g1: #f0f0f0;
+  --g2: #ababab;
+  --g3: #7c7c7c;
+  --g4: #303030;
+  --font-sans: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--g1);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.topbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--g4);
+}
+.logo {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--g1);
+  text-decoration: none;
+}
+.logo:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.back-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--g2);
+  text-decoration: none;
+}
+.back-link:hover { color: var(--g1); text-decoration: underline; text-underline-offset: 3px; }
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--g3);
+  margin-bottom: 12px;
+}
+h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+p { font-size: 1.05rem; color: var(--g2); }
+@media (max-width: 500px) {
+  .topbar { padding: 0 16px; }
+  main { padding: 40px 16px; }
+  h1 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="logo">DeutschKarten</a>
+  <a href="index.html" class="back-link">← Flashcards</a>
+</header>
+
+<main>
+  <div class="label">About</div>
+  <h1>Praanav</h1>
+  <p>I founded DeutschKarten.</p>
+</main>
+
+</body>
+</html>

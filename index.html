@@ -961,6 +961,16 @@ main {
   .action-row { grid-template-columns: 44px 1fr 1fr 44px; max-width: 100%; }
 }
 
+/* About link in the top bar */
+.topbar-right { display: flex; align-items: center; gap: var(--sp-6); }
+.about-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--g2);
+  text-decoration: none;
+}
+.about-link:hover { color: var(--g1); text-decoration: underline; text-underline-offset: 3px; }
+
 /* Emoji slots are left in the markup for the scripts but not shown */
 .cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
 </style>
@@ -974,11 +984,14 @@ main {
     Deutsch<span>Karten</span>
     <span class="logo-author">By Praanav</span>
   </div>
-  <div class="kbd-hint">
-    <span><span class="kbd">Space</span> flip</span>
-    <span><span class="kbd">→</span> next</span>
-    <span><span class="kbd">Y</span> know it</span>
-    <span><span class="kbd">N</span> learning</span>
+  <div class="topbar-right">
+    <div class="kbd-hint">
+      <span><span class="kbd">Space</span> flip</span>
+      <span><span class="kbd">→</span> next</span>
+      <span><span class="kbd">Y</span> know it</span>
+      <span><span class="kbd">N</span> learning</span>
+    </div>
+    <a href="about.html" class="about-link">About</a>
   </div>
 </header>
 
