@@ -99,6 +99,18 @@ main a.inline:hover { color: var(--g2); }
   main { padding: 40px 16px; }
   h1 { font-size: 2rem; }
 }
+
+/* Binary ripple behind the heading */
+body { position: relative; }
+#binary {
+  position: absolute; top: 52px; left: 0; width: 100%; height: 420px;
+  z-index: 0; cursor: crosshair;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 88%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 88%);
+}
+main { position: relative; z-index: 1; pointer-events: none; }
+main a, main li, main p, main h1, main h2 { pointer-events: auto; }
+@media (max-width: 500px) { #binary { height: 340px; } }
 </style>
 </head>
 <body>
@@ -108,13 +120,15 @@ main a.inline:hover { color: var(--g2); }
   <a href="app.html" class="back-link">← Home</a>
 </header>
 
+<canvas id="binary" aria-hidden="true"></canvas>
+
 <main>
   <div class="label">About</div>
   <h1>Praanav</h1>
   <p class="intro">Hi, I'm Praanav. I'm a student living in Germany, and I built DeutschKarten.</p>
 
   <h2>Why I made it</h2>
-  <p>I started learning German at a language school at the end of 2025, online at first and then in person after I moved to Germany in March. I went from A1 to C1 in about eight months and finished with an average grade of 1,4.</p>
+  <p>I started learning German at a language school at the end of December 2025, online at first and then in person after I moved to Germany in March. I went from A1 to C1 in about eight months and finished with an average grade of 1,4.</p>
   <p>DeutschKarten started as what I used to study for those courses. I shared it because the things that helped me, like always learning a noun together with its article, could help anyone preparing for a course, an exam or a move to Germany. Building it also taught me a lot about making websites.</p>
 
   <h2>What's on the site</h2>
@@ -138,5 +152,87 @@ main a.inline:hover { color: var(--g2); }
   <p>The code is on GitHub: <a class="inline" href="https://github.com/CodeTrident07/Deutsch-Karten">github.com/CodeTrident07/Deutsch-Karten</a></p>
 </main>
 
+
+<script>
+// Field of 0s and 1s; ripples spread out every few seconds and on click/tap.
+(function () {
+  const canvas = document.getElementById('binary');
+  const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const CELL = 16, FONT = 12;
+  const SPEED = 0.22;        // px per ms
+  const WIDTH = 46;          // thickness of the ring
+  const LIFE = 3200;         // ms before a ripple fades out
+  let cols, rows, digits, dpr, ripples = [], last = 0, nextAuto = 0, raf;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(w / CELL) + 1; rows = Math.ceil(h / CELL) + 1;
+    digits = Array.from({ length: cols * rows }, () => Math.random() < 0.5 ? '0' : '1');
+    draw(performance.now());
+  }
+
+  function addRipple(x, y, t) { ripples.push({ x, y, t }); if (ripples.length > 6) ripples.shift(); }
+
+  function draw(now) {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    ctx.font = FONT + 'px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ripples = ripples.filter(r => now - r.t < LIFE);
+    for (let j = 0; j < rows; j++) {
+      for (let i = 0; i < cols; i++) {
+        const x = i * CELL + CELL / 2, y = j * CELL + CELL / 2;
+        let glow = 0;
+        for (const r of ripples) {
+          const age = now - r.t, radius = age * SPEED;
+          const d = Math.hypot(x - r.x, y - r.y) - radius;
+          const g = Math.exp(-(d * d) / (2 * WIDTH * WIDTH)) * (1 - age / LIFE);
+          if (g > glow) glow = g;
+        }
+        const k = j * cols + i;
+        if (glow > 0.55 && Math.random() < 0.08) digits[k] = digits[k] === '0' ? '1' : '0';
+        const a = 0.06 + glow * 0.42;
+        ctx.fillStyle = glow > 0.6 ? `rgba(240,240,240,${a})` : `rgba(171,171,171,${a})`;
+        ctx.fillText(digits[k], x, y);
+      }
+    }
+  }
+
+  function frame(now) {
+    if (now - last > 33) {          // about 30 fps is plenty
+      if (now > nextAuto) {
+        addRipple(Math.random() * canvas.clientWidth, Math.random() * canvas.clientHeight * 0.7, now);
+        nextAuto = now + 2600 + Math.random() * 1800;
+      }
+      draw(now); last = now;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    cancelAnimationFrame(raf);
+    if (reduce.matches || document.hidden) { draw(performance.now()); return; }
+    raf = requestAnimationFrame(frame);
+  }
+
+  canvas.addEventListener('pointerdown', e => {
+    const b = canvas.getBoundingClientRect();
+    addRipple(e.clientX - b.left, e.clientY - b.top, performance.now());
+    if (reduce.matches) draw(performance.now());
+  });
+  window.addEventListener('resize', resize);
+  document.addEventListener('visibilitychange', start);
+  reduce.addEventListener?.('change', start);
+
+  resize();
+  addRipple(canvas.clientWidth * 0.3, 90, performance.now());   // first ripple from behind the name
+  nextAuto = performance.now() + 2200;
+  start();
+})();
+</script>
 </body>
 </html>
