@@ -650,6 +650,16 @@ body::before {
   color: #ababab; text-decoration: none;
 }
 .auth-back:hover { color: #f0f0f0; text-decoration: underline; text-underline-offset: 3px; }
+
+.auth-link {
+  display: block; width: 100%; margin-top: 12px; padding: 4px 0;
+  background: none; border: none; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: #ababab; text-align: center;
+}
+.auth-link:hover { color: #f0f0f0; text-decoration: underline; text-underline-offset: 3px; }
+.reset-note { font-size: 0.8rem; line-height: 1.5; color: #ababab; margin-bottom: 16px; }
+.card-footer { margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -694,6 +704,7 @@ body::before {
     </div>
 
     <button class="auth-submit" onclick="handleLogin()">Sign in →</button>
+    <button type="button" class="auth-link" onclick="switchTab('reset')">Forgot password?</button>
 
   </div>
 
@@ -716,6 +727,29 @@ body::before {
     </div>
 
     <button class="btn-submit" onclick="handleRegister()">Create account →</button>
+  </div>
+
+  <!-- ── Reset password form ── -->
+  <div id="resetForm" style="display:none;">
+    <p class="reset-note">Accounts are saved in this browser, so you can set a new password here for any account made on this device. Your progress stays.</p>
+
+    <div class="auth-field">
+      <label for="resetEmail">Email</label>
+      <input type="email" class="auth-input" id="resetEmail" placeholder="your@email.com" autocomplete="email">
+    </div>
+
+    <div class="auth-field">
+      <label for="resetPassword">New password</label>
+      <input type="password" class="auth-input" id="resetPassword" placeholder="at least 6 characters" autocomplete="new-password">
+    </div>
+
+    <div class="auth-field">
+      <label for="resetConfirm">Repeat new password</label>
+      <input type="password" class="auth-input" id="resetConfirm" placeholder="same again" autocomplete="new-password">
+    </div>
+
+    <button class="auth-submit" onclick="handleReset()">Set new password →</button>
+    <button type="button" class="auth-link" onclick="switchTab('login')">← Back to sign in</button>
   </div>
 
   <div class="card-footer">
@@ -770,6 +804,12 @@ function removeSavedEmail(email) {
 function switchTab(tab) {
   document.getElementById('loginForm').style.display = tab === 'login' ? '' : 'none';
   document.getElementById('registerForm').style.display = tab === 'register' ? '' : 'none';
+  document.getElementById('resetForm').style.display = tab === 'reset' ? '' : 'none';
+  document.querySelector('.auth-tabs').style.display = tab === 'reset' ? 'none' : '';
+  if (tab === 'reset') {
+    document.getElementById('resetEmail').value = document.getElementById('loginEmail').value;
+    setTimeout(() => document.getElementById((document.getElementById('resetEmail').value ? 'resetPassword' : 'resetEmail')).focus(), 0);
+  }
   document.querySelectorAll('.auth-tab').forEach((t, i) => {
     t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
   });
@@ -869,11 +909,35 @@ async function handleLogin() {
   setTimeout(() => window.location.href = 'app.html', 700);
 }
 
+// ── Reset password ───────────────────────────────────────
+// There is no server, so no reset email: the account lives in this browser,
+// and whoever can use this browser can already reach its data.
+async function handleReset() {
+  const email = document.getElementById('resetEmail').value.trim().toLowerCase();
+  const password = document.getElementById('resetPassword').value;
+  const confirm = document.getElementById('resetConfirm').value;
+
+  if (!email) return showMsg('Please enter your email.', 'error');
+  const users = getUsers();
+  const user = users[email];
+  if (!user) return showMsg('No account with this email is saved in this browser.', 'error');
+  if (password.length < 6) return showMsg('Password must be at least 6 characters.', 'error');
+  if (password !== confirm) return showMsg("The two passwords don't match.", 'error');
+
+  user.hash = await hashPassword(password);
+  saveUsers(users);
+  addSavedEmail(email);
+  saveSession(email);
+
+  showMsg('Password changed. Signing you in…', 'success');
+  setTimeout(() => window.location.href = 'app.html', 900);
+}
+
 // ── Enter key support ────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    const loginVisible = document.getElementById('loginForm').style.display !== 'none';
-    if (loginVisible) handleLogin();
+    if (document.getElementById('loginForm').style.display !== 'none') handleLogin();
+    else if (document.getElementById('resetForm').style.display !== 'none') handleReset();
     else handleRegister();
   }
 });
