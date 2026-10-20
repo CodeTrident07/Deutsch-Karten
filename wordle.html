@@ -416,134 +416,183 @@ body::before {
 
 
 
-/* ── Arena ── */
-.arena {
-  flex:1; display:flex; flex-direction:column;
-  align-items:center; padding:1.5rem 1rem 1rem;
-  position:relative; z-index:1; gap:0.8rem;
+/* ── Wördle (daily word game) ── */
+:root {
+  --w-hit:  #538d4e;   /* right letter, right spot */
+  --w-near: #b59f3b;   /* in the word, wrong spot */
+  --w-miss: #3a3a3c;   /* not in the word */
+  --w-empty-border: #3a3a3c;
+  --w-filled-border: #6e6e70;
+  --w-key: #818384;
+  --tile: 62px;
 }
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 
-/* ── Word hint ── */
-.word-hint {
-  font-family: var(--font-sans); 
-  font-size:1rem; color:var(--text3);
-  background:var(--surface); border:1px solid var(--bord2);
-  border-radius: 6px; padding:0.3rem 1rem;
+.game-bar {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 6px 16px; border-bottom: 1px solid var(--border);
 }
+.game-bar-left { display: flex; gap: 4px; }
+.game-bar-right { display: flex; gap: 4px; justify-content: flex-end; }
+.game-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; text-align: center; }
+.icon-btn {
+  width: 40px; height: 40px; display: grid; place-items: center;
+  background: none; border: none; border-radius: 6px; color: var(--g1); cursor: pointer;
+}
+.icon-btn:hover { background: var(--s3); }
+.icon-btn svg { width: 22px; height: 22px; }
+.text-btn {
+  height: 32px; padding: 0 10px; align-self: center;
+  background: none; border: 1px solid var(--border2); border-radius: 6px;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--g2); cursor: pointer;
+}
+.text-btn:hover { color: var(--g1); background: var(--s3); }
 
-/* ── Grid ── */
-.grid-wrap { display:flex; flex-direction:column; gap:0.45rem; }
-.grid-row { display:flex; gap:0.45rem; }
+.board-area {
+  flex: 1; position: relative; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 12px 0; min-height: 0;
+}
+.game-sub {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--g2);
+  margin-bottom: 12px; display: flex; gap: 12px; align-items: center;
+}
+.hint-btn {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font: inherit; color: var(--g2); text-decoration: underline; text-underline-offset: 3px;
+}
+.hint-btn:hover { color: var(--g1); }
+
+.board { display: grid; gap: 5px; }
+.board-row { display: grid; gap: 5px; grid-template-columns: repeat(var(--len), var(--tile)); }
 .tile {
-  width:54px; height:54px;
-  border:2px solid var(--bord2);
-  border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'JetBrains Mono',monospace;
-  font-size:1.3rem; font-weight:700;
-  color:var(--text); background:var(--surf2);
-  transition:background 0.25s, border-color 0.25s, transform 0.1s;
-  position:relative; overflow:hidden;
-  text-transform:uppercase;
+  width: var(--tile); height: var(--tile);
+  display: grid; place-items: center;
+  border: 2px solid var(--w-empty-border);
+  font-size: calc(var(--tile) * 0.52); font-weight: 800; line-height: 1;
+  color: var(--g1); user-select: none;
 }
-.tile.filled { border-color:var(--text3); animation:pop 0.1s ease; }
-.tile.hit   { background:var(--surf-hit);  border-color:var(--green);  color:var(--green); }
-.tile.near  { background:var(--surf-near); border-color:var(--yellow); color:var(--yellow); }
-.tile.miss  { background:var(--surf-miss); border-color:var(--text3);  color:var(--text3); }
-.tile.shake { animation:shake 0.4s ease; }
-.tile.flip  { animation:flip 0.4s ease forwards; }
+.tile.filled { border-color: var(--w-filled-border); animation: pop 100ms ease-in; }
+.tile.hit, .tile.near, .tile.miss { border-color: transparent; color: #fff; }
+.tile.hit  { background: var(--w-hit); }
+.tile.near { background: var(--w-near); }
+.tile.miss { background: var(--w-miss); }
+.tile.reveal { animation: flipIn 250ms ease-in forwards; }
+.tile.reveal-out { animation: flipOut 250ms ease-out forwards; }
+.board-row.shake { animation: shake 600ms; }
+.tile.win { animation: jump 500ms ease; }
+@keyframes pop { 0% { transform: scale(0.85); } 40% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes flipIn { from { transform: rotateX(0); } to { transform: rotateX(-90deg); } }
+@keyframes flipOut { from { transform: rotateX(-90deg); } to { transform: rotateX(0); } }
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); } 20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); } 40%, 60% { transform: translateX(4px); }
+}
+@keyframes jump {
+  0%, 20% { transform: translateY(0); } 40% { transform: translateY(-30px); }
+  50% { transform: translateY(5px); } 60% { transform: translateY(-15px); }
+  80% { transform: translateY(2px); } 100% { transform: translateY(0); }
+}
 
-@keyframes pop  { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)} 60%{transform:translateX(5px)} }
-@keyframes flip  { 0%{transform:rotateX(0)} 50%{transform:rotateX(-90deg)} 100%{transform:rotateX(0)} }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+/* Short messages over the board */
+.toasts {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  z-index: 50; pointer-events: none;
+}
+.toast-msg {
+  background: var(--g1); color: #121213; font-weight: 700; font-size: 0.875rem;
+  padding: 12px 16px; border-radius: 4px; white-space: nowrap;
+  transition: opacity 300ms;
+}
+.toast-msg.fade { opacity: 0; }
 
-/* ── Keyboard ── */
-.keyboard { display:flex; flex-direction:column; gap:0.4rem; align-items:center; width:100%; max-width:500px; }
-.kb-row { display:flex; gap:0.3rem; }
+/* Keyboard */
+.keyboard { width: 100%; max-width: 500px; margin: 0 auto; padding: 0 8px 12px; user-select: none; }
+.kb-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; }
 .key {
-  min-width:34px; height:48px; padding:0 0.5rem;
-  background:var(--surf2); border:1px solid var(--bord2);
-  border-radius:8px; font-family:'JetBrains Mono',monospace;
-  font-size:0.78rem; font-weight:700; color:var(--text2);
-  cursor:pointer; transition:all 0.15s;
-  display:flex; align-items:center; justify-content:center;
-  text-transform:uppercase;
+  flex: 1; min-width: 0; height: 58px; max-width: 43px;
+  border: none; border-radius: 4px; background: var(--w-key); color: #fff;
+  font-family: var(--font-sans); font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; display: grid; place-items: center; padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
-.key:hover { border-color:var(--text2); color:var(--text); }
-.key.wide { min-width:52px; font-size:0.68rem; }
-.key.hit  { background:var(--surf-hit);  border-color:var(--green);  color:var(--green); }
-.key.near { background:var(--surf-near); border-color:var(--yellow); color:var(--yellow); }
-.key.miss { background:var(--surf-miss); border-color:var(--text3);  color:var(--text3); opacity:0.5; }
+.key.wide { flex: 1.5; max-width: 66px; font-size: 0.75rem; }
+.key svg { width: 22px; height: 22px; }
+.key:active { filter: brightness(0.85); }
+.key.hit  { background: var(--w-hit); }
+.key.near { background: var(--w-near); }
+.key.miss { background: var(--w-miss); }
 
-/* ── Message ── */
-.msg-bar {
-  font-family:'JetBrains Mono',monospace; font-size:0.82rem;
-  color:var(--text3); min-height:1.4rem; text-align:center;
-  transition:color 0.2s;
+/* Modals */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, 0.6);
+  display: none; align-items: center; justify-content: center; padding: 16px;
 }
-.msg-bar.good { color:var(--green); }
-.msg-bar.bad  { color:var(--red); }
+.modal-backdrop.open { display: flex; }
+.modal {
+  position: relative; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto;
+  background: #121213; border: 1px solid var(--border2); border-radius: 8px;
+  padding: 24px; box-shadow: 0 4px 23px rgba(0, 0, 0, 0.5);
+}
+.modal-close { position: absolute; top: 12px; right: 12px; }
+.modal h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+.modal h3 { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin: 20px 0 10px; }
+.modal p, .modal li { font-size: 0.95rem; line-height: 1.5; color: var(--g1); }
+.modal ul { padding-left: 20px; margin: 10px 0; }
+.modal .muted { color: var(--g2); }
+.example { margin: 14px 0 4px; display: flex; gap: 4px; }
+.example .tile { --tile: 40px; }
 
-/* ── Result card ── */
-.result-card {
-  display:none; flex-direction:column; align-items:center;
-  gap:1rem; background:var(--surface); border:1px solid var(--bord2);
-  border-radius: 6px; padding:1.8rem; max-width:400px; width:100%;
-  text-align:center; animation:cardIn 0.35s ease;
+.stats-row { display: flex; justify-content: center; gap: 12px; margin: 8px 0 4px; }
+.stat { flex: 1; max-width: 80px; text-align: center; }
+.stat-num { font-size: 2.2rem; font-weight: 500; line-height: 1.1; }
+.stat-label { font-size: 0.72rem; color: var(--g1); line-height: 1.3; }
+.dist-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 0.85rem; }
+.dist-n { width: 12px; font-weight: 700; }
+.dist-bar {
+  min-width: 22px; padding: 2px 8px; background: var(--w-miss);
+  text-align: right; font-weight: 700; color: #fff;
 }
-.result-card.show { display:flex; }
-@keyframes cardIn { from{opacity:0;transform:translateY(12px) scale(0.97)} to{opacity:1;transform:none} }
-.result-emoji { font-size:3rem; }
-.result-title { font-size:1.5rem; font-weight:800; letter-spacing:-0.03em; }
-.result-word {
-  font-family:'JetBrains Mono',monospace; font-size:1.2rem;
-  font-weight:700; color:var(--green); letter-spacing:0.1em;
-  text-transform:uppercase;
+.dist-bar.current { background: var(--w-hit); }
+.stats-answer { margin-top: 18px; text-align: center; font-size: 0.95rem; }
+.stats-answer strong { font-size: 1.1rem; }
+.stats-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border2);
 }
-.result-def { font-family: var(--font-sans);  color:var(--text2); font-size:1rem; }
-.result-stats { display:flex; gap:1.5rem; }
-.rstat { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.rstat-val { font-size:1.6rem; font-weight:800; }
-.rstat-label { font-size:0.68rem; font-family:'JetBrains Mono',monospace; color:var(--text3); text-transform:uppercase; }
+.countdown-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+.countdown { font-family: var(--font-mono); font-size: 1.6rem; }
 .share-btn {
-  background:var(--green); color:var(--bg);
-  border:none; border-radius:12px; padding:0.7rem 1.8rem;
-  font-family:'Bricolage Grotesque',sans-serif; font-size:0.95rem; font-weight:800;
-  cursor:pointer; transition:opacity 0.2s; width:100%;
+  height: 48px; padding: 0 24px; border: none; border-radius: 24px;
+  background: var(--w-hit); color: #fff; font-family: var(--font-sans);
+  font-size: 1rem; font-weight: 800; cursor: pointer;
 }
-.share-btn:hover {background: #cfcfcf;}
-.play-again-btn {
-  background:var(--surf2); color:var(--text2);
-  border:1px solid var(--bord2); border-radius:12px; padding:0.6rem 1.5rem;
-  font-family:'Bricolage Grotesque',sans-serif; font-size:0.9rem; font-weight:700;
-  cursor:pointer; transition:all 0.2s; width:100%;
+.share-btn:hover { filter: brightness(1.1); }
+.practice-btn {
+  display: block; width: 100%; margin-top: 12px; height: 40px;
+  background: none; border: 1px solid var(--border2); border-radius: 20px;
+  font-family: var(--font-sans); font-size: 0.9rem; font-weight: 700; color: var(--g1); cursor: pointer;
 }
-.play-again-btn:hover { border-color:var(--text2); color:var(--text); }
+.practice-btn:hover { background: var(--s3); }
 
-/* ── Umlauts bar ── */
-.umlaut-bar { display:flex; gap:0.4rem; }
-.um-btn {
-  padding:0.3rem 0.6rem; background:var(--surf2);
-  border:1px solid var(--bord2); border-radius:8px;
-  font-family:'JetBrains Mono',monospace; font-size:0.85rem;
-  color:var(--text2); cursor:pointer; transition:all 0.15s;
+@media (max-width: 500px) {
+  .game-title { font-size: 1.35rem; }
+  .key { height: 54px; }
+  .modal { padding: 20px 16px; }
 }
-.um-btn:hover { border-color:var(--green); color:var(--green); }
-
-/* ── Daily badge ── */
-.daily-badge {
-  font-family:'JetBrains Mono',monospace; font-size:0.7rem;
-  color:var(--text3); background:var(--surf2);
-  border:1px solid var(--bord2); border-radius: 6px;
-  padding:0.2rem 0.6rem;
+@media (max-height: 700px) {
+  .key { height: 48px; }
+  .kb-row { margin-bottom: 6px; }
 }
-
-@media(max-width:480px) {
-  .tile { width:44px; height:44px; font-size:1.1rem; border-radius:8px; }
-  .key  { min-width:28px; height:42px; font-size:0.7rem; }
-  .key.wide { min-width:44px; }
-  .topbar { padding:0.8rem 1rem; }
+@media (max-height: 600px) {
+  .key { height: 42px; }
+  .game-bar { padding: 2px 12px; }
+}
+@media (max-width: 360px) {
+  .game-bar { padding-left: 8px; padding-right: 8px; }
+  .game-title { font-size: 1.15rem; }
+  .text-btn { padding: 0 6px; }
+  .icon-btn { width: 34px; }
 }
 
 /* Emoji slots are left in the markup for the scripts but not shown */
@@ -583,27 +632,74 @@ body::before {
   <a href="app.html" class="dk-nav-home">← Home</a>
 </header>
 
-<div class="arena" id="arena">
-  <div class="word-hint" id="wordHint">Guess the German word</div>
-  <div class="msg-bar" id="msgBar"></div>
-  <div class="grid-wrap" id="gridWrap"></div>
-  <div class="umlaut-bar">
-    <button class="um-btn" onclick="typeUmlaut('ä')">ä</button>
-    <button class="um-btn" onclick="typeUmlaut('ö')">ö</button>
-    <button class="um-btn" onclick="typeUmlaut('ü')">ü</button>
-    <button class="um-btn" onclick="typeUmlaut('ß')">ß</button>
+<div class="game-bar">
+  <div class="game-bar-left">
+    <button class="icon-btn" onclick="openModal('helpModal')" aria-label="How to play" title="How to play">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.5-2.7 4.3" stroke-linecap="round"/><circle cx="12" cy="17.6" r="0.6" fill="currentColor"/></svg>
+    </button>
   </div>
-  <div class="keyboard" id="keyboard"></div>
+  <div class="game-title">Wördle</div>
+  <div class="game-bar-right">
+    <button class="text-btn" id="modeBtn" onclick="toggleMode(); this.blur()">Practice</button>
+    <button class="icon-btn" onclick="showStats(); this.blur()" aria-label="Statistics" title="Statistics">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="12" width="3.5" height="8" rx="0.5"/><rect x="10.25" y="4" width="3.5" height="16" rx="0.5"/><rect x="16.5" y="9" width="3.5" height="11" rx="0.5"/></svg>
+    </button>
+  </div>
+</div>
 
-  <!-- Result -->
-  <div class="result-card" id="resultCard">
-    <div class="result-emoji" id="resultEmoji"></div>
-    <div class="result-title" id="resultTitle">Ausgezeichnet!</div>
-    <div class="result-word" id="resultWord"></div>
-    <div class="result-def" id="resultDef"></div>
-    <div class="result-stats" id="resultStats"></div>
-    <button class="share-btn" onclick="shareResult()">Share result</button>
-    <button class="play-again-btn" onclick="newGame()">Play again</button>
+<div class="board-area" id="boardArea">
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <div class="game-sub">
+    <span id="gameLabel">Daily #1</span>
+    <button class="hint-btn" id="hintBtn" onclick="showHint()">Show hint</button>
+  </div>
+  <div class="board" id="board"></div>
+</div>
+
+<div class="keyboard" id="keyboard"></div>
+
+<!-- How to play -->
+<div class="modal-backdrop" id="helpModal" onclick="if (event.target === this) closeModal('helpModal')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <button class="icon-btn modal-close" onclick="closeModal('helpModal')" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="helpTitle">How to play</h2>
+    <p class="muted">Guess the German noun in 6 tries.</p>
+    <ul>
+      <li>Each guess must have the right number of letters. Umlauts and ß count as letters.</li>
+      <li>After each guess, the tiles change colour to show how close you were.</li>
+    </ul>
+    <h3>Examples</h3>
+    <div class="example"><div class="tile hit">T</div><div class="tile">I</div><div class="tile">S</div><div class="tile">C</div><div class="tile">H</div></div>
+    <p><strong>T</strong> is in the word and in the right spot.</p>
+    <div class="example"><div class="tile">A</div><div class="tile near">P</div><div class="tile">F</div><div class="tile">E</div><div class="tile">L</div></div>
+    <p><strong>P</strong> is in the word but in the wrong spot.</p>
+    <div class="example"><div class="tile">M</div><div class="tile">I</div><div class="tile">L</div><div class="tile miss">C</div><div class="tile">H</div></div>
+    <p><strong>C</strong> is not in the word.</p>
+    <p class="muted" style="margin-top:18px">There is a new daily word every day. Tap <strong>Practice</strong> for unlimited random words, and <strong>Show hint</strong> to see the English meaning.</p>
+  </div>
+</div>
+
+<!-- Statistics -->
+<div class="modal-backdrop" id="statsModal" onclick="if (event.target === this) closeModal('statsModal')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+    <button class="icon-btn modal-close" onclick="closeModal('statsModal')" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="statsTitle">Statistics</h2>
+    <div class="stats-row" id="statsRow"></div>
+    <h3>Guess distribution</h3>
+    <div id="distribution"></div>
+    <div class="stats-answer" id="statsAnswer"></div>
+    <div class="stats-footer" id="statsFooter">
+      <div>
+        <div class="countdown-label">Next Wördle</div>
+        <div class="countdown" id="countdown">--:--:--</div>
+      </div>
+      <button class="share-btn" id="shareBtn" onclick="shareResult()">Share</button>
+    </div>
+    <button class="practice-btn" id="practiceBtn" onclick="closeModal('statsModal'); startPractice()">Play a practice word</button>
   </div>
 </div>
 
@@ -611,69 +707,116 @@ body::before {
 const ALL_WORDS = [{"w": "Vater", "en": "father", "full": "der Vater"}, {"w": "Tisch", "en": "table", "full": "der Tisch"}, {"w": "Stuhl", "en": "chair", "full": "der Stuhl"}, {"w": "K\u00fcche", "en": "kitchen", "full": "die K\u00fcche"}, {"w": "Apfel", "en": "apple", "full": "der Apfel"}, {"w": "Milch", "en": "milk", "full": "die Milch"}, {"w": "Suppe", "en": "soup", "full": "die Suppe"}, {"w": "Laden", "en": "shop / store", "full": "der Laden"}, {"w": "Preis", "en": "price", "full": "der Preis"}, {"w": "Kasse", "en": "checkout / cashier", "full": "die Kasse"}, {"w": "Markt", "en": "market", "full": "der Markt"}, {"w": "Woche", "en": "week", "full": "die Woche"}, {"w": "Monat", "en": "month", "full": "der Monat"}, {"w": "Abend", "en": "evening", "full": "der Abend"}, {"w": "Preis", "en": "price", "full": "der Preis"}, {"w": "Laden", "en": "shop / store", "full": "der Laden"}, {"w": "Kasse", "en": "checkout / cashier", "full": "die Kasse"}, {"w": "Miete", "en": "rent", "full": "die Miete"}, {"w": "Etage", "en": "floor / storey", "full": "die Etage"}, {"w": "Hobby", "en": "hobby", "full": "das Hobby"}, {"w": "Wunde", "en": "wound", "full": "die Wunde"}, {"w": "Salbe", "en": "ointment / cream", "full": "die Salbe"}, {"w": "Konto", "en": "bank account", "full": "das Konto"}, {"w": "M\u00fcnze", "en": "coin", "full": "die M\u00fcnze"}, {"w": "Motor", "en": "engine", "full": "der Motor"}, {"w": "Tempo", "en": "speed", "full": "das Tempo"}, {"w": "Visum", "en": "visa", "full": "das Visum"}, {"w": "Staat", "en": "state / country", "full": "der Staat"}, {"w": "Krieg", "en": "war", "full": "der Krieg"}, {"w": "Laune", "en": "mood", "full": "die Laune"}, {"w": "Klima", "en": "climate", "full": "das Klima"}, {"w": "Kakao", "en": "cocoa / hot chocolate", "full": "der Kakao"}, {"w": "Lippe", "en": "lip", "full": "die Lippe"}, {"w": "Leder", "en": "leather", "full": "das Leder"}, {"w": "Folie", "en": "foil / film", "full": "die Folie"}, {"w": "Fleck", "en": "stain / spot", "full": "der Fleck"}, {"w": "Tafel", "en": "blackboard / bar (chocolate)", "full": "die Tafel"}, {"w": "Feind", "en": "enemy", "full": "der Feind"}, {"w": "Kiste", "en": "crate / box", "full": "die Kiste"}, {"w": "M\u00fcnze", "en": "coin", "full": "die M\u00fcnze"}, {"w": "Autor", "en": "author", "full": "der Autor"}, {"w": "Lager", "en": "camp / warehouse", "full": "das Lager"}, {"w": "Macht", "en": "power", "full": "die Macht"}, {"w": "Roman", "en": "novel", "full": "der Roman"}, {"w": "Mauer", "en": "wall", "full": "die Mauer"}, {"w": "Summe", "en": "sum / total", "full": "die Summe"}, {"w": "Humor", "en": "humour", "full": "der Humor"}, {"w": "Datei", "en": "file (computer)", "full": "die Datei"}, {"w": "H\u00fcgel", "en": "hill", "full": "der H\u00fcgel"}, {"w": "Ozean", "en": "ocean", "full": "der Ozean"}, {"w": "Wiese", "en": "meadow", "full": "die Wiese"}, {"w": "Kohle", "en": "coal", "full": "die Kohle"}, {"w": "Biene", "en": "bee", "full": "die Biene"}, {"w": "Kreuz", "en": "cross", "full": "das Kreuz"}, {"w": "M\u00fcsli", "en": "muesli", "full": "das M\u00fcsli"}, {"w": "Kakao", "en": "cocoa / hot chocolate", "full": "der Kakao"}, {"w": "Alarm", "en": "alarm", "full": "der Alarm"}, {"w": "Nadel", "en": "needle", "full": "die Nadel"}, {"w": "Sorge", "en": "worry / concern", "full": "die Sorge"}, {"w": "Kerze", "en": "candle", "full": "die Kerze"}, {"w": "Nagel", "en": "nail", "full": "der Nagel"}, {"w": "Feuer", "en": "fire", "full": "das Feuer"}, {"w": "Mensa", "en": "university canteen", "full": "die Mensa"}, {"w": "Torte", "en": "cake / gateau", "full": "die Torte"}, {"w": "Griff", "en": "handle / grip", "full": "der Griff"}, {"w": "B\u00fchne", "en": "stage", "full": "die B\u00fchne"}, {"w": "Honig", "en": "honey", "full": "der Honig"}, {"w": "Staub", "en": "dust", "full": "der Staub"}, {"w": "Feier", "en": "celebration / party", "full": "die Feier"}, {"w": "Couch", "en": "couch / sofa", "full": "die Couch"}, {"w": "F\u00e4hre", "en": "ferry", "full": "die F\u00e4hre"}, {"w": "Druck", "en": "pressure", "full": "der Druck"}, {"w": "Rolle", "en": "role", "full": "die Rolle"}, {"w": "Titel", "en": "title", "full": "der Titel"}, {"w": "Rente", "en": "pension", "full": "die Rente"}, {"w": "Trend", "en": "trend", "full": "der Trend"}, {"w": "Grund", "en": "reason / ground", "full": "der Grund"}, {"w": "Kopie", "en": "copy", "full": "die Kopie"}, {"w": "Neffe", "en": "nephew", "full": "der Neffe"}, {"w": "Start", "en": "start / launch", "full": "der Start"}, {"w": "Recht", "en": "right / law", "full": "das Recht"}, {"w": "Zeuge", "en": "witness", "full": "der Zeuge"}, {"w": "Markt", "en": "market", "full": "der Markt"}, {"w": "Alarm", "en": "alarm", "full": "der Alarm"}, {"w": "Mutter", "en": "mother", "full": "die Mutter"}, {"w": "Bruder", "en": "brother", "full": "der Bruder"}, {"w": "Freund", "en": "friend / boyfriend", "full": "der Freund"}, {"w": "Zimmer", "en": "room", "full": "das Zimmer"}, {"w": "Wasser", "en": "water", "full": "das Wasser"}, {"w": "Kaffee", "en": "coffee", "full": "der Kaffee"}, {"w": "Banane", "en": "banana", "full": "die Banane"}, {"w": "Tasche", "en": "bag", "full": "die Tasche"}, {"w": "Stra\u00dfe", "en": "street / road", "full": "die Stra\u00dfe"}, {"w": "Ticket", "en": "ticket", "full": "das Ticket"}, {"w": "Morgen", "en": "morning", "full": "der Morgen"}, {"w": "Arbeit", "en": "work / job", "full": "die Arbeit"}, {"w": "Gehalt", "en": "salary", "full": "das Gehalt"}, {"w": "Ticket", "en": "ticket", "full": "das Ticket"}, {"w": "Museum", "en": "museum", "full": "das Museum"}, {"w": "Rezept", "en": "prescription", "full": "das Rezept"}, {"w": "Schein", "en": "banknote", "full": "der Schein"}, {"w": "Betrag", "en": "amount (of money)", "full": "der Betrag"}, {"w": "Kredit", "en": "loan / credit", "full": "der Kredit"}, {"w": "Bremse", "en": "brake", "full": "die Bremse"}, {"w": "Reifen", "en": "tyre", "full": "der Reifen"}, {"w": "Friede", "en": "peace", "full": "der Friede"}, {"w": "Physik", "en": "physics", "full": "die Physik"}, {"w": "Erfolg", "en": "success", "full": "der Erfolg"}, {"w": "Jugend", "en": "youth", "full": "die Jugend"}, {"w": "Partei", "en": "political party", "full": "die Partei"}, {"w": "Inhalt", "en": "content / contents", "full": "der Inhalt"}, {"w": "Reform", "en": "reform", "full": "die Reform"}, {"w": "Gewalt", "en": "violence / force", "full": "die Gewalt"}, {"w": "Bedarf", "en": "need / demand", "full": "der Bedarf"}, {"w": "Presse", "en": "the press / media", "full": "die Presse"}, {"w": "Steuer", "en": "tax", "full": "die Steuer"}, {"w": "Umwelt", "en": "environment", "full": "die Umwelt"}, {"w": "Schuld", "en": "guilt / debt / fault", "full": "die Schuld"}, {"w": "Gew\u00fcrz", "en": "spice / seasoning", "full": "das Gew\u00fcrz"}, {"w": "Dialog", "en": "dialogue", "full": "der Dialog"}, {"w": "Platte", "en": "record / plate", "full": "die Platte"}, {"w": "Pfanne", "en": "frying pan", "full": "die Pfanne"}, {"w": "Anlage", "en": "facility / attachment", "full": "die Anlage"}, {"w": "Grafik", "en": "graphic / chart", "full": "die Grafik"}, {"w": "Betrag", "en": "amount", "full": "der Betrag"}, {"w": "Flucht", "en": "flight / escape", "full": "die Flucht"}, {"w": "Frisur", "en": "hairstyle", "full": "die Frisur"}, {"w": "Gebiet", "en": "area / field / territory", "full": "das Gebiet"}, {"w": "Glocke", "en": "bell", "full": "die Glocke"}, {"w": "Kirche", "en": "church", "full": "die Kirche"}, {"w": "Laster", "en": "lorry / truck", "full": "der Laster"}, {"w": "Leiter", "en": "ladder / manager", "full": "die Leiter"}, {"w": "Plakat", "en": "poster", "full": "das Plakat"}, {"w": "Schere", "en": "scissors", "full": "die Schere"}, {"w": "Gegend", "en": "area / region", "full": "die Gegend"}, {"w": "Region", "en": "region", "full": "die Region"}, {"w": "Stelle", "en": "place / position / job", "full": "die Stelle"}, {"w": "Vorort", "en": "suburb", "full": "der Vorort"}, {"w": "Fliege", "en": "fly", "full": "die Fliege"}, {"w": "Insekt", "en": "insect", "full": "das Insekt"}, {"w": "Gew\u00fcrz", "en": "spice / seasoning", "full": "das Gew\u00fcrz"}, {"w": "B\u00fcfett", "en": "buffet", "full": "das B\u00fcfett"}, {"w": "Frucht", "en": "fruit", "full": "die Frucht"}, {"w": "Strafe", "en": "punishment / penalty", "full": "die Strafe"}, {"w": "Freude", "en": "joy", "full": "die Freude"}, {"w": "Geduld", "en": "patience", "full": "die Geduld"}, {"w": "Talent", "en": "talent", "full": "das Talent"}, {"w": "Poster", "en": "poster", "full": "das Poster"}, {"w": "Hammer", "en": "hammer", "full": "der Hammer"}, {"w": "Schlaf", "en": "sleep", "full": "der Schlaf"}, {"w": "Hocker", "en": "stool", "full": "der Hocker"}, {"w": "Klinke", "en": "door handle", "full": "die Klinke"}, {"w": "Streit", "en": "argument / dispute", "full": "der Streit"}, {"w": "Ordner", "en": "folder / file", "full": "der Ordner"}, {"w": "Verlag", "en": "publishing house", "full": "der Verlag"}, {"w": "Mangel", "en": "lack / shortage", "full": "der Mangel"}, {"w": "H\u00e4lfte", "en": "half", "full": "die H\u00e4lfte"}, {"w": "Beginn", "en": "beginning", "full": "der Beginn"}, {"w": "Nichte", "en": "niece", "full": "die Nichte"}, {"w": "Sprung", "en": "jump / leap", "full": "der Sprung"}, {"w": "Gesetz", "en": "law", "full": "das Gesetz"}, {"w": "Anwalt", "en": "lawyer", "full": "der Anwalt"}, {"w": "Urteil", "en": "verdict / judgement", "full": "das Urteil"}, {"w": "Beweis", "en": "proof / evidence", "full": "der Beweis"}, {"w": "Partei", "en": "political party", "full": "die Partei"}, {"w": "Reform", "en": "reform", "full": "die Reform"}, {"w": "Handel", "en": "trade", "full": "der Handel"}, {"w": "Gewinn", "en": "profit", "full": "der Gewinn"}, {"w": "Flucht", "en": "flight / escape", "full": "die Flucht"}, {"w": "Gewalt", "en": "violence / force", "full": "die Gewalt"}, {"w": "Inhalt", "en": "content", "full": "der Inhalt"}, {"w": "Streik", "en": "strike", "full": "der Streik"}, {"w": "Symbol", "en": "symbol", "full": "das Symbol"}];
 
 // ── Daily word selection ────────────────────────────────────────
-function getDayIndex() {
-  const origin = new Date('2026-01-01').getTime();
-  return Math.floor((Date.now() - origin) / 86400000);
-}
+const DAY_MS = 86400000;
+const ORIGIN = new Date('2026-01-01').getTime();
+const MAX_GUESSES = 6;
+const SAVE_KEY = 'dk_wordle_daily';
+const FLIP_MS = 250;      // each half of a tile flip
+const STAGGER_MS = 300;   // delay between tiles in a row
+const WIN_WORDS = ['Genial!', 'Großartig!', 'Beeindruckend!', 'Sehr gut!', 'Gut gemacht!', 'Puh, geschafft!'];
 
-function getDailyWord() {
-  const idx = getDayIndex() % ALL_WORDS.length;
-  return ALL_WORDS[idx];
-}
+function getDayIndex() { return Math.floor((Date.now() - ORIGIN) / DAY_MS); }
+function getDailyWord(day = getDayIndex()) { return ALL_WORDS[day % ALL_WORDS.length]; }
 
 // ── State ───────────────────────────────────────────────────────
-let target, targetLetters, wordLen, maxGuesses;
-let guesses = [];      // array of guess strings
+let wordObj, target, wordLen, rows;
+let guesses = [];
 let currentGuess = '';
 let gameOver = false;
-let startTime;
+let won = false;
+let isDaily = true;
+let busy = false;        // true while a row is flipping
+let hintShown = false;
 
-function newGame(daily = false) {
-  if (daily) {
-    const saved = getDailySave();
-    if (saved && saved.day === getDayIndex()) {
-      // Restore daily game
-      restoreDaily(saved);
-      return;
-    }
-    const word = getDailyWord();
-    initGame(word, true);
-  } else {
-    const word = ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)];
-    initGame(word, false);
+// ── Saving (daily game only) ────────────────────────────────────
+function loadSave() {
+  try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || {}; } catch { return {}; }
+}
+function writeSave(data) {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch {}
+}
+function saveProgress() {
+  if (!isDaily) return;
+  const data = loadSave();
+  data.day = getDayIndex();
+  data.guesses = guesses;
+  data.done = gameOver;
+  data.won = won;
+  data.hint = hintShown;
+  data.history = data.history || {};
+  if (gameOver) data.history[data.day] = { won, guesses: guesses.length };
+  writeSave(data);
+}
+
+// ── Starting games ──────────────────────────────────────────────
+function startDaily() {
+  isDaily = true;
+  const saved = loadSave();
+  const today = getDayIndex();
+  setupGame(getDailyWord(today));
+  if (saved.day === today && Array.isArray(saved.guesses)) {
+    // Older saves were only written once a game was finished
+    const done = saved.done !== undefined ? saved.done : true;
+    replay(saved.guesses, done);
+    if (saved.hint) showHint();
+    if (gameOver) setTimeout(showStats, 400);
+  } else if (!Object.keys(saved.history || {}).length && !saved.seenHelp) {
+    writeSave({ ...saved, seenHelp: true });
+    openModal('helpModal');
   }
 }
 
-function initGame(wordObj, isDaily) {
-  target = wordObj.w.toLowerCase();
-  targetLetters = target.split('');
-  wordLen = target.length;
-  maxGuesses = wordLen + 1; // 6 for 5-letter, 7 for 6-letter
+function startPractice() {
+  isDaily = false;
+  let w;
+  do { w = ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)]; }
+  while (ALL_WORDS.length > 1 && wordObj && w.w === wordObj.w);
+  setupGame(w);
+}
 
+function toggleMode() { isDaily ? startPractice() : startDaily(); }
+
+function setupGame(w) {
+  wordObj = w;
+  target = w.w.toLowerCase();
+  wordLen = [...target].length;
+  rows = MAX_GUESSES;
   guesses = [];
   currentGuess = '';
   gameOver = false;
-  startTime = Date.now();
+  won = false;
+  busy = false;
+  hintShown = false;
 
-  document.getElementById('wordHint').textContent =
-    isDaily ? `Daily word: ${wordLen} letters (${wordObj.en})` : `${wordLen} letters: ${wordObj.en}`;
+  document.getElementById('gameLabel').textContent = isDaily ? `Daily #${getDayIndex()} · ${wordLen} letters` : `Practice · ${wordLen} letters`;
   document.getElementById('dailyBadge').textContent = isDaily ? `Daily #${getDayIndex()}` : 'Practice';
-  document.getElementById('resultCard').classList.remove('show');
-  document.getElementById('msgBar').textContent = '';
-  document.getElementById('msgBar').className = 'msg-bar';
+  document.getElementById('modeBtn').textContent = isDaily ? 'Practice' : 'Daily';
+  const hintBtn = document.getElementById('hintBtn');
+  hintBtn.textContent = 'Show hint';
+  hintBtn.disabled = false;
+  document.getElementById('toasts').innerHTML = '';
 
-  buildGrid();
+  buildBoard();
   buildKeyboard();
-  updateGrid();
+  fitBoard();
 }
 
-// ── Grid ────────────────────────────────────────────────────────
-function buildGrid() {
-  const wrap = document.getElementById('gridWrap');
-  wrap.innerHTML = '';
-  for (let r = 0; r < maxGuesses; r++) {
+function showHint() {
+  hintShown = true;
+  const btn = document.getElementById('hintBtn');
+  btn.textContent = 'Means: ' + wordObj.en;
+  btn.disabled = true;
+  saveProgress();
+}
+
+// ── Board ───────────────────────────────────────────────────────
+function buildBoard() {
+  const board = document.getElementById('board');
+  board.style.setProperty('--len', wordLen);
+  board.innerHTML = '';
+  for (let r = 0; r < rows; r++) {
     const row = document.createElement('div');
-    row.className = 'grid-row';
+    row.className = 'board-row';
     row.id = 'row-' + r;
     for (let c = 0; c < wordLen; c++) {
       const tile = document.createElement('div');
@@ -681,40 +824,42 @@ function buildGrid() {
       tile.id = `tile-${r}-${c}`;
       row.appendChild(tile);
     }
-    wrap.appendChild(row);
+    board.appendChild(row);
   }
 }
 
-function updateGrid() {
-  for (let r = 0; r < maxGuesses; r++) {
-    const guess = guesses[r] || '';
-    for (let c = 0; c < wordLen; c++) {
-      const tile = document.getElementById(`tile-${r}-${c}`);
-      if (r < guesses.length) {
-        // Submitted guess — already colored
-      } else if (r === guesses.length) {
-        // Current row
-        const ch = currentGuess[c] || '';
-        tile.textContent = ch.toUpperCase();
-        tile.className = 'tile' + (ch ? ' filled' : '');
-      } else {
-        tile.textContent = '';
-        tile.className = 'tile';
-      }
-    }
-  }
+// Largest tile that fits both the width and the height left between the bars
+function fitBoard() {
+  const area = document.getElementById('boardArea');
+  const sub = area.querySelector('.game-sub');
+  const gap = 5;
+  const maxW = Math.min(window.innerWidth - 32, 360);
+  // Height left after the top bars, keyboard and label (not the board's own size)
+  const used = document.querySelector('.dk-nav').offsetHeight + document.querySelector('.game-bar').offsetHeight
+             + document.getElementById('keyboard').offsetHeight + sub.offsetHeight + 12 + 24;
+  const maxH = window.innerHeight - used;
+  const byW = (maxW - gap * (wordLen - 1)) / wordLen;
+  const byH = (maxH - gap * (rows - 1)) / rows;
+  const size = Math.max(32, Math.floor(Math.min(62, byW, byH)));
+  document.getElementById('board').style.setProperty('--tile', size + 'px');
 }
+window.addEventListener('resize', fitBoard);
 
-function colorRow(rowIdx, result) {
+function tile(r, c) { return document.getElementById(`tile-${r}-${c}`); }
+// Upper-case for display, but keep ß (CSS text-transform would turn it into SS)
+function cap(ch) { return ch === 'ß' ? 'ß' : ch.toUpperCase(); }
+
+function drawCurrentRow() {
+  const r = guesses.length;
+  if (r >= rows) return;
+  const letters = [...currentGuess];
   for (let c = 0; c < wordLen; c++) {
-    const tile = document.getElementById(`tile-${rowIdx}-${c}`);
-    setTimeout(() => {
-      tile.classList.add('flip');
-      setTimeout(() => {
-        tile.classList.remove('flip');
-        tile.classList.add(result[c]);
-      }, 200);
-    }, c * 100);
+    const t = tile(r, c);
+    const ch = cap(letters[c] || '');
+    if (t.textContent !== ch) {
+      t.textContent = ch;
+      t.className = 'tile' + (ch ? ' filled' : '');
+    }
   }
 }
 
@@ -722,8 +867,9 @@ function colorRow(rowIdx, result) {
 const KB_ROWS = [
   ['q','w','e','r','t','z','u','i','o','p','ü'],
   ['a','s','d','f','g','h','j','k','l','ö','ä'],
-  ['ENTER','y','x','c','v','b','n','m','ß','⌫'],
+  ['enter','y','x','c','v','b','n','m','ß','backspace'],
 ];
+const BACKSPACE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M21 5H9l-6 7 6 7h12z"/><path d="M17 9.5l-5 5M12 9.5l5 5"/></svg>';
 
 function buildKeyboard() {
   const kb = document.getElementById('keyboard');
@@ -733,193 +879,216 @@ function buildKeyboard() {
     div.className = 'kb-row';
     row.forEach(k => {
       const btn = document.createElement('button');
+      btn.type = 'button';
       btn.className = 'key' + (k.length > 1 ? ' wide' : '');
-      btn.textContent = k.toUpperCase();
-      btn.id = 'key-' + k;
-      btn.addEventListener('click', () => handleKey(k));
+      btn.dataset.key = k;
+      if (k === 'backspace') { btn.innerHTML = BACKSPACE_SVG; btn.setAttribute('aria-label', 'Delete'); }
+      else btn.textContent = k === 'enter' ? 'Enter' : cap(k);
+      btn.addEventListener('click', () => { handleKey(k); btn.blur(); });
       div.appendChild(btn);
     });
     kb.appendChild(div);
   });
 }
 
-function updateKeyboard(guess, result) {
-  for (let i = 0; i < guess.length; i++) {
-    const keyEl = document.getElementById('key-' + guess[i]);
-    if (!keyEl) continue;
-    const cur = keyEl.className;
-    if (result[i] === 'hit') { keyEl.className = 'key wide'.includes(guess[i]) ? 'key wide hit' : 'key hit'; }
-    else if (result[i] === 'near' && !cur.includes('hit')) { keyEl.className = 'key near'; }
-    else if (result[i] === 'miss' && !cur.includes('hit') && !cur.includes('near')) { keyEl.className = 'key miss'; }
-  }
+const RANK = { miss: 1, near: 2, hit: 3 };
+function colourKeys(guess, result) {
+  [...guess].forEach((ch, i) => {
+    const key = document.querySelector(`.key[data-key="${ch}"]`);
+    if (!key) return;
+    const cur = ['hit', 'near', 'miss'].find(c => key.classList.contains(c));
+    if (!cur || RANK[result[i]] > RANK[cur]) {
+      key.classList.remove('hit', 'near', 'miss');
+      key.classList.add(result[i]);
+    }
+  });
 }
 
 // ── Guess logic ─────────────────────────────────────────────────
-function evaluate(guess) {
-  const result = Array(wordLen).fill('miss');
-  const tCopy = [...targetLetters];
-  const gArr = guess.split('');
-
-  // First pass: hits
-  for (let i = 0; i < wordLen; i++) {
-    if (gArr[i] === tCopy[i]) {
-      result[i] = 'hit';
-      tCopy[i] = null;
-    }
-  }
-  // Second pass: near
-  for (let i = 0; i < wordLen; i++) {
-    if (result[i] !== 'hit') {
-      const j = tCopy.indexOf(gArr[i]);
-      if (j !== -1) { result[i] = 'near'; tCopy[j] = null; }
-    }
+function evaluate(guess, answer = target) {
+  const g = [...guess], t = [...answer];
+  const result = Array(g.length).fill('miss');
+  for (let i = 0; i < g.length; i++) if (g[i] === t[i]) { result[i] = 'hit'; t[i] = null; }
+  for (let i = 0; i < g.length; i++) {
+    if (result[i] === 'hit') continue;
+    const j = t.indexOf(g[i]);
+    if (j !== -1) { result[i] = 'near'; t[j] = null; }
   }
   return result;
 }
 
 function handleKey(k) {
-  if (gameOver) return;
-  if (k === '⌫' || k === 'backspace') {
-    currentGuess = currentGuess.slice(0,-1);
-    updateGrid();
-    return;
+  if (gameOver || busy || document.querySelector('.modal-backdrop.open')) return;
+  if (k === 'backspace') { currentGuess = [...currentGuess].slice(0, -1).join(''); drawCurrentRow(); return; }
+  if (k === 'enter') { submitGuess(); return; }
+  if (/^[a-zäöüß]$/.test(k) && [...currentGuess].length < wordLen) {
+    currentGuess += k;
+    drawCurrentRow();
   }
-  if (k === 'enter') {
-    submitGuess();
-    return;
-  }
-  if (currentGuess.length >= wordLen) return;
-  // Accept letters + umlauts
-  if (/^[a-zäöüß]$/i.test(k)) {
-    currentGuess += k.toLowerCase();
-    updateGrid();
-  }
-}
-
-function shakeRow(rowIdx) {
-  const row = document.getElementById('row-' + rowIdx);
-  row.querySelectorAll('.tile').forEach(t => {
-    t.classList.add('shake');
-    setTimeout(() => t.classList.remove('shake'), 400);
-  });
 }
 
 function submitGuess() {
-  if (currentGuess.length !== wordLen) {
-    showMsg(`Need ${wordLen} letters`, 'bad');
-    shakeRow(guesses.length);
+  const r = guesses.length;
+  if ([...currentGuess].length < wordLen) {
+    toast('Not enough letters');
+    shakeRow(r);
     return;
   }
-
-  const result = evaluate(currentGuess);
-  const rowIdx = guesses.length;
-  guesses.push(currentGuess);
-
-  // Color tiles in this row
-  for (let c = 0; c < wordLen; c++) {
-    const tile = document.getElementById(`tile-${rowIdx}-${c}`);
-    tile.textContent = currentGuess[c].toUpperCase();
-  }
-  colorRow(rowIdx, result);
-  updateKeyboard(currentGuess, result);
-
-  const won = result.every(r => r === 'hit');
+  const guess = currentGuess;
+  const result = evaluate(guess);
+  guesses.push(guess);
   currentGuess = '';
-  updateGrid();
+  won = result.every(x => x === 'hit');
+  gameOver = won || guesses.length >= rows;
+  saveProgress();
 
-  setTimeout(() => {
+  busy = true;
+  revealRow(r, guess, result, true, () => {
+    busy = false;
+    colourKeys(guess, result);
     if (won) {
-      gameOver = true;
-      saveDailyResult(true, guesses.length);
-      showResult(true);
-    } else if (guesses.length >= maxGuesses) {
-      gameOver = true;
-      saveDailyResult(false, guesses.length);
-      showResult(false);
+      toast(WIN_WORDS[Math.min(guesses.length, 6) - 1], 1800);
+      bounceRow(r);
+      setTimeout(showStats, 2000);
+    } else if (gameOver) {
+      toast(wordObj.full || wordObj.w, 0);
+      setTimeout(showStats, 2000);
     }
-  }, wordLen * 100 + 300);
+  });
 }
 
-function typeUmlaut(ch) { handleKey(ch); }
+function revealRow(r, guess, result, animate, done) {
+  const letters = [...guess];
+  letters.forEach((ch, c) => {
+    const t = tile(r, c);
+    t.textContent = cap(ch);
+    if (!animate) { t.className = 'tile ' + result[c]; return; }
+    setTimeout(() => {
+      t.className = 'tile filled reveal';
+      setTimeout(() => { t.className = 'tile reveal-out ' + result[c]; }, FLIP_MS);
+    }, c * STAGGER_MS);
+  });
+  if (!animate) { done && done(); return; }
+  setTimeout(done, (letters.length - 1) * STAGGER_MS + FLIP_MS * 2);
+}
 
-function showMsg(text, type) {
-  const el = document.getElementById('msgBar');
+function replay(saved, done) {
+  saved.slice(0, rows).forEach((g, r) => {
+    const result = evaluate(g);
+    guesses.push(g);
+    revealRow(r, g, result, false);
+    colourKeys(g, result);
+    if (result.every(x => x === 'hit')) won = true;
+  });
+  gameOver = done || won || guesses.length >= rows;
+}
+
+function shakeRow(r) {
+  const row = document.getElementById('row-' + r);
+  row.classList.remove('shake');
+  void row.offsetWidth;
+  row.classList.add('shake');
+}
+
+function bounceRow(r) {
+  for (let c = 0; c < wordLen; c++) {
+    setTimeout(() => tile(r, c).classList.add('win'), c * 100);
+  }
+}
+
+// ── Messages ────────────────────────────────────────────────────
+function toast(text, ms = 1000) {
+  const box = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = 'toast-msg';
   el.textContent = text;
-  el.className = 'msg-bar ' + (type || '');
-  setTimeout(() => { el.textContent = ''; el.className = 'msg-bar'; }, 2000);
+  box.prepend(el);
+  if (ms > 0) setTimeout(() => { el.classList.add('fade'); setTimeout(() => el.remove(), 300); }, ms);
 }
 
-// ── Result ──────────────────────────────────────────────────────
-function showResult(won) {
-  const elapsed = Math.round((Date.now() - startTime) / 1000);
-  document.getElementById('resultEmoji').textContent = won ? (guesses.length <= 2 ? '' : guesses.length <= 4 ? '' : '') : '';
-  document.getElementById('resultTitle').textContent = won ? ['Perfekt!','Ausgezeichnet!','Sehr gut!','Gut gemacht!','Geschafft!'][Math.min(guesses.length-1,4)] : 'Nicht diesmal...';
+// ── Modals ──────────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  if (id === 'statsModal') clearInterval(countdownTimer);
+}
 
-  const wordObj = ALL_WORDS.find(w => w.w.toLowerCase() === target);
-  document.getElementById('resultWord').textContent = (wordObj?.full || target).toUpperCase();
-  document.getElementById('resultDef').textContent = wordObj?.en || '';
+// ── Statistics ──────────────────────────────────────────────────
+function computeStats() {
+  const history = loadSave().history || {};
+  const days = Object.keys(history).map(Number).sort((a, b) => a - b);
+  const played = days.length;
+  const wins = days.filter(d => history[d].won).length;
+  const dist = [0, 0, 0, 0, 0, 0];
+  days.forEach(d => { if (history[d].won) dist[Math.min(history[d].guesses, 6) - 1]++; });
 
-  const mins = Math.floor(elapsed/60), secs = elapsed%60;
-  document.getElementById('resultStats').innerHTML = won ? `
-    <div class="rstat"><div class="rstat-val" style="color:var(--green)">${guesses.length}</div><div class="rstat-label">guesses</div></div>
-    <div class="rstat"><div class="rstat-val" style="color:var(--yellow)">${mins}:${String(secs).padStart(2,'0')}</div><div class="rstat-label">time</div></div>
-  ` : `<div class="rstat"><div class="rstat-val" style="color:var(--red)">${maxGuesses}</div><div class="rstat-label">guesses used</div></div>`;
+  let max = 0, run = 0, prev = null;
+  days.forEach(d => {
+    if (history[d].won) { run = (prev !== null && d === prev + 1 && history[prev].won) ? run + 1 : 1; max = Math.max(max, run); }
+    else run = 0;
+    prev = d;
+  });
+  const today = getDayIndex();
+  let current = 0;
+  let d = history[today] ? today : today - 1;
+  while (history[d] && history[d].won) { current++; d--; }
 
-  document.getElementById('resultCard').classList.add('show');
+  return { played, winPct: played ? Math.round(wins / played * 100) : 0, current, max, dist };
+}
+
+let countdownTimer;
+function showStats() {
+  const s = computeStats();
+  document.getElementById('statsRow').innerHTML = [
+    [s.played, 'Played'], [s.winPct, 'Win %'], [s.current, 'Current streak'], [s.max, 'Max streak'],
+  ].map(([n, l]) => `<div class="stat"><div class="stat-num">${n}</div><div class="stat-label">${l}</div></div>`).join('');
+
+  const top = Math.max(1, ...s.dist);
+  const todayRow = isDaily && won ? guesses.length : 0;
+  document.getElementById('distribution').innerHTML = s.dist.map((n, i) =>
+    `<div class="dist-row"><div class="dist-n">${i + 1}</div><div class="dist-bar${todayRow === i + 1 ? ' current' : ''}" style="width:${Math.max(7, n / top * 100)}%">${n}</div></div>`
+  ).join('');
+
+  const answer = document.getElementById('statsAnswer');
+  answer.innerHTML = gameOver
+    ? `The word was <strong>${wordObj.full || wordObj.w}</strong>, “${wordObj.en}”.`
+    : '';
+
+  const footer = document.getElementById('statsFooter');
+  footer.style.display = isDaily && gameOver ? '' : 'none';
+  document.getElementById('practiceBtn').textContent = isDaily ? 'Play a practice word' : 'Another practice word';
+  document.getElementById('practiceBtn').style.display = gameOver || !isDaily ? '' : 'none';
+
+  clearInterval(countdownTimer);
+  const tick = () => {
+    const left = ORIGIN + (getDayIndex() + 1) * DAY_MS - Date.now();
+    const h = Math.floor(left / 3600000), m = Math.floor(left / 60000) % 60, sec = Math.floor(left / 1000) % 60;
+    document.getElementById('countdown').textContent = [h, m, sec].map(v => String(v).padStart(2, '0')).join(':');
+    if (left <= 0) { clearInterval(countdownTimer); closeModal('statsModal'); startDaily(); }
+  };
+  tick();
+  countdownTimer = setInterval(tick, 1000);
+  openModal('statsModal');
 }
 
 function shareResult() {
-  const wordObj = ALL_WORDS.find(w => w.w.toLowerCase() === target);
-  const emoji = guesses.map((g,i) => evaluate(g).map(r => r==='hit'?'🟩':r==='near'?'🟨':'⬛').join('')).join('\n');
-  const text = `DeutschKarten Wördle #${getDayIndex()}\n${wordObj?.full || target.toUpperCase()}\n${emoji}\nhttps://codetrident07.github.io/Deutsch-Karten/wordle.html`;
-  if (navigator.share) { navigator.share({text}); }
-  else { navigator.clipboard.writeText(text).then(()=>showMsg('Copied to clipboard!','good')); }
+  const grid = guesses.map(g => evaluate(g).map(r => r === 'hit' ? '🟩' : r === 'near' ? '🟨' : '⬛').join('')).join('\n');
+  const text = `DeutschKarten Wördle #${getDayIndex()} ${won ? guesses.length : 'X'}/${rows}\n\n${grid}\nhttps://codetrident07.github.io/Deutsch-Karten/wordle.html`;
+  if (navigator.share) navigator.share({ text }).catch(() => {});
+  else navigator.clipboard.writeText(text).then(() => toast('Copied results to clipboard'));
 }
 
-// ── Daily save ──────────────────────────────────────────────────
-function getDailySave() {
-  try { return JSON.parse(localStorage.getItem('dk_wordle_daily')); } catch { return null; }
-}
-
-function saveDailyResult(won, guessCount) {
-  const day = getDayIndex();
-  const history = getDailySave()?.history || {};
-  history[day] = { won, guesses: guessCount };
-  localStorage.setItem('dk_wordle_daily', JSON.stringify({ day, won, guesses, history }));
-}
-
-function restoreDaily(saved) {
-  const wordObj = ALL_WORDS[saved.day % ALL_WORDS.length];
-  initGame(wordObj, true);
-  // Replay saved guesses
-  saved.guesses.forEach(g => {
-    const result = evaluate(g);
-    const rowIdx = guesses.length;
-    guesses.push(g);
-    for (let c = 0; c < wordLen; c++) {
-      const tile = document.getElementById(`tile-${rowIdx}-${c}`);
-      tile.textContent = g[c].toUpperCase();
-      tile.classList.add(result[c]);
-    }
-    updateKeyboard(g, result);
-  });
-  const lastResult = evaluate(saved.guesses[saved.guesses.length-1]);
-  if (lastResult.every(r=>r==='hit') || saved.guesses.length >= maxGuesses) {
-    gameOver = true;
-    showResult(lastResult.every(r=>r==='hit'));
-  }
-}
-
-// ── Keyboard events ──────────────────────────────────────────────
+// ── Physical keyboard ───────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.key === 'Enter') handleKey('enter');
+  if (e.key === 'Escape') { document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id)); return; }
+  if (e.key === 'Enter') { e.preventDefault(); handleKey('enter'); }
   else if (e.key === 'Backspace') handleKey('backspace');
-  else handleKey(e.key.toLowerCase());
+  else if (e.key.length === 1) handleKey(e.key.toLowerCase());
 });
 
 // ── Start ────────────────────────────────────────────────────────
-newGame(true);
+startDaily();
 </script>
 
 <script>
