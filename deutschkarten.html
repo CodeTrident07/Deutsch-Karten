@@ -2243,7 +2243,7 @@ B1: {
 
       {w:'das Plakat', a:'das', t:'noun', en:'poster', ex:'Das <strong>Plakat</strong> hängt an der Wand.'},
 
-      {w:'die Aufnahme', a:'der', t:'noun', en:'recording / admission', ex:'Die <strong>Aufnahme</strong> klingt gut.'},
+      {w:'die Aufnahme', a:'die', t:'noun', en:'recording / admission', ex:'Die <strong>Aufnahme</strong> klingt gut.'},
 
       {w:'der Auftritt', a:'der', t:'noun', en:'appearance / performance', ex:'Der <strong>Auftritt</strong> war beeindruckend.'},
 
@@ -4327,6 +4327,14 @@ function shuffleDeck() {
 //  RENDER
 // ════════════════════════════════════════════════════════════
 
+// The word already carries its article ("die Krankheit"), so the small label
+// above it only shows extra info, such as "plural" for Pl. nouns.
+function articleLabel(card) {
+  if (!card.a) return '';
+  if (card.a === 'Pl.') return 'plural';
+  return card.w.toLowerCase().startsWith(card.a.toLowerCase() + ' ') ? '' : card.a;
+}
+
 function renderCard() {
   hideComplete();
   document.getElementById('cardScene').classList.remove('flipped', 'swipe-right', 'swipe-left');
@@ -4341,7 +4349,7 @@ function renderCard() {
   if (isVerb) {
     // Front: German word (original behaviour)
     document.getElementById('tagText').textContent = level + ' · ' + cap(card.t);
-    document.getElementById('wordArticle').textContent = card.a || '';
+    document.getElementById('wordArticle').textContent = articleLabel(card);
     document.getElementById('wordMain').textContent = card.w;
     document.getElementById('wordType').textContent = card.t;
     // Back: English translation + example

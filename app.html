@@ -2473,7 +2473,7 @@ B1: {
 
       {w:'das Plakat', a:'das', t:'noun', en:'poster', ex:'Das <strong>Plakat</strong> hängt an der Wand.'},
 
-      {w:'die Aufnahme', a:'der', t:'noun', en:'recording / admission', ex:'Die <strong>Aufnahme</strong> klingt gut.'},
+      {w:'die Aufnahme', a:'die', t:'noun', en:'recording / admission', ex:'Die <strong>Aufnahme</strong> klingt gut.'},
 
       {w:'der Auftritt', a:'der', t:'noun', en:'appearance / performance', ex:'Der <strong>Auftritt</strong> war beeindruckend.'},
 
@@ -4295,7 +4295,7 @@ B2: {
       {w:'der Gehirnforscher', a:'der', t:'noun', en:'brain researcher', ex:'Der <strong>Gehirnforscher</strong> entdeckte neue Zusammenhänge.'},
       {w:'der Internist', a:'der', t:'noun', en:'internist', ex:'Mein <strong>Internist</strong> hat mir Blut abgenommen.'},
       {w:'der Schlafmangel', a:'der', t:'noun', en:'lack of sleep', ex:'<strong>Schlafmangel</strong> schadet der Gesundheit.'},
-      {w:'die Schnupfen', a:'der', t:'noun', en:'cold / sniffles', ex:'Ich habe einen <strong>Schnupfen</strong>.'},
+      {w:'der Schnupfen', a:'der', t:'noun', en:'cold / sniffles', ex:'Ich habe einen <strong>Schnupfen</strong>.'},
       {w:'die Testperson', a:'die', t:'noun', en:'test subject', ex:'Die <strong>Testpersonen</strong> wurden genau beobachtet.'},
       {w:'das Wohlbefinden', a:'das', t:'noun', en:'well-being', ex:'Sport steigert das <strong>Wohlbefinden</strong>.'},
       {w:'lindern', a:'', t:'verb', en:'to alleviate', ex:'Das Medikament <strong>lindert</strong> den Schmerz.'},
@@ -4308,7 +4308,7 @@ B2: {
       {w:'die Beute', a:'die', t:'noun', en:'prey / loot', ex:'Der Dieb floh mit seiner <strong>Beute</strong>.'},
       {w:'der Dieb', a:'der', t:'noun', en:'thief', ex:'Der <strong>Dieb</strong> wurde auf frischer Tat ertappt.'},
       {w:'der Ermittler', a:'der', t:'noun', en:'investigator', ex:'Der <strong>Ermittler</strong> sammelte Beweise.'},
-      {w:'das Nachweis', a:'der', t:'noun', en:'proof', ex:'Ein <strong>Nachweis</strong> ist erforderlich.'},
+      {w:'der Nachweis', a:'der', t:'noun', en:'proof', ex:'Ein <strong>Nachweis</strong> ist erforderlich.'},
       {w:'das Opfer', a:'das', t:'noun', en:'victim', ex:'Das <strong>Opfer</strong> sagte vor Gericht aus.'},
       {w:'der Täter', a:'der', t:'noun', en:'perpetrator', ex:'Der <strong>Täter</strong> wurde verhaftet.'},
       {w:'das Verbrechen', a:'das', t:'noun', en:'crime', ex:'Das <strong>Verbrechen</strong> wurde aufgeklärt.'},
@@ -4862,6 +4862,14 @@ function shuffleDeck() {
 //  RENDER
 // ════════════════════════════════════════════════════════════
 
+// The word already carries its article ("die Krankheit"), so the small label
+// above it only shows extra info, such as "plural" for Pl. nouns.
+function articleLabel(card) {
+  if (!card.a) return '';
+  if (card.a === 'Pl.') return 'plural';
+  return card.w.toLowerCase().startsWith(card.a.toLowerCase() + ' ') ? '' : card.a;
+}
+
 function renderCard() {
   hideComplete();
   document.getElementById('cardScene').classList.remove('flipped', 'swipe-right', 'swipe-left');
@@ -4875,7 +4883,7 @@ function renderCard() {
 
   // Front always shows German word — forces active production of meaning
   document.getElementById('tagText').textContent = level + ' · ' + cap(card.t);
-  document.getElementById('wordArticle').textContent = card.a || '';
+  document.getElementById('wordArticle').textContent = articleLabel(card);
   document.getElementById('wordMain').textContent = card.w;
   document.getElementById('wordType').textContent = card.t;
   // Back: English meaning + example sentence
