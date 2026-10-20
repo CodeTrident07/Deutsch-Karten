@@ -1371,6 +1371,17 @@ main {
 
 /* Emoji slots are left in the markup for the scripts but not shown */
 .cat-chip .icon, .complete-emoji, .result-emoji, #qCompleteEmoji, #levelRankIcon, .podium-crown, .trophy, .chat-header-icon { display: none !important; }
+
+/* Contact line sits at the end of the page instead of floating over the card */
+.site-footer {
+  padding: 28px 28px 32px; margin-top: 24px; border-top: 1px solid var(--g4);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--g3);
+}
+.site-footer a { color: var(--g1); }
+.site-footer a:hover { color: var(--g2); }
+@media (max-width: 700px) { .site-footer { padding: 20px 16px 88px; } }
+.goal-bar-top { flex-wrap: wrap; row-gap: 8px; }
+@media (max-width: 700px) { .goal-bar-top { padding-left: 16px !important; padding-right: 16px !important; } }
 </style>
 </head>
 <body>
@@ -5689,7 +5700,7 @@ function showWeeklyReport() {
 init();
 </script>
 <!-- Contact footer -->
-<div style="position:fixed;bottom:1.2rem;left:1.5rem;z-index:100;font-size:0.7rem;color:var(--ink3);font-family:'JetBrains Mono',monospace;pointer-events:none;">
+<div class="site-footer">
   contact <span style="color:var(--ink2);"><a href="mailto:deutschkarten2026@gmail.com" style="color:inherit;text-underline-offset:3px;">deutschkarten2026@gmail.com</a></span> for queries or recommendations
 </div>
 <script>
