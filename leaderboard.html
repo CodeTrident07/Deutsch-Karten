@@ -732,14 +732,6 @@ body::before {
 .tab-btn.active { background: var(--green); color: var(--bg); border-color: var(--green); }
 
 /* Contact */
-.contact-footer {
-  position: fixed; bottom: 1rem; left: 1.5rem;
-  font-size: 0.68rem; color: var(--text3);
-  font-family: 'JetBrains Mono', monospace;
-  pointer-events: none; z-index: 50;
-}
-.contact-footer span { color: var(--text2); }
-.contact-footer a { color: inherit; text-underline-offset: 3px; }
 
 @media (max-width: 600px) {
   .topbar { padding: 0.8rem 1rem; }
@@ -833,7 +825,6 @@ body::before {
   <div id="activityFeed"><div class="state-msg" style="padding:1rem 0">No recent activity yet</div></div>
 </div>
 
-<div class="contact-footer">contact <span><a href="mailto:deutschkarten2026@gmail.com">deutschkarten2026@gmail.com</a></span> for queries or recommendations</div>
 
 <script>
 // ── Auth guard ────────────────────────────────────────────────
@@ -1149,5 +1140,6 @@ function escHtml(s) {
 loadLeaderboard();
 </script>
 <script src="ripple.js" defer></script>
+<script src="site.js" defer></script>
 </body>
 </html>
