@@ -1128,6 +1128,43 @@ main {
 
 .goal-bar-top { flex-wrap: wrap; row-gap: 8px; }
 @media (max-width: 700px) { .goal-bar-top { padding-left: 16px !important; padding-right: 16px !important; } }
+
+/* Rank badge and its window */
+.rank-badge {
+  display: flex; align-items: center; gap: 0.4rem; margin-left: auto;
+  padding: 0.25rem 0.75rem; border-radius: 20px; border: 1px solid var(--border2);
+  background: transparent; cursor: pointer; white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--g2);
+}
+.rank-badge:hover { color: var(--g1); border-color: var(--g2); }
+.rank-modal-back {
+  position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.75);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.rank-modal {
+  position: relative; width: 100%; max-width: 380px; max-height: 90vh; overflow-y: auto;
+  background: var(--s1); border: 1px solid var(--g4); border-radius: 14px; padding: 24px;
+}
+.rank-close {
+  position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
+  background: none; border: none; color: var(--g2); font-size: 1rem; cursor: pointer; border-radius: 6px;
+}
+.rank-close:hover { color: var(--g1); background: var(--s3); }
+.rank-kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g3); }
+.rank-modal h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; margin: 2px 0 10px; color: var(--g1); }
+.rank-count { font-size: 0.95rem; color: var(--g2); }
+.rank-count strong { color: var(--g1); }
+.rank-track { height: 6px; background: var(--s3); border-radius: 3px; overflow: hidden; margin: 12px 0 8px; }
+.rank-track div { height: 100%; background: var(--g1); border-radius: 3px; }
+.rank-next { font-size: 0.85rem; color: var(--g2); }
+.rank-next strong { color: var(--g1); }
+.rank-how { font-size: 0.78rem; line-height: 1.5; color: var(--g3); margin: 14px 0 16px; }
+.rank-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.rank-table th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g3); padding: 0 0 6px; }
+.rank-table th:last-child, .rank-table td:last-child { text-align: right; }
+.rank-table td { padding: 7px 0; border-top: 1px solid var(--g4); color: var(--g2); font-variant-numeric: tabular-nums; }
+.rank-table tr.current td { color: var(--g1); font-weight: 700; }
+.rank-table tr.current td span { margin-left: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 500; padding: 1px 6px; border: 1px solid var(--g2); border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -1165,9 +1202,9 @@ main {
       <span class="goal-count"><span id="goalDone">0</span> / <span id="goalTarget">20</span></span>
       <button class="goal-set-btn" onclick="openGoalPicker()">✎ set</button>
     </div>
-    <div id="levelBadgeBar" style="display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0.7rem;border-radius:20px;border:1px solid var(--border2);font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ink3);white-space:nowrap;margin-left:auto;">
+    <button type="button" id="levelBadgeBar" class="rank-badge" onclick="showRankInfo()" title="Your rank: tap for details" aria-haspopup="dialog">
       <span id="levelRankIcon"></span><span id="levelRankName">Beginner</span>
-    </div>
+    </button>
   </div>
   <div class="activity-strip">
     <a href="spelling.html" class="spelling-link">Spelling</a>
@@ -4878,16 +4915,17 @@ if (window.speechSynthesis) {
 // ════════════════════════════════════════════════════════════
 
 const RANKS = [
+  // The site has about 1,600 words, so Legend means nearly all of them
   { name:'Beginner',    icon:'', min:0    },
-  { name:'Explorer',    icon:'',  min:101  },
-  { name:'Pathfinder',  icon:'', min:301  },
-  { name:'Apprentice',  icon:'', min:601  },
-  { name:'Scholar',     icon:'', min:1001 },
-  { name:'Linguist',    icon:'', min:1801 },
-  { name:'Expert',      icon:'', min:2801 },
-  { name:'Master',      icon:'', min:4001 },
-  { name:'Grandmaster', icon:'', min:6001 },
-  { name:'Legend',      icon:'', min:8501 },
+  { name:'Explorer',    icon:'', min:25   },
+  { name:'Pathfinder',  icon:'', min:75   },
+  { name:'Apprentice',  icon:'', min:150  },
+  { name:'Scholar',     icon:'', min:250  },
+  { name:'Linguist',    icon:'', min:400  },
+  { name:'Expert',      icon:'', min:600  },
+  { name:'Master',      icon:'', min:850  },
+  { name:'Grandmaster', icon:'', min:1150 },
+  { name:'Legend',      icon:'', min:1500 },
 ];
 
 function getWordsKnown() {
@@ -4913,6 +4951,40 @@ function getNextRank(wordsKnown) {
   return null;
 }
 
+// Rank window: how many words you know, what's next, and every rank
+function showRankInfo() {
+  const known = getWordsKnown();
+  const rank = getRank(known);
+  const next = getNextRank(known);
+  const pct = next ? Math.round((known - rank.min) / (next.min - rank.min) * 100) : 100;
+  const rows = RANKS.map((r, i) => {
+    const upTo = RANKS[i + 1] ? RANKS[i + 1].min - 1 : null;
+    const range = upTo === null ? `${r.min.toLocaleString('en')}+` : `${r.min.toLocaleString('en')}–${upTo.toLocaleString('en')}`;
+    return `<tr class="${r === rank ? 'current' : ''}"><td>${r.name}${r === rank ? ' <span>you</span>' : ''}</td><td>${range}</td></tr>`;
+  }).join('');
+
+  const back = document.createElement('div');
+  back.className = 'rank-modal-back';
+  back.innerHTML = `
+    <div class="rank-modal" role="dialog" aria-modal="true" aria-labelledby="rankTitle">
+      <button class="rank-close" aria-label="Close">✕</button>
+      <div class="rank-kicker">Your rank</div>
+      <h2 id="rankTitle">${rank.name}</h2>
+      <p class="rank-count"><strong>${known.toLocaleString('en')}</strong> ${known === 1 ? 'word' : 'words'} learned</p>
+      <div class="rank-track"><div style="width:${pct}%"></div></div>
+      <p class="rank-next">${next ? `${(next.min - known).toLocaleString('en')} more to <strong>${next.name}</strong>` : 'Top rank. You know nearly every word on the site.'}</p>
+      <p class="rank-how">A word counts as learned once you've marked it "I know it" enough times that it won't come back for at least 4 days.</p>
+      <table class="rank-table"><thead><tr><th>Rank</th><th>Words learned</th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  const close = () => { back.remove(); document.removeEventListener('keydown', onKey); document.getElementById('levelBadgeBar').focus(); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  back.addEventListener('click', e => { if (e.target === back) close(); });
+  back.querySelector('.rank-close').addEventListener('click', close);
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(back);
+  back.querySelector('.rank-close').focus();
+}
+
 function updateLevelBadge() {
   const known = getWordsKnown();
   const rank = getRank(known);
@@ -4929,7 +5001,7 @@ function checkLevelUp() {
   if (_lastRankIdx === -1) { _lastRankIdx = idx; return; }
   if (idx > _lastRankIdx) {
     _lastRankIdx = idx;
-    showToast(`${rank.icon} Level up! You're now a ${rank.name}!`, 4000);
+    showToast(`Level up! You're now ${/^[AEIOU]/.test(rank.name) ? 'an' : 'a'} ${rank.name}.`, 4000);
     updateLevelBadge();
   }
 }
