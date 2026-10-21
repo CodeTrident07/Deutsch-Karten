@@ -1,6 +1,6 @@
 // DeutschKarten Service Worker — Full Offline Cache
 // Version bump forces old caches to be replaced
-const CACHE_NAME = 'dk-v11';
+const CACHE_NAME = 'dk-v12';
 
 // All pages + critical assets to precache on install
 const PRECACHE = [
@@ -75,22 +75,21 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // HTML pages: stale-while-revalidate
-  // Serve from cache immediately, update in background
-  if (event.request.mode === 'navigate' || event.request.headers.get('accept')?.includes('text/html')) {
+  // Pages and the site's own scripts: network first, so updates show straight
+  // away and always match each other; the saved copy is only used when offline
+  const isPageOrScript = event.request.mode === 'navigate' || event.request.headers.get('accept')?.includes('text/html')
+    || (url.origin === self.location.origin && url.pathname.endsWith('.js'));
+  if (isPageOrScript) {
     event.respondWith(
-      caches.open(CACHE_NAME).then(async cache => {
-        const cached = await cache.match(event.request);
-        const fetchPromise = fetch(event.request)
-          .then(resp => {
-            if (resp && resp.status === 200) {
-              cache.put(event.request, resp.clone());
-            }
-            return resp;
-          })
-          .catch(() => null);
-        return cached || fetchPromise || caches.match('./app.html');
-      })
+      fetch(event.request)
+        .then(resp => {
+          if (resp && resp.status === 200) {
+            const clone = resp.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return resp;
+        })
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('./app.html')))
     );
     return;
   }
