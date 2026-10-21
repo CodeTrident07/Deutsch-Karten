@@ -4287,7 +4287,10 @@ function cardKey(i) {
   }
 })();
 
-function signOut() {
+async function signOut() {
+  const btn = document.getElementById('signOutBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Signing out…'; }
+  try { if (window.dkCloud) await window.dkCloud.signOut(); } catch (e) {}
   localStorage.removeItem('dk_session');
   window.location.href = 'app.html';
 }
@@ -4386,45 +4389,12 @@ function onCardReviewed() {
   publishToLeaderboard();
 }
 
-async function publishToLeaderboard() {
-  try {
-    if (!window.storage) return;
-    const session = authGetSession();
-    if (!session) return;
-    const users = JSON.parse(localStorage.getItem('dk_users') || '{}');
-    const user  = users[session.email];
-    if (!user) return;
-
-    const srsKey = getSrsKey();
-    let srsData  = {};
-    try { srsData = JSON.parse(localStorage.getItem(srsKey)) || {}; } catch {}
-    const wordsKnown = Object.values(srsData).filter(c => c && c.interval >= 4).length;
-
-    const streakData = loadStreak();
-    const streak = streakData.last === todayStr() ? streakData.count : 0;
-
-    let spellingAcc = 0;
-    try {
-      const sa = JSON.parse(localStorage.getItem('dk_spell_acc_' + session.email));
-      spellingAcc = sa ? sa.pct : 0;
-    } catch {}
-
-    const key = 'lb_user_' + session.email.replace(/[^a-z0-9]/gi,'_');
-    await window.storage.set(key, JSON.stringify({
-      name: user.name, email: session.email,
-      wordsKnown, streak, spellingAcc,
-      level, updatedAt: Date.now(), today: todayStr(),
-    }), true);
-
-    // Activity entry
-    if (wordsKnown > 0) {
-      const actKey = 'lb_act_' + session.email.replace(/[^a-z0-9]/gi,'_') + '_' + todayStr();
-      await window.storage.set(actKey, JSON.stringify({
-        name: user.name, email: session.email,
-        wordsKnown, streak, ts: Date.now(),
-      }), true);
-    }
-  } catch(e) { /* silent fail — leaderboard is non-critical */ }
+// Leaderboard and activity feed live in Firebase (cloud.js). Studying
+// reviews many cards a minute, so publish at most every 10 seconds.
+let _publishTimer = null;
+function publishToLeaderboard() {
+  clearTimeout(_publishTimer);
+  _publishTimer = setTimeout(() => { if (window.dkCloud) window.dkCloud.publishStats(); }, 10000);
 }
 
 function init() {

@@ -660,6 +660,9 @@ body::before {
 .auth-link:hover { color: #f0f0f0; text-decoration: underline; text-underline-offset: 3px; }
 .reset-note { font-size: 0.8rem; line-height: 1.5; color: #ababab; margin-bottom: 16px; }
 .card-footer { margin-top: 20px; }
+
+.field-hint { font-size: 0.72rem; color: var(--g3); margin-top: 6px; }
+.auth-submit:disabled { cursor: wait; }
 </style>
 </head>
 <body>
@@ -698,62 +701,52 @@ body::before {
       <input type="email" class="auth-input" id="loginEmail" placeholder="your@email.com" autocomplete="email">
     </div>
 
-    <div class="field">
+    <div class="auth-field">
       <label for="loginPassword">Password</label>
       <input type="password" class="auth-input" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
     </div>
 
-    <button class="auth-submit" onclick="handleLogin()">Sign in →</button>
+    <button class="auth-submit" id="loginBtn" onclick="handleLogin()">Sign in →</button>
     <button type="button" class="auth-link" onclick="switchTab('reset')">Forgot password?</button>
-
   </div>
 
   <!-- ── Register form ── -->
   <div id="registerForm" style="display:none;">
 
-    <div class="field">
+    <div class="auth-field">
       <label for="regName">Display name</label>
-      <input type="text" class="auth-input" id="regName" placeholder="e.g. Anna" autocomplete="name">
+      <input type="text" class="auth-input" id="regName" placeholder="e.g. Anna" autocomplete="nickname" maxlength="40">
+      <div class="field-hint">Shown on the leaderboard. Your email never is.</div>
     </div>
 
-    <div class="field">
+    <div class="auth-field">
       <label for="regEmail">Email</label>
-      <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email">
+      <input type="email" class="auth-input" id="regEmail" placeholder="your@email.com" autocomplete="email">
     </div>
 
-    <div class="field">
+    <div class="auth-field">
       <label for="regPassword">Password</label>
-      <input type="password" id="regPassword" placeholder="at least 6 characters" autocomplete="new-password">
+      <input type="password" class="auth-input" id="regPassword" placeholder="at least 6 characters" autocomplete="new-password">
     </div>
 
-    <button class="btn-submit" onclick="handleRegister()">Create account →</button>
+    <button class="auth-submit" id="registerBtn" onclick="handleRegister()">Create account →</button>
   </div>
 
   <!-- ── Reset password form ── -->
   <div id="resetForm" style="display:none;">
-    <p class="reset-note">Accounts are saved in this browser, so you can set a new password here for any account made on this device. Your progress stays.</p>
+    <p class="reset-note">Enter the email you signed up with and we'll send you a link to choose a new password.</p>
 
     <div class="auth-field">
       <label for="resetEmail">Email</label>
       <input type="email" class="auth-input" id="resetEmail" placeholder="your@email.com" autocomplete="email">
     </div>
 
-    <div class="auth-field">
-      <label for="resetPassword">New password</label>
-      <input type="password" class="auth-input" id="resetPassword" placeholder="at least 6 characters" autocomplete="new-password">
-    </div>
-
-    <div class="auth-field">
-      <label for="resetConfirm">Repeat new password</label>
-      <input type="password" class="auth-input" id="resetConfirm" placeholder="same again" autocomplete="new-password">
-    </div>
-
-    <button class="auth-submit" onclick="handleReset()">Set new password →</button>
+    <button class="auth-submit" id="resetBtn" onclick="handleReset()">Send reset link →</button>
     <button type="button" class="auth-link" onclick="switchTab('login')">← Back to sign in</button>
   </div>
 
   <div class="card-footer">
-    Your progress is saved locally in your browser
+    Your progress is saved to your account, so it follows you to any device.
   </div>
   <a href="app.html" class="auth-back">← Back to flashcards</a>
 </div>
@@ -766,11 +759,9 @@ const SESSION_KEY = 'dk_session';
 function getUsers() {
   try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch { return {}; }
 }
-function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
 function getSession() {
   try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; }
 }
-function saveSession(email) { localStorage.setItem(SESSION_KEY, JSON.stringify({ email, ts: Date.now() })); }
 function clearSession() { localStorage.removeItem(SESSION_KEY); }
 
 // ── Saved accounts (emails list for quick login) ──────────────
@@ -792,7 +783,7 @@ function removeSavedEmail(email) {
 // ── Redirect if already signed in ───────────────────────────
 (function() {
   const session = getSession();
-  if (session) {
+  if (session && session.uid) {
     const users = getUsers();
     if (users[session.email]) {
       window.location.href = 'app.html';
@@ -808,7 +799,7 @@ function switchTab(tab) {
   document.querySelector('.auth-tabs').style.display = tab === 'reset' ? 'none' : '';
   if (tab === 'reset') {
     document.getElementById('resetEmail').value = document.getElementById('loginEmail').value;
-    setTimeout(() => document.getElementById((document.getElementById('resetEmail').value ? 'resetPassword' : 'resetEmail')).focus(), 0);
+    setTimeout(() => document.getElementById('resetEmail').focus(), 0);
   }
   document.querySelectorAll('.auth-tab').forEach((t, i) => {
     t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
@@ -856,38 +847,35 @@ function renderSaved() {
   });
 }
 
-// ── Hash password (simple, client-side) ─────────────────────
-async function hashPassword(password) {
-  const msgBuffer = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+// ── Accounts (Firebase, via cloud.js) ────────────────────────
+// cloud.js loads as a module; wait for it before the first account action
+function cloud() {
+  if (window.dkCloud) return Promise.resolve(window.dkCloud);
+  return new Promise(res => document.addEventListener('dkcloud-ready', () => res(window.dkCloud), { once: true }));
+}
+function busy(id, on, label) {
+  const b = document.getElementById(id);
+  b.disabled = on;
+  if (label) b.textContent = label;
 }
 
-// ── Register ─────────────────────────────────────────────────
 async function handleRegister() {
   const name = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const password = document.getElementById('regPassword').value;
 
-  if (!name) return showMsg('Please enter your name.', 'error');
+  if (!name) return showMsg('Please enter a display name.', 'error');
   if (!email || !email.includes('@')) return showMsg('Please enter a valid email.', 'error');
   if (password.length < 6) return showMsg('Password must be at least 6 characters.', 'error');
 
-  const users = getUsers();
-  if (users[email]) return showMsg('An account with this email already exists.', 'error');
-
-  const hash = await hashPassword(password);
-  users[email] = { name, email, hash, joined: Date.now() };
-  saveUsers(users);
+  busy('registerBtn', true, 'Creating account…');
+  const res = await (await cloud()).signUp(name, email, password);
+  if (!res.ok) { busy('registerBtn', false, 'Create account →'); return showMsg(res.error, 'error'); }
   addSavedEmail(email);
-  saveSession(email);
-
   showMsg('Account created! Redirecting…', 'success');
-  setTimeout(() => window.location.href = 'app.html', 900);
+  setTimeout(() => window.location.href = 'app.html', 700);
 }
 
-// ── Login ────────────────────────────────────────────────────
 async function handleLogin() {
   const email = document.getElementById('loginEmail').value.trim().toLowerCase();
   const password = document.getElementById('loginPassword').value;
@@ -895,42 +883,25 @@ async function handleLogin() {
   if (!email) return showMsg('Please enter your email.', 'error');
   if (!password) return showMsg('Please enter your password.', 'error');
 
-  const users = getUsers();
-  const user = users[email];
-  if (!user) return showMsg('No account found with this email.', 'error');
-
-  const hash = await hashPassword(password);
-  if (hash !== user.hash) return showMsg('Incorrect password.', 'error');
-
+  busy('loginBtn', true, 'Signing in…');
+  const res = await (await cloud()).signIn(email, password);
+  if (!res.ok) { busy('loginBtn', false, 'Sign in →'); return showMsg(res.error, 'error'); }
   addSavedEmail(email);
-  saveSession(email);
-
-  showMsg('Welcome back, ' + user.name + '!', 'success');
-  setTimeout(() => window.location.href = 'app.html', 700);
+  showMsg(res.migrated
+    ? 'Welcome back, ' + res.name + '! Your account now works on every device.'
+    : 'Welcome back' + (res.name ? ', ' + res.name : '') + '!', 'success');
+  setTimeout(() => window.location.href = 'app.html', res.migrated ? 1600 : 700);
 }
 
-// ── Reset password ───────────────────────────────────────
-// There is no server, so no reset email: the account lives in this browser,
-// and whoever can use this browser can already reach its data.
 async function handleReset() {
   const email = document.getElementById('resetEmail').value.trim().toLowerCase();
-  const password = document.getElementById('resetPassword').value;
-  const confirm = document.getElementById('resetConfirm').value;
+  if (!email || !email.includes('@')) return showMsg('Please enter your email.', 'error');
 
-  if (!email) return showMsg('Please enter your email.', 'error');
-  const users = getUsers();
-  const user = users[email];
-  if (!user) return showMsg('No account with this email is saved in this browser.', 'error');
-  if (password.length < 6) return showMsg('Password must be at least 6 characters.', 'error');
-  if (password !== confirm) return showMsg("The two passwords don't match.", 'error');
-
-  user.hash = await hashPassword(password);
-  saveUsers(users);
-  addSavedEmail(email);
-  saveSession(email);
-
-  showMsg('Password changed. Signing you in…', 'success');
-  setTimeout(() => window.location.href = 'app.html', 900);
+  busy('resetBtn', true, 'Sending…');
+  const res = await (await cloud()).resetPassword(email);
+  busy('resetBtn', false, 'Send reset link →');
+  if (!res.ok) return showMsg(res.error, 'error');
+  showMsg('If there is an account for ' + email + ', a reset link is on its way. Check your inbox and spam folder.', 'success');
 }
 
 // ── Enter key support ────────────────────────────────────────

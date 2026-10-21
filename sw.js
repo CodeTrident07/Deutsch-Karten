@@ -1,6 +1,6 @@
 // DeutschKarten Service Worker — Full Offline Cache
 // Version bump forces old caches to be replaced
-const CACHE_NAME = 'dk-v10';
+const CACHE_NAME = 'dk-v11';
 
 // All pages + critical assets to precache on install
 const PRECACHE = [
@@ -21,6 +21,7 @@ const PRECACHE = [
   './ripple.js',
   './site.js',
   './words.js',
+  './cloud.js',
   'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
 ];
 

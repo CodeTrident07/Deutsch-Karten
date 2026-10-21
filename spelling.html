@@ -3765,20 +3765,9 @@ function showComplete() {
   } catch {}
 }
 
-async function publishSpellingStats(email, acc) {
-  try {
-    if (!window.storage) return;
-    const users = JSON.parse(localStorage.getItem('dk_users') || '{}');
-    const user  = users[email];
-    if (!user) return;
-    const key = 'lb_user_' + email.replace(/[^a-z0-9]/gi,'_');
-    let existing = {};
-    try { const r = await window.storage.get(key, true); if (r?.value) existing = JSON.parse(r.value); } catch {}
-    existing.spellingAcc = Math.max(acc, existing.spellingAcc || 0);
-    existing.name = user.name; existing.email = email;
-    existing.updatedAt = Date.now(); existing.today = new Date().toISOString().slice(0,10);
-    await window.storage.set(key, JSON.stringify(existing), true);
-  } catch {}
+// Best spelling accuracy is already saved above; cloud.js puts it on the leaderboard
+function publishSpellingStats() {
+  if (window.dkCloud) window.dkCloud.publishStats();
 }
 
 function startSession() {

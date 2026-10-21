@@ -6,6 +6,12 @@
 (function () {
   const EMAIL = 'deutschkarten2026@gmail.com';
 
+  // Accounts, progress sync and the shared leaderboard (Firebase)
+  const cloudScript = document.createElement('script');
+  cloudScript.type = 'module';
+  cloudScript.src = 'cloud.js';
+  document.head.appendChild(cloudScript);
+
   // ── Styles ─────────────────────────────────────────────────
   const style = document.createElement('style');
   style.textContent = `.chat-fab {

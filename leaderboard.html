@@ -829,13 +829,14 @@ body::before {
 <script>
 // ── Auth guard ────────────────────────────────────────────────
 let currentUser = null;
+let myId = '__guest__';
 
 (function() {
   try {
     const s = JSON.parse(localStorage.getItem('dk_session'));
     if (s && s.email) {
       const u = JSON.parse(localStorage.getItem('dk_users') || '{}')[s.email];
-      if (u) { currentUser = u; return; }
+      if (u) { currentUser = u; myId = s.uid || s.email; return; }
     }
     // No session — use a guest placeholder so leaderboard still renders
     currentUser = { email: '__guest__', name: 'You' };
@@ -896,71 +897,10 @@ function getMyStats() {
   return { wordsKnown, streak, spellingAcc, level, email, name: currentUser.name };
 }
 
-// ── Push my stats to shared storage ───────────────────────────
-// ── Save/load all local accounts' stats ──────────────────────
-function getAllLocalPlayers() {
-  // Gather stats for every account saved on this browser
-  const players = [];
-  try {
-    const users = JSON.parse(localStorage.getItem('dk_users') || '{}');
-    for (const email of Object.keys(users)) {
-      const user = users[email];
-      const srsKey = 'srs_data_v1_' + email;
-      let srsData = {};
-      try { srsData = JSON.parse(localStorage.getItem(srsKey)) || {}; } catch {}
-      const wordsKnown = Object.values(srsData).filter(c => c && c.interval >= 4).length;
-
-      let streak = 0;
-      try {
-        const sd = JSON.parse(localStorage.getItem('dk_streak_' + email));
-        if (sd) streak = sd.last === todayStr() ? sd.count : sd.count;
-      } catch {}
-
-      let spellingAcc = 0;
-      try {
-        const sa = JSON.parse(localStorage.getItem('dk_spell_acc_' + email));
-        spellingAcc = sa ? sa.pct : 0;
-      } catch {}
-
-      // Best level
-      let level = 'A1';
-      const lvls = ['A1','A2','B1','B2','C1'];
-      for (const lvl of lvls) {
-        if (Object.keys(srsData).some(id => id.startsWith(lvl + ':'))) level = lvl;
-      }
-
-      let updatedAt = 0;
-      try {
-        const sd = JSON.parse(localStorage.getItem('dk_streak_' + email));
-        if (sd && sd.last === todayStr()) updatedAt = Date.now();
-        else if (sd) updatedAt = new Date(sd.last).getTime() + 86400000;
-      } catch {}
-
-      players.push({ name: user.name, email, wordsKnown, streak, spellingAcc, level, updatedAt });
-    }
-  } catch {}
-  return players;
-}
-
-function getActivityFeed() {
-  const items = [];
-  try {
-    const users = JSON.parse(localStorage.getItem('dk_users') || '{}');
-    for (const email of Object.keys(users)) {
-      const user = users[email];
-      let streak = 0;
-      try {
-        const sd = JSON.parse(localStorage.getItem('dk_streak_' + email));
-        if (sd) streak = sd.count;
-      } catch {}
-      const srsKey = 'srs_data_v1_' + email;
-      let srsData = {};
-      try { srsData = JSON.parse(localStorage.getItem(srsKey)) || {}; } catch {}
-      const wordsKnown = Object.values(srsData).filter(c => c && c.interval >= 4).length;
-      items.push({ name: user.name, email, streak, wordsKnown, ts: Date.now() - Math.random() * 3600000 });
-    }
-  } catch {}
-  return items;
+// ── Shared data from Firebase (cloud.js) ───────────────────
+function cloud() {
+  if (window.dkCloud) return Promise.resolve(window.dkCloud);
+  return new Promise(res => document.addEventListener('dkcloud-ready', () => res(window.dkCloud), { once: true }));
 }
 
 // ── Load leaderboard ──────────────────────────────────────────
@@ -973,10 +913,20 @@ async function loadLeaderboard() {
   btn.classList.add('spinning');
   icon.textContent = '↻';
 
-  allPlayers = getAllLocalPlayers();
-  renderLeaderboard();
-  renderFeed(getActivityFeed());
   renderMyStats();
+  try {
+    const c = await cloud();
+    await c.ready;
+    if (c.currentUser()) await c.publishStats();      // make sure my latest numbers are in
+    const [players, activity] = await Promise.all([c.getLeaderboard(), c.getActivity()]);
+    allPlayers = players.map(p => ({ ...p, email: p.id }));
+    renderLeaderboard();
+    renderFeed(activity.map(a => ({ ...a, email: a.uid })));
+    renderMyStats();
+  } catch (e) {
+    console.warn('[leaderboard]', e);
+    document.getElementById('leaderList').innerHTML = '<div class="state-msg" style="padding:2rem;text-align:center">Couldn\'t load the leaderboard. Check your connection and press Refresh.</div>';
+  }
 
   btn.classList.remove('spinning');
 }
@@ -1011,7 +961,7 @@ function renderPodium(top3) {
 
   section.innerHTML = order.map((p, i) => {
     if (!p) return '<div class="podium-slot"></div>';
-    const isMe = p.email === currentUser.email;
+    const isMe = p.email === myId;
     const val  = currentTab === 'words' ? p.wordsKnown + ' words'
                : currentTab === 'streak' ? p.streak + ' days'
                : (p.spellingAcc || 0) + '% acc';
@@ -1036,7 +986,7 @@ function renderList(sorted) {
 
   list.innerHTML = sorted.map((p, i) => {
     const rank = i + 1;
-    const isMe = p.email === currentUser.email;
+    const isMe = p.email === myId;
     const rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
     const rankLabel = rank;
 
@@ -1081,10 +1031,10 @@ function renderFeed(items) {
   }
 
   feed.innerHTML = items.map((a, i) => {
-    const isMe = a.email === currentUser.email;
+    const isMe = a.email === myId;
     const msgs = [
-      `reviewed <strong>${a.wordsKnown} word${a.wordsKnown!==1?'s':''}</strong>`,
-      `is on a <strong>${a.streak}-day streak</strong>`,
+      `has learned <strong>${Number(a.wordsKnown)||0} word${Number(a.wordsKnown)!==1?'s':''}</strong>`,
+      `is on a <strong>${Number(a.streak)||0}-day streak</strong>`,
       `studied today`,
     ];
     const msg = a.streak >= 3 ? msgs[1] : msgs[0];
@@ -1106,7 +1056,7 @@ function renderMyStats() {
 
   // Find my rank
   const sorted = [...allPlayers].sort((a,b) => (b.wordsKnown||0) - (a.wordsKnown||0));
-  const myRank = sorted.findIndex(p => p.email === currentUser.email) + 1;
+  const myRank = sorted.findIndex(p => p.email === myId) + 1;
 
   card.innerHTML = `
     <div class="my-stat">

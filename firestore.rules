@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// DeutschKarten security rules.
+// Paste this into Firebase console → Firestore Database → Rules, then Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Each person's saved progress: only they can read or write it
+    match /progress/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Leaderboard: everyone can read; people can only write their own row,
+    // with a name and sensible numbers (no emails or other fields)
+    match /leaderboard/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'wordsKnown', 'streak', 'spellingAcc', 'level', 'updatedAt', 'today'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 40
+        && request.resource.data.wordsKnown is int && request.resource.data.wordsKnown >= 0 && request.resource.data.wordsKnown <= 5000
+        && request.resource.data.streak is int && request.resource.data.streak >= 0 && request.resource.data.streak <= 5000
+        && request.resource.data.spellingAcc is int && request.resource.data.spellingAcc >= 0 && request.resource.data.spellingAcc <= 100
+        && request.resource.data.level in ['A1', 'A2', 'B1', 'B2', 'C1'];
+    }
+
+    // Activity feed: one entry per person per day ({uid}_{date})
+    match /activity/{entry} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && entry.matches(request.auth.uid + '_[0-9]{4}-[0-9]{2}-[0-9]{2}')
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'wordsKnown', 'streak', 'ts'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.name is string && request.resource.data.name.size() <= 40
+        && request.resource.data.wordsKnown is int && request.resource.data.streak is int;
+    }
+  }
+}
